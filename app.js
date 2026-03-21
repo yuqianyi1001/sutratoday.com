@@ -28,7 +28,7 @@ const dom = {
 
 init().catch((error) => {
   dom.catalogGrid.innerHTML = `<p class="loading-text">读取失败：${escapeHtml(error.message)}</p>`;
-  dom.sampleRendered.innerHTML = `<p class="loading-text">请使用本地静态服务打开本页，例如 <code>python3 -m http.server 4174</code>。</p>`;
+  dom.sampleRendered.innerHTML = `<p class="loading-text">请通过站点地址访问本页，避免直接打开本地文件。</p>`;
 });
 
 async function init() {

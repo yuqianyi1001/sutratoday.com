@@ -14,13 +14,18 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="content-page">
     <div class="page-shell">
       <header class="site-header">
         <a class="brand" href="./index.html">
-          <span class="brand-mark">今</span>
+          <span class="brand-mark" aria-hidden="true">
+            <img src="./assets/logo-mark.png" alt="" />
+          </span>
           <span class="brand-text">
             <strong>今文佛典</strong>
             <span>我要参与</span>
@@ -30,6 +35,7 @@
           <a href="./index.html">首页</a>
           <a href="./catalog.html">经文目录</a>
           <a href="./participate.html">我要参与</a>
+          <a href="https://github.com/yuqianyi1001/sutratoday.com" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
       </header>
 
@@ -38,7 +44,7 @@
           <article class="content-surface">
             <div class="content-meta">
               <p class="eyebrow">Join</p>
-              <a class="source-link" href="./content/pages/participate.md" target="_blank" rel="noreferrer">打开 Markdown 原稿</a>
+              <a class="source-link" id="participate-source-link" href="#" target="_blank" rel="noreferrer">打开 Markdown 原稿</a>
             </div>
             <div class="markdown-view reading-prose" id="content-rendered">
               <p class="loading-text">正在加载项目说明…</p>

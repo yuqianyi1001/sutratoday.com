@@ -1,5 +1,6 @@
 import {
   escapeHtml,
+  getMarkdownSourceUrl,
   getReviewState,
   getTranslationState,
   loadDocuments,
@@ -18,7 +19,7 @@ const dom = {
 let documents = [];
 
 init().catch((error) => {
-  dom.rendered.innerHTML = `<p class="loading-text">请使用本地静态服务打开本页，例如 <code>python3 -m http.server 4174</code>。</p>`;
+  dom.rendered.innerHTML = `<p class="loading-text">请通过站点地址访问本页，避免直接打开本地文件。</p>`;
 });
 
 async function init() {
@@ -39,7 +40,7 @@ function selectCurrent() {
 
   dom.title.textContent = selected.title;
   dom.summary.textContent = selected.summary || "";
-  dom.sourceLink.href = selected.path;
+  dom.sourceLink.href = getMarkdownSourceUrl(selected.path);
   dom.rendered.innerHTML = renderMarkdown(selected.body);
   dom.raw.textContent = selected.raw;
   dom.statusbar.innerHTML = `

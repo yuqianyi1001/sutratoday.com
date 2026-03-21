@@ -14,6 +14,7 @@ export const manifest = [
 ];
 
 export const HOME_FEATURED_LIMIT = 6;
+export const GITHUB_REPO_BASE = "https://github.com/yuqianyi1001/sutratoday.com/blob/main/";
 
 const translationStates = {
   untranslated: { label: "未翻译", className: "badge-muted" },
@@ -80,6 +81,10 @@ export function getTranslationState(status) {
 
 export function getReviewState(status) {
   return reviewStates[status] || reviewStates.unreviewed;
+}
+
+export function getMarkdownSourceUrl(path) {
+  return new URL(path, GITHUB_REPO_BASE).toString();
 }
 
 function scoreDocument(doc) {

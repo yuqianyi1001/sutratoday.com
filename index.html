@@ -14,13 +14,18 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="page-shell">
       <header class="site-header">
         <a class="brand" href="#top">
-          <span class="brand-mark">今</span>
+          <span class="brand-mark" aria-hidden="true">
+            <img src="./assets/logo-mark.png" alt="" />
+          </span>
           <span class="brand-text">
             <strong>今文佛典</strong>
             <span>佛经现代语译计划</span>
@@ -30,6 +35,7 @@
           <a href="./index.html">首页</a>
           <a href="./catalog.html">经文目录</a>
           <a href="./participate.html">我要参与</a>
+          <a href="https://github.com/yuqianyi1001/sutratoday.com" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
       </header>
 
@@ -40,7 +46,7 @@
             <h1>今文佛典</h1>
             <p class="hero-subtitle">佛经现代语译计划</p>
             <p class="hero-description">
-              《今文佛典》是一个持续进行的佛经现代语译项目。我们希望在尊重原典、参考注疏与保留关键佛学概念的前提下，把古奥、凝练、跳跃的经文，译成当代中文读者可以直接阅读的文字。这里的“现代语译”，不是随意改写，也不是只求浅白，而是在忠于原义的基础上，尽量让句意清楚、层次分明、语言可读。
+              《今文佛典》是一个持续进行的佛经现代语译项目。项目中的译文初稿，主要由现代强大的大模型 AI 生成；人工的主要职责不是逐句手工翻译，而是围绕原典、注疏、术语与行文可读性进行校验、修订与把关。这里的“现代语译”，不是随意改写，也不是只求浅白，而是在忠于原义的基础上，尽量让句意清楚、层次分明、语言可读。
             </p>
             <div class="hero-actions">
               <a class="primary-link" href="./participate.html">我要参与</a>
