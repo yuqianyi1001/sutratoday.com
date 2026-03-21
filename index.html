@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今文佛典：佛经现代语译计划</title>
+    <meta
+      name="description"
+      content="今文佛典：佛经现代语译计划。用 Markdown 管理佛经现代语译文稿，并在网页中展示经库、状态与正文。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top">
+          <span class="brand-mark">今</span>
+          <span class="brand-text">
+            <strong>今文佛典</strong>
+            <span>佛经现代语译计划</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="./index.html">首页</a>
+          <a href="./catalog.html">经文目录</a>
+          <a href="./participate.html">我要参与</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" id="project">
+          <div class="hero-copy">
+            <p class="eyebrow">Project</p>
+            <h1>今文佛典</h1>
+            <p class="hero-subtitle">佛经现代语译计划</p>
+            <p class="hero-description">
+              《今文佛典》是一个持续进行的佛经现代语译项目。我们希望在尊重原典、参考注疏与保留关键佛学概念的前提下，把古奥、凝练、跳跃的经文，译成当代中文读者可以直接阅读的文字。这里的“现代语译”，不是随意改写，也不是只求浅白，而是在忠于原义的基础上，尽量让句意清楚、层次分明、语言可读。
+            </p>
+            <div class="hero-actions">
+              <a class="primary-link" href="./participate.html">我要参与</a>
+              <a class="secondary-link" href="./catalog.html">查看经文目录</a>
+            </div>
+          </div>
+          <aside class="hero-panel">
+            <p class="panel-title">项目总览</p>
+            <div class="hero-stat-groups" id="hero-stats">
+              <section class="stat-group">
+                <p class="stat-group-title">翻译</p>
+                <div class="compact-stats">
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-untranslated">0</strong>
+                    <span>未翻译</span>
+                    <div class="stat-tooltip">已建条目或已进入计划，但还没有形成可用的现代语译稿。</div>
+                  </div>
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-translating">0</strong>
+                    <span>翻译中</span>
+                    <div class="stat-tooltip">已经开始推进正文，完成了部分段落、章节或卷稿，但尚未形成完整初稿。</div>
+                  </div>
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-translated">0</strong>
+                    <span>已翻译</span>
+                    <div class="stat-tooltip">已经形成完整现代语初稿，但不等于最终定稿，后续仍可继续校订与修整。</div>
+                  </div>
+                </div>
+              </section>
+              <section class="stat-group">
+                <p class="stat-group-title">校验</p>
+                <div class="compact-stats compact-stats-review">
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-unreviewed">0</strong>
+                    <span>未校验</span>
+                    <div class="stat-tooltip">译稿尚未进入校验流程，仍需要检查术语、断句、原义和行文一致性。</div>
+                  </div>
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-reviewing">0</strong>
+                    <span>校验中</span>
+                    <div class="stat-tooltip">已经进入校验流程，但还没有完成整篇确认，可能仍在持续修正中。</div>
+                  </div>
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-ai-reviewed">0</strong>
+                    <span>AI已校验</span>
+                    <div class="stat-tooltip">已经完成一轮 AI 辅助检查，可用于发现明显问题，但不能替代人工最终确认。</div>
+                  </div>
+                  <div class="stat-card" tabindex="0">
+                    <strong id="stat-human-reviewed">0</strong>
+                    <span>人工已校验</span>
+                    <div class="stat-tooltip">已经过人工校对或复核，当前版本相对稳定，适合作为公开展示或继续精修的基础。</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </aside>
+        </section>
+
+        <section class="catalog" id="catalog">
+          <div class="section-heading">
+            <p class="eyebrow">Library</p>
+            <h2>精选经目</h2>
+          </div>
+          <p class="section-description" id="catalog-lead">
+            首页仅展示精选经目。
+          </p>
+          <div class="catalog-grid" id="catalog-grid">
+            <p class="loading-text">正在读取文稿目录…</p>
+          </div>
+          <div class="section-actions">
+            <a class="primary-link" href="./catalog.html">查看更多经文目录</a>
+          </div>
+        </section>
+
+        <section class="sample-reading" id="sample">
+          <div class="section-heading">
+            <p class="eyebrow">Sample</p>
+            <h2>示例文稿阅读</h2>
+          </div>
+          <div class="sample-layout">
+            <aside class="sample-intro">
+              <p class="panel-title">示例说明</p>
+              <h3 id="sample-title">加载中</h3>
+              <div class="badge-row" id="sample-meta"></div>
+              <p>
+                首页示例阅读用于呈现《今文佛典》的基本体例，包括原文对照、现代语译、关键词与简注。完整文稿的连续阅读、篇目切换与原始 Markdown 查看，统一在独立阅读页中进行。
+              </p>
+              <a class="source-link" id="sample-link" href="./reader.html">进入独立阅读页</a>
+            </aside>
+            <div class="sample-surface">
+              <article class="markdown-view reading-prose" id="sample-rendered">
+                <p class="loading-text">正在渲染示例文稿…</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

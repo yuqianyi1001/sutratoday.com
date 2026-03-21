@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今文佛典 | 文稿阅读页</title>
+    <meta
+      name="description"
+      content="今文佛典独立阅读页。用于舒适阅读 Markdown 原稿、查看文稿状态与打开源文件。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="reader-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">今</span>
+          <span class="brand-text">
+            <strong>今文佛典</strong>
+            <span>独立阅读页</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="阅读页导航">
+          <a href="./index.html">首页</a>
+          <a href="./catalog.html">经文目录</a>
+          <a href="./participate.html">我要参与</a>
+        </nav>
+      </header>
+
+      <main class="reader-page-main solo-reader" id="reader-article">
+        <section class="reader-page-article">
+          <div class="reader-toolbar">
+            <div>
+              <p class="toolbar-kicker">当前文稿</p>
+              <h2 id="reader-title">加载中</h2>
+              <p class="reader-summary" id="reader-summary"></p>
+              <div class="reader-statusbar" id="reader-statusbar">
+                <p class="loading-text">正在准备状态信息…</p>
+              </div>
+            </div>
+            <div class="reader-actions">
+              <a class="source-link" href="./catalog.html">返回经文目录</a>
+              <a class="source-link" id="source-link" href="#" target="_blank" rel="noreferrer">打开 Markdown 原稿</a>
+            </div>
+          </div>
+
+          <div class="reader-surface reader-surface-solo">
+            <article class="markdown-view reading-prose" id="reader-rendered">
+              <p class="loading-text">正在渲染文稿…</p>
+            </article>
+            <details class="raw-source">
+              <summary>查看原始 Markdown</summary>
+              <pre id="reader-raw"></pre>
+            </details>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./reader.js"></script>
+  </body>
+</html>

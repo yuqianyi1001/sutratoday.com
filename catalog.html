@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今文佛典 | 经文目录</title>
+    <meta
+      name="description"
+      content="今文佛典完整经文目录页。展示全部文稿、状态、进度，并进入独立阅读页。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="catalog-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">今</span>
+          <span class="brand-text">
+            <strong>今文佛典</strong>
+            <span>经文目录</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="目录页导航">
+          <a href="./index.html">首页</a>
+          <a href="./catalog.html">经文目录</a>
+          <a href="./participate.html">我要参与</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="catalog" id="catalog-index">
+          <div class="section-heading">
+            <p class="eyebrow">Library</p>
+            <h2>全部经目</h2>
+          </div>
+          <p class="section-description" id="catalog-page-lead">正在读取全部经目…</p>
+          <div class="catalog-grid" id="catalog-grid">
+            <p class="loading-text">正在读取文稿目录…</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./catalog.js"></script>
+  </body>
+</html>
