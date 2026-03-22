@@ -1,5 +1,35 @@
 # AGENTS
 
+## 佛典工作流
+
+- 处理佛典时，必须以该经所属的思想体系作为校验框架。若某部经典属于般若系、净土系、法华系、戒律警策类等特定系统，不可用泛泛的佛学常识混答。
+- 精选经目所用底本，优先采用 `sources/cbeta/featured` 中已经备份到 repo 的 CBETA 文件。默认优先使用其中最通行的 CBETA《大正藏》版本。
+- 如上述目录中没有佛经原文，优先通俗本，在这里查找：
+  - 优先查找本地：~/Downloads/bookcase_v090_20231219
+  - 优先在线版本：https://github.com/cbeta-org/xml-p5
+  - 如果上述方法都找不到，请在 Cbeta 查找： https://cbetaonline.dila.edu.tw/
+- `content/sutras/*.md` 中的佛经原文一律保持简体中文，即使 CBETA 源文件是繁体。异体字、用字、句式以 CBETA 为先；若极少数字形不适合直接放进 markdown，则改用最常见、最通行的简体写法。 使用 opencc 工具转换。
+- 依据 CBETA 先整理佛经原文，改成 md 格式，md要求：content/README.md
+- 根据佛经原文，逐段翻译
+- 翻译要求：
+  1. 必须逐句、逐段翻译。
+  2. 不得省略重复句、名单、套语、流通分、结尾等内容。
+  3. 若原文段落过大，应拆成更小的原文 / 译文对应段落。
+  4. 章节内部优先采用这种结构：`原文` 第 1 段，`现代语译` 第 1 段，`原文` 第 2 段，`现代语译` 第 2 段，依次类推。
+  5. `现代语译` 应写成正常段落，不使用 `1. 2. 3.` 这种编号式列表。
+
+- 佛典 markdown 内容格式规则：
+  - 标题必须有实际意义。若某层分组标题没有意义，就删除，不要保留空架子。
+  - 主要分节标题若保留序号，统一使用 `一、二、三、...` 这种标点格式。
+- 阅读器与文稿分离原则：
+  - markdown 负责语义结构，不负责展示花样。
+  - 不要为了显示效果，手工给佛经原文加粗。
+  - `原文` 与 `现代语译` 的视觉强调，优先放在 reader 侧自动解析和渲染。
+
 ## Git
 
-- Push to the remote with `--no-verify` to skip push hooks. Example: `git push --no-verify parent main`
+- 推送远端时，使用 `--no-verify` 跳过 push hooks。例如：`git push --no-verify parent main`
+- 当用户要求提交并推送时，除非另有说明，否则默认按以下顺序执行：
+  - `git add ...`
+  - 如果需要提交，执行 `git commit --no-verify -m "..."`
+  - 然后执行 `git push --no-verify parent main`
