@@ -1,12 +1,13 @@
 import {
+  documentIndex,
   escapeHtml,
   GITHUB_REPO_BASE,
   getMarkdownSourceUrl,
   getReaderUrl,
   getReviewState,
+  loadDocument,
   SITE_BASE_URL,
   getTranslationState,
-  loadDocuments,
   renderMarkdown,
 } from "./site-data.js";
 
@@ -25,12 +26,13 @@ const dom = {
   summary: document.getElementById("reader-summary"),
 };
 
-let documents = [];
 let currentDocument = null;
 let selectedQuote = "";
 let selectionSyncFrame = 0;
 let lastSelectionRect = null;
 let feedbackPanelOpen = false;
+let currentLoadId = 0;
+const documentCache = new Map();
 const GITHUB_ISSUES_NEW_BASE = GITHUB_REPO_BASE.replace("/blob/main/", "/issues/new");
 const SELECTION_FEEDBACK_OFFSET = 14;
 
@@ -39,21 +41,26 @@ init().catch((error) => {
 });
 
 async function init() {
-  documents = await loadDocuments();
   bindSelectionFeedback();
-  selectCurrent();
-  window.addEventListener("hashchange", selectCurrent);
-  window.addEventListener("popstate", selectCurrent);
+  await selectCurrent();
+  window.addEventListener("hashchange", () => {
+    selectCurrent().catch(handleReaderLoadError);
+  });
+  window.addEventListener("popstate", () => {
+    selectCurrent().catch(handleReaderLoadError);
+  });
 }
 
-function selectCurrent() {
-  const slug = getCurrentSlug();
-  const selected = documents.find((doc) => doc.slug === slug) || documents.find((doc) => doc.slug === "heart-sutra") || documents[0];
-  if (!selected) {
-    return;
-  }
+async function selectCurrent() {
+  const requestedSlug = getCurrentSlug();
+  const selectedMeta = getSafeDocumentMeta(requestedSlug);
+  const loadId = ++currentLoadId;
+  const selected = await getDocumentBySlug(selectedMeta.slug);
 
   syncReaderUrl(selected.slug);
+  if (loadId !== currentLoadId) {
+    return;
+  }
 
   currentDocument = selected;
 
@@ -82,6 +89,35 @@ function getCurrentSlug() {
     return slugFromSearch;
   }
   return new URLSearchParams(location.hash.replace(/^#/, "")).get("doc");
+}
+
+function getSafeDocumentMeta(slug) {
+  const fallback = documentIndex.find((doc) => doc.slug === "heart-sutra") || documentIndex[0];
+  if (!slug) {
+    return fallback;
+  }
+  return documentIndex.find((doc) => doc.slug === slug) || fallback;
+}
+
+async function getDocumentBySlug(slug) {
+  if (documentCache.has(slug)) {
+    return documentCache.get(slug);
+  }
+
+  const meta = getSafeDocumentMeta(slug);
+  const loaded = await loadDocument(meta.path);
+  const merged = {
+    ...meta,
+    ...loaded,
+    slug: meta.slug,
+    path: meta.path,
+  };
+  documentCache.set(meta.slug, merged);
+  return merged;
+}
+
+function handleReaderLoadError() {
+  dom.rendered.innerHTML = `<p class="loading-text">当前经文加载失败，请稍后重试。</p>`;
 }
 
 function syncReaderUrl(slug) {

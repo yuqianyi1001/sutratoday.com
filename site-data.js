@@ -243,8 +243,12 @@ export function getMarkdownSourceUrl(path) {
 }
 
 export function getReaderUrl(slug, base = "") {
-  const relative = `./reader.html?doc=${encodeURIComponent(slug)}`;
-  return base ? new URL(relative.replace(/^\.\//, ""), base).toString() : relative;
+  const encodedSlug = encodeURIComponent(slug);
+  const queryOnly = `reader.html?doc=${encodedSlug}`;
+  if (base) {
+    return new URL(queryOnly, base).toString();
+  }
+  return `./${queryOnly}`;
 }
 
 export function getDocumentIndexBySlug(slug) {
