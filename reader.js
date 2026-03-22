@@ -2,7 +2,9 @@ import {
   escapeHtml,
   GITHUB_REPO_BASE,
   getMarkdownSourceUrl,
+  getReaderUrl,
   getReviewState,
+  SITE_BASE_URL,
   getTranslationState,
   loadDocuments,
   renderMarkdown,
@@ -41,14 +43,17 @@ async function init() {
   bindSelectionFeedback();
   selectCurrent();
   window.addEventListener("hashchange", selectCurrent);
+  window.addEventListener("popstate", selectCurrent);
 }
 
 function selectCurrent() {
-  const slugFromHash = new URLSearchParams(location.hash.replace(/^#/, "")).get("doc");
-  const selected = documents.find((doc) => doc.slug === slugFromHash) || documents.find((doc) => doc.slug === "heart-sutra") || documents[0];
+  const slug = getCurrentSlug();
+  const selected = documents.find((doc) => doc.slug === slug) || documents.find((doc) => doc.slug === "heart-sutra") || documents[0];
   if (!selected) {
     return;
   }
+
+  syncReaderUrl(selected.slug);
 
   currentDocument = selected;
 
@@ -60,6 +65,7 @@ function selectCurrent() {
   dom.sourceLink.href = getMarkdownSourceUrl(selected.path);
   dom.rendered.innerHTML = renderMarkdown(selected.body);
   dom.raw.textContent = selected.raw;
+  updateSeo(selected);
   resetSelectionFeedback();
   dom.statusbar.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
@@ -68,6 +74,89 @@ function selectCurrent() {
     <span class="reader-fact">进度：${escapeHtml(String(selected.progress_percent || 0))}%</span>
     <span class="reader-fact">更新：${escapeHtml(selected.updated_at || "未标注")}</span>
   `;
+}
+
+function getCurrentSlug() {
+  const slugFromSearch = new URLSearchParams(location.search).get("doc");
+  if (slugFromSearch) {
+    return slugFromSearch;
+  }
+  return new URLSearchParams(location.hash.replace(/^#/, "")).get("doc");
+}
+
+function syncReaderUrl(slug) {
+  const nextRelativeUrl = getReaderUrl(slug);
+  const nextSearch = `?doc=${encodeURIComponent(slug)}`;
+  if (location.search !== nextSearch || location.hash) {
+    history.replaceState(null, "", nextRelativeUrl);
+  }
+}
+
+function updateSeo(doc) {
+  const names = [doc.short_title, doc.title].filter(Boolean);
+  const pageTitle = `${names[0] || doc.title}白话文与现代语译 | 今文佛典`;
+  const pageDescription = `阅读《${doc.title}》的导读、原文、现代语译与白话文对照，帮助读者更快理解这部佛经在说什么、目的是什么。`;
+  const canonicalUrl = getReaderUrl(doc.slug, SITE_BASE_URL);
+  const keywords = buildSeoKeywords(doc);
+
+  document.title = pageTitle;
+  setMeta('meta[name="description"]', "content", pageDescription);
+  setMeta('meta[name="keywords"]', "content", keywords);
+  setMeta('meta[property="og:title"]', "content", pageTitle);
+  setMeta('meta[property="og:description"]', "content", pageDescription);
+  setMeta('meta[property="og:url"]', "content", canonicalUrl);
+  setMeta('meta[name="twitter:title"]', "content", pageTitle);
+  setMeta('meta[name="twitter:description"]', "content", pageDescription);
+
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) {
+    canonicalLink.href = canonicalUrl;
+  }
+
+  const structuredData = document.getElementById("seo-structured-data");
+  if (structuredData) {
+    structuredData.textContent = JSON.stringify(
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: doc.title,
+        url: canonicalUrl,
+        description: pageDescription,
+        keywords,
+        inLanguage: "zh-CN",
+        isPartOf: {
+          "@type": "WebSite",
+          name: "今文佛典",
+          url: SITE_BASE_URL,
+        },
+      },
+      null,
+      2,
+    );
+  }
+}
+
+function buildSeoKeywords(doc) {
+  const seeds = [doc.short_title, doc.title].filter(Boolean);
+  const keywords = [];
+
+  seeds.forEach((name) => {
+    keywords.push(name);
+    keywords.push(`${name}白话`);
+    keywords.push(`${name}白话文`);
+    keywords.push(`${name}现代语译`);
+  });
+
+  keywords.push("白话佛经", "佛经白话文", "佛经现代语译");
+
+  return [...new Set(keywords)].join(",");
+}
+
+function setMeta(selector, attribute, value) {
+  const element = document.querySelector(selector);
+  if (element) {
+    element.setAttribute(attribute, value);
+  }
 }
 
 function bindSelectionFeedback() {

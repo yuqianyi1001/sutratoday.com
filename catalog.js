@@ -1,4 +1,4 @@
-import { escapeHtml, getReviewState, getTranslationState, loadDocuments } from "./site-data.js";
+import { escapeHtml, getReaderUrl, getReviewState, getTranslationState, loadDocuments } from "./site-data.js";
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),
@@ -41,7 +41,7 @@ function renderCatalog(docs) {
             <span>进度 ${escapeHtml(String(doc.progress_percent || 0))}%</span>
             <span>${escapeHtml(doc.updated_at || "未标注日期")}</span>
           </div>
-          <a class="catalog-open" href="./reader.html#doc=${encodeURIComponent(doc.slug)}">进入阅读页</a>
+          <a class="catalog-open" href="${getReaderUrl(doc.slug)}">进入阅读页</a>
         </article>
       `;
     })

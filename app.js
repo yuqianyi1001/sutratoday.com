@@ -3,6 +3,7 @@ import {
   getFeaturedDocuments,
   getDocumentBySlug,
   getPrimarySample,
+  getReaderUrl,
   getReviewState,
   getTranslationState,
   HOME_FEATURED_LIMIT,
@@ -65,7 +66,7 @@ function renderCatalog(docs) {
             <span>进度 ${escapeHtml(String(doc.progress_percent || 0))}%</span>
             <span>${escapeHtml(doc.updated_at || "未标注日期")}</span>
           </div>
-          <a class="catalog-open" href="./reader.html#doc=${encodeURIComponent(doc.slug)}">进入阅读页</a>
+          <a class="catalog-open" href="${getReaderUrl(doc.slug)}">进入阅读页</a>
         </article>
       `;
     })
@@ -83,5 +84,5 @@ function renderSample(sample) {
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
   `;
   dom.sampleRendered.innerHTML = renderMarkdown(selected.body);
-  dom.sampleLink.href = `./reader.html#doc=${encodeURIComponent(selected.slug)}`;
+  dom.sampleLink.href = getReaderUrl(selected.slug);
 }

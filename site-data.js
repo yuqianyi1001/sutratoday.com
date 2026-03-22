@@ -14,6 +14,7 @@ export const manifest = [
 ];
 
 export const HOME_FEATURED_LIMIT = 6;
+export const SITE_BASE_URL = "https://sutratoday.com/";
 export const GITHUB_REPO_BASE = "https://github.com/yuqianyi1001/sutratoday.com/blob/main/";
 
 const translationStates = {
@@ -85,6 +86,11 @@ export function getReviewState(status) {
 
 export function getMarkdownSourceUrl(path) {
   return new URL(path, GITHUB_REPO_BASE).toString();
+}
+
+export function getReaderUrl(slug, base = "") {
+  const relative = `./reader.html?doc=${encodeURIComponent(slug)}`;
+  return base ? new URL(relative.replace(/^\.\//, ""), base).toString() : relative;
 }
 
 function scoreDocument(doc) {
