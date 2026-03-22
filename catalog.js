@@ -11,7 +11,7 @@ init().catch((error) => {
 
 async function init() {
   const documents = await loadDocuments();
-  dom.lead.textContent = `当前共收录 ${documents.length} 篇文稿样稿。点击任一条目即可进入独立阅读页。`;
+  dom.lead.textContent = `当前共收录 ${documents.length} 篇文稿样稿。点击任一条目即可进入阅读页。`;
   renderCatalog(sortCatalogDocuments(documents));
 }
 

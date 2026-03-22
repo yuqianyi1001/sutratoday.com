@@ -108,3 +108,8 @@
 - 提交规范
 
 当前版本先把入口打开：如果你愿意参与，可以先从 AI 译稿整理、术语统一或人工校验开始。
+
+如需联系，可来信至 [jeffwoo2019@gmail.com](mailto:jeffwoo2019@gmail.com)。
+
+愚千一  
+[yuqianyi.com](https://yuqianyi.com/)
