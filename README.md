@@ -15,7 +15,7 @@
 
 - `content/sutras/`：佛经文稿原始稿，使用 Markdown + front matter
 - `content/pages/`：站点页面文稿
-- `sources/cbeta/featured/`：精选经目的 CBETA 底本备份
+- `sources/cbeta/`：仓库内使用的 CBETA 底本备份
 - `content/README.md`：文稿格式与字段规范
 
 当前文稿工作方式是：

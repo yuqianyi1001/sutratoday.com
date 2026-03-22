@@ -6,7 +6,7 @@ volume_label: 全一卷
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
-updated_at: 2026-03-21
+updated_at: 2026-03-22
 summary: 般若系代表短经，直指五蕴皆空、无所得与离执解脱的核心义旨。
 tags: 般若,入门,短经
 ---
@@ -14,6 +14,14 @@ tags: 般若,入门,短经
 # 般若波罗蜜多心经
 
 > 《心经》篇幅虽短，却高度凝摄般若思想。本文依般若系“缘起性空、破执无得”的主线加以诠释，务求便于当代读者通读经文，并把握其核心义旨。
+
+## 译者题记
+
+### 原文
+唐玄奘译
+
+### 现代语译
+这部经的通行本是唐代玄奘所译。
 
 ## 一、总纲
 

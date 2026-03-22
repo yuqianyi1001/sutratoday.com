@@ -17,7 +17,7 @@
 
 ## 当前文稿体例
 
-以 [`/Users/j.wu/ws/codex_anything/content/sutras/heart-sutra.md`]( /Users/j.wu/ws/codex_anything/content/sutras/heart-sutra.md ) 为当前正式参考稿。
+以 [`~/ws/codex_anything/content/sutras/heart-sutra.md`]( ~/ws/codex_anything/content/sutras/heart-sutra.md ) 为当前正式参考稿。
 
 - front matter 之后，先写一级标题 `# 经名`
 - 标题下可接一段导语，使用 Markdown 引用块 `>`
