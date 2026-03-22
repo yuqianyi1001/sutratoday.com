@@ -12,7 +12,7 @@ init().catch((error) => {
 async function init() {
   const documents = await loadDocuments();
   dom.lead.textContent = `当前共收录 ${documents.length} 篇文稿样稿。点击任一条目即可进入独立阅读页。`;
-  renderCatalog(documents);
+  renderCatalog(sortCatalogDocuments(documents));
 }
 
 function renderCatalog(docs) {
@@ -46,4 +46,27 @@ function renderCatalog(docs) {
       `;
     })
     .join("");
+}
+
+function sortCatalogDocuments(docs) {
+  return [...docs].sort((a, b) => {
+    const rankDiff = getCatalogRank(a) - getCatalogRank(b);
+    if (rankDiff !== 0) {
+      return rankDiff;
+    }
+    return a.title.localeCompare(b.title, "zh-Hans-CN");
+  });
+}
+
+function getCatalogRank(doc) {
+  if (doc.review_status === "human_reviewed") {
+    return 0;
+  }
+  if (doc.review_status === "ai_reviewed") {
+    return 1;
+  }
+  if (doc.translation_status === "translated") {
+    return 2;
+  }
+  return 3;
 }
