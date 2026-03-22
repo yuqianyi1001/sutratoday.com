@@ -82,11 +82,6 @@ function renderSample(sample) {
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
   `;
-  dom.sampleRendered.innerHTML = renderMarkdown(extractSampleExcerpt(selected.body));
+  dom.sampleRendered.innerHTML = renderMarkdown(selected.body);
   dom.sampleLink.href = `./reader.html#doc=${encodeURIComponent(selected.slug)}`;
-}
-
-function extractSampleExcerpt(body) {
-  const sections = body.split("\n## ");
-  return sections.slice(0, 3).join(sections.length > 1 ? "\n## " : "");
 }
