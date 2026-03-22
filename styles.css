@@ -289,6 +289,22 @@ code {
   margin-bottom: 18px;
 }
 
+.section-heading-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: nowrap;
+}
+
+.section-heading-inline h2 {
+  margin-right: auto;
+}
+
+.section-heading-inline .primary-link {
+  flex: 0 0 auto;
+}
+
 .section-heading h2 {
   font-size: clamp(2.2rem, 4vw, 3.5rem);
 }
@@ -883,6 +899,11 @@ code {
   .content-meta {
     align-items: start;
     flex-direction: column;
+  }
+
+  .section-heading-inline {
+    align-items: start;
+    flex-wrap: wrap;
   }
 
   .selection-comment-trigger,
