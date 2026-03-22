@@ -12,13 +12,8 @@ import {
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),
-  statUntranslated: document.getElementById("stat-untranslated"),
-  statTranslating: document.getElementById("stat-translating"),
   statTranslated: document.getElementById("stat-translated"),
-  statUnreviewed: document.getElementById("stat-unreviewed"),
-  statReviewing: document.getElementById("stat-reviewing"),
   statAiReviewed: document.getElementById("stat-ai-reviewed"),
-  statHumanReviewed: document.getElementById("stat-human-reviewed"),
   catalogLead: document.getElementById("catalog-lead"),
   sampleTitle: document.getElementById("sample-title"),
   sampleMeta: document.getElementById("sample-meta"),
@@ -40,13 +35,8 @@ async function init() {
 }
 
 function renderStats(docs) {
-  dom.statUntranslated.textContent = String(docs.filter((doc) => doc.translation_status === "untranslated").length);
-  dom.statTranslating.textContent = String(docs.filter((doc) => doc.translation_status === "translating").length);
   dom.statTranslated.textContent = String(docs.filter((doc) => doc.translation_status === "translated").length);
-  dom.statUnreviewed.textContent = String(docs.filter((doc) => doc.review_status === "unreviewed").length);
-  dom.statReviewing.textContent = String(docs.filter((doc) => doc.review_status === "reviewing").length);
   dom.statAiReviewed.textContent = String(docs.filter((doc) => doc.review_status === "ai_reviewed").length);
-  dom.statHumanReviewed.textContent = String(docs.filter((doc) => doc.review_status === "human_reviewed").length);
 }
 
 function renderCatalog(docs) {
