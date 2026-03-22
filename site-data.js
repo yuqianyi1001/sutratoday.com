@@ -147,24 +147,29 @@ export function renderMarkdown(markdown) {
   let listType = null;
   let inCodeBlock = false;
   let codeBuffer = [];
+  let sectionTone = null;
+
+  const paragraphClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original"' : "");
+  const listClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-list"' : "");
+  const codeClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-code"' : "");
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
-    html.push(`<p>${formatInline(paragraph.join(" "))}</p>`);
+    html.push(`<p${paragraphClass()}>${formatInline(paragraph.join(" "))}</p>`);
     paragraph = [];
   };
 
   const flushList = () => {
     if (!listBuffer.length) return;
     const tag = listType === "ol" ? "ol" : "ul";
-    html.push(`<${tag}>${listBuffer.map((item) => `<li>${formatInline(item)}</li>`).join("")}</${tag}>`);
+    html.push(`<${tag}${listClass()}>${listBuffer.map((item) => `<li>${formatInline(item)}</li>`).join("")}</${tag}>`);
     listBuffer = [];
     listType = null;
   };
 
   const flushCode = () => {
     if (!codeBuffer.length) return;
-    html.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
+    html.push(`<pre${codeClass()}><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
     codeBuffer = [];
   };
 
@@ -202,7 +207,13 @@ export function renderMarkdown(markdown) {
       flushParagraph();
       flushList();
       const level = headingMatch[1].length;
-      html.push(`<h${level}>${formatInline(headingMatch[2])}</h${level}>`);
+      const headingText = headingMatch[2].trim();
+      if (level === 3) {
+        sectionTone = headingText === "原文" ? "sutra-original" : null;
+      } else {
+        sectionTone = null;
+      }
+      html.push(`<h${level}>${formatInline(headingText)}</h${level}>`);
       return;
     }
 

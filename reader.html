@@ -56,10 +56,10 @@
             </div>
           </div>
 
-          <div class="reader-surface reader-surface-solo">
-            <article class="markdown-view reading-prose" id="reader-rendered">
-              <p class="loading-text">正在渲染文稿…</p>
-            </article>
+	          <div class="reader-surface reader-surface-solo">
+	            <article class="markdown-view reading-prose" id="reader-rendered">
+	              <p class="loading-text">正在渲染文稿…</p>
+	            </article>
             <details class="raw-source">
               <summary>查看原始 Markdown</summary>
               <pre id="reader-raw"></pre>
@@ -68,6 +68,46 @@
         </section>
       </main>
     </div>
+
+	    <button
+	      class="selection-comment-trigger"
+	      id="selection-comment-trigger"
+	      type="button"
+	      hidden
+	      aria-label="添加评论或反馈问题"
+	      title="添加评论或反馈问题"
+	    >
+	      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+	        <path
+	          d="M5 6.75C5 5.784 5.784 5 6.75 5h10.5C18.216 5 19 5.784 19 6.75v6.5C19 14.216 18.216 15 17.25 15H10.8l-3.943 3.204A.75.75 0 0 1 5 17.621V15.75c0-.414-.336-.75-.75-.75A1.25 1.25 0 0 1 3 13.75v-7z"
+	          fill="currentColor"
+	        />
+	      </svg>
+	    </button>
+
+	    <div class="selection-feedback" id="selection-feedback" hidden>
+	      <div class="selection-feedback-top">
+	        <p class="selection-feedback-label">已选中一段文字</p>
+	        <button class="selection-feedback-close" id="selection-feedback-close" type="button" aria-label="收起反馈框">
+	          ×
+	        </button>
+	      </div>
+	      <p class="selection-feedback-quote" id="selection-feedback-quote"></p>
+	      <div class="selection-feedback-actions">
+	        <a
+	          class="primary-link"
+	          id="selection-feedback-link"
+	          href="#"
+	          target="_blank"
+	          rel="noreferrer"
+	        >
+	          添加评论或反馈问题
+	        </a>
+	        <button class="selection-feedback-dismiss" id="selection-feedback-dismiss" type="button">
+	          清除选择
+	        </button>
+	      </div>
+	    </div>
 
     <script type="module" src="./reader.js"></script>
   </body>
