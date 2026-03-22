@@ -1,13 +1,14 @@
 import {
+  documentIndex,
   escapeHtml,
   getFeaturedDocuments,
-  getDocumentBySlug,
+  getDocumentIndexBySlug,
   getPrimarySample,
   getReaderUrl,
   getReviewState,
   getTranslationState,
   HOME_FEATURED_LIMIT,
-  loadDocuments,
+  loadDocument,
   renderMarkdown,
 } from "./site-data.js";
 
@@ -24,15 +25,16 @@ const dom = {
 
 init().catch((error) => {
   dom.catalogGrid.innerHTML = `<p class="loading-text">读取失败：${escapeHtml(error.message)}</p>`;
-  dom.sampleRendered.innerHTML = `<p class="loading-text">请通过站点地址访问本页，避免直接打开本地文件。</p>`;
+  dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
 });
 
 async function init() {
-  const documents = await loadDocuments();
-  renderStats(documents);
-  renderCatalog(getFeaturedDocuments(documents));
-  renderSample(getPrimarySample(documents));
+  renderStats(documentIndex);
+  renderCatalog(getFeaturedDocuments(documentIndex));
   dom.catalogLead.textContent = `首页仅展示精选的 ${HOME_FEATURED_LIMIT} 部经目。完整目录请进入单独的经文目录页查看。`;
+  renderSample(getPrimarySample(documentIndex)).catch((error) => {
+    dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
+  });
 }
 
 function renderStats(docs) {
@@ -73,8 +75,9 @@ function renderCatalog(docs) {
     .join("");
 }
 
-function renderSample(sample) {
-  const selected = getDocumentBySlug(sample.slug);
+async function renderSample(sample) {
+  const selectedMeta = getDocumentIndexBySlug(sample.slug);
+  const selected = await loadDocument(selectedMeta.path);
   const translationBadge = getTranslationState(selected.translation_status);
   const reviewBadge = getReviewState(selected.review_status);
 
