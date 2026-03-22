@@ -7,7 +7,7 @@ translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
 updated_at: 2026-03-21
-summary:
+summary: 般若系代表短经，直指五蕴皆空、无所得与离执解脱的核心义旨。
 tags: 般若,入门,短经
 ---
 

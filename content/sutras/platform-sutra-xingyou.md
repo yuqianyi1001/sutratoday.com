@@ -7,7 +7,7 @@ translation_status: translating
 review_status: reviewing
 progress_percent: 41
 updated_at: 2026-03-21
-summary: 以“行由品”先试做人物叙事型佛典的现代语译法。
+summary: 叙述六祖惠能得法因缘，显出顿悟见性的禅宗精神。
 tags: 禅宗,坛经,人物叙事
 ---
 

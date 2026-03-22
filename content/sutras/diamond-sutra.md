@@ -7,7 +7,7 @@ translation_status: translating
 review_status: unreviewed
 progress_percent: 32
 updated_at: 2026-03-21
-summary: 已建立完整目录提要，并完成开篇与核心问答片段的试译。
+summary: 般若系重要经典，以反复破相破执开显无住、无我、无所得的菩萨行。
 tags: 般若,破执,问答
 ---
 

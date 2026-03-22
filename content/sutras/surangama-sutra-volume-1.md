@@ -7,7 +7,7 @@ translation_status: untranslated
 review_status: unreviewed
 progress_percent: 12
 updated_at: 2026-03-21
-summary: 长经先按卷推进，目前仅完成阿难缘起与问题意识的提纲整理。
+summary: 由阿难遭缘起疑，展开见性、妄心与修证根本问题。
 tags: 楞严,长经,卷一
 ---
 

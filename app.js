@@ -64,7 +64,7 @@ function renderCatalog(docs) {
             </div>
             <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
           </div>
-          <p>${escapeHtml(doc.summary || "暂无摘要。")}</p>
+          <p class="catalog-summary">${escapeHtml(doc.summary || "暂无摘要。")}</p>
           <div class="badge-row">
             <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
           </div>

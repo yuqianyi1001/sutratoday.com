@@ -7,7 +7,7 @@ translation_status: translating
 review_status: unreviewed
 progress_percent: 26
 updated_at: 2026-03-21
-summary: 已建文稿框架和十二大愿提要，正文仅完成少量试译。
+summary: 以药师如来十二大愿为主，开示疗苦延寿、消灾离难与发愿修行之义。
 tags: 药师,愿力,消灾
 ---
 

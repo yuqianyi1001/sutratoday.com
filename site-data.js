@@ -149,7 +149,11 @@ export function renderMarkdown(markdown) {
   let codeBuffer = [];
   let sectionTone = null;
 
-  const paragraphClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original"' : "");
+  const paragraphClass = () => {
+    if (sectionTone === "sutra-original") return ' class="sutra-original"';
+    if (sectionTone === "sutra-translation") return ' class="sutra-translation"';
+    return "";
+  };
   const listClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-list"' : "");
   const codeClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-code"' : "");
 
@@ -208,8 +212,14 @@ export function renderMarkdown(markdown) {
       flushList();
       const level = headingMatch[1].length;
       const headingText = headingMatch[2].trim();
-      if (level === 3) {
-        sectionTone = headingText === "原文" ? "sutra-original" : null;
+      if (level >= 3) {
+        if (headingText === "原文") {
+          sectionTone = "sutra-original";
+        } else if (headingText === "现代语译") {
+          sectionTone = "sutra-translation";
+        } else {
+          sectionTone = null;
+        }
       } else {
         sectionTone = null;
       }
@@ -238,6 +248,10 @@ export function renderMarkdown(markdown) {
 
     const orderedMatch = line.match(/^\d+\.\s+(.*)$/);
     if (orderedMatch) {
+      if (sectionTone === "sutra-translation") {
+        paragraph.push(orderedMatch[1]);
+        return;
+      }
       flushParagraph();
       if (listType && listType !== "ol") {
         flushList();

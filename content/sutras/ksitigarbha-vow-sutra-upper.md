@@ -7,7 +7,7 @@ translation_status: untranslated
 review_status: unreviewed
 progress_percent: 15
 updated_at: 2026-03-21
-summary: 目前以卷上结构整理为主，正文只补入开场法会与发愿脉络。
+summary: 以地藏菩萨大愿与众生业感为主线，展开孝亲、救苦与因果教化。
 tags: 地藏,愿力,孝道
 ---
 

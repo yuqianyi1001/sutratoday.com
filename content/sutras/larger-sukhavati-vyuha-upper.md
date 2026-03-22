@@ -7,7 +7,7 @@ translation_status: translating
 review_status: unreviewed
 progress_percent: 35
 updated_at: 2026-03-21
-summary: 净土核心长经先按卷分稿，已完成法藏比丘发愿部分的试译。
+summary: 净土根本长经，铺陈法藏比丘大愿与极乐世界成就因缘。
 tags: 净土,无量寿,愿海
 ---
 

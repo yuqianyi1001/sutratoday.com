@@ -358,41 +358,52 @@ code {
 
 .catalog-card h3,
 .sample-intro h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
+  margin: 0 0 2px;
+  font-size: 1.16rem;
 }
 
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
 }
 
 .catalog-card {
   display: grid;
-  gap: 14px;
-  padding: 22px;
+  gap: 8px;
+  padding: 18px 18px 16px;
 }
 
 .catalog-top {
   display: flex;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   align-items: start;
 }
 
 .catalog-title-wrap p {
-  margin: 0 0 6px;
+  margin: 0 0 2px;
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.catalog-summary {
+  margin: 0;
+  color: #5f554d;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .badge-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .badge {
@@ -400,9 +411,9 @@ code {
   align-items: center;
   gap: 6px;
   width: fit-content;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   border: 1px solid transparent;
 }
 
@@ -431,7 +442,7 @@ code {
 }
 
 .progress-track {
-  height: 8px;
+  height: 7px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(57, 42, 31, 0.08);
@@ -448,14 +459,15 @@ code {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   color: var(--muted);
 }
 
 .catalog-open {
   display: inline-flex;
   width: fit-content;
-  margin-top: 2px;
+  margin-top: 0;
+  font-size: 0.96rem;
   color: var(--accent);
 }
 
@@ -720,6 +732,11 @@ code {
 .markdown-view .sutra-original {
   font-size: 1.06rem;
   line-height: 1.95;
+}
+
+.markdown-view .sutra-translation {
+  line-height: 1.95;
+  color: #3b312b;
 }
 
 .markdown-view .sutra-original-list li::marker {
