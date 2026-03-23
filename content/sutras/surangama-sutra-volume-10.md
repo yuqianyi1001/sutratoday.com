@@ -3,7 +3,7 @@ title: 大佛顶首楞严经 卷第十
 short_title: 楞严经卷十
 slug: surangama-sutra-volume-10
 volume_label: 卷第十
-cbeta_source: sources/cbeta/T19n0945_010.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_010.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

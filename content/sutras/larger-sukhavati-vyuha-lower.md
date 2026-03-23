@@ -3,7 +3,7 @@ title: 佛说无量寿经 卷下
 short_title: 无量寿经卷下
 slug: larger-sukhavati-vyuha-lower
 volume_label: 卷下
-cbeta_source: sources/cbeta/T12n0360_002.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0360_002.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

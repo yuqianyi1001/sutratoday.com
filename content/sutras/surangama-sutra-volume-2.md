@@ -3,7 +3,7 @@ title: 大佛顶首楞严经 卷第二
 short_title: 楞严经卷二
 slug: surangama-sutra-volume-2
 volume_label: 卷第二
-cbeta_source: sources/cbeta/T19n0945_002.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_002.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

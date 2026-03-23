@@ -3,7 +3,7 @@ title: 地藏菩萨本愿经 卷下
 short_title: 地藏经卷下
 slug: ksitigarbha-vow-sutra-lower
 volume_label: 卷下
-cbeta_source: sources/cbeta/T13n0412_002.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T13n0412_002.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

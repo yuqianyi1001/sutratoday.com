@@ -3,7 +3,7 @@ title: 佛说阿弥陀经
 short_title: 阿弥陀经
 slug: amitabha-sutra
 volume_label: 全一卷
-cbeta_source: sources/cbeta/T12n0366_001.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0366_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
