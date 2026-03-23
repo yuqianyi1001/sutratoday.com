@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/cbeta-git/xml-p5a/master/schema/cbeta-p5a.rnc" type="application/relax-ng-compact-syntax"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:cb="http://www.cbeta.org/ns/1.0" xml:id="T19n0945">
+<teiHeader>
+	<fileDesc>
+		<titleStmt>
+			<title>Taishō Tripiṭaka, Electronic version, No. 945 大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			<title xml:lang="zh-Hant">大正新脩大藏經數位版, No. 945 大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			<author>唐 般剌蜜帝譯</author>
+			<respStmt>
+				<resp>Electronic Version by</resp>
+				<name>CBETA</name>
+			</respStmt>
+		</titleStmt>
+		<editionStmt>
+			<edition>單卷版 XML TEI P5b</edition>
+		</editionStmt>
+		<extent>10卷</extent>
+		<publicationStmt>
+			<idno type="CBETA">
+				<idno type="canon">T</idno>.<idno type="vol">19</idno>.<idno type="no">945</idno>
+			</idno>
+			<distributor>
+				<name>中華電子佛典協會 (CBETA)</name>
+				<address>
+					<addrLine><email>service@cbeta.org</email></addrLine>
+				</address>
+			</distributor>
+			<availability>
+				<p>Available for non-commercial use when distributed with this header intact.</p>
+			</availability>
+			<date>2023-07-11 21:15:38 +0800</date>
+		</publicationStmt>
+		<sourceDesc>
+			<bibl>
+				<title level="s">Taishō Tripiṭaka</title>
+				<title level="s" xml:lang="zh-Hant">大正新脩大藏經</title>
+				<title level="m" xml:lang="zh-Hant">大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			</bibl>
+		</sourceDesc>
+	</fileDesc>
+	<encodingDesc>
+		<projectDesc>
+			<p xml:lang="en" cb:type="ly">Text as provided by Mr. Hsiao Chen-Kuo, Text as provided by Anonymous from USA, Punctuated text as provided by Chinese Buddhist Literary Foundation, Re-proofing punctuated text as provided by CBETA</p>
+			<p xml:lang="zh-Hant" cb:type="ly">蕭鎮國大德提供，北美某大德提供，中華佛教百科文獻基金會提供新式標點，CBETA 提供新式標點重校</p>
+		</projectDesc>
+		<editorialDecl>
+			<punctuation resp="CBETA"><p>新式標點</p></punctuation>
+		</editorialDecl>
+		<tagsDecl>
+			<namespace name="http://www.tei-c.org/ns/1.0">
+				<tagUsage gi="rdg">
+					<listWit>
+						<witness xml:id="wit.orig">【大】</witness>
+						<witness xml:id="wit.cbeta">【CB】</witness>
+					</listWit>
+				</tagUsage>
+			</namespace>
+		</tagsDecl>
+		<charDecl>
+			<char xml:id="CB00752">
+				<charName>CBETA CHARACTER CB00752</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[卄/(阿-可+辛)/女]</value>
+				</charProp>
+				<mapping type="unicode">U+26FA8</mapping>
+				<mapping cb:dec="983792" type="PUA">U+F02F0</mapping>
+			</char>
+			<char xml:id="CB00859">
+				<charName>CBETA CHARACTER CB00859</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[薛/女]</value>
+				</charProp>
+				<charProp>
+					<localName>normalized form</localName>
+					<value>孽</value>
+				</charProp>
+				<mapping type="unicode">U+3738</mapping>
+				<mapping cb:dec="983899" type="PUA">U+F035B</mapping>
+			</char>
+			<char xml:id="CB03691">
+				<charName>CBETA CHARACTER CB03691</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[淴-心+目]</value>
+				</charProp>
+				<mapping type="unicode">U+2DC53</mapping>
+				<mapping cb:dec="986731" type="PUA">U+F0E6B</mapping>
+			</char>
+			<char xml:id="CB04474">
+				<charName>CBETA CHARACTER CB04474</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[泳-永+曶]</value>
+				</charProp>
+				<mapping type="unicode">U+3CF7</mapping>
+				<mapping cb:dec="987514" type="PUA">U+F117A</mapping>
+			</char>
+		</charDecl>
+	</encodingDesc>
+	<profileDesc>
+		<langUsage>
+			<language ident="en">English</language>
+			<language ident="zh-Hant">Chinese (Traditional)</language>
+		</langUsage>
+	</profileDesc>
+	<revisionDesc>
+		<change when="2013-05-20">
+			<name>CW</name><name>Ray Chou 周邦信</name>P4 to P5 conversion by p4top5a.py, intended for publication
+		</change>
+		<change when="2000-01-27T11:50:58">
+			CW (ed.) Created initial TEI XML version with BASICX.BAT (00/01/05)
+		</change>
+	</revisionDesc>
+</teiHeader>
+<text><body>
+<cb:mulu level="1" type="序">大佛頂如來萬行首楞嚴經序</cb:mulu>
+<milestone n="10" unit="juan"/>
+<lb n="0151b17" ed="T"/>
+<lb n="0151b18" ed="T"/>
+<lb n="0151b19" ed="T"/><cb:juan n="010" fun="open"><cb:mulu n="010" type="卷"></cb:mulu><cb:jhead>大佛頂如來密因修證了義諸
+<lb n="0151b20" ed="T"/>菩薩萬行首楞嚴經卷第十<anchor xml:id="fxT19p0151b03"/><note place="inline">一名中印度那蘭陀
+<lb n="0151b21" ed="T"/>大道場經，於灌頂部錄出別行</note></cb:jhead></cb:juan>
+<lb n="0151b22" ed="T"/>
+<lb n="0151b23" ed="T"/><byline cb:type="Translator"><note n="0151004" resp="Taisho" type="orig" place="foot text">（大唐…譯出）三十九字＝（天竺沙門般剌蜜諦譯）九字【三】</note><note n="0151004" resp="CBETA" type="mod">（大唐…譯出）三十九字【大】，天竺沙門般剌蜜諦譯【宋】【元】【明】</note><app n="0151004" cb:word-count="39"><lem wit="【大】">大唐神龍元年龍集乙巳五月己卯
+<lb n="0151b24" ed="T"/>朔二十三日辛丑中天竺沙門般剌
+<lb n="0151b25" ed="T"/>蜜帝於廣州制止道場譯出</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">天竺沙門般剌蜜諦譯</rdg></app></byline>
+<lb n="0151b26" ed="T"/><byline cb:type="Scribe"><note n="0151005" resp="Taisho" type="orig" place="foot text">菩薩乃至筆授∞烏長乃至譯語【三】</note><note n="0151005" resp="CBETA" type="mod">菩薩戒弟子前正諫大夫同中書門下平章事清河房融筆授【大】∞烏長國沙門彌伽釋迦譯語【宋】【元】【明】</note><app n="0151005"><lem wit="【大】">菩薩戒弟子前<note n="0151006" resp="Taisho" type="orig" place="foot text">正諫＝正議【宋】，〔正諫大夫同〕－【元】</note><note n="0151006" resp="CBETA" type="mod">正諫大夫同【大】，〔－〕【元】，正議大夫同【宋】</note><app n="0151006"><lem wit="【大】">正諫大夫同</lem><rdg resp="Taisho" wit="【元】"><space quantity="0"/></rdg><rdg resp="Taisho" wit="【宋】">正議大夫同</rdg></app>中書
+<lb n="0151b27" ed="T"/>門下平章事清河房融筆<note n="0151007" resp="Taisho" type="orig" place="foot text">授＝受【三】</note><note n="0151007" resp="CBETA" type="mod">授【大】，受【宋】【元】【明】</note><app n="0151007"><lem wit="【大】">授</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">受</rdg></app></lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">烏長國沙門彌伽釋迦譯語</rdg></app></byline>
+<lb n="0151b28" ed="T"/><byline cb:type="Oral_translator"><note n="0151008" resp="Taisho" type="orig" place="foot text">菩薩乃至筆授∞烏長乃至譯語【三】</note><note n="0151008" resp="CBETA" type="mod">烏長國沙門彌伽釋迦譯語【大】∞菩薩戒弟子前正諫大夫同中書門下平章事清河房融筆授【宋】【元】【明】</note><app n="0151008"><lem wit="【大】">烏長國沙門彌伽釋迦譯語</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">菩薩戒弟子前正諫大夫同中書門下平章事清河房融筆授</rdg></app></byline>
+<lb n="0151b29" ed="T"/><cb:div type="jing"><p xml:id="pT19p0151b2901">「阿難！彼善男子修三摩<note n="0151009" resp="Taisho" type="orig" place="foot text">提＝地【元】＊</note><note n="0151009" resp="CBETA" type="mod">提【大】＊，地【元】＊</note><app n="0151009"><lem wit="【大】">提</lem><rdg resp="Taisho" wit="【元】">地</rdg></app>想陰盡者，是人平
+<pb n="0151c" ed="T" xml:id="T19.0945.0151c"/>
+<lb n="0151c01" ed="T"/>常夢想銷滅，寤寐恒一。覺明虛靜猶如晴空，
+<lb n="0151c02" ed="T"/>無復麁重前塵影事，觀諸世間大地<note n="0151010" resp="Taisho" type="orig" place="foot text">河山＝山河【三】</note><note n="0151010" resp="CBETA" type="mod" cb:note_key="T19.0151c02.15">山河【CB】【磧乙-CB】【宋】【元】【明】，河山【大】</note><app n="0151010"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】">山河，<note type="cf1">QC040n0439_p0521b12</note></lem><rdg wit="【大】">河山</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">山河</rdg></app>如
+<lb n="0151c03" ed="T"/>鏡鑑明，來無所粘，過無蹤跡。虛受照應，了
+<lb n="0151c04" ed="T"/><note n="0151011" resp="Taisho" type="orig" place="foot text">罔＝內【宋】</note><note n="0151011" resp="CBETA" type="mod">罔【大】，內【宋】</note><app n="0151011"><lem wit="【大】">罔</lem><rdg resp="Taisho" wit="【宋】">內</rdg></app>陳習，唯一精真；生滅根元，從此披露。見諸
+<lb n="0151c05" ed="T"/>十方十二眾生，畢殫其類。雖未通其各命由
+<lb n="0151c06" ed="T"/>緒，見同生基，猶如野馬熠熠清擾，為浮根塵
+<lb n="0151c07" ed="T"/>究竟樞穴；此則名為行陰區宇。若此清擾熠
+<lb n="0151c08" ed="T"/>熠元性，性入元澄，一澄元習，如波瀾滅化為
+<lb n="0151c09" ed="T"/>澄水，名行陰盡，是人則能超眾生濁。觀其所
+<lb n="0151c10" ed="T"/>由，幽隱妄想以為其本。</p>
+<lb n="0151c11" ed="T"/><p xml:id="pT19p0151c1101">「阿難當知，是得正知奢摩他中諸善男子凝明
+<lb n="0151c12" ed="T"/>正心，十類天魔不得其便；方得精研，窮生類
+<lb n="0151c13" ed="T"/>本，於本類中生元露者，觀彼幽清圓擾動元，
+<lb n="0151c14" ed="T"/>於圓元中起計度者，是人墜入二無因論：一
+<lb n="0151c15" ed="T"/>者、是人見本無因。何以故？是人既得生機全
+<lb n="0151c16" ed="T"/>破，乘于眼根八百功德，見八萬劫所有眾生，
+<lb n="0151c17" ed="T"/>業流灣環、死此生彼，秖見眾生輪迴其處。八
+<lb n="0151c18" ed="T"/>萬劫外，冥無所觀，便作是解：『此等世間十方
+<lb n="0151c19" ed="T"/>眾生，八萬劫來無因自有。』由此計度，亡正遍
+<lb n="0151c20" ed="T"/>知，墮落外道，惑菩提性。二者、是人見末無因。
+<lb n="0151c21" ed="T"/>何以故？是人於生既見其根，知人生人，悟鳥
+<lb n="0151c22" ed="T"/>生鳥；烏從來黑，鵠從來白，人天本竪，畜生本
+<lb n="0151c23" ed="T"/>橫，白非洗成，黑非染造；從八萬劫無復改移。
+<lb n="0151c24" ed="T"/>今盡此形，亦復如是。而我本來不見菩提，云
+<lb n="0151c25" ed="T"/>何更有成菩提事！當知今日一切物象，皆本
+<lb n="0151c26" ed="T"/>無因。由此計度，亡正遍知，墮落外道，惑菩提
+<lb n="0151c27" ed="T"/>性。是則名為第一外道，立無因論。</p>
+<lb n="0151c28" ed="T"/><p xml:id="pT19p0151c2801">「阿難！是三摩中諸善男子，凝明正心，魔不得
+<lb n="0151c29" ed="T"/>便；窮生類本，觀彼幽清常擾動元，於圓常中
+<pb n="0152a" ed="T" xml:id="T19.0945.0152a"/>
+<lb n="0152a01" ed="T"/>起計度者，是人墜入四遍常論：一者、是人窮
+<lb n="0152a02" ed="T"/>心境性，二處無因；修習能知二萬劫中十方
+<lb n="0152a03" ed="T"/>眾生所有生滅，咸皆循環不曾散失，計以為
+<lb n="0152a04" ed="T"/>常。二者、是人窮四大元，四性常住；修習能知
+<lb n="0152a05" ed="T"/>四萬劫中十方眾生所有生滅，咸皆體恒不
+<lb n="0152a06" ed="T"/>曾散失，計以為常。三者、是人窮盡六根末
+<lb n="0152a07" ed="T"/>那執受，心意識中本元由處，性常恒故；修習
+<lb n="0152a08" ed="T"/>能知八萬劫中一切眾生循環不失，本來常
+<lb n="0152a09" ed="T"/>住，窮不失性，計以為常。四者、是人既盡想元，
+<lb n="0152a10" ed="T"/>生理更無流止運轉，生滅想心今已永滅，理
+<lb n="0152a11" ed="T"/>中自然成不生滅；因心所度，計以為常。由此
+<lb n="0152a12" ed="T"/>計常，亡正遍知，墮落外道，惑菩提性。是則名
+<lb n="0152a13" ed="T"/>為第二外道，立圓常論。</p>
+<lb n="0152a14" ed="T"/><p xml:id="pT19p0152a1401">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152a15" ed="T"/>生類本，觀彼幽清常擾動元，於自他中起計
+<lb n="0152a16" ed="T"/>度者，是人墜入四顛倒見，一分無常、一分常
+<lb n="0152a17" ed="T"/>論：一者、是人觀妙明心遍十方界，湛然以為
+<lb n="0152a18" ed="T"/>究竟神我。從是則計我遍十方，凝明不動；一
+<lb n="0152a19" ed="T"/>切眾生，於我心中自生自死。則我心性名之
+<lb n="0152a20" ed="T"/>為常，彼生滅者真無常性。二者、是人不觀其
+<lb n="0152a21" ed="T"/>心，遍觀十方恒沙國土，見劫壞處名為究竟
+<lb n="0152a22" ed="T"/>無常種性；劫不壞處，名究竟常。三者、是人別
+<lb n="0152a23" ed="T"/>觀我心，精細微密猶如微塵，流轉十方性無
+<lb n="0152a24" ed="T"/>移改。能令此身即生即滅，其不壞性名我性
+<lb n="0152a25" ed="T"/>常；一切死生從我流出，名無常性。四者、是人
+<lb n="0152a26" ed="T"/>知想陰盡，見行陰流，行陰常流計為常性；色、
+<lb n="0152a27" ed="T"/>受、想等今已滅盡，名為無常。由此計度一分
+<lb n="0152a28" ed="T"/>無常、一分常故，墮落外道，惑菩提性。是則名
+<lb n="0152a29" ed="T"/>為第三外道一分常論。</p>
+<pb n="0152b" ed="T" xml:id="T19.0945.0152b"/>
+<lb n="0152b01" ed="T"/><p xml:id="pT19p0152b0101">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152b02" ed="T"/>生類本，觀彼幽清常擾動元，於分位中生計
+<lb n="0152b03" ed="T"/>度者，是人墜入四有邊論：一者、是人心計生
+<lb n="0152b04" ed="T"/>元，流用不息，計過未者名為有邊；計相續心
+<lb n="0152b05" ed="T"/>名為無邊。二者、是人觀八萬劫則見眾生，八
+<lb n="0152b06" ed="T"/>萬劫前寂無聞見。無聞見處名為無邊；有眾
+<lb n="0152b07" ed="T"/>生處名為有邊。三者、是人計我遍知，得無邊
+<lb n="0152b08" ed="T"/>性。彼一切人現我知中，我曾不知彼之知性；
+<lb n="0152b09" ed="T"/>名彼不得無邊之心，但有邊性。四者、是人窮
+<lb n="0152b10" ed="T"/>行陰空，以其所見心路籌度，一切眾生一身
+<lb n="0152b11" ed="T"/>之中，計其咸皆半生半滅。明其世界一切所
+<lb n="0152b12" ed="T"/>有，一半有邊，一半無邊。由<note n="0152001" resp="Taisho" type="orig" place="foot text">此＝是【明】</note><note n="0152001" resp="CBETA" type="mod">此【大】，是【明】</note><app n="0152001"><lem wit="【大】">此</lem><rdg resp="Taisho" wit="【明】">是</rdg></app>計度有邊無
+<lb n="0152b13" ed="T"/>邊，墮落外道，惑菩提性。是則名為第四外道
+<lb n="0152b14" ed="T"/>立有邊論。</p>
+<lb n="0152b15" ed="T"/><p xml:id="pT19p0152b1501">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152b16" ed="T"/>生類本，觀彼幽清常擾動元，於知見中生計
+<lb n="0152b17" ed="T"/>度者，是人墜入四種顛倒不死矯亂遍計虛
+<lb n="0152b18" ed="T"/>論：一者、是人觀變化元，見遷流處名之為變；
+<lb n="0152b19" ed="T"/>見相續處名之為恒；見所見處名之為生；不
+<lb n="0152b20" ed="T"/>見見處名之為滅。相續之因，性不斷處名之
+<lb n="0152b21" ed="T"/>為增；正相續中，中所離處名之為減；各各生
+<lb n="0152b22" ed="T"/>處名之為有；互互亡處名之為無。以理都觀，
+<lb n="0152b23" ed="T"/>用心別見。有求法人來問其義，答言：『我今亦
+<lb n="0152b24" ed="T"/>生亦滅，亦有亦無，亦增亦減。』於一切時皆亂
+<lb n="0152b25" ed="T"/>其語，令彼前人遺失章句。二者、是人諦觀其
+<lb n="0152b26" ed="T"/>心，互互無處，因無得證。有人來問，唯答一字，
+<lb n="0152b27" ed="T"/>但言其無。除無之餘，無所言說。三者、是人諦
+<lb n="0152b28" ed="T"/>觀其心，各各有處，因有得證。有人來問，唯答
+<lb n="0152b29" ed="T"/>一字，但言其是。除是之餘，無所言說。四者、是
+<pb n="0152c" ed="T" xml:id="T19.0945.0152c"/>
+<lb n="0152c01" ed="T"/>人有無俱見，其境枝故其心亦亂。有人來問，
+<lb n="0152c02" ed="T"/>答言：『亦有即是亦無，亦無之中不是亦有。』一
+<lb n="0152c03" ed="T"/>切矯亂，無容窮詰。由此計度矯亂虛無，墮落
+<lb n="0152c04" ed="T"/>外道，惑菩提性。是則名為第五外道四顛倒
+<lb n="0152c05" ed="T"/>性不死矯亂遍計虛論。</p>
+<lb n="0152c06" ed="T"/><p xml:id="pT19p0152c0601">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152c07" ed="T"/>生類本，觀彼幽清常擾動元，於無盡流生計
+<lb n="0152c08" ed="T"/>度者，是人墜入死後有相發心顛倒：或自固
+<lb n="0152c09" ed="T"/>身，云色是我；或見我圓含遍國土，云我有色；
+<lb n="0152c10" ed="T"/>或彼前緣隨我迴復，云色屬我；或復我依行
+<lb n="0152c11" ed="T"/>中相續，云我在色。皆計度言死後有相，如是
+<lb n="0152c12" ed="T"/>循環有十六相。從此<note n="0152002" resp="Taisho" type="orig" place="foot text">惑＝或【元】【明】</note><note n="0152002" resp="CBETA" type="mod">惑【大】，或【元】【明】</note><app n="0152002"><lem wit="【大】">惑</lem><rdg resp="Taisho" wit="【元】 【明】">或</rdg></app>計畢竟煩惱，畢竟菩
+<lb n="0152c13" ed="T"/>提，兩性並驅，各不相觸。由此計度死後有故，
+<lb n="0152c14" ed="T"/>墮落外道，惑菩提性。是則名為第六外道，立
+<lb n="0152c15" ed="T"/>五陰中死後有相心顛倒論。</p>
+<lb n="0152c16" ed="T"/><p xml:id="pT19p0152c1601">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152c17" ed="T"/>生類本，觀彼幽清常擾動元，於先除滅色、受、
+<lb n="0152c18" ed="T"/>想中生計度者，是人墜入死後無相發心顛
+<lb n="0152c19" ed="T"/>倒：見其色滅形無所因，觀其想滅心無所繫，
+<lb n="0152c20" ed="T"/>知其受滅無<note n="0152003" resp="Taisho" type="orig" place="foot text">後＝復【元】【明】</note><note n="0152003" resp="CBETA" type="mod">復【CB】【元】【明】，後【大】</note><app n="0152003"><lem resp="CBETA.maha" wit="【CB】">復</lem><rdg wit="【大】">後</rdg><rdg resp="Taisho" wit="【元】 【明】">復</rdg></app>連綴，陰性銷散。縱有生理而
+<lb n="0152c21" ed="T"/>無受、想，與草木同。此質現前猶不可得，死後
+<lb n="0152c22" ed="T"/>云何更有諸相？因之勘校死後相無。如是循
+<lb n="0152c23" ed="T"/>環有八無相。從此<note n="0152004" resp="Taisho" type="orig" place="foot text">或＝惑【宋】</note><note n="0152004" resp="CBETA" type="mod">或【大】，惑【宋】</note><app n="0152004"><lem wit="【大】">或</lem><rdg resp="Taisho" wit="【宋】">惑</rdg></app>計涅槃因果一切皆空，
+<lb n="0152c24" ed="T"/>徒有名字，究竟斷滅。由此計度死後無故，墮
+<lb n="0152c25" ed="T"/>落外道，惑菩提性。是則名為第七外道立五
+<lb n="0152c26" ed="T"/>陰中死後無相心顛倒論。</p>
+<lb n="0152c27" ed="T"/><p xml:id="pT19p0152c2701">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0152c28" ed="T"/>生類本，觀彼幽清常擾動元，於行存中，兼受
+<lb n="0152c29" ed="T"/>想滅，雙計有無，自體相破；是人墜入死後俱
+<pb n="0153a" ed="T" xml:id="T19.0945.0153a"/>
+<lb n="0153a01" ed="T"/>非起顛倒論：色、受、想中見有非有；行遷流內
+<lb n="0153a02" ed="T"/>觀無不無。如是循環，窮盡陰、界八俱非相；隨
+<lb n="0153a03" ed="T"/>得一緣，皆言死後有相無相。又計諸行性遷
+<lb n="0153a04" ed="T"/>訛故，心發通悟，有無俱非，虛實失措。由此計
+<lb n="0153a05" ed="T"/>度死後俱非，後際昏瞢無可道故，墮落外道，
+<lb n="0153a06" ed="T"/>惑菩提性。是則名為第八外道立五陰中死
+<lb n="0153a07" ed="T"/>後俱非心顛倒論。</p>
+<lb n="0153a08" ed="T"/><p xml:id="pT19p0153a0801">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0153a09" ed="T"/>生類本，觀彼幽清常擾動元，於後後無生計
+<lb n="0153a10" ed="T"/>度者，是人墜入七斷滅論：或計身滅，或欲
+<lb n="0153a11" ed="T"/>盡滅，或苦盡滅，或極樂滅，或極捨滅。如是循
+<lb n="0153a12" ed="T"/>環窮盡七際，現前銷滅，滅已無復。由此計度
+<lb n="0153a13" ed="T"/>死後斷滅，墮落外道，惑菩提性。是則名為第
+<lb n="0153a14" ed="T"/>九外道立五陰中死後斷滅心顛倒論。</p>
+<lb n="0153a15" ed="T"/><p xml:id="pT19p0153a1501">「又三摩中諸善男子，堅凝正心，魔不得便；窮
+<lb n="0153a16" ed="T"/>生類本，觀彼幽清常擾動元，於後後有生計
+<lb n="0153a17" ed="T"/>度者，是人墜入五涅槃論：或以欲界為正轉
+<lb n="0153a18" ed="T"/>依，觀見圓明生愛慕故；或以初禪，性無憂故；
+<lb n="0153a19" ed="T"/>或以二禪，心無苦故；或以三禪，極悅隨故；或
+<lb n="0153a20" ed="T"/>以四禪，苦樂二亡不受輪迴生滅性故。迷有
+<lb n="0153a21" ed="T"/>漏天，作無為解，五處安隱為勝淨依。如是循
+<lb n="0153a22" ed="T"/>環，五處究竟，由此計度五現涅槃，墮落外道，
+<lb n="0153a23" ed="T"/>惑菩提性。是則名為第十外道立五陰中五
+<lb n="0153a24" ed="T"/>現涅槃心顛倒論。</p>
+<lb n="0153a25" ed="T"/><p xml:id="pT19p0153a2501">「阿難！如是十種禪那狂解，皆是行陰用心交
+<lb n="0153a26" ed="T"/>互，故現斯悟。眾生頑迷，不自忖量，逢此現前，
+<lb n="0153a27" ed="T"/>以迷為解，自言登聖，大妄語成，墮無間獄。汝
+<lb n="0153a28" ed="T"/>等必須將如來<note n="0153001" resp="Taisho" type="orig" place="foot text">心＝語【三】</note><note n="0153001" resp="CBETA" type="mod">語【CB】【宋】【元】【明】，心【大】</note><app n="0153001"><lem resp="CBETA.maha" wit="【CB】">語</lem><rdg wit="【大】">心</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">語</rdg></app>，於我滅後傳示末法，遍令
+<lb n="0153a29" ed="T"/>眾生覺了斯義。無令心魔自起<note n="0153002" resp="Taisho" type="orig" place="foot text">深＝沈【宋】</note><note n="0153002" resp="CBETA" type="mod">深【大】，沈【宋】</note><app n="0153002"><lem wit="【大】">深</lem><rdg resp="Taisho" wit="【宋】">沈</rdg></app><g ref="#CB00859"/>，保持覆
+<pb n="0153b" ed="T" xml:id="T19.0945.0153b"/>
+<lb n="0153b01" ed="T"/>護，消息邪見，教其身心，開覺真義，於無上道
+<lb n="0153b02" ed="T"/>不遭枝岐。勿令心祈得少為足，作大覺王清
+<lb n="0153b03" ed="T"/>淨標指。</p>
+<lb n="0153b04" ed="T"/><p xml:id="pT19p0153b0401">「阿難！彼善男子修三摩<app type="star" corresp="#0151009"><lem wit="【大】">提</lem><rdg resp="Taisho" wit="【元】">地</rdg></app>，行陰盡者，諸世
+<lb n="0153b05" ed="T"/>間性幽清擾動同分生機倏然墮裂，沈細綱
+<lb n="0153b06" ed="T"/>紐補特伽羅酬業深脈感應懸絕。於涅槃天
+<lb n="0153b07" ed="T"/>將大明<note n="0153003" resp="Taisho" type="orig" place="foot text">悟＝晤【宋】</note><note n="0153003" resp="CBETA" type="mod">悟【大】，晤【宋】</note><app n="0153003"><lem wit="【大】">悟</lem><rdg resp="Taisho" wit="【宋】">晤</rdg></app>，如鷄<note n="0153004" resp="Taisho" type="orig" place="foot text">後＝候【元】</note><note n="0153004" resp="CBETA" type="mod">後【大】，候【元】</note><app n="0153004"><lem wit="【大】">後</lem><rdg resp="Taisho" wit="【元】">候</rdg></app>鳴；瞻顧東方已有精色。
+<lb n="0153b08" ed="T"/>六根虛靜，無復馳逸，內<note n="0153005" resp="Taisho" type="orig" place="foot text">外＝內【宋】</note><note n="0153005" resp="CBETA" type="mod">外【大】，內【宋】</note><app n="0153005"><lem wit="【大】">外</lem><rdg resp="Taisho" wit="【宋】">內</rdg></app>湛明，入無所入，深
+<lb n="0153b09" ed="T"/>達十方十二種類受命元由。觀由執元，諸類
+<lb n="0153b10" ed="T"/>不召，於十方界已獲其同，精色不沈發現幽
+<lb n="0153b11" ed="T"/>祕；此則名為識陰區宇。若於群召已獲同中，
+<lb n="0153b12" ed="T"/>銷磨六門合開成就，見聞通隣，互用清淨；十
+<lb n="0153b13" ed="T"/>方世界及與身心如吠瑠璃，內外明徹，名識
+<lb n="0153b14" ed="T"/>陰盡，是人則能超越命濁。觀其所由，罔象虛
+<lb n="0153b15" ed="T"/>無顛倒妄想以為其本。</p>
+<lb n="0153b16" ed="T"/><p xml:id="pT19p0153b1601">「阿難當知，是善男子窮諸行空，於識還元，已
+<lb n="0153b17" ed="T"/>滅生滅而於寂滅精妙未圓，能令己身根隔
+<lb n="0153b18" ed="T"/>合開，亦與十方諸類通覺，覺知通<note n="0153006" resp="Taisho" type="orig" place="foot text"><g ref="#CB04474"/>＝泯【宋】＊</note><note n="0153006" resp="CBETA" type="mod"><g ref="#CB04474"/>【大】＊，泯【宋】＊</note><app n="0153006"><lem wit="【大】"><g ref="#CB04474"/></lem><rdg resp="Taisho" wit="【宋】">泯</rdg></app>能入圓
+<lb n="0153b19" ed="T"/>元。若於所歸立真常因生勝解者，是人則墮
+<lb n="0153b20" ed="T"/>因所因執，娑毘迦羅所歸冥諦，成其伴侶。迷
+<lb n="0153b21" ed="T"/>佛菩提，亡失知見，是名第一立所得心，成所
+<lb n="0153b22" ed="T"/>歸果；違遠圓通，背涅槃城，生外道種。</p>
+<lb n="0153b23" ed="T"/><p xml:id="pT19p0153b2301">「阿難！又善男子窮諸行空，已滅生滅而於寂
+<lb n="0153b24" ed="T"/>滅精妙未圓。若於所歸覽為自體，盡虛空界
+<lb n="0153b25" ed="T"/>十二類內所有眾生，皆我身中一類流出生
+<lb n="0153b26" ed="T"/>勝解者，是人則墮能非能執，摩醯首羅現無
+<lb n="0153b27" ed="T"/>邊身，成其伴侶。迷佛菩提，亡失知見。是名第
+<lb n="0153b28" ed="T"/>二立能為心，成能事果；違遠圓通，背涅槃城，
+<lb n="0153b29" ed="T"/>生大慢天我遍圓種。</p>
+<pb n="0153c" ed="T" xml:id="T19.0945.0153c"/>
+<lb n="0153c01" ed="T"/><p xml:id="pT19p0153c0101">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0153c02" ed="T"/>妙未圓。若於所歸有所歸依，自疑身心從彼
+<lb n="0153c03" ed="T"/>流出，十方虛空咸其生起。即於都起所宣流
+<lb n="0153c04" ed="T"/>地，作真常身無生滅解，在生滅中早計常住。
+<lb n="0153c05" ed="T"/>既惑不生，亦迷生滅，安住沈迷生勝解者，是
+<lb n="0153c06" ed="T"/>人則墮常非常執，計自在天成其伴侶。迷佛
+<lb n="0153c07" ed="T"/>菩提，亡失知見。是名第三立因依心，成妄計
+<lb n="0153c08" ed="T"/>果；違遠圓通，背涅槃城，生倒圓種。</p>
+<lb n="0153c09" ed="T"/><p xml:id="pT19p0153c0901">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0153c10" ed="T"/>妙未圓。若於所知知遍圓故，因知立解，十方
+<lb n="0153c11" ed="T"/>草木皆稱有情，與人無異；草木為人，人死還
+<lb n="0153c12" ed="T"/>成十方草樹。無擇遍知生勝解者，是人則墮
+<lb n="0153c13" ed="T"/>知無知執，婆吒霰尼執一切覺，成其伴侶。迷
+<lb n="0153c14" ed="T"/>佛菩提，亡失知見，是名第四計圓知心，成虛
+<lb n="0153c15" ed="T"/>謬果；違遠圓通，背涅槃城，生倒知種。</p>
+<lb n="0153c16" ed="T"/><p xml:id="pT19p0153c1601">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0153c17" ed="T"/>妙未圓。若於圓融根互用中，已得隨順，便於
+<lb n="0153c18" ed="T"/>圓化一切發生，求火光明，樂水清淨，愛風周
+<lb n="0153c19" ed="T"/>流，觀塵成就，各各崇事。以此群塵發作本因，
+<lb n="0153c20" ed="T"/>立常住解，是人則墮生無生執，諸迦葉波并
+<lb n="0153c21" ed="T"/>婆羅門，勤心役身事火崇水，求出生死，成其
+<lb n="0153c22" ed="T"/>伴侶。迷佛菩提，亡失知見，是名第五計著崇
+<lb n="0153c23" ed="T"/>事迷心從物、立妄求因，求妄冀果；違遠圓通，
+<lb n="0153c24" ed="T"/>背涅槃城，生顛化種。</p>
+<lb n="0153c25" ed="T"/><p xml:id="pT19p0153c2501">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0153c26" ed="T"/>妙未圓。若於圓明計明中虛，非滅群化，以永
+<lb n="0153c27" ed="T"/>滅依為所歸依生勝解者，是人則墮歸無歸
+<lb n="0153c28" ed="T"/>執，無<note n="0153007" resp="Taisho" type="orig" place="foot text">相＝想【三】</note><note n="0153007" resp="CBETA" type="mod">想【CB】【宋】【元】【明】，相【大】</note><app n="0153007"><lem resp="CBETA.maha" wit="【CB】">想</lem><rdg wit="【大】">相</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">想</rdg></app>天中諸舜若多成其伴侶。迷佛菩提，
+<lb n="0153c29" ed="T"/>亡失知見，是名第六圓虛無心，成空亡果；違
+<pb n="0154a" ed="T" xml:id="T19.0945.0154a"/>
+<lb n="0154a01" ed="T"/>遠圓通，背涅槃城，生斷滅種。</p>
+<lb n="0154a02" ed="T"/><p xml:id="pT19p0154a0201">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0154a03" ed="T"/>妙未圓。若於圓常固身常住，同<note n="0154001" resp="Taisho" type="orig" place="foot text">于＝於【明】</note><note n="0154001" resp="CBETA" type="mod">于【大】，於【明】</note><app n="0154001"><lem wit="【大】">于</lem><rdg resp="Taisho" wit="【明】">於</rdg></app>精圓長不
+<lb n="0154a04" ed="T"/>傾逝生勝解者，是人則墮貪非貪執，諸阿斯
+<lb n="0154a05" ed="T"/>陀求長命者成其伴侶。迷佛菩提，亡失知見，
+<lb n="0154a06" ed="T"/>是名第七執著命元立固妄因，趣長勞果；違
+<lb n="0154a07" ed="T"/>遠圓通，背涅槃城，生妄延種。</p>
+<lb n="0154a08" ed="T"/><p xml:id="pT19p0154a0801">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0154a09" ed="T"/>妙未圓。觀命互通，却留塵勞恐其銷盡，便於
+<lb n="0154a10" ed="T"/>此際坐蓮華宮，廣化七珍多增寶媛縱恣其
+<lb n="0154a11" ed="T"/>心生勝解者，是人則墮真無真執，吒<note n="0154a1101" resp="CBETA" type="add" cb:note_key="T19.0154a11.15">枳【CB】【磧乙-CB】，抧【大】</note><app n="0154a1101"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】" cb:provider="討論區：身外有乾坤 (2022-05-15)">枳<note type="cf1">QC040n0439_p0527a17</note><note type="cf2">T39n1799_p0963b12</note></lem><rdg wit="【大】">抧</rdg></app>迦羅
+<lb n="0154a12" ed="T"/>成其伴侶。迷佛菩提，亡失知見，是名第八發
+<lb n="0154a13" ed="T"/>邪思因，立熾塵果；違遠圓通，背涅槃城，生天
+<lb n="0154a14" ed="T"/>魔種。</p>
+<lb n="0154a15" ed="T"/><p xml:id="pT19p0154a1501">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0154a16" ed="T"/>妙未圓。於命明中分別精麁，疏決真偽，因果
+<lb n="0154a17" ed="T"/>相酬、唯求感應，背清淨道，所謂見苦、斷集、證
+<lb n="0154a18" ed="T"/>滅、修道。居滅<note n="0154002" resp="Taisho" type="orig" place="foot text">已＝以【宋】</note><note n="0154002" resp="CBETA" type="mod">已【大】，以【宋】</note><app n="0154002"><lem wit="【大】">已</lem><rdg resp="Taisho" wit="【宋】">以</rdg></app>休更不前進生勝解者，是人
+<lb n="0154a19" ed="T"/>則墮定性聲聞，諸無聞僧增上慢者成其伴
+<lb n="0154a20" ed="T"/>侶。迷佛菩提，亡失知見，是名第九圓精應心，
+<lb n="0154a21" ed="T"/>成趣寂果；違遠圓通，背涅槃城，生纏空種。</p>
+<lb n="0154a22" ed="T"/><p xml:id="pT19p0154a2201">「又善男子窮諸行空，已滅生滅而於寂滅精
+<lb n="0154a23" ed="T"/>妙未圓。若於圓融清淨覺明發研深妙，即立
+<lb n="0154a24" ed="T"/>涅槃而不前進生勝解者，是人則墮定性辟
+<lb n="0154a25" ed="T"/>支，諸緣獨倫不迴心者成其伴侶。迷佛菩提，
+<lb n="0154a26" ed="T"/>亡失知見，是名第十圓覺<anchor xml:id="fxT19p0154a01"/><note n="0154a2601" resp="CBETA" type="add" cb:note_key="T19.0154a26.11"><g ref="#CB04474"/>【CB】【磧乙-CB】，<g ref="#CB03691"/>【大】</note><app n="0154a2601"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】" cb:provider="討論區：身外有乾坤 (2022-05-15)"><g ref="#CB04474"/><note type="cf1">QC040n0439_p0527b13</note><note type="cf2">T39n1799_p0963c15</note></lem><rdg wit="【大】"><g ref="#CB03691"/></rdg><rdg resp="Taisho" wit="【宋】">泯</rdg></app>心，成湛明果；違
+<lb n="0154a27" ed="T"/>遠圓通，背涅槃城，生覺圓明不化圓種。</p>
+<lb n="0154a28" ed="T"/><p xml:id="pT19p0154a2801">「阿難！如是十種禪那，中<note n="0154003" resp="Taisho" type="orig" place="foot text">途＝塗【元】【明】</note><note n="0154003" resp="CBETA" type="mod">途【大】，塗【元】【明】</note><app n="0154003"><lem wit="【大】">途</lem><rdg resp="Taisho" wit="【元】 【明】">塗</rdg></app>成狂，因<note n="0154004" resp="Taisho" type="orig" place="foot text">依或＝依迷惑於【三】</note><note n="0154004" resp="CBETA" type="mod" cb:note_key="T19.0154a28.14">依迷惑於【CB】【磧乙-CB】【宋】【元】【明】，依或【大】</note><app n="0154004"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】">依迷惑，於<note type="cf1">QC040n0439_p0527b15</note></lem><rdg wit="【大】">依，或</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">依迷惑於</rdg></app>未
+<lb n="0154a29" ed="T"/>足中生滿足證，皆是識陰用心交互，故生斯
+<pb n="0154b" ed="T" xml:id="T19.0945.0154b"/>
+<lb n="0154b01" ed="T"/>位。眾生頑迷，不自忖量，逢此現前，各以所愛
+<lb n="0154b02" ed="T"/>先習迷心而自休息；將為畢竟所歸寧地，自
+<lb n="0154b03" ed="T"/>言滿足無上菩提。大妄語成，外道邪魔所感
+<lb n="0154b04" ed="T"/>業終，墮無間獄。聲聞、緣覺，不成增進。汝等
+<lb n="0154b05" ed="T"/>存心秉如來道，將此法門，於我滅後傳示末
+<lb n="0154b06" ed="T"/>世，普令眾生覺了斯義。無令見魔自作沈<g ref="#CB00752"/>，
+<lb n="0154b07" ed="T"/>保綏哀救，消息邪緣，令其身心入佛知見，從
+<lb n="0154b08" ed="T"/>始成就不遭<note n="0154b0801" resp="CBETA" type="add" cb:note_key="T19.0154b08.06">歧【CB】【麗-CB】，岐【大】</note><app n="0154b0801"><lem resp="CBETA.ting" wit="【CB】 【麗-CB】">歧<note type="cf1">K13n0426_p0861b23</note></lem><rdg wit="【大】">岐</rdg></app>路。</p><p xml:id="pT19p0154b0825" cb:place="inline">「如是法門，先過去世恒沙
+<lb n="0154b09" ed="T"/>劫中微塵如來乘此心開，得無上道。識陰若
+<lb n="0154b10" ed="T"/>盡，則汝現前諸根互用。從互用中，能入菩薩
+<lb n="0154b11" ed="T"/>金剛乾慧。圓明精心於中發化，如淨瑠璃內
+<lb n="0154b12" ed="T"/>含寶月。如是乃超十信、十住、十行、十迴向、四
+<lb n="0154b13" ed="T"/>加行心、菩薩所行金剛十地、等覺圓明，入於
+<lb n="0154b14" ed="T"/>如來妙莊嚴海；圓滿菩提，歸無所得！</p><p xml:id="pT19p0154b1415" cb:place="inline">「此是過
+<lb n="0154b15" ed="T"/>去先佛世尊奢摩他中、毘婆舍那覺明分析
+<lb n="0154b16" ed="T"/>微細魔事。魔境現前，汝能諳識，心垢洗除，不
+<lb n="0154b17" ed="T"/>落邪見。陰魔銷滅，天魔摧碎，大力鬼神褫魄
+<lb n="0154b18" ed="T"/>逃逝，魑魅、魍魎、無復出生。直至菩提，無諸<note n="0154005" resp="Taisho" type="orig" place="foot text">少乏＝乏少【元】</note><note n="0154005" resp="CBETA" type="mod">少乏【大】，乏少【元】</note><app n="0154005"><lem wit="【大】">少
+<lb n="0154b19" ed="T"/>乏</lem><rdg resp="Taisho" wit="【元】">乏少</rdg></app>。下劣增進，於大涅槃，心不迷悶。若諸末世
+<lb n="0154b20" ed="T"/>愚鈍眾生，未識禪那，不知說法，樂修三昧；汝
+<lb n="0154b21" ed="T"/>恐同邪，一心勸令持我佛頂陀羅尼呪。若未
+<lb n="0154b22" ed="T"/>能誦，寫於禪堂、或帶身上，一切諸魔所不能
+<lb n="0154b23" ed="T"/>動。汝當恭欽十方如來究竟修進最後垂範！」</p>
+<lb n="0154b24" ed="T"/><p xml:id="pT19p0154b2401">阿難即從坐起，聞佛示誨，頂禮欽奉，憶持無
+<lb n="0154b25" ed="T"/>失。於大眾中重復白佛：「如佛所言『五陰相中，
+<lb n="0154b26" ed="T"/>五種虛妄為本想心』，我等平常未蒙如來微
+<lb n="0154b27" ed="T"/>細開示。又此五陰為併銷除？為次第盡？如是
+<lb n="0154b28" ed="T"/>五重詣何為界？<note n="0154006" resp="Taisho" type="orig" place="foot text">惟＝唯【宋】</note><note n="0154006" resp="CBETA" type="mod" cb:note_key="T19.0154b28.07">唯【CB】【麗-CB】【宋】，惟【大】</note><app n="0154006"><lem resp="CBETA.ting" wit="【CB】 【麗-CB】">唯<note type="cf1">K13n0426_p0862a02</note></lem><rdg wit="【大】">惟</rdg><rdg resp="Taisho" wit="【宋】">唯</rdg></app>願如來發宣大慈，為此
+<lb n="0154b29" ed="T"/>大眾清<note n="0154007" resp="Taisho" type="orig" place="foot text">明＝淨【明】</note><note n="0154007" resp="CBETA" type="mod">明【大】，淨【明】</note><app n="0154007"><lem wit="【大】">明</lem><rdg resp="Taisho" wit="【明】">淨</rdg></app>心目，以為末世一切眾生作將來
+<pb n="0154c" ed="T" xml:id="T19.0945.0154c"/>
+<lb n="0154c01" ed="T"/>眼！」</p><p xml:id="pT19p0154c0102" cb:place="inline">佛告阿難：「精真妙明本覺圓淨，非留死生
+<lb n="0154c02" ed="T"/>及諸塵垢；乃至虛空皆因妄想之所生起，斯
+<lb n="0154c03" ed="T"/>元本覺妙明真精，妄以發生諸器世間。如演
+<lb n="0154c04" ed="T"/>若多迷頭認影。妄元無因，於妄想中立因緣
+<lb n="0154c05" ed="T"/>性；迷因緣者，稱為自然。彼虛空性猶實幻生，
+<lb n="0154c06" ed="T"/>因緣、自然，皆是眾生妄心計度。阿難！知妄所
+<lb n="0154c07" ed="T"/>起，說妄因緣，若妄元無，說妄因緣元無所有，
+<lb n="0154c08" ed="T"/>何況不知推自然者！是故如來與汝發明，五
+<lb n="0154c09" ed="T"/>陰本因同是妄想。</p><p xml:id="pT19p0154c0908" cb:place="inline">「汝體先因父母想生，汝心
+<lb n="0154c10" ed="T"/>非想，則不能來想中傳命。如我先言『心想<note n="0154008" resp="Taisho" type="orig" place="foot text">醋＝酢【三】＊</note><note n="0154008" resp="CBETA" type="mod" cb:note_key="T19.0154c10.17">醋【大】【嘉興丙-CB】＊，酢【宋】【元】【明】＊</note><app n="0154008"><lem wit="【大】">醋</lem><rdg resp="CBETA.poyung" wit="【嘉興丙-CB】" cb:provider="璃落成伤 (2017-09-08)">醋<note type="cf1">《嘉興藏》（民族出版社第055函第404冊第173頁）</note></rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">酢</rdg></app>
+<lb n="0154c11" ed="T"/>味，口中涎生；心想登高，足心酸起』，懸崖不有，
+<lb n="0154c12" ed="T"/><app type="star" corresp="#0154008"><lem wit="【大】">醋</lem><rdg resp="CBETA.poyung" wit="【嘉興丙-CB】" cb:provider="璃落成伤 (2017-09-08)">醋<note type="cf1">《嘉興藏》（民族出版社第055函第404冊第173頁）</note></rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">酢</rdg></app>物未來，汝體必非虛妄通倫，口水如何因
+<lb n="0154c13" ed="T"/>談<app type="star" corresp="#0154008"><lem wit="【大】">醋</lem><rdg resp="CBETA.poyung" wit="【嘉興丙-CB】" cb:provider="璃落成伤 (2017-09-08)">醋<note type="cf1">《嘉興藏》（民族出版社第055函第404冊第173頁）</note></rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">酢</rdg></app>出？是故當知汝現色身，名為堅固第一
+<lb n="0154c14" ed="T"/>妄想。即此所說臨高想心，能令汝形真受酸
+<lb n="0154c15" ed="T"/>澁。由因受生，能動色體。汝今現前順益、違損、
+<lb n="0154c16" ed="T"/>二現驅馳，名為虛明第二妄想。由汝念慮使
+<lb n="0154c17" ed="T"/>汝色身，身非念倫，汝身何因隨念所使種種
+<lb n="0154c18" ed="T"/>取像？心生形取，與念相應，寤即想心，寐為諸
+<lb n="0154c19" ed="T"/>夢。則汝想念搖動妄情，名為融通第三妄想。
+<lb n="0154c20" ed="T"/>化理不住，運<note n="0154009" resp="Taisho" type="orig" place="foot text">運＝轉【宋】</note><note n="0154009" resp="CBETA" type="mod">運【大】，轉【宋】</note><app n="0154009"><lem wit="【大】">運</lem><rdg resp="Taisho" wit="【宋】">轉</rdg></app>密移，甲長髮生，氣銷容皺，日
+<lb n="0154c21" ed="T"/>夜相代曾無覺悟。阿難！此若非汝，云何體遷？
+<lb n="0154c22" ed="T"/>如必是真，汝何無覺？則汝諸行念念不停，名
+<lb n="0154c23" ed="T"/>為幽隱第四妄想。又汝精明湛不搖處名恒
+<lb n="0154c24" ed="T"/>常者，於身不出見、聞、覺、知。若實精真，不容習
+<lb n="0154c25" ed="T"/>妄，何因汝等曾於昔年覩一奇物，經歷年歲
+<lb n="0154c26" ed="T"/>憶忘俱無；於後忽然覆覩前異，記憶宛然曾
+<lb n="0154c27" ed="T"/>不遺失！則此精了湛不搖中，念念受熏，有何
+<lb n="0154c28" ed="T"/>籌算？阿難當知，此湛非真，如急流水，望如恬
+<lb n="0154c29" ed="T"/>靜，流急不見，非是無流。若非想元，寧受<note n="0154010" resp="Taisho" type="orig" place="foot text">想＝妄【明】</note><note n="0154010" resp="CBETA" type="mod">想【大】，妄【明】</note><app n="0154010"><lem wit="【大】">想</lem><rdg resp="Taisho" wit="【明】">妄</rdg></app>
+<pb n="0155a" ed="T" xml:id="T19.0945.0155a"/>
+<lb n="0155a01" ed="T"/>習？非汝六根互用<note n="0155001" resp="Taisho" type="orig" place="foot text">合開＝開合【明】</note><note n="0155001" resp="CBETA" type="mod">合開【大】，開合【明】</note><app n="0155001"><lem wit="【大】">合開</lem><rdg resp="Taisho" wit="【明】">開合</rdg></app>，此之妄想無時得
+<lb n="0155a02" ed="T"/>滅。故汝現在見、聞、覺、知中串習幾，則湛了內
+<lb n="0155a03" ed="T"/>罔象虛<note n="0155002" resp="Taisho" type="orig" place="foot text">無＝元【宋】【元】</note><note n="0155002" resp="CBETA" type="mod">無【大】，元【宋】【元】</note><app n="0155002"><lem wit="【大】">無</lem><rdg resp="Taisho" wit="【宋】 【元】">元</rdg></app>，第五顛倒<note n="0155003" resp="Taisho" type="orig" place="foot text">細微＝微細【明】</note><note n="0155003" resp="CBETA" type="mod">細微【大】，微細【明】</note><app n="0155003"><lem wit="【大】">細微</lem><rdg resp="Taisho" wit="【明】">微細</rdg></app>精想。</p>
+<lb n="0155a04" ed="T"/><p xml:id="pT19p0155a0401">「阿難！是五受陰，五妄想成。汝今欲知因界淺
+<lb n="0155a05" ed="T"/>深，唯色與空，是色邊際；唯觸及離，是受邊際；
+<lb n="0155a06" ed="T"/>唯記與忘，是想邊際；唯滅與生，是行邊際；湛
+<lb n="0155a07" ed="T"/>入合湛，歸識邊際。此五陰元重疊生起，生因
+<lb n="0155a08" ed="T"/>識有，滅從色除。理則頓悟，乘悟併銷；事非頓
+<lb n="0155a09" ed="T"/>除，因次第盡。我已示汝劫波巾結，何所不明
+<lb n="0155a10" ed="T"/>再此詢問？汝應將此妄想根元心得開通，傳
+<lb n="0155a11" ed="T"/>示將來末法之中諸修行者，令識虛妄深厭
+<lb n="0155a12" ed="T"/>自生，知有涅槃不戀三界。</p>
+<lb n="0155a13" ed="T"/><p xml:id="pT19p0155a1301">「阿難！若復有人遍滿十方所有虛空盈滿七
+<lb n="0155a14" ed="T"/>寶，持以奉上微塵諸佛，承事供養，心無虛度。
+<lb n="0155a15" ed="T"/>於意云何？是人以此施佛因緣得福多不？」</p><p xml:id="pT19p0155a1517" cb:place="inline">阿
+<lb n="0155a16" ed="T"/>難答言：「虛空無盡，珍寶無邊，昔有眾生施佛
+<lb n="0155a17" ed="T"/>七錢，捨身猶獲轉輪王位，況復現前虛空既
+<lb n="0155a18" ed="T"/>窮，佛土充遍皆施珍寶？窮劫思議尚不能及，
+<lb n="0155a19" ed="T"/>是福云何更有邊際！」</p>
+<lb n="0155a20" ed="T"/><p xml:id="pT19p0155a2001">佛告阿難：「諸佛如來語無虛妄，若復有人，身
+<lb n="0155a21" ed="T"/>具四重、十波羅夷，瞬息即經此方他方阿鼻
+<lb n="0155a22" ed="T"/>地獄，乃至窮盡十方無<note n="0155a2201" resp="CBETA" type="add">間【CB】，問【大】</note><app n="0155a2201"><lem resp="CBETA.pan" wit="【CB】">間</lem><rdg wit="【大】">問</rdg></app>靡不經歷。能以一
+<lb n="0155a23" ed="T"/>念將此法門於末劫中開示未學，是人罪障
+<lb n="0155a24" ed="T"/>應念銷滅。變其所受地獄苦因，成安樂國，得
+<lb n="0155a25" ed="T"/>福超越前之施人，百倍、千倍、千萬億倍，如是
+<lb n="0155a26" ed="T"/>乃至算數譬喻所不能及。阿難！若有眾生能
+<lb n="0155a27" ed="T"/>誦此經，能持此呪，如我廣說窮劫不盡。依我
+<lb n="0155a28" ed="T"/>教言，如教行道，直成菩提，無復魔業。」</p>
+<lb n="0155a29" ed="T"/><p xml:id="pT19p0155a2901">佛說此經已，比丘、比丘尼、優婆塞、優婆夷，一
+<pb n="0155b" ed="T" xml:id="T19.0945.0155b"/>
+<lb n="0155b01" ed="T"/>切世間、天、人、阿修羅，及諸他方菩薩、二乘、聖
+<lb n="0155b02" ed="T"/>仙童子，并初發心大力鬼神，皆大歡喜，作禮
+<lb n="0155b03" ed="T"/>而去。</p></cb:div>
+<lb n="0155b04" ed="T"/><cb:juan n="010" fun="close"><cb:jhead>大佛<anchor xml:id="fxT19p0155b01"/>頂萬行首楞嚴經卷第十</cb:jhead></cb:juan>
+</body></text></TEI>

@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://raw.githubusercontent.com/cbeta-git/xml-p5a/master/schema/cbeta-p5a.rnc" type="application/relax-ng-compact-syntax"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:cb="http://www.cbeta.org/ns/1.0" xml:id="T19n0945">
+<teiHeader>
+	<fileDesc>
+		<titleStmt>
+			<title>Taishō Tripiṭaka, Electronic version, No. 945 大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			<title xml:lang="zh-Hant">大正新脩大藏經數位版, No. 945 大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			<author>唐 般剌蜜帝譯</author>
+			<respStmt>
+				<resp>Electronic Version by</resp>
+				<name>CBETA</name>
+			</respStmt>
+		</titleStmt>
+		<editionStmt>
+			<edition>單卷版 XML TEI P5b</edition>
+		</editionStmt>
+		<extent>10卷</extent>
+		<publicationStmt>
+			<idno type="CBETA">
+				<idno type="canon">T</idno>.<idno type="vol">19</idno>.<idno type="no">945</idno>
+			</idno>
+			<distributor>
+				<name>中華電子佛典協會 (CBETA)</name>
+				<address>
+					<addrLine><email>service@cbeta.org</email></addrLine>
+				</address>
+			</distributor>
+			<availability>
+				<p>Available for non-commercial use when distributed with this header intact.</p>
+			</availability>
+			<date>2023-07-11 21:15:38 +0800</date>
+		</publicationStmt>
+		<sourceDesc>
+			<bibl>
+				<title level="s">Taishō Tripiṭaka</title>
+				<title level="s" xml:lang="zh-Hant">大正新脩大藏經</title>
+				<title level="m" xml:lang="zh-Hant">大佛頂如來密因修證了義諸菩薩萬行首楞嚴經</title>
+			</bibl>
+		</sourceDesc>
+	</fileDesc>
+	<encodingDesc>
+		<projectDesc>
+			<p xml:lang="en" cb:type="ly">Text as provided by Mr. Hsiao Chen-Kuo, Text as provided by Anonymous from USA, Punctuated text as provided by Chinese Buddhist Literary Foundation, Re-proofing punctuated text as provided by CBETA</p>
+			<p xml:lang="zh-Hant" cb:type="ly">蕭鎮國大德提供，北美某大德提供，中華佛教百科文獻基金會提供新式標點，CBETA 提供新式標點重校</p>
+		</projectDesc>
+		<editorialDecl>
+			<punctuation resp="CBETA"><p>新式標點</p></punctuation>
+		</editorialDecl>
+		<tagsDecl>
+			<namespace name="http://www.tei-c.org/ns/1.0">
+				<tagUsage gi="rdg">
+					<listWit>
+						<witness xml:id="wit.orig">【大】</witness>
+						<witness xml:id="wit.cbeta">【CB】</witness>
+					</listWit>
+				</tagUsage>
+			</namespace>
+		</tagsDecl>
+		<charDecl>
+			<char xml:id="CB00066">
+				<charName>CBETA CHARACTER CB00066</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*室]</value>
+				</charProp>
+				<mapping type="unicode">U+35CC</mapping>
+				<mapping cb:dec="983106" type="PUA">U+F0042</mapping>
+			</char>
+			<char xml:id="CB00069">
+				<charName>CBETA CHARACTER CB00069</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*栗]</value>
+				</charProp>
+				<mapping type="unicode">U+35DA</mapping>
+				<mapping cb:dec="983109" type="PUA">U+F0045</mapping>
+			</char>
+			<char xml:id="CB00074">
+				<charName>CBETA CHARACTER CB00074</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*梨]</value>
+				</charProp>
+				<mapping type="unicode">U+20F1D</mapping>
+				<mapping cb:dec="983114" type="PUA">U+F004A</mapping>
+			</char>
+			<char xml:id="CB00145">
+				<charName>CBETA CHARACTER CB00145</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[少/兔]</value>
+				</charProp>
+				<mapping type="unicode">U+3779</mapping>
+				<mapping cb:dec="983185" type="PUA">U+F0091</mapping>
+			</char>
+			<char xml:id="CB00292">
+				<charName>CBETA CHARACTER CB00292</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[合*牛]</value>
+				</charProp>
+				<mapping type="unicode">U+24656</mapping>
+				<mapping cb:dec="983332" type="PUA">U+F0124</mapping>
+			</char>
+			<char xml:id="CB00562">
+				<charName>CBETA CHARACTER CB00562</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[跳-兆+(梳-木)]</value>
+				</charProp>
+				<charProp>
+					<localName>normalized form</localName>
+					<value>疏</value>
+				</charProp>
+				<mapping type="unicode">U+47FD</mapping>
+				<mapping cb:dec="983602" type="PUA">U+F0232</mapping>
+			</char>
+			<char xml:id="CB00718">
+				<charName>CBETA CHARACTER CB00718</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[赤*皮]</value>
+				</charProp>
+				<charProp>
+					<localName>normalized form</localName>
+					<value>赧</value>
+				</charProp>
+				<mapping type="unicode">U+27E5E</mapping>
+				<mapping cb:dec="983758" type="PUA">U+F02CE</mapping>
+			</char>
+			<char xml:id="CB00771">
+				<charName>CBETA CHARACTER CB00771</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*藍]</value>
+				</charProp>
+				<mapping type="unicode">U+3615</mapping>
+				<mapping cb:dec="983811" type="PUA">U+F0303</mapping>
+			</char>
+			<char xml:id="CB00942">
+				<charName>CBETA CHARACTER CB00942</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*(隸-木+士)]</value>
+				</charProp>
+				<mapping type="unicode">U+3611</mapping>
+				<mapping cb:dec="983982" type="PUA">U+F03AE</mapping>
+			</char>
+			<char xml:id="CB01223">
+				<charName>CBETA CHARACTER CB01223</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*耶]</value>
+				</charProp>
+				<mapping type="unicode">U+35BF</mapping>
+				<mapping cb:dec="984263" type="PUA">U+F04C7</mapping>
+			</char>
+			<char xml:id="CB02740">
+				<charName>CBETA CHARACTER CB02740</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[口*犁]</value>
+				</charProp>
+				<mapping type="unicode">U+20F10</mapping>
+				<mapping cb:dec="985780" type="PUA">U+F0AB4</mapping>
+			</char>
+			<char xml:id="CB02954">
+				<charName>CBETA CHARACTER CB02954</charName>
+				<charProp>
+					<localName>composition</localName>
+					<value>[悍-干+月]</value>
+				</charProp>
+				<mapping type="unicode">U+226E1</mapping>
+				<mapping cb:dec="985994" type="PUA">U+F0B8A</mapping>
+			</char>
+		</charDecl>
+	</encodingDesc>
+	<profileDesc>
+		<langUsage>
+			<language ident="en">English</language>
+			<language ident="zh-Hant">Chinese (Traditional)</language>
+		</langUsage>
+	</profileDesc>
+	<revisionDesc>
+		<change when="2013-05-20">
+			<name>CW</name><name>Ray Chou 周邦信</name>P4 to P5 conversion by p4top5a.py, intended for publication
+		</change>
+		<change when="2000-01-27T11:50:58">
+			CW (ed.) Created initial TEI XML version with BASICX.BAT (00/01/05)
+		</change>
+	</revisionDesc>
+</teiHeader>
+<text><body>
+<cb:mulu level="1" type="序">大佛頂如來萬行首楞嚴經序</cb:mulu>
+<milestone n="7" unit="juan"/>
+<pb n="0133a" ed="T" xml:id="T19.0945.0133a"/>
+<lb n="0133a01" ed="T"/>
+<lb n="0133a02" ed="T"/><cb:juan n="007" fun="open"><cb:mulu n="007" type="卷"></cb:mulu><cb:jhead>大佛頂如來密因修證了義諸
+<lb n="0133a03" ed="T"/>菩薩萬行首楞嚴經卷第七<anchor xml:id="fxT19p0133a01"/><note place="inline">一名中印度那蘭陀
+<lb n="0133a04" ed="T"/>大道場經，於灌頂部錄出別行</note></cb:jhead></cb:juan>
+<lb n="0133a05" ed="T"/>
+<lb n="0133a06" ed="T"/><byline cb:type="Translator"><anchor xml:id="fxT19p0133a02"/>唐天竺沙門般剌蜜諦<anchor xml:id="fxT19p0133a03"/>譯</byline>
+<lb n="0133a07" ed="T"/><cb:div type="jing"><p xml:id="pT19p0133a0701">「阿難！汝問攝心，我今先說入三摩地修學妙
+<lb n="0133a08" ed="T"/>門。求菩薩道，要先持此四種律儀，皎如氷霜，
+<lb n="0133a09" ed="T"/>自不能生一切枝葉。心三口四，生必無因。阿
+<lb n="0133a10" ed="T"/>難！如是四事若不<note n="0133001" resp="Taisho" type="orig" place="foot text">失遺＝遺失【元】【明】</note><note n="0133001" resp="CBETA" type="mod">失遺【大】，遺失【元】【明】</note><app n="0133001"><lem wit="【大】">失遺</lem><rdg resp="Taisho" wit="【元】 【明】">遺失</rdg></app>，心尚不緣色、香、味、觸，
+<lb n="0133a11" ed="T"/>一切魔事云何發生？若有宿習不能滅除，汝
+<lb n="0133a12" ed="T"/>教是人一心誦我佛頂光明摩訶<note n="0133002" resp="Taisho" type="orig" place="foot text">薩＝悉【元】</note><note n="0133002" resp="CBETA" type="mod">薩【大】，悉【元】</note><app n="0133002"><lem wit="【大】">薩</lem><rdg resp="Taisho" wit="【元】">悉</rdg></app>怛多般
+<lb n="0133a13" ed="T"/>怛<note n="0133003" resp="Taisho" type="orig" place="foot text">囉＝羅【宋】【明】</note><note n="0133003" resp="CBETA" type="mod">囉【大】，羅【宋】【明】</note><app n="0133003"><lem wit="【大】">囉</lem><rdg resp="Taisho" wit="【宋】 【明】">羅</rdg></app>無上神呪。斯是如來無見頂相無為心
+<lb n="0133a14" ed="T"/>佛，從頂發輝，坐寶蓮華所說心呪。且汝宿世與
+<lb n="0133a15" ed="T"/>摩登伽，歷劫因緣恩愛習氣，非是一生及與
+<lb n="0133a16" ed="T"/>一劫，我一宣揚，愛心永脫成阿羅漢。彼尚婬
+<lb n="0133a17" ed="T"/>女無心修行，神力冥資速證無學，云何汝等
+<lb n="0133a18" ed="T"/>在會聲聞，求最上乘決定成佛。譬如以塵揚
+<lb n="0133a19" ed="T"/>于順風，有何艱險？</p><p xml:id="pT19p0133a1908" cb:place="inline">「若有末世欲坐道場，先持
+<lb n="0133a20" ed="T"/>比丘清淨禁戒，要當選擇戒清淨者第一沙
+<lb n="0133a21" ed="T"/>門以為其師。若其不遇真清淨僧，汝戒律儀
+<lb n="0133a22" ed="T"/>必不成就。戒成已後，著新淨衣，然香閑居。誦
+<lb n="0133a23" ed="T"/>此心佛所說神呪一百八遍，然後結界建立
+<lb n="0133a24" ed="T"/>道場。求於十方現住國土無上如來，放大悲
+<lb n="0133a25" ed="T"/>光來灌其頂。阿難！如是末世清淨比丘，若比
+<lb n="0133a26" ed="T"/>丘尼、白衣檀越，心滅貪婬，持佛淨戒；於道場
+<lb n="0133a27" ed="T"/>中發菩薩願，出入澡浴，六時行道。如是不寐，
+<lb n="0133a28" ed="T"/>經三七日，我自現身至其人前，摩頂安慰，令
+<lb n="0133a29" ed="T"/>其開悟。」</p>
+<pb n="0133b" ed="T" xml:id="T19.0945.0133b"/>
+<lb n="0133b01" ed="T"/><p xml:id="pT19p0133b0101">阿難白佛言：「世尊！我蒙如來無上悲誨，心已
+<lb n="0133b02" ed="T"/>開悟，自知修證無學道成；末法修行建立道
+<lb n="0133b03" ed="T"/>場，云何結界，合佛世尊清淨軌則？」</p>
+<lb n="0133b04" ed="T"/><p xml:id="pT19p0133b0401">佛告阿難：「若末世人願立道場，先取雪山大
+<lb n="0133b05" ed="T"/>力白牛，食其山中肥膩香草，此牛唯飲雪山
+<lb n="0133b06" ed="T"/>清水；其糞微細，可取其糞和合栴檀以泥其
+<lb n="0133b07" ed="T"/>地。若非雪山，其牛臭穢不堪塗地。別於平原
+<lb n="0133b08" ed="T"/>穿去地皮，五尺已下取其黃土，和上栴檀、沈
+<lb n="0133b09" ed="T"/>水、蘇合、薰陸、欝金、白膠、青木、零陵、甘松、及雞
+<lb n="0133b10" ed="T"/>舌香，以此十種細羅為粉，合土成泥，以塗場
+<lb n="0133b11" ed="T"/>地。方圓丈六，為八角壇。壇心置一金、銀、銅、木
+<lb n="0133b12" ed="T"/>所造蓮華，華中安鉢，鉢中先盛八月露水，水
+<lb n="0133b13" ed="T"/>中隨安所有華葉。取八圓鏡各安其方，圍繞
+<lb n="0133b14" ed="T"/>花鉢。鏡外建立十六蓮華，十六香鑪間花鋪
+<lb n="0133b15" ed="T"/>設。莊嚴香鑪，純燒沈水，無令見火。取白牛乳
+<lb n="0133b16" ed="T"/>置十六器，乳為煎餅，并諸沙糖、油餅、乳糜、<note n="0133004" resp="Taisho" type="orig" place="foot text">酥＝蘇【宋】＊</note><note n="0133004" resp="CBETA" type="mod">酥【大】＊，蘇【宋】＊</note><app n="0133004"><lem wit="【大】">酥</lem><rdg resp="Taisho" wit="【宋】">蘇</rdg></app>
+<lb n="0133b17" ed="T"/>合、蜜薑、純<app type="star" corresp="#0133004"><lem wit="【大】">酥</lem><rdg resp="Taisho" wit="【宋】">蘇</rdg></app>、純蜜，<note n="0133005" resp="Taisho" type="orig" place="foot text">〔及諸…食〕十六字－【三】</note><note n="0133005" resp="CBETA" type="mod">（及諸…食）十六字【大】，〔－〕【宋】【元】【明】</note><app n="0133005" cb:word-count="16"><lem wit="【大】">及諸菓子、飲食、葡萄、石
+<lb n="0133b18" ed="T"/>蜜，種種上妙等食</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】"><space quantity="0"/></rdg></app>，於蓮華外各各十六，圍繞華
+<lb n="0133b19" ed="T"/>外，以奉諸佛及大菩薩。每以食時，若在中
+<lb n="0133b20" ed="T"/>夜，取蜜半升，用<app type="star" corresp="#0133004"><lem wit="【大】">酥</lem><rdg resp="Taisho" wit="【宋】">蘇</rdg></app>三合；壇前別安一小火鑪，
+<lb n="0133b21" ed="T"/>以兜樓婆香，煎取香水，沐浴其炭，然令猛熾；
+<lb n="0133b22" ed="T"/>投是<app type="star" corresp="#0133004"><lem wit="【大】">酥</lem><rdg resp="Taisho" wit="【宋】">蘇</rdg></app>蜜於炎<note n="0133b2201" resp="CBETA" type="add" cb:note_key="T19.0133b22.07">鑪【CB】【麗-CB】，爐【大】</note><app n="0133b2201"><lem resp="CBETA.ting" wit="【CB】 【麗-CB】">鑪<note type="cf1">K13n0426_p0833b12</note></lem><rdg wit="【大】">爐</rdg></app>內，燒令煙盡，<note n="0133006" resp="Taisho" type="orig" place="foot text">饗＝享【三】</note><note n="0133006" resp="CBETA" type="mod">饗【大】，享【宋】【元】【明】</note><app n="0133006"><lem wit="【大】">饗</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">享</rdg></app>佛、菩薩。
+<lb n="0133b23" ed="T"/>令其四外遍懸幡華。於壇室中，四壁敷設十
+<lb n="0133b24" ed="T"/>方如來及諸菩薩所有形像。應於當陽，張盧
+<lb n="0133b25" ed="T"/>舍那、釋迦、彌勒、阿閦、彌陀，諸大變化觀音形
+<lb n="0133b26" ed="T"/>像兼金剛藏，安其左右。帝釋、梵王、烏芻瑟摩，
+<lb n="0133b27" ed="T"/>并藍地迦、諸軍<note n="0133007" resp="Taisho" type="orig" place="foot text">茶＝荼【宋】</note><note n="0133007" resp="CBETA" type="mod">茶【大】，荼【宋】</note><app n="0133007"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】">荼</rdg></app>利，與毘俱<note n="0133008" resp="Taisho" type="orig" place="foot text">知＝胝【三】</note><note n="0133008" resp="CBETA" type="mod">知【大】，胝【宋】【元】【明】</note><app n="0133008"><lem wit="【大】">知</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">胝</rdg></app>、四天王等，
+<lb n="0133b28" ed="T"/>頻那、夜迦，張於門側，左右安置。又取八鏡，覆
+<lb n="0133b29" ed="T"/>懸虛空。與壇場中所安之鏡，方面相對，使其
+<pb n="0133c" ed="T" xml:id="T19.0945.0133c"/>
+<lb n="0133c01" ed="T"/>形影重重相涉。</p><p xml:id="pT19p0133c0107" cb:place="inline">「於初七<note n="0133009" resp="Taisho" type="orig" place="foot text">〔日〕－【三】</note><note n="0133009" resp="CBETA" type="mod">日【大】，〔－〕【宋】【元】【明】</note><app n="0133009"><lem wit="【大】">日</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】"><space quantity="0"/></rdg></app>中，至誠頂禮十方
+<lb n="0133c02" ed="T"/>如來、諸大菩薩<note n="0133010" resp="Taisho" type="orig" place="foot text">〔及〕－【三】</note><note n="0133010" resp="CBETA" type="mod">及【大】，〔－〕【宋】【元】【明】</note><app n="0133010"><lem wit="【大】">及</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】"><space quantity="0"/></rdg></app>阿羅漢，<note n="0133011" resp="Taisho" type="orig" place="foot text">（號）＋恒【三】</note><note n="0133011" resp="CBETA" type="mod">恒【大】，號恒【宋】【元】【明】</note><app n="0133011"><lem wit="【大】">恒</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">號恒</rdg></app>於六時誦呪
+<lb n="0133c03" ed="T"/><note n="0133012" resp="Taisho" type="orig" place="foot text">繞＝圍【三】</note><note n="0133012" resp="CBETA" type="mod">繞【大】，圍【宋】【元】【明】</note><app n="0133012"><lem wit="【大】">繞</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">圍</rdg></app>壇，至心行道。一時常行一百八遍。第二七
+<lb n="0133c04" ed="T"/>中，一向專心發菩薩願，心無間斷。我毘奈耶，
+<lb n="0133c05" ed="T"/>先有願教。第三七中，於十二時一向持佛般
+<lb n="0133c06" ed="T"/>怛<note n="0133013" resp="Taisho" type="orig" place="foot text">羅＝囉【元】</note><note n="0133013" resp="CBETA" type="mod">羅【大】，囉【元】</note><app n="0133013"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>呪。至第<note n="0133014" resp="Taisho" type="orig" place="foot text">〔四〕－【三】</note><note n="0133014" resp="CBETA" type="mod" cb:note_key="T19.0133c06.06">〔－〕【CB】【金藏乙-CB】【磧乙-CB】【宋】【元】【明】，四【大】</note><app n="0133014"><lem resp="CBETA.ting" wit="【CB】 【金藏乙-CB】 【磧乙-CB】"><space quantity="0"/><note type="cf1">QC040n0439_p0487b16</note><note type="cf2">AC6258_007_0005a03</note><note type="cf3">T19n0945_p0133a28</note></lem><rdg wit="【大】">四</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】"><space quantity="0"/></rdg></app>七日，十方如來一時出現，
+<lb n="0133c07" ed="T"/>鏡交光處承佛摩頂。即於道場修三摩地，能
+<lb n="0133c08" ed="T"/>令如是末世修學，身心明淨猶如瑠璃。阿難！
+<lb n="0133c09" ed="T"/>若此比丘本受戒師及同會中十比丘等，其
+<lb n="0133c10" ed="T"/>中有一不清淨者，如是道場多不成就。從三
+<lb n="0133c11" ed="T"/>七後，端坐安居經一百日，有利根者不起于
+<lb n="0133c12" ed="T"/>座，得須陀洹。縱其身心聖果未成，決定自知
+<lb n="0133c13" ed="T"/>成佛不謬。汝問道場，建立如是。」</p><p xml:id="pT19p0133c1313" cb:place="inline">阿難頂禮佛
+<lb n="0133c14" ed="T"/>足，而白佛言：「自我出家，恃佛憍愛，求多聞故
+<lb n="0133c15" ed="T"/>未證無為；遭彼梵天邪術所禁，心雖明了力
+<lb n="0133c16" ed="T"/>不自由，賴遇文殊令我解脫。雖蒙如來佛頂
+<lb n="0133c17" ed="T"/>神呪，冥獲其力，尚未親聞。唯願大慈重為宣
+<lb n="0133c18" ed="T"/>說，悲救此會諸修行輩，末及當來在輪迴者，
+<lb n="0133c19" ed="T"/>承佛密音身意解脫！」于時會中一切大眾，普
+<lb n="0133c20" ed="T"/>皆作禮，佇聞如來祕密章句。</p>
+<lb n="0133c21" ed="T"/><p xml:id="pT19p0133c2101">爾時，世尊從肉髻中涌百寶光，光中涌出千
+<lb n="0133c22" ed="T"/>葉寶蓮，有化如來坐寶華中，頂放十道百寶
+<lb n="0133c23" ed="T"/>光明，一一光明，皆遍示現十恒河沙金剛密
+<lb n="0133c24" ed="T"/>跡，擎山持杵遍虛空界。大眾仰觀，畏愛兼抱，
+<lb n="0133c25" ed="T"/>求佛<note n="0133015" resp="Taisho" type="orig" place="foot text">恃怙＝哀祐【三】</note><note n="0133015" resp="CBETA" type="mod">恃怙【大】，哀祐【宋】【元】【明】</note><app n="0133015"><lem wit="【大】">恃怙</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">哀祐</rdg></app>，一心聽佛無見頂相放光如來宣
+<lb n="0133c26" ed="T"/>說神呪。</p>
+<lb n="0133c27" ed="T"/><p xml:id="pT19p0133c2701"><note n="0133016" resp="Taisho" type="orig" place="foot text">〔大佛…神呪〕四十三字－【三】</note><note n="0133016" resp="CBETA" type="mod" cb:note_key="T19.0133c27.01">（大佛…神呪）四十三字【大】，〔－〕【宋】【元】【明】（CBETA 按：《大正藏》原注載出處為〈大佛頂如來放光悉怛多鉢怛囉菩薩萬行品〉，於《大正藏》收錄於《大佛頂如來放光悉怛多般怛羅大神力都攝一切呪王陀羅尼經大威德最勝金輪三昧呪品》第一品，CBETA檢索對應經文歸屬於該經第二品〈大威德最勝金輪三昧呪品〉（T19n0947_p0180c07-p0181b23）。）</note><app n="0133016" cb:word-count="43"><lem wit="【大】">大佛頂如來放光悉怛多鉢怛囉菩薩萬行
+<lb n="0133c28" ed="T"/>品，灌頂部錄出，一名中印度那蘭陀曼茶羅灌
+<lb n="0133c29" ed="T"/>頂金剛大道場神呪</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】"><space quantity="0"/></rdg></app></p>
+<pb n="0134a" ed="T" xml:id="T19.0945.0134a"/>
+<lb n="0134a01" ed="T"/><p cb:type="dharani" xml:id="pT19p0134a0101"><anchor type="circle"/><note n="0134001" resp="Taisho" type="orig" place="foot text">此陀羅尼宋元明三本與麗本大異故附於載卷末 cf. P. 139a.</note>南牟薩怛他蘇伽哆耶<note place="inline">歸命一切諸佛</note><note place="inline">一</note>　阿囉訶帝三
+<lb n="0134a02" ed="T"/>藐三菩陀耶<note place="inline">歸命一切如來應正等覺</note><note place="inline">二</note>　娜牟薩婆勃陀<note place="inline">敬禮一切諸佛</note>
+<lb n="0134a03" ed="T"/><note place="inline">三</note>　勃地薩哆吠弊<note place="inline">歸命菩薩</note><note place="inline">毘<g ref="#CB01223"/>反</note><note place="inline">四</note>　娜牟颯哆喃三藐三
+<lb n="0134a04" ed="T"/>菩陀俱胝喃<note place="inline">敬禮正遍知</note><note place="inline">五</note>　薩失囉<note place="inline">引</note>皤<note place="inline">去</note>迦僧伽喃
+<lb n="0134a05" ed="T"/><note place="inline">敬禮辟支佛及四果人</note><note place="inline">六</note>　娜牟嚧雞阿囉喝哆喃<note place="inline">歸命羅漢等眾</note><note place="inline">七</note>　娜牟
+<lb n="0134a06" ed="T"/>蘇嚕哆半那喃<note place="inline">八</note>　娜牟塞羯唎<note place="inline">二合</note>陀<note place="inline">引</note>伽<note place="inline">輕去</note>
+<lb n="0134a07" ed="T"/>彌喃<note place="inline">敬禮斯陀含阿<note n="0134a0701" resp="CBETA" type="add">那【CB】【麗-CB】，陀【大】</note><app n="0134a0701"><lem resp="CBETA.maha" wit="【CB】 【麗-CB】">那<note type="cf1">K13n0426_p0834a16</note></lem><rdg wit="【大】">陀</rdg></app>含眾</note><note place="inline">九</note>　娜牟盧鷄三藐伽哆喃<note place="inline">敬禮過去未來</note><note place="inline">十</note>
+<lb n="0134a08" ed="T"/>　娜牟三藐鉢囉<note place="inline">二合</note>底半那<note place="inline">去</note>喃<note place="inline">十一</note>　娜牟提婆
+<lb n="0134a09" ed="T"/>唎史喃<note place="inline">敬禮三十三天及一切諸仙天等</note><note place="inline">十二</note>　娜牟微悉陀耶微<note place="inline">入聲呼</note>
+<lb n="0134a10" ed="T"/>地也<note place="inline">二合</note>陀囉喃<note place="inline">敬禮呪仙</note><note place="inline">十三</note>　娜牟悉陀微地也<note place="inline">二合</note>
+<lb n="0134a11" ed="T"/>陀囉<g ref="#CB00069"/>史喃<note place="inline">敬禮持呪成就仙人</note><note place="inline">十四</note>　舍波<note place="inline">去</note>拏揭囉訶娑訶
+<lb n="0134a12" ed="T"/>摩囉陀<note place="inline">二合</note>喃<note place="inline">攝惡作善</note><note place="inline">十五</note>　娜牟皤囉<note place="inline">二合</note>訶摩<note place="inline">二合</note>埿
+<lb n="0134a13" ed="T"/><note place="inline">歸命梵天</note><note place="inline">十六</note>　娜牟因<note place="inline">去</note>陀囉<note place="inline">二合</note>耶<note place="inline">歸命帝釋</note><note place="inline">十七</note>　娜牟婆伽嚩
+<lb n="0134a14" ed="T"/>帝<note place="inline">歸命世尊</note><note place="inline">十八</note>　嚕陀囉<note place="inline">二合</note><note place="inline">引</note>耶<note place="inline">大自在天</note><note place="inline">十九</note>　烏摩鉢底<note place="inline">天后</note>娑
+<lb n="0134a15" ed="T"/>醯夜耶<note place="inline">及眷屬等</note><note place="inline">二十</note>　娜牟婆伽筏<note place="inline">蒱末反</note>帝<note place="inline">世尊</note><note place="inline">二十一</note>　那囉
+<lb n="0134a16" ed="T"/>延拏耶<note place="inline">地祇眾</note><note place="inline">二十二</note>　半遮摩訶沒陀囉<note place="inline">大印</note><note place="inline">二十三</note>　娜牟塞
+<lb n="0134a17" ed="T"/>訖哩<note place="inline">二合</note>多耶<note place="inline">頂禮世尊</note><note place="inline">二十四</note>　娜牟婆伽<note place="inline">上呼</note>筏帝摩
+<lb n="0134a18" ed="T"/>訶迦囉耶<note place="inline">大黑天神</note><note place="inline">二十五</note>　底哩<note place="inline">二合</note>補囉那伽<note place="inline">上</note>囉<note place="inline">城</note><note place="inline">二十六</note>
+<lb n="0134a19" ed="T"/>　毘陀囉皤拏迦囉耶<note place="inline">破壞</note><note place="inline">二十七</note>　阿底目多迦尸摩
+<lb n="0134a20" ed="T"/>舍那縛悉埿<note place="inline">尸陀林中</note><note place="inline">二十八</note>　摩怛唎<note place="inline">二合</note>伽拏<note place="inline">鬼神眾</note><note place="inline">二十九</note>
+<lb n="0134a21" ed="T"/>　娜牟塞訖唎多耶<note place="inline">三十</note>　娜牟婆伽筏帝<note place="inline">舊</note>怛他
+<lb n="0134a22" ed="T"/>揭多俱囉耶<note place="inline">如來族</note><note place="inline">三十一</note>　娜牟鉢頭摩<note place="inline">二合</note>俱囉耶<note place="inline">歸命
+<lb n="0134a23" ed="T"/>蓮華族菩薩等</note><note place="inline">三十二</note>　娜牟筏折囉俱囉<note place="inline">半音用，同下</note>耶<note place="inline">歸命金剛族</note><note place="inline">三十三</note>
+<lb n="0134a24" ed="T"/>　娜牟摩尼俱囉耶<note place="inline">歸命寶族</note><note place="inline">三十四</note>　娜牟伽<note place="inline">上</note>闍俱囉耶
+<lb n="0134a25" ed="T"/><note place="inline">歸命眾族</note><note place="inline">三十五</note>　娜牟婆伽筏帝<note place="inline">三十六</note>　地唎<note place="inline">二合</note>茶輸囉哂
+<lb n="0134a26" ed="T"/>那<note place="inline">三十七</note>　鉢囉<note place="inline">二合</note>訶囉拏囉<note place="inline">引</note>闍耶<note place="inline">大猛將各持器仗入</note><note place="inline">三十八</note>
+<lb n="0134a27" ed="T"/>　怛他揭多耶<note place="inline">如來</note><note place="inline">三十九</note>　娜牟婆伽筏帝<note place="inline">四十</note>　阿彌陀
+<lb n="0134a28" ed="T"/><note place="inline">引</note>婆<note place="inline">引</note>耶<note place="inline">無量壽佛</note><note place="inline">四十一</note>　怛他揭多耶<note place="inline">四十二</note>　阿囉訶帝
+<pb n="0134b" ed="T" xml:id="T19.0945.0134b"/>
+<lb n="0134b01" ed="T"/>三藐三菩陀耶<note place="inline">應等正覺</note><note place="inline">四十三</note>　娜牟婆伽筏帝<note place="inline">四十四</note>　阿
+<lb n="0134b02" ed="T"/>芻鞞也<note place="inline">阿閦如來</note><note place="inline">四十五</note>　怛他揭多耶<note place="inline">四十六</note>　阿羅訶帝三
+<lb n="0134b03" ed="T"/>藐三菩陀耶<note place="inline">四十七</note>　娜牟婆伽筏帝<note place="inline">四十八</note>　毘沙闍俱
+<lb n="0134b04" ed="T"/>嚕<note place="inline">二合</note>吠<note n="0134b0401" resp="CBETA" type="add" cb:note_key="T19.0134b04.05">琉【CB】【麗-CB】，<g ref="#CB00562"/>【大】</note><app n="0134b0401"><lem resp="CBETA.ting" wit="【CB】 【麗-CB】">琉<note type="cf1">K13n0426_p0834c02</note></lem><rdg wit="【大】"><g ref="#CB00562"/></rdg></app>璃唎耶<note place="inline">藥師如來</note><note place="inline">四十九</note>　鉢囉<note place="inline">二合</note>婆囉<note place="inline">引</note>闍耶
+<lb n="0134b05" ed="T"/><note place="inline">光王</note><note place="inline">五十</note>　怛他揭多耶<note place="inline">五十一</note>　阿囉訶帝三藐三菩陀耶
+<lb n="0134b06" ed="T"/><note place="inline">五十二</note>　娜牟婆伽筏帝<note place="inline">五十三</note>　三布瑟畢多娑囉囉<note place="inline">引</note>
+<lb n="0134b07" ed="T"/>闍夜<note place="inline">娑羅花王</note><note place="inline">五十四</note>　怛他揭多耶<note place="inline">五十五</note>　阿囉訶帝三藐
+<lb n="0134b08" ed="T"/>三菩陀<note place="inline">引</note>耶<note place="inline">五十六</note>　娜牟婆伽筏帝<note place="inline">五十七</note>　舍枳也<note place="inline">二
+<lb n="0134b09" ed="T"/>合</note>母娜曳<note place="inline">釋迦牟尼佛</note><note place="inline">五十八</note>　怛他揭多耶<note place="inline">五十九</note>　阿囉訶帝
+<lb n="0134b10" ed="T"/>三藐三菩陀<note place="inline">引</note>耶<note place="inline">六十</note>　娜牟婆伽筏帝<note place="inline">六十一</note>　囉怛
+<lb n="0134b11" ed="T"/>那俱蘇摩<note place="inline">寶花</note><note place="inline">六十二</note>　鷄都囉<note place="inline">引</note>闍耶<note place="inline">寶幢王如來</note><note place="inline">六十三</note>　怛他
+<lb n="0134b12" ed="T"/>揭多耶<note place="inline">六十四</note>　阿羅訶帝三藐三菩陀<note place="inline">引</note>耶帝瓢
+<lb n="0134b13" ed="T"/><note place="inline">六十五</note>　娜牟塞訖哩<note place="inline">二合</note>多皤翳摩含婆伽筏多<note place="inline">六十
+<lb n="0134b14" ed="T"/>六</note>　薩怛他揭都烏瑟尼衫<note place="inline">如來佛頂</note><note place="inline">六十七</note>　悉怛多<note place="inline">引</note>鉢
+<lb n="0134b15" ed="T"/>怛<g ref="#CB00771"/><note place="inline">二合</note><note place="inline">華蓋</note><note place="inline">六十八</note>　娜牟阿波<note place="inline">引</note>囉支單<note place="inline">半音</note><note place="inline">敬禮是辰勝</note><note place="inline">六十九</note>　鉢
+<lb n="0134b16" ed="T"/>羅登<note place="inline">登甑反</note>擬<note place="inline">擬異反</note>囉<note place="inline">七十</note>　薩嚩部多揭囉<note place="inline">二合</note>訶
+<lb n="0134b17" ed="T"/>迦囉尼<note place="inline">一切神眾作罰</note><note place="inline">七十一</note>　波囉微<note place="inline">入</note>地也<note place="inline">二合</note>掣<note place="inline">車曳反</note>陀
+<lb n="0134b18" ed="T"/><note place="inline">輕呼</note>儞<note place="inline">能斷他呪</note><note place="inline">七十二</note>　阿哥<note place="inline">引</note>囉<note place="inline">輕呼</note>微哩<note place="inline">入</note><note place="inline">二合</note>駐<note place="inline">橫死</note><note place="inline">七十三</note>
+<lb n="0134b19" ed="T"/>　波唎怛囉耶<note place="inline">引</note>那揭唎<note place="inline">救取</note><note place="inline">七十四</note>　薩嚩畔陀那<g ref="#CB02954"/>
+<lb n="0134b20" ed="T"/>乞叉那迦唎<note place="inline">一切縛禁解脫</note><note place="inline">七十五</note>　薩嚩突瑟吒<note place="inline">二合</note><note place="inline">除一切惡</note><note place="inline">七十六</note><note place="inline">上</note>
+<lb n="0134b21" ed="T"/>　突莎般那儞縛囉尼<note place="inline">惡夢</note><note place="inline">七十七</note>　者都囉<note place="inline">引</note>室底喃<note place="inline">八萬
+<lb n="0134b22" ed="T"/>四千眾神</note><note place="inline">七十八</note>　揭囉訶娑訶娑囉<note place="inline">引</note>喃<note place="inline">七十九</note>　微陀防娑<note place="inline">引</note>
+<lb n="0134b23" ed="T"/>那羯哩<note place="inline">打破</note><note place="inline">八十</note>　阿瑟吒氷設底喃<note place="inline">去聲呼</note><note place="inline">八十一</note><note place="inline">呼皆同</note>　諾剎
+<lb n="0134b24" ed="T"/>怛囉喃<note place="inline">八十二</note>　鉢囉<note place="inline">二合</note>娑<note place="inline">引</note>陀那羯哩<note place="inline">正行</note>阿瑟
+<lb n="0134b25" ed="T"/>吒<note place="inline">二合</note>喃<note place="inline">八十三</note>　摩訶揭囉訶喃<note place="inline">辰</note><note place="inline">八十四</note>　微陀防<note place="inline">二合</note>薩
+<lb n="0134b26" ed="T"/>那羯哩<note place="inline">打破</note><note place="inline">八十五</note>　薩嚩舍都嚕<note place="inline">二合</note>儞嚩囉尼<note place="inline">除一切惡</note>
+<lb n="0134b27" ed="T"/><note place="inline">八十六</note>　巨<note place="inline">去</note>囉喃<note place="inline">八十七</note>　突室乏<note place="inline">二合</note>鉢那難遮那舍
+<lb n="0134b28" ed="T"/>尼<note place="inline">除却嚴惡</note><note place="inline">八十八</note>　毘沙設薩怛囉<note place="inline">器仗</note><note place="inline">八十九</note>　阿祁尼<note place="inline">火</note><note place="inline">九十</note>　烏
+<pb n="0134c" ed="T" xml:id="T19.0945.0134c"/>
+<lb n="0134c01" ed="T"/>陀迦囉尼<note place="inline">水</note><note place="inline">九十一</note>　阿波<note place="inline">引</note>囉視多具囉<note place="inline">苻能勝嚴</note><note place="inline">九十二</note>　摩
+<lb n="0134c02" ed="T"/>訶跋囉戰拏<note place="inline">大力嗔怒</note><note place="inline">九十三</note>　摩訶提哆<note place="inline">火天</note><note place="inline">九十四</note>　摩訶帝
+<lb n="0134c03" ed="T"/>闍<note place="inline">大滅</note><note place="inline">九十五</note>　摩訶稅尾<note place="inline">二合</note>多<note place="inline">太白</note><note place="inline">九十六</note>　什伐<note place="inline">二合</note>囉
+<lb n="0134c04" ed="T"/><note place="inline">光焰</note><note place="inline">九十七</note>　摩訶跋囉<note place="inline">大力</note><note place="inline">九十八</note>　半茶囉嚩<note place="inline">引</note>悉儞<note place="inline">白拂</note><note place="inline">九十九</note>
+<lb n="0134c05" ed="T"/>　阿唎耶多囉<note place="inline">聖者</note><note place="inline">一百</note>　毘哩<note place="inline">二合</note>俱知制嚩毘闍耶
+<lb n="0134c06" ed="T"/><note place="inline">最勝菩薩</note><note place="inline">百一</note>　筏折囉<note place="inline">二合</note>摩禮底毘輸嚕多<note place="inline">摧碎金剛</note><note place="inline">百二</note>　鉢
+<lb n="0134c07" ed="T"/>踏罔迦<note place="inline">降伏</note><note place="inline">百三</note>　跋折囉兒<note place="inline">熾曳反</note>訶縛者<note place="inline">金剛力士</note><note place="inline">百四</note>　摩囉
+<lb n="0134c08" ed="T"/>制縛<note place="inline">隨一逐</note><note place="inline">百五</note>　般囉室多<note place="inline">金剛神杵</note><note place="inline">百六</note>　跋折<note place="inline">時熱反</note><note place="inline">上</note>囉<note place="inline">二合</note>檀
+<lb n="0134c09" ed="T"/>持<note place="inline">金剛神杵</note><note place="inline">百七</note>　毘舍羅摩遮<note place="inline">天神力士</note><note place="inline">百八</note>　扇多舍毘提嚩布
+<lb n="0134c10" ed="T"/>室哆蘇摩嚕波<note place="inline">參辰日月天子及二十八宿</note><note place="inline">百九</note>　摩訶<note place="inline">引</note>稅尾<note place="inline">二合</note>
+<lb n="0134c11" ed="T"/>多<note place="inline">引</note><note place="inline">太白星</note><note place="inline">百十</note>　阿哩耶多羅<note place="inline">百十一</note>　摩訶<note place="inline">引</note>跋囉阿波囉
+<lb n="0134c12" ed="T"/><note place="inline">百十二</note>　跋折囉<note place="inline">二合</note>商羯囉制婆<note place="inline">金剛連鎖</note><note place="inline">百十三</note>　怛他<note place="inline">天可
+<lb n="0134c13" ed="T"/>反</note>跋折囉俱摩唎迦<note place="inline">金剛童女</note><note place="inline">百十四</note>　俱<g ref="#CB00771"/><note place="inline">盧紺反</note>咃唎<note place="inline">金剛童子</note>
+<lb n="0134c14" ed="T"/><note place="inline">百十五</note>　跋折囉訶薩哆者<note place="inline">二合</note><note place="inline">金剛手</note><note place="inline">百十六</note>　微地也<note place="inline">大明呪藏</note><note place="inline">百十七</note>
+<lb n="0134c15" ed="T"/>　乾遮那摩<note place="inline">引</note>唎迦<note place="inline">四天王太子</note><note place="inline">百十八</note>　俱蘇婆喝囉怛囉怛
+<lb n="0134c16" ed="T"/>那<note place="inline">百十九</note>　毘嚕遮耶那俱唎耶<note place="inline">百二十</note>　韜淡<note place="inline">吐炎</note>夜囉
+<lb n="0134c17" ed="T"/>烏瑟尼<note place="inline">二合</note>沙<note place="inline">佛頂</note><note place="inline">百二十一</note>　毘折藍婆摩邏遮<note place="inline">羅剎神女</note><note place="inline">百二十二</note>
+<lb n="0134c18" ed="T"/>　跋折囉<note place="inline">二合</note>迦那迦<note place="inline">金剛使者</note><note place="inline">百二十三</note>　鉢囉<note place="inline">二合</note>婆咾<note place="inline">去</note>
+<lb n="0134c19" ed="T"/>遮那<note place="inline"><note n="0134c1901" resp="CBETA" type="add" cb:note_key="T19.0134c19.03">蓮【CB】【麗-CB】，蓬【大】</note><app n="0134c1901"><lem resp="CBETA.ting" wit="【CB】 【麗-CB】">蓮<note type="cf1">K13n0426_p0835b10</note></lem><rdg wit="【大】">蓬</rdg></app>華神眾</note><note place="inline">百二十四</note>　跋折囉<note place="inline">二合</note>敦尼遮<note place="inline">金剛擎山</note><note place="inline"><note n="0134c1902" resp="CBETA" type="add" cb:note_key="T19.0134c19.23">百【大】，〔－〕【麗-CB】</note><app n="0134c1902"><lem wit="【大】">百</lem><rdg resp="CBETA.ting" wit="【麗-CB】"><space quantity="0"/><note type="cf1">K13n0426_p0835b11</note></rdg></app>二十五</note>　稅尾
+<lb n="0134c20" ed="T"/>多遮迦摩<note place="inline">引</note>囉<note place="inline">引</note>乞叉<note place="inline">二合</note><note place="inline">百二十六</note>　舍施鉢囉<note place="inline">二合</note>婆
+<lb n="0134c21" ed="T"/>翳帝夷帝<note place="inline">如是等</note><note place="inline">百二十七</note>　母<note place="inline">引</note>陀囉<note place="inline">二合</note>尼揭拏<note place="inline">眾印可</note><note place="inline">百二十
+<lb n="0134c22" ed="T"/>八</note>　娑吠囉乞懺<note place="inline">二合</note><note place="inline">一切護我</note><note place="inline">百二十九</note>　俱囉飯<note place="inline">二合</note>都印<g ref="#CB00145"/>
+<lb n="0134c23" ed="T"/>那麼麼<note place="inline">某乙稱名</note>那寫<note place="inline">誦呪者但至此語皆自稱名</note><note place="inline">百三十</note>　嗚吽<note place="inline">二合</note>牟哩
+<lb n="0134c24" ed="T"/><note place="inline">二合</note>瑟揭<note place="inline">二合</note><note place="inline">渠羯反</note><note place="inline">皆同</note>拏<note place="inline">仙眾</note><note place="inline">百三十一</note>　鉢囉<note place="inline">二合</note>舍<note place="inline">引</note>薩多
+<lb n="0134c25" ed="T"/><note place="inline">善相</note><note place="inline">百三十二</note>　薩怛他揭都<note place="inline">一切如來</note><note place="inline">百三十三</note>　烏瑟尼沙<note place="inline">百三十四</note>　呼吽
+<lb n="0134c26" ed="T"/><note place="inline">二合</note>咄嚕吽<note place="inline">三合</note><note place="inline">警誤</note><note place="inline">百三十五</note>　瞻婆那<note place="inline">押領</note><note place="inline">百三十六</note>　呼吽<note place="inline">二合</note>咄
+<lb n="0134c27" ed="T"/>嚕吽<note place="inline">三合</note><note place="inline">百三十七</note>　薩耽婆那<note place="inline">鎮守</note><note place="inline">百三十八</note>　呼吽<note place="inline">二合</note>咄嚕吽
+<lb n="0134c28" ed="T"/><note place="inline">三合</note><note place="inline">百三十九</note>　婆囉微地也三婆乞叉那囉<note place="inline">百四十</note>　呼吽<note place="inline">二
+<pb n="0135a" ed="T" xml:id="T19.0945.0135a"/>
+<lb n="0135a01" ed="T"/>合</note>咄嚕吽<note place="inline">三合</note><note place="inline">百四十一</note>　薩婆部瑟吒喃<note place="inline">百四十二</note>　塞曇婆那
+<lb n="0135a02" ed="T"/>羯囉<note place="inline">喫却他呪</note><note place="inline">百四十三</note>　呼吽<note place="inline">二合</note>咄嚕吽<note place="inline">三合</note><note place="inline">百四十四</note>　薩嚩藥
+<lb n="0135a03" ed="T"/>叉<note place="inline">勇猛</note><note place="inline">百四十五</note>　喝囉<note place="inline">引</note>剎娑揭囉訶喃<note place="inline">百四十六</note>　毘陀防娑
+<lb n="0135a04" ed="T"/>那羯囉<note place="inline">打破</note><note place="inline">百四十七</note>　呼吽<note place="inline">二合</note>咄嚕吽<note place="inline">三合</note><note place="inline">百四十八</note>　者都羅
+<lb n="0135a05" ed="T"/>尸底喃<note place="inline">百四十九</note>　揭囉訶娑囉喃<note place="inline">八萬四千神王眾</note><note place="inline">百五十</note>　毘陀防
+<lb n="0135a06" ed="T"/>娑那羯囉<note place="inline">百五十一</note>　呼吽<note place="inline">二合</note>咄嚕吽<note place="inline">三合</note><note place="inline">百五十二</note>　阿瑟吒
+<lb n="0135a07" ed="T"/>微<note place="inline">二合</note>摩舍帝喃<note place="inline">上</note><note place="inline">百五十三</note>　那佉<note place="inline">上</note>沙怛囉喃<note place="inline">上</note><note place="inline">百五十
+<lb n="0135a08" ed="T"/>四</note>　婆囉摩馱那伽囉<note place="inline">百五十五</note>　呼吽<note place="inline">二合</note>咄嚕吽<note place="inline">三合</note><note place="inline">百五
+<lb n="0135a09" ed="T"/>十六</note>　囉剎囉剎<note place="inline">護一切諸佛菩薩金剛天仙皆護</note><note place="inline">百五十七</note>　薄伽梵<note place="inline">佛</note><note place="inline">百五十八</note>　薩
+<lb n="0135a10" ed="T"/>怛他揭都烏瑟尼沙<note place="inline">佛頂</note><note place="inline">百五十九</note>　鉢囉登擬哩<note place="inline">百六十</note>　摩
+<lb n="0135a11" ed="T"/>訶薩訶薩囉部兒<note place="inline">千臂大神</note><note place="inline">百六十一</note>　娑訶薩囉室<note n="0135a1101" resp="CBETA" type="add" cb:note_key="T19.0135a11.21">囇【CB】，曬【大】</note><app n="0135a1101"><lem resp="CBETA.maha" wit="【CB】" cb:provider="lt liu (2018-09-21)">囇<note type="cf1">T19n0945_p0140a07</note><note type="cf2">T39n1799_p0918a20</note></lem><rdg wit="【大】">曬</rdg></app><note place="inline">千頭神</note><note place="inline">百
+<lb n="0135a12" ed="T"/>六十二</note>　俱胝舍多娑訶薩囉寧怛<g ref="#CB00942"/><note place="inline">百千眼神</note><note place="inline">百六十三</note>　阿弊
+<lb n="0135a13" ed="T"/>地也什嚩哩多那吒迦<note place="inline">百六十四</note>　摩訶跋折嚕陀<note place="inline">引</note>
+<lb n="0135a14" ed="T"/>囉<note place="inline">大輪金剛</note><note place="inline">百六十五</note>　帝哩菩嚩那<note place="inline">三世</note><note place="inline">百六十六</note>　曼茶囉<note place="inline">檀場</note><note place="inline">百六十七</note>　<note n="0135a1401" resp="CBETA" type="add">嗚【CB】，鳴【大】</note><app n="0135a1401"><lem resp="CBETA.say" wit="【CB】">嗚<note type="cf1">T19n0945_p0140a10</note><note type="cf2">T39n1799_p0918a22</note></lem><rdg wit="【大】">鳴</rdg></app>
+<lb n="0135a15" ed="T"/>吽莎悉底<note place="inline">百六十八</note>　薄婆都<note place="inline">與我平等</note><note place="inline">百六十九</note>　印<g ref="#CB00145"/>麼麼<note place="inline">某乙</note><note place="inline">百七十</note>
+<lb n="0135a16" ed="T"/>　囉闍婆夜<note place="inline">王難</note><note place="inline">百七十一</note>　主囉婆夜<note place="inline">賊難</note><note place="inline">百七十二</note>　阿祇尼婆夜
+<lb n="0135a17" ed="T"/><note place="inline">火難</note><note place="inline">百七十三</note>　烏陀迦婆夜<note place="inline">水難</note><note place="inline">百七十四</note>　吠沙婆夜<note place="inline">毒難</note><note place="inline">百七十五</note>　舍薩
+<lb n="0135a18" ed="T"/>多囉婆夜<note place="inline">刀仗難</note><note place="inline">百七十六</note>　波囉斫羯囉婆夜<note place="inline">兵難</note><note place="inline">百七十七</note>　突
+<lb n="0135a19" ed="T"/><g ref="#CB00069"/>叉婆夜<note place="inline">穀貴飢饉難</note><note place="inline">百七十八</note>　阿舍儞婆夜<note place="inline">雹難</note><note place="inline">百七十九</note>　阿迦
+<lb n="0135a20" ed="T"/>囉沒<g ref="#CB00069"/><note place="inline">利吉反</note>駐婆夜<note place="inline">掩死難</note><note place="inline">百八十</note>　阿陀囉尼部彌劍波
+<lb n="0135a21" ed="T"/><note place="inline">總持地動</note><note place="inline">百八十一</note>　伽波哆婆夜<note place="inline">險難</note><note place="inline">百八十二</note>　烏囉囉迦波多婆
+<lb n="0135a22" ed="T"/>夜<note place="inline">道路難</note><note place="inline">百八十三</note>　囉闍彈茶婆夜<note place="inline">王刑罰難</note><note place="inline">百八十四</note>　那<note place="inline">上</note>伽婆夜
+<lb n="0135a23" ed="T"/><note place="inline">龍怖難</note><note place="inline">百八十五</note>　微地揄婆夜<note place="inline">閃電難</note><note place="inline">百八十六</note>　蘇跋<g ref="#CB00069"/>尼婆夜<note place="inline">金翄
+<lb n="0135a24" ed="T"/>鳥難</note><note place="inline">百八十七</note>　藥叉揭囉訶<note place="inline">百八十八</note>　羅剎娑揭囉訶<note place="inline">百八十九</note>　畢
+<lb n="0135a25" ed="T"/>唎哆揭囉<note place="inline">二合</note>訶<note place="inline">餓鬼難</note><note place="inline">百九十</note>　毘舍<note place="inline">上</note>遮揭囉訶<note place="inline">廁神</note><note place="inline">百九十一</note>
+<lb n="0135a26" ed="T"/>　部多揭囉<note place="inline">二合</note>訶<note place="inline">神鬼眾</note><note place="inline">百九十二</note>　鳩槃茶揭囉訶<note place="inline">守宮婦女
+<lb n="0135a27" ed="T"/>鬼</note><note place="inline">一百九十三</note>　布單那揭囉<note place="inline">二合</note>訶<note place="inline">魄鬼</note><note place="inline">百九十四</note>　羯吒布單那
+<lb n="0135a28" ed="T"/>揭囉<note place="inline">二合</note>訶<note place="inline">奇魄鬼</note><note place="inline">一百九十五</note>　塞揵陀揭囉訶<note place="inline">鳩摩羅童天子</note><note place="inline">百九十六</note>
+<pb n="0135b" ed="T" xml:id="T19.0945.0135b"/>
+<lb n="0135b01" ed="T"/>　阿婆娑摩囉揭囉<note place="inline">二合</note>訶<note place="inline">羊頭鬼</note><note place="inline">百九十七</note>　烏檀摩陀揭
+<lb n="0135b02" ed="T"/>囉<note place="inline">二合</note>訶<note place="inline">熱鬼</note><note place="inline">百九十八</note>　車耶揭囉<note place="inline">二合</note>訶<note place="inline">影鬼</note><note place="inline">百九十九</note>　梨婆底
+<lb n="0135b03" ed="T"/>揭囉訶<note place="inline">陰謀鬼</note><note place="inline">二百</note>　闍底訶哩泥<note place="inline">食初產鬼</note><note place="inline">二百一</note>　羯囉婆訶
+<lb n="0135b04" ed="T"/>哩埿<note place="inline">食懷孕鬼</note><note place="inline">二百二</note>　嚧地囉訶哩泥<note place="inline">食血鬼</note><note place="inline">二百三</note>　芒娑訶哩
+<lb n="0135b05" ed="T"/>泥<note place="inline">食肉鬼</note><note place="inline">二百四</note>　計陀訶哩泥<note place="inline">食脂鬼</note><note place="inline">二百五</note>　摩闍訶哩<note place="inline">輕呼</note><note place="inline">去聲</note>泥<note place="inline">食髓
+<lb n="0135b06" ed="T"/>鬼</note><note place="inline">二百六</note>　闍多訶哩泥<note place="inline">食氣鬼</note><note place="inline">二百七</note>　視吠哆訶哩泥<note place="inline">食壽命鬼</note><note place="inline">二百八</note>
+<lb n="0135b07" ed="T"/>　婆多訶哩泥<note place="inline">食風鬼</note><note place="inline">二百九</note>　皤多訶哩喃阿輸遮訶
+<lb n="0135b08" ed="T"/>哩泥<note place="inline">食不淨鬼</note><note place="inline">二百一十</note>　質多訶哩泥<note place="inline">食心鬼</note><note place="inline">二百十一</note>帝衫薩毘
+<lb n="0135b09" ed="T"/>衫<note place="inline">如是等眾</note><note place="inline">二百十二</note>　薩嚩揭囉訶喃<note place="inline">一切執祖鬼</note><note place="inline">二百十三</note>　毘地也<note place="inline">明呪
+<lb n="0135b10" ed="T"/>藏</note><note place="inline">二百十四</note>　嗔陀夜彌<note place="inline">斬伐罪者</note><note place="inline">二百十五</note>　枳囉夜彌<note place="inline">二百十六</note>　波哩跋
+<lb n="0135b11" ed="T"/>囉斫迦<note n="0135b1101" resp="CBETA" type="add" cb:note_key="T19.0135b11.04">羅【大】，囉【麗-CB】</note><app n="0135b1101"><lem wit="【大】">羅</lem><rdg resp="CBETA.ting" wit="【麗-CB】">囉<note type="cf1">K13n0426_p0836b02</note></rdg></app><note place="inline">外道</note><note place="inline">二百十七</note>　訖哩<note place="inline">離枳反</note><note place="inline">上</note>擔微地也<note place="inline">明呪藏</note><note place="inline">二百十八</note>　嗔
+<lb n="0135b12" ed="T"/>陀夜彌<note place="inline">二百十九</note>　枳囉夜彌<note place="inline">捕罰</note><note place="inline">二百二十</note>　茶枳尼<note place="inline">狐魅鬼</note><note place="inline">二百二十一</note>　訖
+<lb n="0135b13" ed="T"/>哩擔微地也<note place="inline">明呪</note><note place="inline">二百二十二</note>　嗔陀夜彌枳囉夜彌<note place="inline">二百二十
+<lb n="0135b14" ed="T"/>三</note>　摩訶鉢輸鉢底夜<note place="inline">二百二十四</note>　嚕陀囉<note place="inline">大自在天</note><note place="inline">二百二十五</note>　訖
+<lb n="0135b15" ed="T"/>哩耽微地也<note place="inline">明呪</note><note place="inline">二百二十六</note>　嗔陀夜彌枳羅夜彌<note place="inline">二百二十
+<lb n="0135b16" ed="T"/>七</note>　那囉耶拏耶<note place="inline">天神</note><note place="inline">二百二十八</note>　訖哩耽微地也<note place="inline">明呪</note><note place="inline">二百二十九</note>
+<lb n="0135b17" ed="T"/>　嗔陀夜彌枳囉夜彌<note place="inline">二百三十</note>　怛怛嚩伽<note place="inline">上</note>嚕茶<note place="inline">金翅鳥王</note>
+<lb n="0135b18" ed="T"/><note place="inline">二百三十一</note>　訖哩耽微地也<note place="inline">二百三十二</note>　嗔陀夜彌枳羅夜
+<lb n="0135b19" ed="T"/>彌<note place="inline">二百三十三</note>　摩訶迦羅<note place="inline">大黑天神</note><note place="inline">二百三十四</note>　摩怛囉伽拏訖
+<lb n="0135b20" ed="T"/>哩<note place="inline">離枳反</note><note place="inline">上</note>耽微地也<note place="inline">二百三十五</note>　嗔陀夜彌枳羅夜彌<note place="inline">二百
+<lb n="0135b21" ed="T"/>三十六</note>　迦波哩迦<note place="inline">髑髏外道</note><note place="inline">二百三十七</note>　訖哩耽微地也<note place="inline">二百三十八</note>
+<lb n="0135b22" ed="T"/>　嗔陀夜彌枳囉夜彌<note place="inline">二百三十九</note>　闍夜羯囉<note place="inline">二百四十</note>　曼度
+<lb n="0135b23" ed="T"/>羯囉<note place="inline">二百四十一</note>　薩婆囉他娑達儞<note place="inline">持一切物</note><note place="inline">二百四十二</note>　訖哩耽
+<lb n="0135b24" ed="T"/>微地也<note place="inline">二百四十三</note>　嗔陀夜彌枳囉夜彌<note place="inline">二百四十四</note>　者都
+<lb n="0135b25" ed="T"/><g ref="#CB00069"/><note place="inline">利吉反</note>薄祁儞<note place="inline">姊妹神女</note><note place="inline">二百四十五</note>　訖哩耽微地也<note place="inline">二百四十六</note>
+<lb n="0135b26" ed="T"/>　嗔陀夜彌<note place="inline">二百四十七</note>　枳囉夜彌<note place="inline">二百四十八</note>　憑<note place="inline">去</note>儀哩知
+<lb n="0135b27" ed="T"/><note place="inline">鬪戰勝神并器仗</note><note place="inline">二百四十九</note>　難泥<note place="inline">外道</note>雞首婆囉<note place="inline">孔雀王器仗</note><note place="inline">二百五十</note>　伽那
+<lb n="0135b28" ed="T"/>鉢底<note place="inline">毘那夜迦王</note><note place="inline">二百五十一</note>　娑醯夜<note place="inline">野叉王兄弟三人各領二十八萬眾</note><note place="inline">二百五十二</note>　訖
+<pb n="0135c" ed="T" xml:id="T19.0945.0135c"/>
+<lb n="0135c01" ed="T"/>哩耽微地也<note place="inline">二百五十三</note>　嗔陀夜彌<note place="inline">二百五十四</note>　枳囉夜彌
+<lb n="0135c02" ed="T"/><note place="inline">二百五十五</note>　那延那室囉<note place="inline">引</note>婆拏<note place="inline">裸形外道</note><note place="inline">二百五十六</note>　訖哩<note place="inline">離吉反</note><note place="inline">皆
+<lb n="0135c03" ed="T"/>同</note>耽微地也<note place="inline">二百五十七</note>　嗔陀夜彌<note place="inline">二百五十八</note>　枳囉夜彌
+<lb n="0135c04" ed="T"/><note place="inline">二百五十九</note>　阿囉訶多<note place="inline">羅漢</note><note place="inline">二百六十</note>　訖哩耽微地也<note place="inline">二百六十一</note>　嗔
+<lb n="0135c05" ed="T"/>陀夜彌<note place="inline">二百六十二</note>　枳囉夜彌<note place="inline">二百六十三</note>　微怛<note place="inline">多音</note>囉<note place="inline">引</note>迦
+<lb n="0135c06" ed="T"/><note place="inline">起尸鬼</note><note place="inline">二百六十四</note>　訖哩耽微地也<note place="inline">二百六十五</note>　嗔陀夜彌<note place="inline">二百六十六</note>
+<lb n="0135c07" ed="T"/>　枳囉夜彌<note place="inline">二百六十七</note>　跋折<note place="inline">時熱反</note>囉波儞<note place="inline">執金剛神</note><note place="inline">二百六十八</note>　跋
+<lb n="0135c08" ed="T"/>折囉婆<note place="inline">重呼</note>尼<note place="inline">二百六十九</note>　具醯夜迦<note place="inline">密跡力士</note><note place="inline">二百七十</note>　地鉢底
+<lb n="0135c09" ed="T"/><note place="inline">總管</note><note place="inline">二百七十一</note>　訖哩耽微地也<note place="inline">二百七十二</note>　嗔陀夜彌枳羅
+<lb n="0135c10" ed="T"/>夜彌<note place="inline">二百七十三</note>　囉叉囉叉罔<note place="inline">一切諸佛菩薩天仙龍神方護</note><note place="inline">二百七十四</note>　薄
+<lb n="0135c11" ed="T"/>伽梵<note place="inline">佛</note><note place="inline">二百七十五</note>　印<g ref="#CB00145"/>那麼麼那寫<note place="inline">某乙寫</note><note place="inline">二百七十六</note>　婆伽梵
+<lb n="0135c12" ed="T"/>薩怛他揭都烏瑟尼沙<note place="inline">二百七十七</note>　悉怛多鉢怛囉<note place="inline">華蓋</note>
+<lb n="0135c13" ed="T"/><note place="inline">二百七十八</note>　南無嗉<note place="inline">上</note>都<note place="inline">上</note>羝<note place="inline">頂禮</note><note place="inline">二百七十九</note>　阿悉多那<note place="inline">引</note>
+<lb n="0135c14" ed="T"/>囉<note place="inline">引</note>囉迦<note place="inline">白光分明</note><note place="inline">二百八十</note>　鉢囉婆毘薩普吒<note place="inline">二百八十一</note>　毘
+<lb n="0135c15" ed="T"/>迦悉怛多<note place="inline">二百八十二</note>　鉢底哩<note place="inline">二百八十三</note>　什嚩囉什嚩囉
+<lb n="0135c16" ed="T"/><note place="inline">光焰</note><note place="inline">二百八十四</note>　陀囉陀囉<note place="inline">二百八十五</note>　頻陀囉頻陀囉<note place="inline">二百八十六</note>
+<lb n="0135c17" ed="T"/>　嗔陀嗔陀<note place="inline">二百八十七</note>　含吽含吽<note place="inline">二百八十八</note>　泮泮泮<note place="inline">二百八十九</note>
+<lb n="0135c18" ed="T"/>　泮吒泮吒<note place="inline">二百九十</note>　莎皤訶<note place="inline">二百九十一</note>　醯醯泮<note place="inline">二百九十二</note>　阿
+<lb n="0135c19" ed="T"/>牟伽耶泮<note place="inline">不空大使</note><note place="inline">二百九十三</note>　阿鉢囉底訶多泮<note place="inline">無障礙</note><note place="inline">二百九十四</note>
+<lb n="0135c20" ed="T"/>　皤囉鉢囉<note place="inline">二合</note>陀泮<note place="inline">與願</note><note place="inline">二百九十五</note>　阿素囉毘陀囉皤
+<lb n="0135c21" ed="T"/>迦泮<note place="inline">修羅破壞</note><note place="inline">二百九十六</note>　薩皤提吠弊泮<note place="inline">一切天神</note><note place="inline">二百九十七</note>　薩皤
+<lb n="0135c22" ed="T"/>那那伽弊泮<note place="inline">一切龍眾</note><note place="inline">二百九十八</note>　薩皤藥叉弊泮<note place="inline">一切勇鬼神</note><note place="inline">二百九
+<lb n="0135c23" ed="T"/>十九</note>　薩皤乾闥婆弊泮<note place="inline">一切音樂神</note><note place="inline">三百</note>　薩皤阿素囉弊泮
+<lb n="0135c24" ed="T"/><note place="inline">三百一</note>　薩皤揭嚕茶弊泮<note place="inline">三百二</note>　薩皤緊那羅弊泮<note place="inline">三百
+<lb n="0135c25" ed="T"/>三</note>　薩皤摩護囉伽弊泮<note place="inline">三百四</note>　薩皤囉剎莎弊泮<note place="inline">三百
+<lb n="0135c26" ed="T"/>五</note>　薩皤摩努曬弊泮<note place="inline">三百六</note>　薩皤阿摩努曬弊泮<note place="inline">三百
+<lb n="0135c27" ed="T"/>七</note>　薩皤布單那弊泮<note place="inline">三百八</note>　薩皤迦吒布丹那弊
+<lb n="0135c28" ed="T"/>泮<note place="inline">三百九</note>　薩皤突蘭枳帝弊泮<note place="inline">一切難過</note><note place="inline">三百十</note>　薩皤突瑟
+<pb n="0136a" ed="T" xml:id="T19.0945.0136a"/>
+<lb n="0136a01" ed="T"/>吒畢哩乞史帝弊泮<note place="inline">一切難</note><note place="inline">三百十一</note>　薩皤什皤梨弊泮
+<lb n="0136a02" ed="T"/><note place="inline">一切瘧壯熱</note><note place="inline">三百十二</note>　薩皤阿波薩麼嚟弊泮<note place="inline">一切外道出</note><note place="inline">三百十三</note>　薩
+<lb n="0136a03" ed="T"/>婆奢羅皤拏弊泮<note place="inline">三百十四</note>　薩嚩底<g ref="#CB00069"/>耻雞弊泮<note place="inline">三百十五</note>
+<lb n="0136a04" ed="T"/>　薩菩怛波提弊泮<note place="inline">一切鬼惡</note><note place="inline">三百十六</note>　薩皤微地也囉誓遮
+<lb n="0136a05" ed="T"/>黎弊泮<note place="inline">一切持呪博士等</note><note place="inline">三百十七</note>　闍耶羯囉摩度羯囉<note place="inline">三百十八</note>
+<lb n="0136a06" ed="T"/>　薩婆囉他娑陀雞弊泮<note place="inline">一切物呪博士</note><note place="inline">三百十九</note>　微地也遮唎
+<lb n="0136a07" ed="T"/>曳弊泮<note place="inline">三百二十</note>　者咄囉南薄祁儞弊泮<note place="inline">四姊妹神女</note><note place="inline">三百二十一</note>
+<lb n="0136a08" ed="T"/>　跋折囉俱摩唎迦弊泮<note place="inline">金剛童子</note><note place="inline">三百二十二</note>　跋折囉俱
+<lb n="0136a09" ed="T"/>藍陀利弊泮<note place="inline">三百二十三</note>　微地也囉<note place="inline">引</note>闍弊泮<note place="inline">呪王等</note><note place="inline">三百二
+<lb n="0136a10" ed="T"/>十四</note>　摩訶鉢囉登耆囇弊泮<note place="inline">三百二十五</note>　跋折囉商羯
+<lb n="0136a11" ed="T"/>囉<note place="inline">引</note>夜泮<note place="inline">金剛連鎖</note><note place="inline">三百二十六</note>　鉢囉登祁囉囉<note place="inline">引</note>闍<note place="inline">引</note>耶
+<lb n="0136a12" ed="T"/>泮<note place="inline">三百二十七</note>　摩訶揭囉耶泮<note place="inline">大黑天神</note><note place="inline">三百二十八</note>　摩訶摩怛
+<lb n="0136a13" ed="T"/>哩<note place="inline">二合</note>伽拏耶泮<note place="inline">鬼眾</note><note place="inline">三百二十九</note>　娜牟塞揭哩<note place="inline">二合</note>多
+<lb n="0136a14" ed="T"/>耶泮<note place="inline">三百三十</note>　毘瑟拏尾曳泮<note place="inline">毘紐天子</note><note place="inline">三百三十一</note>　皤囉<g ref="#CB00292"/>摩
+<lb n="0136a15" ed="T"/>尼曳泮<note place="inline">梵王</note><note place="inline">三百三十二</note>　阿祁尼曳泮<note place="inline">火天</note><note place="inline">三百三十三</note>　摩訶迦
+<lb n="0136a16" ed="T"/>哩曳泮<note place="inline">大黑天女</note><note place="inline">三百三十四</note>　迦囉檀<note n="0136a1601" resp="CBETA" type="add" cb:note_key="T19.0136a16.16">持【CB】，特【大】</note><app n="0136a1601"><lem resp="CBETA.maha" wit="【CB】" cb:provider="lt liu (2018-09-21)">持<note type="cf1">X12n0281_p0863c14</note><note type="cf2">P185n1618_p0497a06</note><note type="cf3">T19n0945_p0140c24</note></lem><rdg wit="【大】">特</rdg></app>曳泮<note place="inline">大鬼帥黑奧神</note><note place="inline">三百三十五</note>
+<lb n="0136a17" ed="T"/>　瞖泥哩曳泮<note place="inline">帝釋</note><note place="inline">三百三十六</note>　遮文遲曳泮<note place="inline">怒神</note><note place="inline">三百三十七</note>　嘮怛
+<lb n="0136a18" ed="T"/>哩曳泮<note place="inline">瞋怒神</note><note place="inline">三百三十八</note>　迦囉<note place="inline">引</note>怛哩曳泮<note place="inline">三百三十九</note>　迦波嚟
+<lb n="0136a19" ed="T"/>曳泮<note place="inline">三百四十</note>　阿地目抧多迦尸麼舍那皤悉儞曳
+<lb n="0136a20" ed="T"/>泮<note place="inline">三百四十一</note>　曳髻者那薩怛薩怛皤<note place="inline">若有眾生</note><note place="inline">三百四十二</note>　突
+<lb n="0136a21" ed="T"/>瑟吒質多<note place="inline">惡心鬼</note><note place="inline">三百四十三</note>　澇持囉質多<note place="inline">三百四十四</note>　烏闍訶
+<lb n="0136a22" ed="T"/>囉<note place="inline">食精氣鬼</note><note place="inline">三百四十五</note>　揭婆訶囉<note place="inline">食胎藏鬼</note><note place="inline">三百四十六</note>　嘮地囉訶囉
+<lb n="0136a23" ed="T"/><note place="inline">食血鬼</note><note place="inline">三百四十七</note>　芒娑訶囉<note place="inline">食肉鬼</note><note place="inline">三百四十八</note>　摩社訶囉<note place="inline">食產鬼</note><note place="inline">三百四十九</note>
+<lb n="0136a24" ed="T"/>　社多訶囉<note place="inline">三百五十</note>　視微多訶囉<note place="inline">食壽命鬼</note><note place="inline">三百五十一</note>　皤略耶
+<lb n="0136a25" ed="T"/>訶囉<note place="inline">食祭鬼</note><note place="inline">三百五十二</note>　健陀訶囉<note place="inline">食香鬼</note><note place="inline">三百五十三</note>　布瑟波訶囉<note place="inline">食花
+<lb n="0136a26" ed="T"/>鬼</note><note place="inline">三百五十四</note>　破囉訶囉<note place="inline">食五果子鬼</note><note place="inline">三百五十五</note>　薩寫訶囉<note place="inline">食五穀種子鬼</note><note place="inline">三百五十
+<lb n="0136a27" ed="T"/>六</note>　波波質多突瑟吒<note place="inline">知諫反</note>質多<note place="inline">惡心鬼</note><note place="inline">三百五十七</note>　嘮陀羅
+<lb n="0136a28" ed="T"/>質多<note place="inline">嗔心鬼</note><note place="inline">三百五十八</note>　陀囉質多藥叉揭囉訶<note place="inline">三百五十九</note>　囉
+<pb n="0136b" ed="T" xml:id="T19.0945.0136b"/>
+<lb n="0136b01" ed="T"/>剎娑揭囉訶<note place="inline">三百六十</note>　閉囇多揭囉訶毘舍遮揭囉
+<lb n="0136b02" ed="T"/>訶<note place="inline">三百六十一</note>　部多揭囉訶<note place="inline">神眾</note><note place="inline">三百六十二</note>　鳩槃茶揭囉訶
+<lb n="0136b03" ed="T"/><note place="inline">三百六十三</note>　塞健陀揭囉訶<note place="inline">三百六十四</note>　烏怛摩陀揭囉訶
+<lb n="0136b04" ed="T"/><note place="inline">三百六十五</note>　車夜揭囉訶<note place="inline">影鬼</note><note place="inline">三百六十六</note>　阿波娑摩囉揭囉
+<lb n="0136b05" ed="T"/>訶<note place="inline">羊嗔鬼鬼如野狐</note><note place="inline">三百六十七</note>　侘<note place="inline">坼阿反</note><note place="inline">上</note><note place="inline">長平呼</note>迦茶祁尼揭囉訶<note place="inline">魅鬼
+<lb n="0136b06" ed="T"/>魅女鬼</note><note place="inline">三百六十八</note>　<g ref="#CB00074"/>婆底揭囉訶<note place="inline">如狗惱小鬼</note><note place="inline">三百六十九</note>　闍弭迦揭囉
+<lb n="0136b07" ed="T"/>訶<note place="inline">如烏鬼</note><note place="inline">三百七十</note>　舍俱尼揭囉訶<note place="inline">如馬</note><note place="inline">三百七十一</note>　漫怛囉難
+<lb n="0136b08" ed="T"/>提迦揭囉訶<note place="inline">如猫兒</note><note place="inline">三百七十二</note>　阿藍皤揭囉訶<note place="inline">如蛇</note><note place="inline">三百七十三</note>　訶
+<lb n="0136b09" ed="T"/>奴建度波尼揭囉訶<note place="inline">如雞</note><note place="inline">三百七十四</note>　什<note place="inline">入音</note>皤囉<note place="inline">壯熱瘧鬼</note>
+<lb n="0136b10" ed="T"/>翳迦醯迦<note place="inline">一日一發</note>德吠底迦<note place="inline">二日一發</note><note place="inline">三百七十五</note>　帝哩帝藥
+<lb n="0136b11" ed="T"/>迦<note place="inline">三日一發</note>折咄<g ref="#CB00069"/>他迦<note place="inline">四日一發</note><note place="inline">三百七十六</note>　眤底夜什皤囉
+<lb n="0136b12" ed="T"/><note place="inline">常壯熱鬼</note><note place="inline">三百七十七</note>　毘沙摩什皤囉<note place="inline">壯熱</note><note place="inline">三百七十八</note>　皤底迦<note place="inline">風病鬼</note>
+<lb n="0136b13" ed="T"/>背底迦<note place="inline">黃病鬼</note><note place="inline">三百七十九</note>　室禮瑟彌迦<note place="inline">痰飲</note><note place="inline">三百八十</note>　娑儞波底
+<lb n="0136b14" ed="T"/>迦<note place="inline">痢病</note><note place="inline">三百八十一</note>　薩皤什皤囉<note place="inline">一切壯熱</note><note place="inline">三百八十二</note>　室嚕喝囉底
+<lb n="0136b15" ed="T"/><note place="inline">頭痛</note><note place="inline">三百八十三</note>　阿羅陀皤帝<note place="inline">半頭痛</note><note place="inline">三百八十四</note>　阿乞史嚧劍<note place="inline">飢不食鬼</note>
+<lb n="0136b16" ed="T"/><note place="inline">三百八十五</note>　目佉嚧鉗<note place="inline">口痛</note><note place="inline">三百八十六</note>　羯唎突嚧鉗<note place="inline">愁鬼</note><note place="inline">三百八十七</note>
+<lb n="0136b17" ed="T"/>　羯囉訶輸藍<note place="inline">咽喉痛</note><note place="inline">三百八十八</note>　羯拏輸藍<note place="inline">耳痛</note><note place="inline">三百八十九</note>　檀多輸
+<lb n="0136b18" ed="T"/>藍<note place="inline">齒痛</note><note place="inline">三百九十</note>　頡哩馱耶輸藍<note place="inline">心痛</note><note place="inline">三百九十一</note>　末摩輸藍<note place="inline">盧鉗反</note><note place="inline">三
+<lb n="0136b19" ed="T"/>百九十二</note>　跋囉<g ref="#CB00066"/>婆輸藍<note place="inline">肋痛</note><note place="inline">三百九十三</note>　背哩瑟吒輸藍<note place="inline">背痛</note>
+<lb n="0136b20" ed="T"/><note place="inline">三百九十四</note>　烏馱囉輸藍<note place="inline">盧鉗反</note><note place="inline">腹痛</note><note place="inline">三百九十五</note>　<note n="0136b2001" resp="CBETA" type="add" cb:note_key="T19.0136b20.21">羯【CB】，羶【大】</note><app n="0136b2001"><lem resp="CBETA.maha" wit="【CB】" cb:provider="lt liu (2018-09-21)">羯<note type="cf1">T19n0945_p0141a24</note><note type="cf2">T39n1799_p0919b05</note><note type="cf3">X11n0268_p0523a14</note></lem><rdg wit="【大】">羶</rdg></app>知輸藍<note place="inline">腰痛</note><note place="inline">三百九十
+<lb n="0136b21" ed="T"/>六</note>　跛悉帝輸藍<note place="inline">裸骨痛</note><note place="inline">三百九十七</note>　鄔<note place="inline">上</note>嚧輸藍<note place="inline">腿髀痛</note><note place="inline">三百九十八</note>　常
+<lb n="0136b22" ed="T"/>伽輸藍<note place="inline">腕痛</note><note place="inline">三百九十九</note>　喝薩多輸藍<note place="inline">手痛</note><note place="inline">四百</note>　波陀輸藍<note place="inline">脚痛</note>
+<lb n="0136b23" ed="T"/><note place="inline">四百一</note>　頞伽鉢囉登輸藍<note place="inline">四支節痛</note><note place="inline">四百二</note>　部多吠怛茶<note place="inline">起尸
+<lb n="0136b24" ed="T"/>鬼</note><note place="inline">四百三</note>　茶枳<note place="inline">呼哽反</note><note place="inline">上</note>尼<note place="inline">魅鬼</note><note place="inline">四百四</note>　什皤囉陀突盧建紐<note place="inline">四百五</note>
+<lb n="0136b25" ed="T"/>　吉知<note place="inline">蜘蛛</note>婆路多<note place="inline">丁瘡</note><note place="inline">四百六</note>　吠薩囉波嚕訶<note place="inline">侵淫瘡</note>凌
+<lb n="0136b26" ed="T"/><note place="inline">里孕反</note>伽<note place="inline">赤瘡</note><note place="inline">四百七</note>　輸沙多<note place="inline">引</note>囉娑那迦囉毘沙喻迦
+<lb n="0136b27" ed="T"/><note place="inline">上坎</note><note place="inline">四百八</note>　阿祁尼<note place="inline">火</note>烏陀迦<note place="inline">水</note>摩囉吠囉建多囉<note place="inline">四百
+<lb n="0136b28" ed="T"/>九</note>　阿迦囉蜜<g ref="#CB00069"/><note place="inline">二合</note>駐<note place="inline">橫死</note><note place="inline">四百十</note>　怛囇部迦地哩囉
+<pb n="0136c" ed="T" xml:id="T19.0945.0136c"/>
+<lb n="0136c01" ed="T"/>吒毘失脂迦<note place="inline">蝎</note><note place="inline">四百十一</note>　薩囉波<note place="inline">蛇</note><note place="inline">四百十二</note>　那俱囉<note place="inline">虎狼</note><note place="inline">四百十三</note>
+<lb n="0136c02" ed="T"/>　僧<note place="inline">思孕反</note>伽<note place="inline">師子</note><note place="inline">四百十四</note>　吠也揭囉<note place="inline">大虫</note><note place="inline">四百十五</note>　怛乞叉<note place="inline">猪熊</note><note place="inline">四百十六</note>
+<lb n="0136c03" ed="T"/>　怛囉乞叉末囉<note place="inline">馬熊</note>視皤帝衫<note place="inline">此等</note><note place="inline">四百十七</note>　薩毘衫薩
+<lb n="0136c04" ed="T"/>毘衫<note place="inline">一切此說者</note><note place="inline">四百十八</note>　悉怛多鉢怛囉<note place="inline">花蓋</note><note place="inline">四百十九</note>　摩訶跋折
+<lb n="0136c05" ed="T"/>嚕<note place="inline">大金剛藏</note><note place="inline">四百二十</note>　瑟尼衫摩訶鉢囉登祁藍<note place="inline">四百二十一</note>　夜
+<lb n="0136c06" ed="T"/>婆埵陀舍喻社那<note place="inline">乃至十二由旬成界地</note><note place="inline">四百二十二</note>　便怛囇拏毘
+<lb n="0136c07" ed="T"/><note place="inline">入聲</note>地夜畔馱迦嚧彌<note place="inline">云我大明呪十二由旬結界禁縛莫入</note><note place="inline">四百二十三</note>　帝
+<lb n="0136c08" ed="T"/>殊畔陀迦<note place="inline">居那反</note>嚧彌<note place="inline">佛頂光聚縛結不得入界</note><note place="inline">四百二十四</note>　波囉微地
+<lb n="0136c09" ed="T"/>也<note place="inline">途迦反</note>畔陀迦嚧彌<note place="inline">能縛一切惡神鬼</note><note place="inline">四百二十五</note>　怛地他<note place="inline">即說呪曰</note><note place="inline">四百
+<lb n="0136c10" ed="T"/>二十六</note>　唵<note place="inline">四百二十七</note>　阿那<g ref="#CB00942"/>毘舍提<note place="inline">四百二十八</note>　鞞囉<note place="inline">四百二十九</note>
+<lb n="0136c11" ed="T"/>　跋折囉<note place="inline">四百三十</note>　阿唎畔陀<note place="inline">四百三十一</note>　毘陀儞<note place="inline">四百三十二</note>　跋
+<lb n="0136c12" ed="T"/>折囉波尼泮<note place="inline">四百三十三</note>　呼吽<note place="inline">四百三十四</note>　咄嚕吽<note place="inline">三合</note><note place="inline">四百三十五</note>
+<lb n="0136c13" ed="T"/>　莎皤訶<note place="inline">四百三十六</note>　唵吽<note place="inline">四百三十七</note>　毘嚕提<note place="inline">四百三十八</note>　莎皤訶
+<lb n="0136c14" ed="T"/><note place="inline">四百三十九</note></p>
+<lb n="0136c15" ed="T"/><p xml:id="pT19p0136c1501">　　右此呪句總有四百三十九句。</p>
+<lb n="0136c16" ed="T"/><p xml:id="pT19p0136c1601">「阿難！是佛頂光聚悉怛多般怛<note n="0136001" resp="Taisho" type="orig" place="foot text">羅＝囉【元】＊</note><note n="0136001" resp="CBETA" type="mod">羅【大】＊，囉【元】＊</note><app n="0136001"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>祕密伽陀
+<lb n="0136c17" ed="T"/>微妙章句，出生十方一切諸佛，十方如來因
+<lb n="0136c18" ed="T"/>此呪心，得成無上正遍知覺。十方如來執此
+<lb n="0136c19" ed="T"/>呪心，降伏諸魔、制諸外道。十方如來乘此呪
+<lb n="0136c20" ed="T"/>心，坐寶蓮華應微塵國。十方如來含此呪心，
+<lb n="0136c21" ed="T"/>於微塵國轉大法輪。十方如來持此呪心，能
+<lb n="0136c22" ed="T"/>於十方摩頂授記；自果未成，亦於十方蒙佛
+<lb n="0136c23" ed="T"/>授記。十方如來依此呪心，能於十方拔濟群
+<lb n="0136c24" ed="T"/>苦。所謂地獄、餓鬼、畜生，盲聾瘖瘂，怨憎會苦、
+<lb n="0136c25" ed="T"/>愛別離苦、求不得苦、五陰熾盛，大小諸橫同
+<lb n="0136c26" ed="T"/>時解脫；賊難、兵難、王難、獄難、<note n="0136002" resp="Taisho" type="orig" place="foot text">〔風水火難〕－【宋】</note><note n="0136002" resp="CBETA" type="mod">風水火難【大】，〔－〕【宋】</note><app n="0136002"><lem wit="【大】">風<note n="0136003" resp="Taisho" type="orig" place="foot text">水火＝火水【元】【明】</note><note n="0136003" resp="CBETA" type="mod">水火【大】，火水【元】【明】</note><app n="0136003"><lem wit="【大】">水火</lem><rdg resp="Taisho" wit="【元】 【明】">火水</rdg></app>難</lem><rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg></app>，飢
+<lb n="0136c27" ed="T"/>渴貧窮，應念銷散。十方如來隨此呪心，能於
+<lb n="0136c28" ed="T"/>十方事善知識，四威儀中供養如意；恒沙如
+<pb n="0137a" ed="T" xml:id="T19.0945.0137a"/>
+<lb n="0137a01" ed="T"/>來會中，推為大法王子。十方如來行此呪心，
+<lb n="0137a02" ed="T"/>能於十方攝受親因，令諸小乘聞祕密藏不
+<lb n="0137a03" ed="T"/>生驚怖。十方如來誦此呪心，成無上覺，坐菩
+<lb n="0137a04" ed="T"/>提樹入大涅槃。十方如來傳此呪心，於滅度
+<lb n="0137a05" ed="T"/>後，付佛法事究竟住持。嚴淨戒律，悉得清淨。</p>
+<lb n="0137a06" ed="T"/><p xml:id="pT19p0137a0601">「若我說是佛頂光聚般怛<app type="star" corresp="#0136001"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>呪，從旦至暮，音
+<lb n="0137a07" ed="T"/>聲相<note n="0137001" resp="Taisho" type="orig" place="foot text">連＝聯【三】</note><note n="0137001" resp="CBETA" type="mod">連【大】，聯【宋】【元】【明】</note><app n="0137001"><lem wit="【大】">連</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">聯</rdg></app>，字句中間亦不重疊，經恒沙劫終不
+<lb n="0137a08" ed="T"/>能盡。亦說此呪，名如來頂。汝等有學未盡輪
+<lb n="0137a09" ed="T"/>迴，發心至誠<note n="0137002" resp="Taisho" type="orig" place="foot text">（趣向…菩提）十字＝（取阿羅漢）四字【三】</note><note n="0137002" resp="CBETA" type="mod" cb:note_key="T19.0137a09.06">取阿羅漢【CB】【房山-CB】【金藏乙-CB】【宋】【元】【明】，趣向阿耨多羅三藐三菩提【大】（CBETA 按：對校僅《麗》本（K13n0426_p0838c13-14）作「趣向阿耨多羅三藐三菩提」（見《中華本》〈校勘記〉C23n0457_p0541b欄末至c欄首），他校《楞嚴經》諸注疏亦皆作「取阿羅漢」。）</note><app n="0137002"><lem resp="CBETA.ting" wit="【CB】 【房山-CB】 【金藏乙-CB】" cb:provider="討論區：身外有乾坤 (2022-05-15)">取阿羅漢<note type="cf1">F13n0571_p0210b13-14</note><note type="cf2">AC6258_007_0020a13</note><note type="cf3">T39n1799_p0920a19</note></lem><rdg wit="【大】">趣向阿耨多羅三藐三菩提</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">取阿羅漢</rdg></app>，不
+<lb n="0137a10" ed="T"/>持此呪而坐道場，令其身心遠諸魔事，無有
+<lb n="0137a11" ed="T"/>是處。</p>
+<lb n="0137a12" ed="T"/><p xml:id="pT19p0137a1201">「阿難！若諸世界，隨所國土所有眾生，隨國所
+<lb n="0137a13" ed="T"/>生樺皮、貝葉、紙素、白疊，書寫此呪貯於香囊，
+<lb n="0137a14" ed="T"/>是人心<note n="0137003" resp="Taisho" type="orig" place="foot text">惛＝昏【三】</note><note n="0137003" resp="CBETA" type="mod">惛【大】，昏【宋】【元】【明】</note><app n="0137003"><lem wit="【大】">惛</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">昏</rdg></app>未能誦憶，或帶身上、或書宅中，當
+<lb n="0137a15" ed="T"/>知是人，盡其生年，一切諸毒所不能害。</p>
+<lb n="0137a16" ed="T"/><p xml:id="pT19p0137a1601">「阿難！我今為汝更說此呪，救護世間得大無
+<lb n="0137a17" ed="T"/>畏，成就眾生出世間智。若我滅後，末世眾生，
+<lb n="0137a18" ed="T"/>有能自誦，若教他誦，當知如是誦持眾生，火
+<lb n="0137a19" ed="T"/>不能燒、水不能溺、大毒小毒所不能害，如是
+<lb n="0137a20" ed="T"/>乃至龍天、鬼神、精祇、魔魅、所有惡呪皆不能
+<lb n="0137a21" ed="T"/>著，心得正受。一切呪<note n="0137004" resp="Taisho" type="orig" place="foot text">咀＝詛【宋】</note><note n="0137004" resp="CBETA" type="mod">咀【大】，詛【宋】</note><app n="0137004"><lem wit="【大】">咀</lem><rdg resp="Taisho" wit="【宋】">詛</rdg></app>、<note n="0137005" resp="Taisho" type="orig" place="foot text">魘＝厭【三】</note><note n="0137005" resp="CBETA" type="mod">魘【大】，厭【宋】【元】【明】</note><app n="0137005"><lem wit="【大】">魘</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">厭</rdg></app>蠱、毒藥、金毒、銀
+<lb n="0137a22" ed="T"/>毒、草木蟲蛇萬物毒氣，入此人口成甘露味。
+<lb n="0137a23" ed="T"/>一切惡星并諸鬼神，磣<note n="0137006" resp="Taisho" type="orig" place="foot text">毒心＝心毒【三】</note><note n="0137006" resp="CBETA" type="mod" cb:note_key="T19.0137a23.10">心毒【CB】【磧-CB】【宋】【元】【明】，毒心【大】，毒心【麗-CB】</note><app n="0137006"><lem resp="CBETA.maha" wit="【CB】 【磧-CB】">心毒<note type="cf1">Q13_p0475a23</note></lem><rdg wit="【大】">毒心</rdg><rdg resp="CBETA.maha" wit="【麗-CB】">毒心<note type="cf1">K13n0426_p0839a07</note></rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">心毒</rdg></app>人，於如是人不
+<lb n="0137a24" ed="T"/>能起惡。<note n="0137007" resp="Taisho" type="orig" place="foot text">毘＝頻【元】【明】</note><note n="0137007" resp="CBETA" type="mod">毘【大】，頻【元】【明】</note><app n="0137007"><lem wit="【大】">毘</lem><rdg resp="Taisho" wit="【元】 【明】">頻</rdg></app>那夜迦諸惡鬼王，并其眷屬皆領
+<lb n="0137a25" ed="T"/>深恩，常加守護。</p><p xml:id="pT19p0137a2507" cb:place="inline">「阿難！當知是呪，常有八萬四
+<lb n="0137a26" ed="T"/>千那由他恒河沙俱胝金剛藏王菩薩種族，
+<lb n="0137a27" ed="T"/>一一皆有諸金剛眾而為眷<note n="0137008" resp="Taisho" type="orig" place="foot text">屬＋（晝夜隨侍）【三】</note><note n="0137008" resp="CBETA" type="mod" cb:note_key="T19.0137a27.12">屬晝夜隨侍【CB】【磧乙-CB】【宋】【元】【明】，屬【大】</note><app n="0137008"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】">屬，晝夜隨侍<note type="cf1">QC040n0439_p0494b03</note></lem><rdg wit="【大】">屬</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">屬晝夜隨侍</rdg></app>。設有眾生，於
+<lb n="0137a28" ed="T"/>散亂心非三摩地，心憶口持，是金剛王常隨
+<lb n="0137a29" ed="T"/>從彼諸善男子，何況決定菩提心者？此諸金
+<pb n="0137b" ed="T" xml:id="T19.0945.0137b"/>
+<lb n="0137b01" ed="T"/>剛菩薩藏王，精心陰速發彼神識，是人應時
+<lb n="0137b02" ed="T"/>心能記憶八萬四千恒河沙劫，周遍了知得
+<lb n="0137b03" ed="T"/>無疑惑。從第一劫乃至後身，生生不生藥叉、
+<lb n="0137b04" ed="T"/>羅剎，及富單那、迦吒富單那、鳩槃茶、毘舍遮
+<lb n="0137b05" ed="T"/>等，并諸餓鬼、有形無形、有想無想，如是惡處。
+<lb n="0137b06" ed="T"/>是善男子若讀若誦、若書若寫、若帶若藏、諸
+<lb n="0137b07" ed="T"/>色供養，劫劫不生貧窮下賤不可樂處。此諸
+<lb n="0137b08" ed="T"/>眾生，縱其自身不作福業，十方如來所有功
+<lb n="0137b09" ed="T"/>德，悉與此人。由是得於恒河沙阿僧祇不可
+<lb n="0137b10" ed="T"/>說不可說劫，常與諸佛同生一處。無量功德
+<lb n="0137b11" ed="T"/>如惡叉聚，同處熏修永無分散。是故能令破
+<lb n="0137b12" ed="T"/>戒之人戒根清淨，未得戒者令其得戒，未精
+<lb n="0137b13" ed="T"/>進者令得精進，無智慧者令得智慧，不清淨
+<lb n="0137b14" ed="T"/>者速得清淨，不持齋戒自成齋戒。</p><p xml:id="pT19p0137b1414" cb:place="inline">「阿難！是善
+<lb n="0137b15" ed="T"/>男子持此呪時，設犯禁戒於未受時，持呪之
+<lb n="0137b16" ed="T"/>後，眾破戒罪無問輕重，一時銷滅。縱經飲酒、
+<lb n="0137b17" ed="T"/>食噉五辛、種種不淨，一切諸佛、菩薩、金剛、天
+<lb n="0137b18" ed="T"/>仙、鬼神，不將為過。設著不淨破弊衣服，一行
+<lb n="0137b19" ed="T"/>一住，悉同清淨。縱不作壇、不入道場、亦不行
+<lb n="0137b20" ed="T"/>道，誦持此呪，還同入壇行道功<note n="0137009" resp="Taisho" type="orig" place="foot text">德＋（無有異也）【三】</note><note n="0137009" resp="CBETA" type="mod">德【大】，德無有異也【宋】【元】【明】</note><app n="0137009"><lem wit="【大】">德</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">德無有異也</rdg></app>。若造五逆
+<lb n="0137b21" ed="T"/>無間重罪，及諸比丘、比丘尼、四棄八棄，誦此
+<lb n="0137b22" ed="T"/>呪已，如是重業，猶如猛風吹散沙聚，悉皆滅
+<lb n="0137b23" ed="T"/>除更無毫髮。</p>
+<lb n="0137b24" ed="T"/><p xml:id="pT19p0137b2401">「阿難！若有眾生，從無量無數劫來所有一切
+<lb n="0137b25" ed="T"/>輕重罪障，從前世來未及懺悔；若能讀誦、書
+<lb n="0137b26" ed="T"/>寫此呪，身上帶持，若安住處莊宅園館，如是
+<lb n="0137b27" ed="T"/>積業猶湯<note n="0137b2701" resp="CBETA" type="add" cb:note_key="T19.0137b27.05">銷【大】，消【麗-CB】</note><app n="0137b2701"><lem wit="【大】">銷</lem><rdg resp="CBETA.ting" wit="【麗-CB】">消<note type="cf1">K13n0426_p0839b22</note></rdg></app>雪，不久皆得悟無生忍。</p>
+<lb n="0137b28" ed="T"/><p xml:id="pT19p0137b2801">「復次，阿難！若有女人未生男女，欲求<note n="0137010" resp="Taisho" type="orig" place="foot text">生＝孕【三】</note><note n="0137010" resp="CBETA" type="mod">生【大】，孕【宋】【元】【明】</note><app n="0137010"><lem wit="【大】">生</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">孕</rdg></app>者，若
+<lb n="0137b29" ed="T"/>能至心憶念斯呪，或能身上帶此悉怛多<note n="0137011" resp="Taisho" type="orig" place="foot text">鉢＝般【三】</note><note n="0137011" resp="CBETA" type="mod">鉢【大】，般【宋】【元】【明】</note><app n="0137011"><lem wit="【大】">鉢</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">般</rdg></app>
+<pb n="0137c" ed="T" xml:id="T19.0945.0137c"/>
+<lb n="0137c01" ed="T"/>怛<app type="star" corresp="#0136001"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>者，便生福德智慧男女。求長命者<note n="0137012" resp="Taisho" type="orig" place="foot text">速＝即【三】</note><note n="0137012" resp="CBETA" type="mod">速【大】，即【宋】【元】【明】</note><app n="0137012"><lem wit="【大】">速</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">即</rdg></app>
+<lb n="0137c02" ed="T"/>得長命；欲求果報速圓滿者，速得圓滿。身、命、
+<lb n="0137c03" ed="T"/>色、力，亦復如是。命終之後，隨願往生十方國
+<lb n="0137c04" ed="T"/>土。必定不生邊地下賤，何況雜形？</p><p xml:id="pT19p0137c0414" cb:place="inline">「阿難！若諸
+<lb n="0137c05" ed="T"/>國土州縣、聚落，饑荒、疫癘，或復刀兵賊難鬪
+<lb n="0137c06" ed="T"/>諍，兼餘一切厄難之地，寫此神呪，安城四門，
+<lb n="0137c07" ed="T"/>并諸支提、或脫闍上，令其國土所有眾生奉
+<lb n="0137c08" ed="T"/>迎斯呪，禮拜恭敬一心供養，令其人民各各
+<lb n="0137c09" ed="T"/>身佩，或各各安所居宅地，一切災厄悉皆銷
+<lb n="0137c10" ed="T"/>滅。</p>
+<lb n="0137c11" ed="T"/><p xml:id="pT19p0137c1101">「阿難！在在處處國土眾生，隨有此呪，天龍歡
+<lb n="0137c12" ed="T"/>喜，風雨順時，五穀豐殷，兆庶安樂。亦復能鎮
+<lb n="0137c13" ed="T"/>一切惡星，隨方變怪，災障不起，人無橫夭。杻
+<lb n="0137c14" ed="T"/>械、枷鎖不著其身，晝夜安眠常無惡夢。</p><p xml:id="pT19p0137c1416" cb:place="inline">「阿難！
+<lb n="0137c15" ed="T"/>是娑婆界有八萬四千災變惡星，二十八大
+<lb n="0137c16" ed="T"/>惡星而為上首。復有八大惡星以為其主，作
+<lb n="0137c17" ed="T"/>種種形出現世時，能生眾生種種災異；有此
+<lb n="0137c18" ed="T"/>呪地，悉皆銷滅。十二由旬成結界地，諸惡災
+<lb n="0137c19" ed="T"/>祥，永不能入。</p><p xml:id="pT19p0137c1906" cb:place="inline">「是故如來宣示此呪，於未來世，
+<lb n="0137c20" ed="T"/>保護初學諸修行者入三摩<note n="0137013" resp="Taisho" type="orig" place="foot text">提＝地【元】＊</note><note n="0137013" resp="CBETA" type="mod">提【大】＊，地【元】＊</note><app n="0137013"><lem wit="【大】">提</lem><rdg resp="Taisho" wit="【元】">地</rdg></app>。身心泰然，
+<lb n="0137c21" ed="T"/>得大安隱。更無一切諸魔鬼神，及無始來冤
+<lb n="0137c22" ed="T"/>橫宿殃，舊業陳債，來相惱害。汝及眾中諸有
+<lb n="0137c23" ed="T"/>學人，及未來世諸修行者，依我壇場如法持
+<lb n="0137c24" ed="T"/>戒，所受戒主逢清淨僧，<note n="0137014" resp="Taisho" type="orig" place="foot text">持＝於【三】</note><note n="0137014" resp="CBETA" type="mod">持【大】，於【宋】【元】【明】</note><app n="0137014"><lem wit="【大】">持</lem><rdg resp="Taisho" wit="【宋】 【元】 【明】">於</rdg></app>此呪心不生疑
+<lb n="0137c25" ed="T"/>悔。是善男子，於此父母所生之身，不得心通；
+<lb n="0137c26" ed="T"/>十方如來便為妄語。」</p><p xml:id="pT19p0137c2609" cb:place="inline">說是語已，會中無量百
+<lb n="0137c27" ed="T"/>千金剛，一時佛前合掌頂禮，而白佛言：「如佛
+<lb n="0137c28" ed="T"/>所說，我當誠心保護如是修菩提者。」</p>
+<lb n="0137c29" ed="T"/><p xml:id="pT19p0137c2901">爾時梵王并天帝釋、四天大王，亦於佛前同
+<pb n="0138a" ed="T" xml:id="T19.0945.0138a"/>
+<lb n="0138a01" ed="T"/>時頂禮，而白佛言：「審有如是修學善人，我當
+<lb n="0138a02" ed="T"/>盡心至誠保護，令其一生所作如願。」</p><p xml:id="pT19p0138a0215" cb:place="inline">復有無
+<lb n="0138a03" ed="T"/>量藥叉大將、諸羅剎王、富單那王、鳩槃茶王、
+<lb n="0138a04" ed="T"/>毘舍遮王、頻那夜迦諸大鬼王，及諸鬼帥，亦
+<lb n="0138a05" ed="T"/>於佛前合掌頂禮：「我亦誓願護持是人，令菩
+<lb n="0138a06" ed="T"/>提心速得圓滿。」</p><p xml:id="pT19p0138a0607" cb:place="inline">復有無量日月天子、風師、雨
+<lb n="0138a07" ed="T"/>師、雲師、雷師，并電伯等，年歲巡官、諸星眷屬，
+<lb n="0138a08" ed="T"/>亦於會中頂禮佛足，而白佛言：「我亦保護是
+<lb n="0138a09" ed="T"/>修行人，安立道場得無所畏。」</p><p xml:id="pT19p0138a0912" cb:place="inline">復有無量山神、
+<lb n="0138a10" ed="T"/>海神、一切土地水、陸、空行萬物精祇，并風神
+<lb n="0138a11" ed="T"/>王、無色界天，於如來前，同時稽首而白佛言：
+<lb n="0138a12" ed="T"/>「我亦保護是修行人得成菩<note n="0138001" resp="Taisho" type="orig" place="foot text">〔提永無魔事〕－【元】</note><note n="0138001" resp="CBETA" type="mod">提永無魔事【大】，〔－〕【元】</note><app n="0138001"><lem wit="【大】">提，永無魔事</lem><rdg resp="Taisho" wit="【元】"><space quantity="0"/></rdg></app>。」</p><p xml:id="pT19p0138a1217" cb:place="inline">爾
+<lb n="0138a13" ed="T"/>時八萬四千那由他恒河沙俱胝金剛藏王菩
+<lb n="0138a14" ed="T"/>薩，在大會中即從座起，頂禮佛足而白佛言：
+<lb n="0138a15" ed="T"/>「世尊！如我等輩所修功業，久成菩提不取涅
+<lb n="0138a16" ed="T"/>槃，常隨此呪，救護末世修三摩提正修行者。
+<lb n="0138a17" ed="T"/>世尊！如是修心求正定人，若在道場及餘經
+<lb n="0138a18" ed="T"/>行，乃至散心遊戲聚落，我等徒眾常當隨從
+<lb n="0138a19" ed="T"/>侍衛此人。縱令魔王大自在天，求其方便終
+<lb n="0138a20" ed="T"/>不可得。諸小鬼神，去此善人十由旬外，除彼
+<lb n="0138a21" ed="T"/>發心樂修禪者。世尊！如是惡魔、若魔眷屬，欲
+<lb n="0138a22" ed="T"/>來侵擾是善人者，我以寶杵殞碎其首，猶如
+<lb n="0138a23" ed="T"/>微塵。<note n="0138002" resp="Taisho" type="orig" place="foot text">恒＝常【元】</note><note n="0138002" resp="CBETA" type="mod">恒【大】，常【元】</note><app n="0138002"><lem wit="【大】">恒</lem><rdg resp="Taisho" wit="【元】">常</rdg></app>令此人，所作如願。」</p>
+<lb n="0138a24" ed="T"/><p xml:id="pT19p0138a2401">阿難即從座起，頂禮佛足而白佛言：「我輩愚
+<lb n="0138a25" ed="T"/>鈍，好為多聞，於諸漏心，未求出離；蒙佛慈誨，
+<lb n="0138a26" ed="T"/>得正熏修，身心快然，獲大饒益。世尊！如是修
+<lb n="0138a27" ed="T"/>證佛三摩<app type="star" corresp="#0137013"><lem wit="【大】">提</lem><rdg resp="Taisho" wit="【元】">地</rdg></app>，未到涅槃，云何名為乾慧之地？
+<lb n="0138a28" ed="T"/>四十四心至何漸次、得修行目？詣何方所，名
+<lb n="0138a29" ed="T"/>入地中？云何名為等覺菩薩？」作是語已，五體
+<pb n="0138b" ed="T" xml:id="T19.0945.0138b"/>
+<lb n="0138b01" ed="T"/>投地，大眾一心，佇佛慈音，瞪矒瞻仰。</p>
+<lb n="0138b02" ed="T"/><p xml:id="pT19p0138b0201">爾時，世尊讚阿難言：「善哉！善哉！汝等乃能普
+<lb n="0138b03" ed="T"/>為大眾，及諸末世一切眾生修三摩提求大
+<lb n="0138b04" ed="T"/>乘者，從於凡夫，終大涅槃，懸示無上正修行
+<lb n="0138b05" ed="T"/>路。汝今諦聽！當為汝說。」阿難、大眾，合掌、刳心，
+<lb n="0138b06" ed="T"/>默然受教。</p>
+<lb n="0138b07" ed="T"/><p xml:id="pT19p0138b0701">佛言：「阿難當知！妙性圓明離諸名相，本來無
+<lb n="0138b08" ed="T"/>有世界、眾生。因妄有生，因生有滅，生滅名妄，
+<lb n="0138b09" ed="T"/>滅妄名真；是稱如來無上菩提及大涅槃二
+<lb n="0138b10" ed="T"/>轉依號。</p><p xml:id="pT19p0138b1004" cb:place="inline">「阿難！汝今欲修真三摩地，直詣如來
+<lb n="0138b11" ed="T"/>大涅槃者，先當識此眾生、世界二顛倒因。顛
+<lb n="0138b12" ed="T"/>倒不生，斯則如來真三摩地。</p><p xml:id="pT19p0138b1212" cb:place="inline">「阿難！云何名為
+<lb n="0138b13" ed="T"/>眾生顛倒？阿難！由性明心，性明圓故，因明發
+<lb n="0138b14" ed="T"/>性，性妄見生，從畢竟無成究竟有。此有所有，
+<lb n="0138b15" ed="T"/>非因所因；住所住相，了無根本。本此無住，建
+<lb n="0138b16" ed="T"/>立世界及諸眾生。迷本圓明，是生虛妄，妄性
+<lb n="0138b17" ed="T"/>無體，非有所依。將欲復真，欲真已非真真如
+<lb n="0138b18" ed="T"/>性；非真求復，宛成非相。非生、非住，非心、非法，
+<lb n="0138b19" ed="T"/>展轉發生，生力發明。熏<note n="0138003" resp="Taisho" type="orig" place="foot text">以＝已【元】</note><note n="0138003" resp="CBETA" type="mod">以【大】，已【元】</note><app n="0138003"><lem wit="【大】">以</lem><rdg resp="Taisho" wit="【元】">已</rdg></app>成業，同業相感，因
+<lb n="0138b20" ed="T"/>有感業，相滅、相生，由是故有眾生顛倒。</p>
+<lb n="0138b21" ed="T"/><p xml:id="pT19p0138b2101">「阿難！云何名為世界顛倒？是有所有，分段妄
+<lb n="0138b22" ed="T"/>生，因此界立。非因所因，無住所住，遷流不住，
+<lb n="0138b23" ed="T"/>因此世成。三世、四方和合相涉，變化眾生成
+<lb n="0138b24" ed="T"/>十二類。是故世界，因動有聲，因聲有色，因色
+<lb n="0138b25" ed="T"/>有香，因香有觸，因觸有味，因味知法。六亂妄
+<lb n="0138b26" ed="T"/>想成業性故，十二區分由此輪轉。是故世間
+<lb n="0138b27" ed="T"/>聲、香、味、觸，窮十二變為一旋復。乘此輪轉顛
+<lb n="0138b28" ed="T"/>倒相故，是有世界——卵生、胎生、濕生、化生，有色、
+<lb n="0138b29" ed="T"/>無色，有想、無想，若非有色、若非無色，若非有
+<pb n="0138c" ed="T" xml:id="T19.0945.0138c"/>
+<lb n="0138c01" ed="T"/>想、若非無想。</p>
+<lb n="0138c02" ed="T"/><p xml:id="pT19p0138c0201">「阿難！由因世界虛妄輪迴，動顛倒故，和合氣
+<lb n="0138c03" ed="T"/>成八萬四千飛沈亂想；如是故有卵羯邏藍，
+<lb n="0138c04" ed="T"/>流轉國土，魚、鳥、龜、蛇、其類充塞。</p>
+<lb n="0138c05" ed="T"/><p xml:id="pT19p0138c0501">「由因世界雜染輪迴，欲顛倒故，和合滋成八
+<lb n="0138c06" ed="T"/>萬四千橫竪亂想；如是故有胎遏<note n="0138004" resp="Taisho" type="orig" place="foot text">蒱＝蒲【宋】＊</note><note n="0138004" resp="CBETA" type="mod">蒱【大】＊，蒲【宋】＊</note><app n="0138004"><lem wit="【大】">蒱</lem><rdg resp="Taisho" wit="【宋】">蒲</rdg></app>曇，流轉
+<lb n="0138c07" ed="T"/>國土，人、畜、龍、仙、其類充塞。</p>
+<lb n="0138c08" ed="T"/><p xml:id="pT19p0138c0801">「由因世界執著輪迴，趣顛倒故，和合<note n="0138005" resp="Taisho" type="orig" place="foot text">軟＝煖【三】</note><note n="0138005" resp="CBETA" type="mod" cb:note_key="T19.0138c08.15">煖【CB】【磧乙-CB】【宋】【元】【明】，軟【大】</note><app n="0138005"><lem resp="CBETA.ting" wit="【CB】 【磧乙-CB】">煖<note type="cf1">QC040n0439_p049716</note></lem><rdg wit="【大】">軟</rdg><rdg resp="Taisho" wit="【宋】 【元】 【明】">煖</rdg></app>成八
+<lb n="0138c09" ed="T"/>萬四千飜覆亂想；如是故有濕相蔽尸，流轉
+<lb n="0138c10" ed="T"/>國土，含蠢、蠕動、其類充塞。</p>
+<lb n="0138c11" ed="T"/><p xml:id="pT19p0138c1101">「由因世界變易輪迴，假顛倒故，和合觸成八
+<lb n="0138c12" ed="T"/>萬四千新故亂想；如是故有化相羯南，流轉
+<lb n="0138c13" ed="T"/>國土，轉蛻、飛行、其類充塞。</p>
+<lb n="0138c14" ed="T"/><p xml:id="pT19p0138c1401">「由因世界留礙輪迴，障顛倒故，和合著成八
+<lb n="0138c15" ed="T"/>萬四千精耀亂想；如是故有色相羯南，流轉
+<lb n="0138c16" ed="T"/>國土，休咎、精明、其類充塞。</p>
+<lb n="0138c17" ed="T"/><p xml:id="pT19p0138c1701">「由因世界銷散輪迴，惑顛倒故，和合暗成八
+<lb n="0138c18" ed="T"/>萬四千陰隱亂想；如是故有無色羯南，流轉
+<lb n="0138c19" ed="T"/>國土，空散、銷沈、其類充塞。</p>
+<lb n="0138c20" ed="T"/><p xml:id="pT19p0138c2001">「由因世界罔象輪迴，影顛倒故，和合憶成八
+<lb n="0138c21" ed="T"/>萬四千潛結亂想；如是故有想相羯南，流轉
+<lb n="0138c22" ed="T"/>國土，神鬼、精靈、其類充塞。</p>
+<lb n="0138c23" ed="T"/><p xml:id="pT19p0138c2301">「由因世界愚鈍輪迴，癡顛倒故，和合頑成八
+<lb n="0138c24" ed="T"/>萬四千枯槁亂想；如是故有無想羯南，流轉
+<lb n="0138c25" ed="T"/>國土，精神化為土木金石、其類充塞。</p>
+<lb n="0138c26" ed="T"/><p xml:id="pT19p0138c2601">「由因世界相待輪迴，偽顛倒故，和合染成八
+<lb n="0138c27" ed="T"/>萬四千因依亂想；如是故有非有色相成色
+<lb n="0138c28" ed="T"/>羯南，流轉國土，諸水母等以蝦為目，其類充
+<lb n="0138c29" ed="T"/>塞。</p>
+<pb n="0139a" ed="T" xml:id="T19.0945.0139a"/>
+<lb n="0139a01" ed="T"/><p xml:id="pT19p0139a0101">「由因世界相引輪迴，性顛倒故，和合呪成八
+<lb n="0139a02" ed="T"/>萬四千呼召亂想；由是故有非無色相無色
+<lb n="0139a03" ed="T"/>羯南，流轉國土，呪咀厭生、其類充塞。</p>
+<lb n="0139a04" ed="T"/><p xml:id="pT19p0139a0401">「由因世界合妄輪迴，罔顛倒故，和合異成八
+<lb n="0139a05" ed="T"/>萬四千迴互亂想；如是故有非有想相成想
+<lb n="0139a06" ed="T"/>羯南，流轉國土，彼<app type="star" corresp="#0138004"><lem wit="【大】">蒱</lem><rdg resp="Taisho" wit="【宋】">蒲</rdg></app>盧等異質相成，其類充
+<lb n="0139a07" ed="T"/>塞。</p>
+<lb n="0139a08" ed="T"/><p xml:id="pT19p0139a0801">「由因世界<note n="0139001" resp="Taisho" type="orig" place="foot text">怨＋（平聲）【元】</note><note n="0139001" resp="CBETA" type="mod">怨【大】，怨平聲【元】</note><app n="0139001"><lem wit="【大】">怨</lem><rdg resp="Taisho" wit="【元】">怨平聲</rdg></app>害輪迴，殺顛倒故，和合怪成八
+<lb n="0139a09" ed="T"/>萬四千食父母想；如是故有非無想相無想
+<lb n="0139a10" ed="T"/>羯南，流轉國土，如土梟等附塊為兒，及破鏡
+<lb n="0139a11" ed="T"/>鳥以毒樹果抱為其子，子成，父母皆遭其食，
+<lb n="0139a12" ed="T"/>其類充塞。是名眾生十二種類。」</p></cb:div>
+<lb n="0139a13" ed="T"/><cb:juan n="007" fun="close"><cb:jhead>大佛<anchor xml:id="fxT19p0139a02"/>頂萬行首楞嚴經卷第七</cb:jhead></cb:juan>
+<lb n="0139a14" ed="T"/><cb:div type="w"><p cb:type="dharani" xml:id="pT19p0139a1401"><note n="0139002" resp="Taisho" type="orig" place="foot text">此陀羅尼依明本載之以宋本元本對校之 cf. P. 134a.</note>南無薩怛他蘇伽多耶阿<note n="0139003" resp="Taisho" type="orig" place="foot text">羅＝囉【元】＊</note><note n="0139003" resp="CBETA" type="mod">羅【大】＊，囉【元】＊</note><app n="0139003"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>訶帝三藐三
+<lb n="0139a15" ed="T"/>菩陀寫<note place="inline">一</note>　薩怛他佛陀俱胝瑟尼釤<note place="inline">二</note>　南無
+<lb n="0139a16" ed="T"/>薩婆勃陀勃地薩跢鞞弊<note place="inline">三</note><note place="inline"><note n="0139004" resp="Taisho" type="orig" place="foot text">〔毘迦切〕－【元】</note><note n="0139004" resp="CBETA" type="mod">毘迦切【大】，〔－〕【元】</note><app n="0139004"><lem wit="【大】">毘迦切</lem><rdg resp="Taisho" wit="【元】"><space quantity="0"/></rdg></app></note>　南無薩多南
+<lb n="0139a17" ed="T"/>三藐三菩陀俱知南<note place="inline">四</note>　娑舍囉婆迦僧伽喃
+<lb n="0139a18" ed="T"/><note place="inline">五</note>　南無盧雞阿羅漢跢喃<note place="inline">六</note>　南無蘇盧多波
+<lb n="0139a19" ed="T"/>那喃<note place="inline">七</note>　南無娑羯唎陀伽彌喃<note place="inline">八</note>　南無盧雞
+<lb n="0139a20" ed="T"/>三藐伽跢喃<note place="inline">九</note>　三藐伽波囉底波多那喃<note place="inline">十</note>
+<lb n="0139a21" ed="T"/>　南無提婆離瑟<g ref="#CB00718"/><note place="inline">十一</note>　南無悉陀耶毘地耶
+<lb n="0139a22" ed="T"/>陀囉離瑟<g ref="#CB00718"/><note place="inline">十二</note>　舍波奴揭囉訶娑訶娑囉
+<lb n="0139a23" ed="T"/>摩他喃<note place="inline">十三</note>　南無跋囉訶摩泥<note place="inline">十四</note>　南無因陀
+<lb n="0139a24" ed="T"/>囉耶<note place="inline">十五</note>　南無婆伽婆帝<note place="inline">十六</note>　嚧陀囉耶<note place="inline">十七</note>
+<lb n="0139a25" ed="T"/>　烏摩般帝<note place="inline">十八</note>　娑醯夜耶<note place="inline">十九</note>　南無婆伽婆帝
+<lb n="0139a26" ed="T"/><note place="inline">二十</note>　那囉野拏耶<note place="inline">二十一</note>　槃遮摩訶三慕陀囉<note place="inline">二十
+<lb n="0139a27" ed="T"/>二</note>　南無悉羯唎多耶<note place="inline">二十三</note>　南無婆伽婆帝<note place="inline">二十四</note>
+<lb n="0139a28" ed="T"/>　摩訶迦<app type="star" corresp="#0139003"><lem wit="【大】">羅</lem><rdg resp="Taisho" wit="【元】">囉</rdg></app>耶<note place="inline">二十五</note>　地唎般<note n="0139a2801" resp="CBETA" type="add">剌【CB】，刺【大】</note><app n="0139a2801"><lem resp="CBETA.maha CBETA.say" wit="【CB】">剌<note type="cf1">T39n1799_p0917b15</note><note type="cf2">T19n0945_p0134a18</note></lem><rdg wit="【大】">刺</rdg></app>那伽囉<note place="inline">二十六</note>　毘
+<lb n="0139a29" ed="T"/>陀囉波拏迦囉耶<note place="inline">二十七</note>　阿地目帝<note place="inline">二十八</note>　尸摩舍
+<pb n="0139b" ed="T" xml:id="T19.0945.0139b"/>
+<lb n="0139b01" ed="T"/>那泥婆悉泥<note place="inline">二十九</note>　摩怛唎伽拏<note place="inline">三十</note>　南無悉羯
+<lb n="0139b02" ed="T"/>唎多耶<note place="inline">三十一</note>　南無婆伽婆帝<note place="inline">三十二</note>　多他伽跢俱
+<lb n="0139b03" ed="T"/>囉耶<note place="inline">三十三</note>　南無般頭摩俱囉耶<note place="inline">三十四</note>　南無跋闍
+<lb n="0139b04" ed="T"/>羅俱囉耶<note place="inline">三十五</note>　南無摩尼俱囉耶<note place="inline">三十六</note>　南無伽
+<lb n="0139b05" ed="T"/>闍俱囉耶<note place="inline">三十七</note>　南無婆伽婆帝<note place="inline">三十八</note>　帝唎茶輸
+<lb n="0139b06" ed="T"/>囉西那<note place="inline">三十九</note>　波囉訶囉拏囉闍耶<note place="inline">四十</note>　跢他伽
+<lb n="0139b07" ed="T"/>多耶<note place="inline">四十一</note>　南無婆伽婆帝<note place="inline">四十二</note>　南無阿彌多婆
+<lb n="0139b08" ed="T"/>耶<note place="inline">四十三</note>　跢他伽多耶<note place="inline">四十四</note>　阿囉訶帝<note place="inline">四十五</note>　三藐
+<lb n="0139b09" ed="T"/>三菩陀耶<note place="inline">四十六</note>　南無婆伽婆帝<note place="inline"><note n="0139b0901" resp="CBETA" type="add">四【CB】，三【大】</note><app n="0139b0901"><lem resp="CBETA.maha" wit="【CB】">四</lem><rdg wit="【大】">三</rdg></app>十七</note>　阿芻鞞耶
+<lb n="0139b10" ed="T"/><note place="inline">四十八</note>　跢他伽多耶<note place="inline">四十九</note>　阿囉訶帝<note place="inline">五十</note>　三藐三
+<lb n="0139b11" ed="T"/>菩陀耶<note place="inline">五十一</note>　南無婆伽婆帝<note place="inline">五十二</note>　鞞沙闍耶俱
+<lb n="0139b12" ed="T"/><note n="0139005" resp="Taisho" type="orig" place="foot text">盧＝嚧【宋】</note><note n="0139005" resp="CBETA" type="mod">盧【大】，嚧【宋】</note><app n="0139005"><lem wit="【大】">盧</lem><rdg resp="Taisho" wit="【宋】">嚧</rdg></app>吠柱唎耶<note place="inline">五十三</note>　般囉婆囉闍耶<note place="inline">五十四</note>　跢他
+<lb n="0139b13" ed="T"/>伽多耶<note place="inline">五十五</note>　南無婆伽婆帝<note place="inline">五十六</note>　三補師毖多
+<lb n="0139b14" ed="T"/><note place="inline">五十七</note>　薩憐捺囉<note n="0139b1401" resp="CBETA" type="add">剌【CB】，刺【大】</note><app n="0139b1401"><lem resp="CBETA.maha CBETA.say" wit="【CB】">剌<note type="cf1">T39n1799_p0917c02</note><note type="cf2">T19n0945_p0134b06</note></lem><rdg wit="【大】">刺</rdg></app>闍耶<note place="inline">五十八</note>　跢他伽多耶<note place="inline">五十九</note>
+<lb n="0139b15" ed="T"/>　阿<note n="0139006" resp="Taisho" type="orig" place="foot text">囉＝羅【宋】</note><note n="0139006" resp="CBETA" type="mod">囉【大】，羅【宋】</note><app n="0139006"><lem wit="【大】">囉</lem><rdg resp="Taisho" wit="【宋】">羅</rdg></app>訶帝<note place="inline">六十</note>　三藐三菩陀耶<note place="inline">六十一</note>　南無婆
+<lb n="0139b16" ed="T"/>伽婆帝<note place="inline">六十二</note>　舍雞野母那曳<note place="inline">六十三</note>　跢他伽多耶
+<lb n="0139b17" ed="T"/><note place="inline">六十四</note>　阿囉訶帝<note place="inline">六十五</note>　三藐三菩陀<note n="0139b1701" resp="CBETA" type="add">耶【CB】，那【大】</note><app n="0139b1701"><lem resp="CBETA.say" wit="【CB】">耶<note type="cf1">T19n0945_p0139b19</note></lem><rdg wit="【大】">那</rdg></app><note place="inline">六十六</note>　南無
+<lb n="0139b18" ed="T"/>婆伽婆帝<note place="inline">六十七</note>　<note n="0139b1801" resp="CBETA" type="add">剌【CB】，刺【大】</note><app n="0139b1801"><lem resp="CBETA.maha CBETA.say " wit="【CB】">剌<note type="cf1">T39n1799_p0917c05</note><note type="cf2">T19n0945_p0134b10</note></lem><rdg wit="【大】">刺</rdg></app>怛那雞都囉闍耶<note place="inline">六十八</note>　跢他
+<lb n="0139b19" ed="T"/>伽多耶<note place="inline">六十九</note>　阿囉訶帝<note place="inline">七十</note>　三藐三菩陀耶
+<lb n="0139b20" ed="T"/><note n="0139007" resp="Taisho" type="orig" place="foot text">七十一帝瓢＝帝瓢七十一【元】</note><note n="0139007" resp="CBETA" type="mod">七十一帝瓢【大】，帝瓢七十一【元】</note><app n="0139007"><lem wit="【大】"><note place="inline">七十一</note>　帝瓢</lem><rdg resp="Taisho" wit="【元】">帝瓢七十一　</rdg></app>南無薩羯唎多<note place="inline">七十二</note>　翳曇婆伽婆
+<lb n="0139b21" ed="T"/>多<note place="inline">七十三</note>　薩怛他伽都瑟尼釤<note place="inline">七十四</note>　薩怛多般怛
+<lb n="0139b22" ed="T"/><g ref="#CB00771"/><note place="inline">七十五</note>　南無阿婆囉視躭<note place="inline">七十六</note>　般囉帝揚岐囉
+<lb n="0139b23" ed="T"/><note place="inline">七十七</note>　薩囉婆部多揭囉訶<note place="inline">七十八</note>　尼羯囉訶揭迦
+<lb n="0139b24" ed="T"/>囉訶尼<note place="inline">七十九</note>　跋囉毖地耶叱陀儞<note place="inline">八十</note>　阿迦囉
+<lb n="0139b25" ed="T"/>蜜唎柱<note place="inline">八十一</note>　般唎怛囉耶儜揭唎<note place="inline">八十二</note>　薩囉婆
+<lb n="0139b26" ed="T"/>槃陀那目叉尼<note place="inline">八十三</note>　薩囉婆突瑟吒<note place="inline">八十四</note>　突悉
+<lb n="0139b27" ed="T"/>乏般那儞伐囉尼<note place="inline">八十五</note>　赭都囉失帝<note n="0139008" resp="Taisho" type="orig" place="foot text">南＝喃【元】</note><note n="0139008" resp="CBETA" type="mod">南【大】＊，喃【元】＊</note><app n="0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">八十六</note>
+<lb n="0139b28" ed="T"/>　羯囉訶娑訶薩囉若闍<note place="inline">八十七</note>　毘多崩娑那羯
+<pb n="0139c" ed="T" xml:id="T19.0945.0139c"/>
+<lb n="0139c01" ed="T"/>唎<note place="inline">八十八</note>　阿瑟吒氷舍帝南<note place="inline">八十九</note>　那叉剎怛囉若
+<lb n="0139c02" ed="T"/>闍<note place="inline">九十</note>　波囉薩陀那羯唎<note place="inline">九十一</note>　阿瑟吒<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">九十二</note>
+<lb n="0139c03" ed="T"/>　摩訶揭囉訶若闍<note place="inline">九十三</note>　毘多崩薩那羯唎<note place="inline">九十四</note>
+<lb n="0139c04" ed="T"/>　薩婆舍都嚧儞婆囉若闍<note place="inline">九十五</note>　呼藍突悉乏
+<lb n="0139c05" ed="T"/>難遮那舍尼<note place="inline">九十六</note>　毖沙舍悉怛囉<note place="inline">九十七</note>　阿吉尼
+<lb n="0139c06" ed="T"/>烏陀迦囉若闍<note place="inline">九十八</note>　阿般囉視多具囉<note place="inline">九十九</note>　摩
+<lb n="0139c07" ed="T"/>訶般囉戰持<note place="inline">一百</note>　摩訶疊多<note place="inline">一百一</note>　摩訶帝闍<note place="inline">二</note>
+<lb n="0139c08" ed="T"/>　摩訶稅多闍婆囉<note place="inline">三</note>　摩訶跋囉槃陀囉婆悉
+<lb n="0139c09" ed="T"/>儞<note place="inline">四</note>　阿唎耶多囉<note place="inline">五</note>　毘唎俱知<note place="inline">六</note>　誓婆毘闍
+<lb n="0139c10" ed="T"/>耶<note place="inline">七</note>　跋闍囉摩禮底<note place="inline">八</note>　毘舍嚧多<note place="inline">九</note>　勃騰罔
+<lb n="0139c11" ed="T"/>迦<note place="inline">十</note>　跋闍囉制喝那阿遮<note place="inline">一百十一</note>　摩囉制婆般
+<lb n="0139c12" ed="T"/>囉質多<note place="inline">十二</note>　跋闍囉<note n="0139c1201" resp="CBETA" type="add" cb:note_key="T19.0139c12.09">擅【CB】【磧-CB】，檀【大】</note><app n="0139c1201"><lem resp="CBETA.maha" wit="【CB】 【磧-CB】">擅<note type="cf1">Q13_p0473b10</note></lem><rdg wit="【大】">檀</rdg></app>持<note place="inline">十三</note>　毘舍囉遮<note place="inline">十四</note>
+<lb n="0139c13" ed="T"/>　扇多舍鞞提婆補視多<note place="inline">十五</note>　蘇摩嚧波<note place="inline">十六</note>　摩
+<lb n="0139c14" ed="T"/>訶稅多<note place="inline">十七</note>　阿唎耶多囉<note place="inline">十八</note>　摩訶婆囉阿般
+<lb n="0139c15" ed="T"/>囉<note place="inline">十九</note>　跋闍囉<note n="0139c1501" resp="CBETA" type="add" cb:note_key="T19.0139c15.07">啇【CB】，商【大】</note><app n="0139c1501"><lem resp="CBETA.maha" wit="【CB】">啇</lem><rdg wit="【大】">商</rdg></app>羯囉制婆<note place="inline">二十</note>　跋闍囉俱摩
+<lb n="0139c16" ed="T"/>唎<note place="inline">一百二十一</note>　俱藍陀唎<note place="inline">二十二</note>　跋闍囉喝薩多遮<note place="inline">二十
+<lb n="0139c17" ed="T"/>三</note>　毘地耶乾遮那摩唎迦<note place="inline">二十四</note>　啒蘇母婆羯
+<lb n="0139c18" ed="T"/>囉<note n="0139c1801" resp="CBETA" type="add">跢【CB】【磧-CB】【龍-CB】，<g ref="#CB00292"/>【大】</note><app n="0139c1801"><lem resp="CBETA.maha CBETA.say" wit="【CB】 【磧-CB】 【龍-CB】">跢<note type="cf1">Q13_p0473b15</note><note type="cf2">L47_p0083b06 </note></lem><rdg wit="【大】"><g ref="#CB00292"/></rdg></app>那<note place="inline">二十五</note>　鞞嚧遮那俱唎耶<note place="inline">二十六</note>　夜囉菟瑟
+<lb n="0139c19" ed="T"/>尼釤<note place="inline">二十七</note>　毘折藍婆摩尼遮<note place="inline">二十八</note>　跋闍囉迦那
+<lb n="0139c20" ed="T"/>迦波囉婆<note place="inline">二十九</note>　嚧闍那跋闍囉頓稚遮<note place="inline">三十</note>　稅
+<lb n="0139c21" ed="T"/>多遮迦摩囉<note place="inline">一百三十一</note>　剎奢尸波囉婆<note place="inline">三十二</note>　翳帝
+<lb n="0139c22" ed="T"/>夷帝<note place="inline">三十三</note>　母陀囉羯拏<note place="inline">三十四</note>　娑鞞囉懺<note place="inline">三十五</note>　掘
+<lb n="0139c23" ed="T"/>梵都<note place="inline">三十六</note>　印兔那麼麼寫<note place="inline">三十七</note>　<note place="inline">誦呪者至此句稱弟子某甲受持</note>
+<lb n="0139c24" ed="T"/>烏<g ref="#CB00292"/><note place="inline">三十八</note>　唎瑟揭拏<note place="inline">三十九</note>　般<note n="0139c2401" resp="CBETA" type="add">剌【CB】，刺【大】</note><app n="0139c2401"><lem resp="CBETA.maha CBETA.say " wit="【CB】">剌<note type="cf1">T39n1799_p0918a10</note><note type="cf2">T19n0945_p0134c24</note></lem><rdg wit="【大】">刺</rdg></app>舍悉多<note place="inline">四十</note>　薩
+<lb n="0139c25" ed="T"/>怛他伽都瑟尼釤<note place="inline">一百四十一</note>　虎<note n="0139c2501" resp="CBETA" type="add" cb:note_key="T19.0139c25.14">汼【CB】【磧-CB】，<g ref="#CB00292"/>【大】</note><app n="0139c2501"><lem resp="CBETA.maha" wit="【CB】 【磧-CB】">汼<note type="cf1">Q13_p0473b22</note></lem><rdg wit="【大】"><g ref="#CB00292"/></rdg></app><note place="inline">四十二</note>　都嚧雍<note place="inline">四十
+<lb n="0139c26" ed="T"/>三</note>　瞻婆那<note place="inline">四十四</note>　虎<g ref="#CB00292"/><note place="inline">四十五</note>　都嚧雍<note place="inline">四十六</note>　悉耽婆
+<lb n="0139c27" ed="T"/>那<note place="inline">四十七</note>　虎<g ref="#CB00292"/><note place="inline">四十八</note>　都嚧雍<note place="inline">四十九</note>　波羅瑟地耶三
+<lb n="0139c28" ed="T"/>般叉拏羯囉<note place="inline">五十</note>　虎<g ref="#CB00292"/><note place="inline">一百五十一</note>　都嚧雍<note place="inline">五十二</note>　薩
+<pb n="0140a" ed="T" xml:id="T19.0945.0140a"/>
+<lb n="0140a01" ed="T"/>婆藥叉喝囉剎娑<note place="inline">五十三</note>　揭囉訶若闍<note place="inline">五十四</note>　毘騰
+<lb n="0140a02" ed="T"/>崩薩那羯囉<note place="inline">五十五</note>　虎<g ref="#CB00292"/><note place="inline">五十六</note>　都嚧雍<note place="inline">五十七</note>　者都
+<lb n="0140a03" ed="T"/>囉尸底<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">五十八</note>　揭囉訶娑訶薩囉<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">五十九</note>　毘
+<lb n="0140a04" ed="T"/>騰崩薩那囉<note place="inline">六十</note>　虎<g ref="#CB00292"/><note place="inline">一百六十一</note>　都嚧雍<note place="inline">六十二</note>　囉
+<lb n="0140a05" ed="T"/>叉<note place="inline">六十三</note>　婆伽梵<note place="inline">六十四</note>　薩怛他伽都瑟尼釤<note place="inline">六十五</note>
+<lb n="0140a06" ed="T"/>　波囉點闍吉唎<note place="inline">六十六</note>　摩訶娑訶薩囉<note place="inline">六十七</note>　勃樹
+<lb n="0140a07" ed="T"/>娑訶薩囉室唎沙<note place="inline">六十八</note>　俱知娑訶薩泥帝<g ref="#CB00942"/>
+<lb n="0140a08" ed="T"/><note place="inline">六十九</note>　阿弊提視婆唎多<note place="inline">七十</note>　吒吒甖迦<note place="inline">一百七十一</note>
+<lb n="0140a09" ed="T"/>　摩訶跋闍嚧陀囉<note place="inline">七十二</note>　帝唎菩婆那<note place="inline">七十三</note>　曼茶
+<lb n="0140a10" ed="T"/>囉<note place="inline">七十四</note>　烏<g ref="#CB00292"/><note place="inline">七十五</note>　莎悉帝薄婆都<note place="inline">七十六</note>　麼麼<note place="inline">七十
+<lb n="0140a11" ed="T"/>七</note>　印兔那麼麼寫<note place="inline">七十八</note>　<note n="0140001" resp="Taisho" type="orig" place="foot text">（至此…甲）十五字＝（至此依前稱某甲受持）九字【元】</note><note n="0140001" resp="CBETA" type="mod">（至此…甲）十五字【大】，至此依前稱某甲受持【元】</note><app n="0140001" cb:word-count="15"><lem wit="【大】"><note place="inline">至此句準前稱名，若俗人稱弟子某甲</note></lem><rdg resp="Taisho" wit="【元】"><note place="inline">至此依前稱某甲受持</note></rdg></app>囉闍
+<lb n="0140a12" ed="T"/>婆夜<note place="inline">七十九</note>　主囉跋夜<note place="inline">八十</note>　阿祇尼婆夜<note place="inline">一百八十一</note>
+<lb n="0140a13" ed="T"/>　烏陀迦婆夜<note place="inline">八十二</note>　毘沙婆夜<note place="inline">八十三</note>　舍薩多囉<note n="0140a1301" resp="CBETA" type="add">婆【CB】，娑【大】</note><app n="0140a1301"><lem resp="CBETA.say" wit="【CB】">婆<note type="cf1">T19n0945_p0135a18</note><note type="cf2">T39n1799_p0918a26</note></lem><rdg wit="【大】">娑</rdg></app>
+<lb n="0140a14" ed="T"/>夜<note place="inline">八十四</note>　婆囉斫羯囉婆夜<note place="inline">八十五</note>　突瑟叉婆夜<note place="inline">八十
+<lb n="0140a15" ed="T"/>六</note>　阿舍儞婆夜<note place="inline">八十七</note>　阿迦囉蜜唎柱婆夜<note place="inline">八十八</note>
+<lb n="0140a16" ed="T"/>　陀囉尼部彌劍波伽波陀婆夜<note place="inline">八十九</note>　烏囉迦
+<lb n="0140a17" ed="T"/>婆多婆夜<note place="inline">九十</note>　剌闍壇<note n="0140002" resp="Taisho" type="orig" place="foot text">茶＝荼【宋】【元】＊</note><note n="0140002" resp="CBETA" type="mod">茶【大】＊，荼【宋】【元】＊</note><app n="0140002"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】 【元】">荼</rdg></app>婆夜<note place="inline">一百九十一</note>　那伽
+<lb n="0140a18" ed="T"/>婆夜<note place="inline">九十二</note>　毘條怛婆夜<note place="inline">九十三</note>　蘇波囉拏婆夜<note place="inline">九十
+<lb n="0140a19" ed="T"/>四</note>　藥叉揭囉訶<note place="inline">九十五</note>　囉叉私揭囉訶<note place="inline">九十六</note>　畢唎
+<lb n="0140a20" ed="T"/>多揭囉訶<note place="inline">九十七</note>　毘舍遮揭囉訶<note place="inline">九十八</note>　部多揭囉
+<lb n="0140a21" ed="T"/>訶<note place="inline">九十九</note>　鳩槃茶揭囉訶<note place="inline">二百</note>　補丹那揭囉訶<note place="inline">二百
+<lb n="0140a22" ed="T"/>一</note>　迦吒補丹那揭囉訶<note place="inline">二</note>　悉乾度揭囉訶<note place="inline">三</note>
+<lb n="0140a23" ed="T"/>　阿播悉摩囉揭囉訶<note place="inline">四</note>　烏檀摩陀揭囉訶<note place="inline">五</note>
+<lb n="0140a24" ed="T"/>　車夜揭囉訶<note place="inline">六</note>　醯唎婆帝揭囉訶<note place="inline">七</note>　社多訶
+<lb n="0140a25" ed="T"/>唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">八</note>　揭婆訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">九</note>　嚧地囉訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">十</note>
+<lb n="0140a26" ed="T"/>　忙娑訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">二百十一</note>　謎陀訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">十二</note>　摩闍訶
+<lb n="0140a27" ed="T"/>唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">十三</note>　闍多訶唎女<note place="inline">十四</note>　視比多訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app>
+<lb n="0140a28" ed="T"/><note place="inline">十五</note>　毘多訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">十六</note>　婆多訶唎<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">十七</note>　阿
+<pb n="0140b" ed="T" xml:id="T19.0945.0140b"/>
+<lb n="0140b01" ed="T"/>輸遮訶唎女<note place="inline">十八</note>　質多訶唎女<note place="inline">十九</note>　帝釤薩鞞
+<lb n="0140b02" ed="T"/>釤<note place="inline">二十</note>　薩婆揭囉訶<app type="star" corresp="#0139008"><lem wit="【大】">南</lem><rdg resp="Taisho" wit="【元】">喃</rdg></app><note place="inline">二百二十一</note>　毘陀耶闍瞋
+<lb n="0140b03" ed="T"/>陀夜彌<note place="inline">二十二</note>　雞囉夜彌<note place="inline">二十三</note>　波唎跋囉者迦訖
+<lb n="0140b04" ed="T"/>唎<note n="0140003" resp="Taisho" type="orig" place="foot text">擔＝檐【宋】【元】＊</note><note n="0140003" resp="CBETA" type="mod">擔【大】＊，檐【宋】【元】＊</note><app n="0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">二十四</note>　毘陀夜闍瞋陀夜彌<note place="inline">二十五</note>　雞囉夜
+<lb n="0140b05" ed="T"/>彌<note place="inline">二十六</note>　茶演尼訖唎擔<note place="inline">二十七</note>　毘陀夜闍瞋陀
+<lb n="0140b06" ed="T"/>夜彌<note place="inline">二十八</note>　雞囉夜彌<note place="inline">二十九</note>　摩訶般輸般怛夜<note place="inline">三十</note>
+<lb n="0140b07" ed="T"/>　嚧陀囉訖唎擔<note place="inline">二百三十一</note>　毘陀夜闍瞋陀夜彌<note place="inline">三十
+<lb n="0140b08" ed="T"/>二</note>　雞囉夜彌<note place="inline">三十三</note>　那囉夜拏訖唎擔<note place="inline">三十四</note>　毘陀
+<lb n="0140b09" ed="T"/>夜闍瞋陀夜彌<note place="inline">三十五</note>　雞囉夜彌<note place="inline">三十六</note>　怛埵伽嚧
+<lb n="0140b10" ed="T"/><app type="star" corresp="#0140002"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】 【元】">荼</rdg></app>西訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">三十七</note>　毘陀夜闍瞋陀夜彌<note place="inline">三十八</note>
+<lb n="0140b11" ed="T"/>　雞囉夜彌<note place="inline">三十九</note>　摩訶迦囉摩怛唎伽拏訖唎
+<lb n="0140b12" ed="T"/>擔<note place="inline">四十</note>　毘陀夜闍瞋陀夜彌<note place="inline">二百四十一</note>　雞囉夜
+<lb n="0140b13" ed="T"/>彌<note place="inline">四十二</note>　迦波唎迦訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">四十三</note>　毘陀夜闍瞋
+<lb n="0140b14" ed="T"/>陀夜彌<note place="inline">四十四</note>　雞囉夜彌<note place="inline">四十五</note>　闍耶羯囉摩度羯
+<lb n="0140b15" ed="T"/>囉<note place="inline">四十六</note>　薩婆囉他娑達那訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">四十七</note>　毘陀
+<lb n="0140b16" ed="T"/>夜闍瞋陀夜彌<note place="inline">四十八</note>　雞囉夜彌<note place="inline">四十九</note>　赭咄囉婆
+<lb n="0140b17" ed="T"/>耆儞訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">五十</note>　毘陀夜闍瞋陀夜彌<note place="inline">二百五十
+<lb n="0140b18" ed="T"/>一</note>　雞囉夜彌<note place="inline">五十二</note>　毘唎羊訖唎知<note place="inline">五十三</note>　難陀雞
+<lb n="0140b19" ed="T"/>沙囉伽拏般帝<note place="inline">五十四</note>　索醯夜訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">五十五</note>　毘
+<lb n="0140b20" ed="T"/>陀夜闍瞋陀夜彌<note place="inline">五十六</note>　雞囉夜彌<note place="inline">五十七</note>　那揭那
+<lb n="0140b21" ed="T"/>舍囉婆拏訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">五十八</note>　毘陀夜闍瞋陀夜
+<lb n="0140b22" ed="T"/>彌<note place="inline">五十九</note>　雞囉夜彌<note place="inline">六十</note>　阿羅漢訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app>毘陀
+<lb n="0140b23" ed="T"/>夜闍瞋陀夜彌<note place="inline">二百六十一</note>　雞囉夜彌<note place="inline">六十二</note>　毘多囉
+<lb n="0140b24" ed="T"/>伽訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">六十三</note>　毘陀夜闍瞋陀夜彌<note place="inline">六十四</note>　雞
+<lb n="0140b25" ed="T"/>囉夜彌跋闍囉波儞<note place="inline">六十五</note>　具醯夜具醯夜<note place="inline">六十六</note>
+<lb n="0140b26" ed="T"/>　迦地般帝訖唎<app type="star" corresp="#0140003"><lem wit="【大】">擔</lem><rdg resp="Taisho" wit="【宋】 【元】">檐</rdg></app><note place="inline">六十七</note>　毘陀夜闍瞋陀夜
+<lb n="0140b27" ed="T"/>彌<note place="inline">六十八</note>　雞囉夜彌<note place="inline">六十九</note>　囉叉罔<note place="inline">七十</note>　婆伽梵<note place="inline">二百七十
+<lb n="0140b28" ed="T"/>一</note>　印兔那麼麼寫<note place="inline">七十二</note>　<note place="inline">至此依前稱
+<note n="0140004" resp="Taisho" type="orig" place="foot text">〔弟子〕－【元】</note><note n="0140004" resp="CBETA" type="mod">弟子【大】，〔－〕【元】</note>
+<app n="0140004"><lem wit="【大】">弟子</lem><rdg resp="Taisho" wit="【元】"><space quantity="0"/></rdg></app>名</note>婆伽梵<note place="inline">七十三</note>
+<pb n="0140c" ed="T" xml:id="T19.0945.0140c"/>
+<lb n="0140c01" ed="T"/>　薩怛多般怛囉<note place="inline">七十四</note>　南無粹都帝<note place="inline">七十五</note>　阿悉多
+<lb n="0140c02" ed="T"/>那囉<note n="0140c0201" resp="CBETA" type="add">剌【CB】，刺【大】</note><app n="0140c0201"><lem resp="CBETA.maha CBETA.say" wit="【CB】">剌<note type="cf1">T19n0945_p0135c14</note></lem><rdg wit="【大】">刺</rdg></app>迦<note place="inline">七十六</note>　波囉婆悉普吒<note place="inline">七十七</note>　毘迦薩怛
+<lb n="0140c03" ed="T"/>多鉢帝唎<note place="inline">七十八</note>　什佛囉什佛囉<note place="inline">七十九</note>　陀囉陀囉
+<lb n="0140c04" ed="T"/><note place="inline">八十</note>　頻陀囉頻陀囉瞋陀瞋陀<note place="inline">二百八十一</note>　虎<g ref="#CB00292"/><note place="inline">八十
+<lb n="0140c05" ed="T"/>二</note>　虎<g ref="#CB00292"/><note place="inline">八十三</note>　泮吒<note place="inline">八十四</note>　泮吒泮吒泮吒泮吒<note place="inline">八十
+<lb n="0140c06" ed="T"/>五</note>　娑訶<note place="inline">八十六</note>　醯醯泮<note place="inline">八十七</note>　阿牟迦耶泮<note place="inline">八十八</note>　阿
+<lb n="0140c07" ed="T"/>波囉提訶多泮<note place="inline">八十九</note>　婆囉波囉陀泮<note place="inline">九十</note>　阿素
+<lb n="0140c08" ed="T"/>囉毘陀囉波迦泮<note place="inline">二百九十一</note>　薩婆提鞞弊泮<note place="inline">九十二</note>
+<lb n="0140c09" ed="T"/>　薩婆那伽弊泮<note place="inline">九十三</note>　薩婆藥叉弊泮<note place="inline">九十四</note>　薩婆
+<lb n="0140c10" ed="T"/>乾闥婆弊泮<note place="inline">九十五</note>　薩婆補丹那弊泮<note place="inline">九十六</note>　迦吒
+<lb n="0140c11" ed="T"/>補丹那弊泮<note place="inline">九十七</note>　薩婆突狼枳帝弊泮<note place="inline">九十八</note>　薩
+<lb n="0140c12" ed="T"/>婆突澁比<g ref="#CB02740"/>訖瑟帝弊泮<note place="inline">九十九</note>　薩婆什婆唎
+<lb n="0140c13" ed="T"/>弊泮<note place="inline">三百</note>　薩婆阿播悉摩<note n="0140005" resp="Taisho" type="orig" place="foot text"><g ref="#CB02740"/>＝<g ref="#CB00074"/>【宋】【元】＊</note><note n="0140005" resp="CBETA" type="mod"><g ref="#CB02740"/>【大】＊，<g ref="#CB00074"/>【宋】【元】＊</note><app n="0140005"><lem wit="【大】"><g ref="#CB02740"/></lem><rdg resp="Taisho" wit="【宋】 【元】"><g ref="#CB00074"/></rdg></app>弊泮<note place="inline">三百一</note>　薩婆
+<lb n="0140c14" ed="T"/>舍囉婆拏弊泮<note place="inline">二</note>　薩婆地帝雞弊泮<note place="inline">三</note>　薩婆
+<lb n="0140c15" ed="T"/>怛摩陀繼弊泮<note place="inline">四</note>　薩婆毘陀耶囉誓遮<app type="star" corresp="#0140005"><lem wit="【大】"><g ref="#CB02740"/></lem><rdg resp="Taisho" wit="【宋】 【元】"><g ref="#CB00074"/></rdg></app>
+<lb n="0140c16" ed="T"/>弊泮<note place="inline">五</note>　闍夜羯囉摩度羯囉<note place="inline">六</note>　薩婆羅他娑
+<lb n="0140c17" ed="T"/>陀雞弊泮<note place="inline">七</note>　毘地夜遮唎弊泮<note place="inline">八</note>　者都囉縛
+<lb n="0140c18" ed="T"/>耆儞弊泮<note place="inline">九</note>　跋闍囉俱摩唎<note place="inline">十</note>　毘陀夜囉誓
+<lb n="0140c19" ed="T"/>弊泮<note place="inline">三百十一</note>　摩訶波囉丁羊乂耆唎弊泮<note place="inline">十二</note>　跋
+<lb n="0140c20" ed="T"/>闍囉商羯囉夜<note place="inline">十三</note>　波囉丈耆囉闍耶泮<note place="inline">十四</note>
+<lb n="0140c21" ed="T"/>　摩訶迦囉夜<note place="inline">十五</note>　摩訶末怛唎迦拏<note place="inline">十六</note>　南無
+<lb n="0140c22" ed="T"/>娑羯唎多夜泮<note place="inline">十七</note>　毖瑟拏婢曳泮<note place="inline">十八</note>　勃囉
+<lb n="0140c23" ed="T"/>訶牟尼曳泮<note place="inline">十九</note>　阿<note n="0140006" resp="Taisho" type="orig" place="foot text">闍＝耆【宋】【元】</note><note n="0140006" resp="CBETA" type="mod">耆【CB】【龍-CB】【宋】【元】，闍【大】</note><app n="0140006"><lem resp="CBETA.maha CBETA.say" wit="【CB】 【龍-CB】">耆<note type="cf1">L47n0442_p0086</note><note type="cf2">T39n1799_p0919a05</note></lem><rdg wit="【大】">闍</rdg><rdg resp="Taisho" wit="【宋】 【元】">耆</rdg></app>尼曳泮<note place="inline">二十</note>　摩訶羯
+<lb n="0140c24" ed="T"/>唎曳泮<note place="inline">三百二十一</note>　羯囉檀遲曳泮<note place="inline">二十二</note>　蔑怛唎曳
+<lb n="0140c25" ed="T"/>泮<note place="inline">二十三</note>　嘮怛唎曳泮<note place="inline">二十四</note>　遮文<app type="star" corresp="#0140002"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】 【元】">荼</rdg></app>曳泮<note place="inline">二十五</note>
+<lb n="0140c26" ed="T"/>　羯邏囉怛唎曳泮<note place="inline">二十六</note>　迦般唎曳泮<note place="inline">二十七</note>　阿地
+<lb n="0140c27" ed="T"/>目質多迦尸摩舍那<note place="inline">二十八</note>　婆私儞曳泮<note place="inline">二十九</note>　演
+<lb n="0140c28" ed="T"/>吉質<note place="inline">三十</note>　薩埵婆寫<note place="inline">三百三十一</note>　麼麼印兔那麼麼
+<pb n="0141a" ed="T" xml:id="T19.0945.0141a"/>
+<lb n="0141a01" ed="T"/>寫<note place="inline">三十二</note>　
+<note n="0141001" resp="Taisho" type="orig" place="foot text">（至此…人）十字＝（至此依前稱名）六字【元】</note><note n="0141001" resp="CBETA" type="mod">（至此…人）十字【大】，至此依前稱名【元】</note>
+<app n="0141001" cb:word-count="10"><lem wit="【大】"><note place="inline">至此句依前稱弟子某<note n="0141002" resp="Taisho" type="orig" place="foot text">〔人〕－【宋】</note><note n="0141002" resp="CBETA" type="mod">人【大】，〔－〕【宋】</note><app n="0141002"><lem wit="【大】">人</lem><rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg></app></note></lem><rdg resp="Taisho" wit="【元】"><note place="inline">至此依前稱名</note></rdg></app>突瑟吒質多<note place="inline">三十三</note>　阿末怛
+<lb n="0141a02" ed="T"/>唎質多<note place="inline">三十四</note>　烏闍訶囉<note place="inline">三十五</note>　伽婆訶囉<note place="inline">三十六</note>　嚧
+<lb n="0141a03" ed="T"/>地囉訶囉<note place="inline">三十七</note>　婆娑訶囉<note place="inline">三十八</note>　摩闍訶囉<note place="inline">三十九</note>
+<lb n="0141a04" ed="T"/>　闍多訶囉<note place="inline">四十</note>　視毖多訶囉<note place="inline">三百四十一</note>　跋略夜訶
+<lb n="0141a05" ed="T"/>囉<note place="inline">四十二</note>　乾陀訶囉<note place="inline">四十三</note>　布史波訶囉<note place="inline">四十四</note>　頗囉
+<lb n="0141a06" ed="T"/>訶囉<note place="inline">四十五</note>　婆寫訶囉<note place="inline">四十六</note>　般波質多<note place="inline">四十七</note>　突瑟
+<lb n="0141a07" ed="T"/>吒質多<note place="inline">四十八</note>　嘮陀囉質多<note place="inline">四十九</note>　藥叉揭囉訶<note place="inline">五
+<lb n="0141a08" ed="T"/>十</note>　囉剎娑揭囉訶<note place="inline">三百五十一</note>　閉<g ref="#CB00942"/>多揭囉訶<note place="inline">五十二</note>
+<lb n="0141a09" ed="T"/>　毘舍遮揭囉訶<note place="inline">五十三</note>　部多揭囉訶<note place="inline">五十四</note>　鳩槃茶
+<lb n="0141a10" ed="T"/>揭囉訶<note place="inline">五十五</note>　悉乾陀揭囉訶<note place="inline">五十六</note>　烏怛摩陀揭
+<lb n="0141a11" ed="T"/>囉訶<note place="inline">五十七</note>　車夜揭囉訶<note place="inline">五十八</note>　阿播薩摩囉揭囉
+<lb n="0141a12" ed="T"/>訶<note place="inline">五十九</note>　宅袪革<app type="star" corresp="#0140002"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】 【元】">荼</rdg></app>耆尼揭囉訶<note place="inline">六十</note>　唎佛帝
+<lb n="0141a13" ed="T"/>揭囉訶<note place="inline">三百六十一</note>　闍彌迦揭囉訶<note place="inline">六十二</note>　舍俱尼揭
+<lb n="0141a14" ed="T"/>囉訶<note place="inline">六十三</note>　姥陀囉難地迦揭囉訶<note place="inline">六十四</note>　阿藍婆
+<lb n="0141a15" ed="T"/>揭囉訶<note place="inline">六十五</note>　乾度波尼揭囉訶<note place="inline">六十六</note>　什伐囉堙
+<lb n="0141a16" ed="T"/>迦醯迦<note place="inline">六十七</note>　墜帝藥迦<note place="inline">六十八</note>　怛隷帝藥迦<note place="inline">六十九</note>
+<lb n="0141a17" ed="T"/>　者突託迦<note place="inline">七十</note>　昵提什伐囉毖釤摩什伐囉
+<lb n="0141a18" ed="T"/><note place="inline">三百七十一</note>　薄底迦<note place="inline">七十二</note>　鼻底迦<note place="inline">七十三</note>　室隷瑟蜜迦
+<lb n="0141a19" ed="T"/><note place="inline">七十四</note>　娑儞般帝迦<note place="inline">七十五</note>　薩婆什伐囉<note place="inline">七十六</note>　室嚧
+<lb n="0141a20" ed="T"/>吉帝<note place="inline">七十七</note>　末陀鞞達嚧制劍<note place="inline">七十八</note>　阿綺嚧鉗<note place="inline">七十
+<lb n="0141a21" ed="T"/>九</note>　目佉嚧鉗<note place="inline">八十</note>　羯唎突嚧鉗<note place="inline">三百八十一</note>　揭囉訶
+<lb n="0141a22" ed="T"/><note n="0141a2201" resp="CBETA" type="add">輸【CB】，揭【大】</note><app n="0141a2201"><lem resp="CBETA.maha" wit="【CB】">輸<note type="cf1">T19n0945_p0136b17</note></lem><rdg wit="【大】">揭</rdg></app>藍<note place="inline">八十二</note>　羯拏輸藍<note place="inline">八十三</note>　憚多輸藍<note place="inline">八十四</note>　迄唎
+<lb n="0141a23" ed="T"/>夜輸藍<note place="inline">八十五</note>　末麼輸藍<note place="inline">八十六</note>　跋唎室婆輸藍<note place="inline">八十
+<lb n="0141a24" ed="T"/>七</note>　毖栗瑟吒輸藍<note place="inline">八十八</note>　烏陀囉輸藍<note place="inline">八十九</note>　羯知
+<lb n="0141a25" ed="T"/>輸藍<note place="inline">九十</note>　跋悉帝輸藍<note place="inline">三百九十一</note>　鄔嚧輸藍<note place="inline">九十二</note>
+<lb n="0141a26" ed="T"/>　常伽輸藍<note place="inline">九十三</note>　喝悉多輸藍<note place="inline">九十四</note>　跋陀輸藍<note place="inline">九十
+<lb n="0141a27" ed="T"/>五</note>　娑房盎伽般囉丈伽輸藍<note place="inline">九十六</note>　部多毖跢
+<lb n="0141a28" ed="T"/><app type="star" corresp="#0140002"><lem wit="【大】">茶</lem><rdg resp="Taisho" wit="【宋】 【元】">荼</rdg></app><note place="inline">九十七</note>　茶耆尼什婆囉<note place="inline">九十八</note>　陀突嚧迦建咄
+<pb n="0141b" ed="T" xml:id="T19.0945.0141b"/>
+<lb n="0141b01" ed="T"/>嚧吉知婆路多毘<note place="inline">九十九</note>　薩般嚧訶凌伽<note place="inline">四百</note>　輸
+<lb n="0141b02" ed="T"/>沙怛囉<note n="0141b0201" resp="CBETA" type="add">娑【CB】，婆【大】</note><app n="0141b0201"><lem resp="CBETA.say" wit="【CB】">娑<note type="cf1">T19n0945_p0136b26</note><note type="cf2">T39n1799_p0919b10</note></lem><rdg wit="【大】">婆</rdg></app>那羯囉<note place="inline">四百一</note>　毘沙喻迦<note place="inline">二</note>　阿耆尼
+<lb n="0141b03" ed="T"/>烏陀迦<note place="inline">三</note>　末囉鞞囉建跢囉<note place="inline">四</note>　阿迦囉蜜唎
+<lb n="0141b04" ed="T"/>咄怛斂部迦<note place="inline">五</note>　地栗剌吒<note place="inline">六</note>　毖唎瑟質迦<note place="inline">七</note>
+<lb n="0141b05" ed="T"/>　薩婆那俱囉<note place="inline">八</note>　肆引伽弊揭囉唎藥叉怛囉
+<lb n="0141b06" ed="T"/>芻<note place="inline">九</note>　末囉視吠帝釤娑鞞釤<note place="inline">十</note>　悉怛多鉢怛
+<lb n="0141b07" ed="T"/>囉<note place="inline">四百十一</note>　摩訶跋闍嚧瑟尼釤<note place="inline">十二</note>　摩訶般賴丈
+<lb n="0141b08" ed="T"/>耆藍<note place="inline">十三</note>　夜波突陀舍喻闍那<note place="inline">十四</note>　辮怛隷拏
+<lb n="0141b09" ed="T"/><note place="inline">十五</note>　毘陀耶槃曇迦嚧彌<note place="inline">十六</note>　帝殊槃曇迦嚧
+<lb n="0141b10" ed="T"/>彌<note place="inline">十七</note>　般囉毘陀槃曇迦嚧彌<note place="inline">十八</note>　跢姪他<note place="inline">十
+<lb n="0141b11" ed="T"/>九</note>　唵<note place="inline">二十</note>　阿那隷<note place="inline">四百二十一</note>　毘舍提<note place="inline">二十二</note>　鞞囉跋闍
+<lb n="0141b12" ed="T"/>囉陀唎<note place="inline">二十三</note>　槃陀槃陀儞<note place="inline">二十四</note>　跋闍囉謗尼泮
+<lb n="0141b13" ed="T"/><note place="inline">二十五</note>　虎<g ref="#CB00292"/>都嚧甕泮<note place="inline">二十六</note>　莎婆訶<note place="inline">二十七</note></p></cb:div>
+</body></text></TEI>
