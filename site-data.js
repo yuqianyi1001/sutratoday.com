@@ -70,6 +70,88 @@ const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => ({
   volume_index: item.volume_index,
 }));
 
+const PLATFORM_SUTRA_VOLUMES = [
+  {
+    index: 1,
+    slug: "xingyou",
+    title: "行由品第一",
+    summary: "叙述六祖惠能得法因缘，显出顿悟见性、直指本心的禅宗精神。",
+  },
+  {
+    index: 2,
+    slug: "prajna",
+    title: "般若品第二",
+    summary: "开示摩诃般若波罗蜜，明自性本具智慧，不离见性修行。",
+  },
+  {
+    index: 3,
+    slug: "queries",
+    title: "疑问品第三",
+    summary: "通过对净土、功德等问题的解答，揭示唯心净土、见性功德的深刻义理。",
+  },
+  {
+    index: 4,
+    slug: "samadhi-prajna",
+    title: "定慧品第四",
+    summary: "阐明定慧一体、不二之义，开示一行三昧与无念法门。",
+  },
+  {
+    index: 5,
+    slug: "zazen",
+    title: "坐禅品第五",
+    summary: "重新定义禅定与坐禅，强调见性不动、内外无碍。",
+  },
+  {
+    index: 6,
+    slug: "repentance",
+    title: "忏悔品第六",
+    summary: "传授自性五分法身香及无相忏悔，详述四弘誓愿、三归依与一体三身佛。",
+  },
+  {
+    index: 7,
+    slug: "encounters",
+    title: "机缘品第七",
+    summary: "记录六祖与法达、智通、智隍等弟子的问答，随机点化，各令悟入。",
+  },
+  {
+    index: 8,
+    slug: "sudden-gradual",
+    title: "顿渐品第八",
+    summary: "辨析顿渐二宗，通过与神秀门人等对话，显明法无顿渐、人有迟疾之旨。",
+  },
+  {
+    index: 9,
+    slug: "imperial",
+    title: "宣诏品第九",
+    summary: "记录朝廷征诏及六祖与薛简的对话，论说坐禅、见性、道由心悟。",
+  },
+  {
+    index: 10,
+    slug: "transmission",
+    title: "付嘱品第十",
+    summary: "临终付嘱，教示三十六对法及传法脉络，最后示灭曹溪。",
+  },
+];
+
+const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => ({
+  title: `六祖坛经 ${item.title}`,
+  short_title: `坛经${item.title.split("品")[0]}品`,
+  slug: `platform-sutra-${item.slug}`,
+  volume_label: item.title,
+  translation_status: "translated",
+  review_status: "ai_reviewed",
+  progress_percent: 100,
+  updated_at: "2026-03-23",
+  summary: item.summary,
+  tags: ["禅宗", "坛经", item.title.split("品")[0]],
+  path: `content/sutras/platform-sutra-${item.slug}.md`,
+  work_id: "platform-sutra",
+  work_title: "六祖坛经",
+  work_short_title: "坛经",
+  work_summary: "《六祖坛经》记载六祖慧能言教，强调顿悟见性、不二法门，是禅宗的核心经典。",
+  volume_index: item.index,
+}));
+
 export const manifest = [
   "content/sutras/heart-sutra.md",
   "content/sutras/diamond-sutra.md",
@@ -78,7 +160,7 @@ export const manifest = [
   "content/sutras/ksitigarbha-vow-sutra-upper.md",
   "content/sutras/ksitigarbha-vow-sutra-lower.md",
   "content/sutras/lotus-sutra-universal-gate.md",
-  "content/sutras/platform-sutra-xingyou.md",
+  ...PLATFORM_SUTRA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/buddha-bequeathed-teaching.md",
   "content/sutras/sutra-in-forty-two-sections.md",
   "content/sutras/sutra-of-eight-realizations.md",
@@ -238,19 +320,7 @@ export const documentIndex = [
     tags: ["药师", "愿力", "消灾"],
     path: "content/sutras/medicine-buddha-sutra.md",
   },
-  {
-    title: "六祖坛经 行由品第一",
-    short_title: "坛经行由品",
-    slug: "platform-sutra-xingyou",
-    volume_label: "行由品第一",
-    translation_status: "translated",
-    review_status: "ai_reviewed",
-    progress_percent: 100,
-    updated_at: "2026-03-22",
-    summary: "叙述六祖惠能得法因缘，显出顿悟见性、直指本心的禅宗精神。",
-    tags: ["禅宗", "坛经", "人物叙事"],
-    path: "content/sutras/platform-sutra-xingyou.md",
-  },
+  ...PLATFORM_SUTRA_DOCUMENTS,
   ...SURANGAMA_DOCUMENTS,
   {
     title: "佛说四十二章经",
