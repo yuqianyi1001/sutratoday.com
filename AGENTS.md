@@ -13,7 +13,7 @@
   - 把佛经底本，保存到 `sources/cbeta/`
 
 - 整理成 佛经 md 文件
-  - 把 `sources/cbeta/` 的佛经原文，提取成 md 文件，并存放在 `content/sutras/` ，md要求：`content/README.md`
+  - 把 `sources/cbeta/` 的佛经原文，提取成 md 文件，并存放在 `content/sutras/` ，md要求见下方“佛经 md 文稿规范”
   - 用 opencc 工具，把繁体中文转成简体中文
   - 把 异体字、用字、句式以 CBETA 为先；若极少数字形不适合直接放进 markdown，则改用最常见、最通行的简体写法。
   - 分组和分段：
@@ -37,6 +37,97 @@
   - markdown 负责语义结构，不负责展示花样。
   - 不要为了显示效果，手工给佛经原文加粗。
   - `原文` 与 `现代语译` 的视觉强调，优先放在 reader 侧自动解析和渲染。
+
+## 佛经 md 文稿规范
+
+- 文稿统一存放在 `content/sutras/` 下，使用 Markdown + front matter。
+- 当前正式参考稿：`content/sutras/heart-sutra.md`
+
+### front matter 字段
+
+- `title`: 完整标题
+- `short_title`: 页面短标题
+- `slug`: 文稿唯一标识
+- `volume_label`: 卷别或篇别说明
+- `translation_status`: 翻译状态
+- `review_status`: 校验状态
+- `progress_percent`: 当前进度，0-100
+- `updated_at`: 最后更新时间
+- `summary`: 一句话摘要
+- `tags`: 标签，逗号分隔
+
+### 正文体例
+
+- front matter 之后，先写一级标题 `# 经名`
+- 正文主体使用 `## 一、... / 二、... / 三、...` 这种分节标题
+- 每一节内部使用成对的：
+  - `### 原文`
+  - `### 现代语译`
+- 末尾可加 `## 全篇总意`，用于对整篇义旨做简洁收束
+
+### 内容取舍补充
+
+- 默认不再使用 `关键词`、`简注`、`文稿说明` 这类区块
+- 标题命名要直接反映该段经文的义理重点，不要保留项目式、草稿式标题
+
+### 状态字段约定
+
+- `translation_status`
+  - `untranslated`: 未翻译
+  - `translating`: 翻译中
+  - `translated`: 已翻译
+- `review_status`
+  - `unreviewed`: 未校验
+  - `reviewing`: 校验中
+  - `ai_reviewed`: AI已校验
+  - `human_reviewed`: 人工已校验
+
+### 文稿处理补充流程
+
+1. 新建文稿时，先写 front matter 与提纲。
+2. 逐段补原文、现代语译。
+3. 每次提交时更新 `progress_percent` 与 `updated_at`。
+4. 开始核对时，把 `review_status` 改成 `reviewing`。
+5. 完成一轮 AI 辅助检查后，可标记为 `ai_reviewed`。
+6. 完成人工复核后，标记为 `human_reviewed`。
+7. 若已有 CBETA 底本，先校 `原文`，后校 `现代语译`。
+8. 如果原文校到另一条版本线，必须继续重写章节标题与译文，使之重新对应。
+9. 每次内容完成后，同步检查 `summary` 是否仍符合当前正式稿内容，而不是项目说明。
+
+### 文稿模板
+
+```md
+---
+title: 示例经名
+short_title: 示例
+slug: sample
+volume_label: 全一卷
+translation_status: translating
+review_status: unreviewed
+progress_percent: 20
+updated_at: 2026-03-21
+summary: 这里写一行摘要
+tags: 入门,示例
+---
+
+# 示例经名
+
+## 导读
+
+导读文本
+
+## 一、示例分节
+
+### 原文
+
+原文文本
+
+### 现代语译
+
+白话翻译
+
+
+```
 
 ## Git
 
