@@ -62,6 +62,9 @@
 - 示例文稿：先感受一篇完整稿的体例
 - `content/README.md`：查看当前文稿规范
 
+## VSCode Ext
+- 安装 Smart File Links 扩展，可以在经文md文件中跳转到Cbeta原文
+
 ## 联系方式
 
 如有反馈，或暂时不会 GitHub 操作但仍想参与，可来信至 [jeffwoo2019@gmail.com](mailto:jeffwoo2019@gmail.com)。
