@@ -3,6 +3,7 @@ title: 大佛顶首楞严经 卷第一
 short_title: 楞严经卷一
 slug: surangama-sutra-volume-1
 volume_label: 卷第一
+cbeta_source: sources/cbeta/T19n0945_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

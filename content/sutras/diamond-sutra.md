@@ -3,6 +3,7 @@ title: 金刚般若波罗蜜经
 short_title: 金刚经
 slug: diamond-sutra
 volume_label: 全一卷
+cbeta_source: sources/cbeta/T08n0235_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

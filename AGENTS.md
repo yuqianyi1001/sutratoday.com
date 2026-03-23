@@ -20,6 +20,7 @@
     - 分组标题必须有实际意义。若某层分组标题没有意义，就删除，不要保留空架子。
     - 主要分节标题若保留序号，统一使用 `一、二、三、...` 这种标点格式。
     - 分段时，不要过长。不要过于稀碎。一次对话，可以作为一个段落。
+    - 原文每段不要超过 250 字。
   - 偈语的分段，以 4 句为一段
   - 校验一次 分段 结果是否合适，不合适就要调整。
 
@@ -57,6 +58,7 @@
 - `short_title`: 页面短标题
 - `slug`: 文稿唯一标识
 - `volume_label`: 卷别或篇别说明
+- `cbeta_source`: 对应的 CBETA 底本文件路径
 - `translation_status`: 翻译状态
 - `review_status`: 校验状态
 - `progress_percent`: 当前进度，0-100
@@ -110,6 +112,7 @@ title: 示例经名
 short_title: 示例
 slug: sample
 volume_label: 全一卷
+cbeta_source: sources/cbeta/T00n0000_001.xml
 translation_status: translating
 review_status: unreviewed
 progress_percent: 20

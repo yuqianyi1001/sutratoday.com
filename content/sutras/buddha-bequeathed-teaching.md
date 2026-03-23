@@ -3,6 +3,7 @@ title: 佛遗教经
 short_title: 佛遗教经
 slug: buddha-bequeathed-teaching
 volume_label: 全一卷
+cbeta_source: sources/cbeta/T12n0389_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
