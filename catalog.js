@@ -12,7 +12,7 @@ init().catch((error) => {
 async function init() {
   const documents = await loadDocuments();
   const catalogDocuments = getCatalogDocuments(documents);
-  dom.lead.textContent = `当前共收录 ${catalogDocuments.length} 部文稿样稿。点击任一条目即可进入阅读页。`;
+  dom.lead.textContent = `当前共整理共 ${catalogDocuments.length} 部佛典，共 ${documents.length} 卷。点击任一条目即可进入阅读页。`;
   renderCatalog(sortCatalogDocuments(catalogDocuments));
 }
 
@@ -21,13 +21,17 @@ function renderCatalog(docs) {
     .map((doc) => {
       const translationBadge = getTranslationState(doc.translation_status);
       const reviewBadge = getReviewState(doc.review_status);
+      const isMultiVolumeWork = Boolean(doc.work_id && /^共\d+卷$/.test(doc.volume_label || ""));
+      const displayVolumeLabel = isMultiVolumeWork ? doc.volume_label.replace(/^共/, "全") : doc.volume_label || "单篇";
+      const titleMarkup = isMultiVolumeWork
+        ? `<h3>${escapeHtml(doc.short_title || doc.title)} <span class="catalog-title-suffix">${escapeHtml(displayVolumeLabel)}</span></h3>`
+        : `<p>${escapeHtml(displayVolumeLabel)}</p><h3>${escapeHtml(doc.short_title || doc.title)}</h3>`;
 
       return `
         <article class="catalog-card">
           <div class="catalog-top">
             <div class="catalog-title-wrap">
-              <p>${escapeHtml(doc.volume_label || "单篇")}</p>
-              <h3>${escapeHtml(doc.short_title || doc.title)}</h3>
+              ${titleMarkup}
             </div>
             <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
           </div>

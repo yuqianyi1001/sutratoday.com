@@ -92,11 +92,8 @@ async function selectCurrent() {
   dom.sourceLink.href = getMarkdownSourceUrl(selected.path);
   dom.rendered.innerHTML = renderMarkdown(selected.body);
   renderVolumeNavigation(selected);
-  applyReadingMode(readingMode);
-  applyFontSize(fontSize);
   dom.raw.textContent = selected.raw;
   updateSeo(selected);
-  resetSelectionFeedback();
   dom.statusbar.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
@@ -104,6 +101,9 @@ async function selectCurrent() {
     <span class="reader-fact">进度：${escapeHtml(String(selected.progress_percent || 0))}%</span>
     <span class="reader-fact">更新：${escapeHtml(selected.updated_at || "未标注")}</span>
   `;
+  resetSelectionFeedback();
+  applyReadingMode(readingMode);
+  applyFontSize(fontSize);
 }
 
 function bindReadingModePicker() {

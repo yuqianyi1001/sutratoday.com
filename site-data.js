@@ -257,7 +257,7 @@ export async function loadDocuments() {
   }
 
   const loaded = await Promise.all(
-    manifest.map((path) => loadDocument(path)),
+    manifest.map(async (path) => mergeDocumentMeta(await loadDocument(path))),
   );
 
   documentsCache = loaded.sort((a, b) => a.title.localeCompare(b.title, "zh-Hans-CN"));
@@ -344,6 +344,20 @@ export function getReaderUrl(slug, base = "") {
 
 export function getDocumentIndexBySlug(slug) {
   return documentIndex.find((doc) => doc.slug === slug) || documentIndex[0];
+}
+
+function mergeDocumentMeta(doc) {
+  const matched = documentIndex.find((item) => item.path === doc.path || item.slug === doc.slug);
+  if (!matched) {
+    return doc;
+  }
+
+  return {
+    ...matched,
+    ...doc,
+    slug: matched.slug,
+    path: matched.path,
+  };
 }
 
 function getWorkKey(doc) {
