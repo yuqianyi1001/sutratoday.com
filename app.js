@@ -1,6 +1,7 @@
 import {
   documentIndex,
   escapeHtml,
+  getCatalogDocuments,
   getFeaturedDocuments,
   getDocumentIndexBySlug,
   getPrimarySample,
@@ -29,7 +30,7 @@ init().catch((error) => {
 });
 
 async function init() {
-  renderStats(documentIndex);
+  renderStats(getCatalogDocuments(documentIndex));
   renderCatalog(getFeaturedDocuments(documentIndex));
   dom.catalogLead.textContent = `首页仅展示精选的 ${HOME_FEATURED_LIMIT} 部经目。完整目录请进入单独的经文目录页查看。`;
   renderSample(getPrimarySample(documentIndex)).catch((error) => {

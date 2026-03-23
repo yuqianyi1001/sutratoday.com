@@ -2,6 +2,7 @@ import {
   documentIndex,
   escapeHtml,
   GITHUB_REPO_BASE,
+  getVolumeNavigation,
   getMarkdownSourceUrl,
   getReaderUrl,
   getReviewState,
@@ -16,6 +17,12 @@ const dom = {
   title: document.getElementById("reader-title"),
   rendered: document.getElementById("reader-rendered"),
   raw: document.getElementById("reader-raw"),
+  modePicker: document.getElementById("reader-mode-picker"),
+  modeButtons: Array.from(document.querySelectorAll("[data-reading-mode-value]")),
+  fontPicker: document.getElementById("reader-font-picker"),
+  fontButtons: Array.from(document.querySelectorAll("[data-font-size-value]")),
+  volumeNavTop: document.getElementById("reader-volume-nav-top"),
+  volumeNavBottom: document.getElementById("reader-volume-nav-bottom"),
   selectionCommentTrigger: document.getElementById("selection-comment-trigger"),
   selectionFeedbackClose: document.getElementById("selection-feedback-close"),
   selectionFeedback: document.getElementById("selection-feedback"),
@@ -35,12 +42,25 @@ let currentLoadId = 0;
 const documentCache = new Map();
 const GITHUB_ISSUES_NEW_BASE = GITHUB_REPO_BASE.replace("/blob/main/", "/issues/new");
 const SELECTION_FEEDBACK_OFFSET = 14;
+const READING_MODE_COOKIE = "sutra_reader_mode";
+const READING_MODE_DEFAULT = "parallel";
+const VALID_READING_MODES = new Set([READING_MODE_DEFAULT, "original", "translation"]);
+const FONT_SIZE_COOKIE = "sutra_reader_font_size";
+const FONT_SIZE_DEFAULT = "default";
+const VALID_FONT_SIZES = new Set([FONT_SIZE_DEFAULT, "large", "xlarge"]);
+const READING_MODE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+let readingMode = getSavedReadingMode();
+let fontSize = getSavedFontSize();
 
 init().catch((error) => {
   dom.rendered.innerHTML = `<p class="loading-text">请通过站点地址访问本页，避免直接打开本地文件。</p>`;
 });
 
 async function init() {
+  bindReadingModePicker();
+  bindFontPicker();
+  applyReadingMode(readingMode);
+  applyFontSize(fontSize);
   bindSelectionFeedback();
   await selectCurrent();
   window.addEventListener("hashchange", () => {
@@ -71,6 +91,9 @@ async function selectCurrent() {
   dom.summary.textContent = selected.summary || "";
   dom.sourceLink.href = getMarkdownSourceUrl(selected.path);
   dom.rendered.innerHTML = renderMarkdown(selected.body);
+  renderVolumeNavigation(selected);
+  applyReadingMode(readingMode);
+  applyFontSize(fontSize);
   dom.raw.textContent = selected.raw;
   updateSeo(selected);
   resetSelectionFeedback();
@@ -81,6 +104,122 @@ async function selectCurrent() {
     <span class="reader-fact">进度：${escapeHtml(String(selected.progress_percent || 0))}%</span>
     <span class="reader-fact">更新：${escapeHtml(selected.updated_at || "未标注")}</span>
   `;
+}
+
+function bindReadingModePicker() {
+  if (!dom.modePicker) {
+    return;
+  }
+
+  dom.modePicker.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-reading-mode-value]");
+    if (!button) {
+      return;
+    }
+
+    const nextMode = button.dataset.readingModeValue;
+    if (!VALID_READING_MODES.has(nextMode)) {
+      return;
+    }
+
+    applyReadingMode(nextMode, { persist: true });
+  });
+}
+
+function bindFontPicker() {
+  if (!dom.fontPicker) {
+    return;
+  }
+
+  dom.fontPicker.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-font-size-value]");
+    if (!button) {
+      return;
+    }
+
+    const nextSize = button.dataset.fontSizeValue;
+    if (!VALID_FONT_SIZES.has(nextSize)) {
+      return;
+    }
+
+    applyFontSize(nextSize, { persist: true });
+  });
+}
+
+function applyReadingMode(mode, options = {}) {
+  const { persist = false } = options;
+  const nextMode = VALID_READING_MODES.has(mode) ? mode : READING_MODE_DEFAULT;
+
+  readingMode = nextMode;
+  dom.rendered.dataset.readingMode = nextMode;
+
+  dom.modeButtons.forEach((button) => {
+    const isActive = button.dataset.readingModeValue === nextMode;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-checked", isActive ? "true" : "false");
+  });
+
+  if (persist) {
+    saveReadingMode(nextMode);
+  }
+
+  clearSelection();
+  resetSelectionFeedback();
+}
+
+function applyFontSize(size, options = {}) {
+  const { persist = false } = options;
+  const nextSize = VALID_FONT_SIZES.has(size) ? size : FONT_SIZE_DEFAULT;
+
+  fontSize = nextSize;
+  dom.rendered.dataset.fontSize = nextSize;
+
+  dom.fontButtons.forEach((button) => {
+    const isActive = button.dataset.fontSizeValue === nextSize;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-checked", isActive ? "true" : "false");
+  });
+
+  if (persist) {
+    saveCookie(FONT_SIZE_COOKIE, nextSize);
+  }
+}
+
+function getSavedReadingMode() {
+  const cookieValue = readCookie(READING_MODE_COOKIE);
+  return VALID_READING_MODES.has(cookieValue) ? cookieValue : READING_MODE_DEFAULT;
+}
+
+function getSavedFontSize() {
+  const cookieValue = readCookie(FONT_SIZE_COOKIE);
+  return VALID_FONT_SIZES.has(cookieValue) ? cookieValue : FONT_SIZE_DEFAULT;
+}
+
+function saveReadingMode(mode) {
+  saveCookie(READING_MODE_COOKIE, mode);
+}
+
+function saveCookie(name, value) {
+  document.cookie = [
+    `${name}=${encodeURIComponent(value)}`,
+    `Max-Age=${READING_MODE_COOKIE_MAX_AGE}`,
+    "Path=/",
+    "SameSite=Lax",
+  ].join("; ");
+}
+
+function readCookie(name) {
+  const cookiePrefix = `${name}=`;
+  const matched = document.cookie
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(cookiePrefix));
+
+  if (!matched) {
+    return "";
+  }
+
+  return decodeURIComponent(matched.slice(cookiePrefix.length));
 }
 
 function getCurrentSlug() {
@@ -118,6 +257,7 @@ async function getDocumentBySlug(slug) {
 
 function handleReaderLoadError() {
   dom.rendered.innerHTML = `<p class="loading-text">当前经文加载失败，请稍后重试。</p>`;
+  renderVolumeNavigation(null);
 }
 
 function syncReaderUrl(slug) {
@@ -170,6 +310,45 @@ function updateSeo(doc) {
       2,
     );
   }
+}
+
+function renderVolumeNavigation(doc) {
+  const items = doc ? getVolumeNavigation(doc) : [];
+  const markup = items.length ? buildVolumeNavigationMarkup(items) : "";
+
+  [dom.volumeNavTop, dom.volumeNavBottom].forEach((container) => {
+    if (!container) {
+      return;
+    }
+
+    if (!markup) {
+      container.hidden = true;
+      container.innerHTML = "";
+      return;
+    }
+
+    container.hidden = false;
+    container.innerHTML = markup;
+  });
+}
+
+function buildVolumeNavigationMarkup(items) {
+  const links = items
+    .map((item) => {
+      if (item.isCurrent) {
+        return `<span class="reader-volume-link is-current" aria-current="page">${escapeHtml(item.label)}</span>`;
+      }
+      return `<a class="reader-volume-link" href="${getReaderUrl(item.slug)}" title="${escapeHtml(item.title)}">${escapeHtml(item.label)}</a>`;
+    })
+    .join("");
+
+  return `
+    <div class="reader-volume-nav-inner">
+      <div class="reader-volume-link-list">
+        ${links}
+      </div>
+    </div>
+  `;
 }
 
 function buildSeoKeywords(doc) {

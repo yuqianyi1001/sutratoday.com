@@ -1,4 +1,4 @@
-import { escapeHtml, getReaderUrl, getReviewState, getTranslationState, loadDocuments } from "./site-data.js";
+import { escapeHtml, getCatalogDocuments, getReaderUrl, getReviewState, getTranslationState, loadDocuments } from "./site-data.js";
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),
@@ -11,8 +11,9 @@ init().catch((error) => {
 
 async function init() {
   const documents = await loadDocuments();
-  dom.lead.textContent = `当前共收录 ${documents.length} 篇文稿样稿。点击任一条目即可进入阅读页。`;
-  renderCatalog(sortCatalogDocuments(documents));
+  const catalogDocuments = getCatalogDocuments(documents);
+  dom.lead.textContent = `当前共收录 ${catalogDocuments.length} 部文稿样稿。点击任一条目即可进入阅读页。`;
+  renderCatalog(sortCatalogDocuments(catalogDocuments));
 }
 
 function renderCatalog(docs) {

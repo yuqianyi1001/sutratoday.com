@@ -81,7 +81,7 @@
       <main class="reader-page-main solo-reader" id="reader-article">
         <section class="reader-page-article">
           <div class="reader-toolbar">
-            <div>
+            <div class="reader-toolbar-copy">
               <p class="toolbar-kicker">当前文稿</p>
               <h2 id="reader-title">加载中</h2>
               <p class="reader-summary" id="reader-summary"></p>
@@ -90,15 +90,79 @@
               </div>
             </div>
             <div class="reader-actions">
-              <a class="source-link" href="./catalog.html">返回经文目录</a>
+              <div class="reader-preferences">
+                <div class="reader-mode-picker" id="reader-mode-picker" role="radiogroup" aria-label="阅读内容选项">
+                  <button
+                    class="reader-mode-option"
+                    id="reader-mode-parallel"
+                    type="button"
+                    role="radio"
+                    aria-checked="true"
+                    data-reading-mode-value="parallel"
+                  >
+                    原文和现代语译
+                  </button>
+                  <button
+                    class="reader-mode-option"
+                    id="reader-mode-original"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-reading-mode-value="original"
+                  >
+                    只读原文
+                  </button>
+                  <button
+                    class="reader-mode-option"
+                    id="reader-mode-translation"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-reading-mode-value="translation"
+                  >
+                    只读现代语译
+                  </button>
+                </div>
+                <div class="reader-font-picker" id="reader-font-picker" role="radiogroup" aria-label="字体大小选项">
+                  <button
+                    class="reader-font-option"
+                    type="button"
+                    role="radio"
+                    aria-checked="true"
+                    data-font-size-value="default"
+                  >
+                    默认字号
+                  </button>
+                  <button
+                    class="reader-font-option"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-font-size-value="large"
+                  >
+                    大一号
+                  </button>
+                  <button
+                    class="reader-font-option"
+                    type="button"
+                    role="radio"
+                    aria-checked="false"
+                    data-font-size-value="xlarge"
+                  >
+                    大两号
+                  </button>
+                </div>
+              </div>
               <a class="source-link" id="source-link" href="#" target="_blank" rel="noreferrer">打开 Markdown 原稿</a>
             </div>
           </div>
 
-	          <div class="reader-surface reader-surface-solo">
-	            <article class="markdown-view reading-prose" id="reader-rendered">
-	              <p class="loading-text">正在渲染文稿…</p>
-	            </article>
+            <div class="reader-surface reader-surface-solo">
+              <nav class="reader-volume-nav" id="reader-volume-nav-top" aria-label="卷数导航" hidden></nav>
+              <article class="markdown-view reading-prose" id="reader-rendered">
+                <p class="loading-text">正在渲染文稿…</p>
+              </article>
+              <nav class="reader-volume-nav reader-volume-nav-bottom" id="reader-volume-nav-bottom" aria-label="卷数导航" hidden></nav>
             <details class="raw-source">
               <summary>查看原始 Markdown</summary>
               <pre id="reader-raw"></pre>
@@ -108,45 +172,45 @@
       </main>
     </div>
 
-	    <button
-	      class="selection-comment-trigger"
-	      id="selection-comment-trigger"
-	      type="button"
-	      hidden
-	      aria-label="添加评论或反馈问题"
-	      title="添加评论或反馈问题"
-	    >
-	      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-	        <path
-	          d="M5 6.75C5 5.784 5.784 5 6.75 5h10.5C18.216 5 19 5.784 19 6.75v6.5C19 14.216 18.216 15 17.25 15H10.8l-3.943 3.204A.75.75 0 0 1 5 17.621V15.75c0-.414-.336-.75-.75-.75A1.25 1.25 0 0 1 3 13.75v-7z"
-	          fill="currentColor"
-	        />
-	      </svg>
-	    </button>
+    <button
+      class="selection-comment-trigger"
+      id="selection-comment-trigger"
+      type="button"
+      hidden
+      aria-label="添加评论或反馈问题"
+      title="添加评论或反馈问题"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M5 6.75C5 5.784 5.784 5 6.75 5h10.5C18.216 5 19 5.784 19 6.75v6.5C19 14.216 18.216 15 17.25 15H10.8l-3.943 3.204A.75.75 0 0 1 5 17.621V15.75c0-.414-.336-.75-.75-.75A1.25 1.25 0 0 1 3 13.75v-7z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
 
-	    <div class="selection-feedback" id="selection-feedback" hidden>
-	      <div class="selection-feedback-top">
-	        <p class="selection-feedback-label">已选中一段文字</p>
-	        <button class="selection-feedback-close" id="selection-feedback-close" type="button" aria-label="收起反馈框">
-	          ×
-	        </button>
-	      </div>
-	      <p class="selection-feedback-quote" id="selection-feedback-quote"></p>
-	      <div class="selection-feedback-actions">
-	        <a
-	          class="primary-link"
-	          id="selection-feedback-link"
-	          href="#"
-	          target="_blank"
-	          rel="noreferrer"
-	        >
-	          添加评论或反馈问题
-	        </a>
-	        <button class="selection-feedback-dismiss" id="selection-feedback-dismiss" type="button">
-	          清除选择
-	        </button>
-	      </div>
-	    </div>
+    <div class="selection-feedback" id="selection-feedback" hidden>
+      <div class="selection-feedback-top">
+        <p class="selection-feedback-label">已选中一段文字</p>
+        <button class="selection-feedback-close" id="selection-feedback-close" type="button" aria-label="收起反馈框">
+          ×
+        </button>
+      </div>
+      <p class="selection-feedback-quote" id="selection-feedback-quote"></p>
+      <div class="selection-feedback-actions">
+        <a
+          class="primary-link"
+          id="selection-feedback-link"
+          href="#"
+          target="_blank"
+          rel="noreferrer"
+        >
+          添加评论或反馈问题
+        </a>
+        <button class="selection-feedback-dismiss" id="selection-feedback-dismiss" type="button">
+          清除选择
+        </button>
+      </div>
+    </div>
 
     <script type="module" src="./reader.js"></script>
   </body>

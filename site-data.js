@@ -1,3 +1,75 @@
+const SURANGAMA_VOLUMES = [
+  {
+    volume_index: 1,
+    volume_label: "卷第一",
+    summary: "由阿难遭难起疑，层层破除攀缘妄心，开启楞严经卷一显真破妄的论证。",
+  },
+  {
+    volume_index: 2,
+    volume_label: "卷第二",
+    summary: "由波斯匿王问无常身入手，佛层层显发见性不灭，并进一步破除因缘、自然、和合等执，开示五阴本空。",
+  },
+  {
+    volume_index: 3,
+    volume_label: "卷第三",
+    summary: "本卷广破六入、十二处、十八界与七大之执，显明一切法皆即如来藏妙真如性，并引发阿难深誓度生。",
+  },
+  {
+    volume_index: 4,
+    volume_label: "卷第四",
+    summary: "由富楼那发问而广明迷妄起世界、如来藏随缘不变，并转入发心修证、六根优劣与闻性常住的关键开示。",
+  },
+  {
+    volume_index: 5,
+    volume_label: "卷第五",
+    summary: "本卷广明六根结缚与解结次第，并集诸圣各陈圆通所由，最后以耳根圆通与念佛圆通显出入道关键。",
+  },
+  {
+    volume_index: 6,
+    volume_label: "卷第六",
+    summary: "本卷先详陈观世音耳根圆通与文殊拣选，后由阿难为末法众生再请修定根本，如来由此开出四种清净明诲，确立修三摩地的戒行基础。",
+  },
+  {
+    volume_index: 7,
+    volume_label: "卷第七",
+    summary: "本卷详说末法修学的道场仪轨，重宣楞严神咒与护法功德，并转入干慧地总启、众生世界颠倒及十二类生的轮回业因。",
+  },
+  {
+    volume_index: 8,
+    volume_label: "卷第八",
+    summary: "本卷由三种渐次与五十五位真菩提路展开修证位次，又广明十习因、六交报以及鬼畜人仙诸趣流转，系统说明业因与果报的相续。",
+  },
+  {
+    volume_index: 9,
+    volume_label: "卷第九",
+    summary: "本卷先收束色界、无色界与阿修罗诸趣，继而系统开示五阴魔境，重点分析色阴、受阴、想阴中的诸种偏差与魔扰。",
+  },
+  {
+    volume_index: 10,
+    volume_label: "卷第十",
+    summary: "本卷继续辨析行阴、识阴中的外道邪执，收束五阴妄想根元，并以持经功德与法会圆满作为全经结尾。",
+  },
+];
+
+const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => ({
+  title: `大佛顶首楞严经 ${item.volume_label}`,
+  short_title: `楞严经${getCompactVolumeLabel(item.volume_index)}`,
+  slug: `surangama-sutra-volume-${item.volume_index}`,
+  volume_label: item.volume_label,
+  translation_status: "translated",
+  review_status: "ai_reviewed",
+  progress_percent: 100,
+  updated_at: "2026-03-22",
+  summary: item.summary,
+  tags: ["楞严", "长经", getCompactVolumeLabel(item.volume_index)],
+  path: `content/sutras/surangama-sutra-volume-${item.volume_index}.md`,
+  work_id: "surangama-sutra",
+  work_title: "大佛顶首楞严经",
+  work_short_title: "楞严经",
+  work_summary: "《楞严经》十卷次第展开，从破妄显真、圆通修证到戒行、道场、位次与魔境辨析，系统铺陈修行与见地的完整道路。",
+  volume_index: item.volume_index,
+}));
+
 export const manifest = [
   "content/sutras/heart-sutra.md",
   "content/sutras/diamond-sutra.md",
@@ -9,7 +81,7 @@ export const manifest = [
   "content/sutras/buddha-bequeathed-teaching.md",
   "content/sutras/sutra-in-forty-two-sections.md",
   "content/sutras/sutra-of-eight-realizations.md",
-  "content/sutras/surangama-sutra-volume-1.md",
+  ...SURANGAMA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/larger-sukhavati-vyuha-upper.md",
 ];
 
@@ -131,19 +203,7 @@ export const documentIndex = [
     tags: ["禅宗", "坛经", "人物叙事"],
     path: "content/sutras/platform-sutra-xingyou.md",
   },
-  {
-    title: "大佛顶首楞严经 卷第一",
-    short_title: "楞严经卷一",
-    slug: "surangama-sutra-volume-1",
-    volume_label: "卷第一",
-    translation_status: "translated",
-    review_status: "ai_reviewed",
-    progress_percent: 100,
-    updated_at: "2026-03-22",
-    summary: "由阿难遭难起疑，层层破除攀缘妄心，开启楞严经卷一显真破妄的论证。",
-    tags: ["楞严", "长经", "卷一"],
-    path: "content/sutras/surangama-sutra-volume-1.md",
-  },
+  ...SURANGAMA_DOCUMENTS,
   {
     title: "佛说四十二章经",
     short_title: "四十二章经",
@@ -225,9 +285,40 @@ export function getPrimarySample(docs) {
 }
 
 export function getFeaturedDocuments(docs, limit = HOME_FEATURED_LIMIT) {
-  return [...docs]
+  return getCatalogDocuments(docs)
     .sort((a, b) => scoreDocument(b) - scoreDocument(a) || a.title.localeCompare(b.title, "zh-Hans-CN"))
     .slice(0, limit);
+}
+
+export function getCatalogDocuments(docs) {
+  const groups = new Map();
+
+  docs.forEach((doc) => {
+    const key = getWorkKey(doc);
+    const siblings = groups.get(key) || [];
+    siblings.push(doc);
+    groups.set(key, siblings);
+  });
+
+  return Array.from(groups.values()).map((group) => buildCatalogDocument(group));
+}
+
+export function getVolumeNavigation(doc, docs = documentIndex) {
+  const current = typeof doc === "string" ? getDocumentIndexBySlug(doc) : doc;
+  const siblings = docs
+    .filter((candidate) => getWorkKey(candidate) === getWorkKey(current) && Number.isFinite(candidate.volume_index))
+    .sort(compareVolumeDocs);
+
+  if (siblings.length <= 1) {
+    return [];
+  }
+
+  return siblings.map((item) => ({
+    slug: item.slug,
+    label: getVolumeNavigationLabel(item),
+    title: item.title,
+    isCurrent: item.slug === current.slug,
+  }));
 }
 
 export function getTranslationState(status) {
@@ -253,6 +344,89 @@ export function getReaderUrl(slug, base = "") {
 
 export function getDocumentIndexBySlug(slug) {
   return documentIndex.find((doc) => doc.slug === slug) || documentIndex[0];
+}
+
+function getWorkKey(doc) {
+  return doc.work_id || doc.slug;
+}
+
+function buildCatalogDocument(group) {
+  const sortedGroup = [...group].sort(compareVolumeDocs);
+  const representative = sortedGroup[0];
+
+  if (sortedGroup.length === 1) {
+    return representative;
+  }
+
+  return {
+    ...representative,
+    title: representative.work_title || representative.title,
+    short_title: representative.work_short_title || representative.short_title || representative.title,
+    volume_label: `共${sortedGroup.length}卷`,
+    summary: representative.work_summary || representative.summary,
+    translation_status: getAggregateTranslationStatus(sortedGroup),
+    review_status: getAggregateReviewStatus(sortedGroup),
+    progress_percent: Math.round(
+      sortedGroup.reduce((sum, item) => sum + (Number(item.progress_percent) || 0), 0) / sortedGroup.length,
+    ),
+    updated_at: sortedGroup.reduce((latest, item) => (item.updated_at > latest ? item.updated_at : latest), ""),
+  };
+}
+
+function getAggregateTranslationStatus(group) {
+  if (group.every((item) => item.translation_status === "translated")) {
+    return "translated";
+  }
+  if (group.some((item) => item.translation_status === "translated" || item.translation_status === "translating")) {
+    return "translating";
+  }
+  return "untranslated";
+}
+
+function getAggregateReviewStatus(group) {
+  if (group.every((item) => item.review_status === "human_reviewed")) {
+    return "human_reviewed";
+  }
+  if (group.every((item) => item.review_status === "human_reviewed" || item.review_status === "ai_reviewed")) {
+    return "ai_reviewed";
+  }
+  if (group.some((item) => item.review_status === "reviewing")) {
+    return "reviewing";
+  }
+  return "unreviewed";
+}
+
+function compareVolumeDocs(a, b) {
+  const aVolume = Number.isFinite(a.volume_index) ? a.volume_index : Number.MAX_SAFE_INTEGER;
+  const bVolume = Number.isFinite(b.volume_index) ? b.volume_index : Number.MAX_SAFE_INTEGER;
+  if (aVolume !== bVolume) {
+    return aVolume - bVolume;
+  }
+  return a.title.localeCompare(b.title, "zh-Hans-CN");
+}
+
+function getVolumeNavigationLabel(doc) {
+  if (Number.isFinite(doc.volume_index)) {
+    return getCompactVolumeLabel(doc.volume_index);
+  }
+  return doc.volume_label || doc.short_title || doc.title;
+}
+
+function getCompactVolumeLabel(volume) {
+  return `卷${toChineseNumeral(volume)}`;
+}
+
+function toChineseNumeral(value) {
+  const numerals = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  if (value <= 10) {
+    return value === 10 ? "十" : numerals[value];
+  }
+  if (value < 20) {
+    return `十${numerals[value % 10]}`;
+  }
+  const tens = Math.floor(value / 10);
+  const ones = value % 10;
+  return `${numerals[tens]}十${ones ? numerals[ones] : ""}`;
 }
 
 function scoreDocument(doc) {
@@ -327,14 +501,33 @@ export function renderMarkdown(markdown) {
   let inCodeBlock = false;
   let codeBuffer = [];
   let sectionTone = null;
+  let sectionHeadingClass = "";
+
+  const toneClassName = () => {
+    if (sectionTone === "sutra-original") return "sutra-original";
+    if (sectionTone === "sutra-translation") return "sutra-translation";
+    return "";
+  };
 
   const paragraphClass = () => {
     if (sectionTone === "sutra-original") return ' class="sutra-original"';
     if (sectionTone === "sutra-translation") return ' class="sutra-translation"';
     return "";
   };
-  const listClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-list"' : "");
-  const codeClass = () => (sectionTone === "sutra-original" ? ' class="sutra-original-code"' : "");
+  const listClass = () => {
+    if (sectionTone === "sutra-original") return ' class="sutra-original sutra-original-list"';
+    if (sectionTone === "sutra-translation") return ' class="sutra-translation"';
+    return "";
+  };
+  const codeClass = () => {
+    if (sectionTone === "sutra-original") return ' class="sutra-original sutra-original-code"';
+    if (sectionTone === "sutra-translation") return ' class="sutra-translation"';
+    return "";
+  };
+  const blockquoteClass = () => {
+    const className = toneClassName();
+    return className ? ` class="${className}"` : "";
+  };
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
@@ -391,18 +584,21 @@ export function renderMarkdown(markdown) {
       flushList();
       const level = headingMatch[1].length;
       const headingText = headingMatch[2].trim();
+      sectionHeadingClass = "";
       if (level >= 3) {
         if (headingText === "原文") {
           sectionTone = "sutra-original";
+          sectionHeadingClass = ' class="sutra-original-heading"';
         } else if (headingText === "现代语译") {
           sectionTone = "sutra-translation";
+          sectionHeadingClass = ' class="sutra-translation-heading"';
         } else {
           sectionTone = null;
         }
       } else {
         sectionTone = null;
       }
-      html.push(`<h${level}>${formatInline(headingText)}</h${level}>`);
+      html.push(`<h${level}${sectionHeadingClass}>${formatInline(headingText)}</h${level}>`);
       return;
     }
 
@@ -410,7 +606,7 @@ export function renderMarkdown(markdown) {
     if (blockquoteMatch) {
       flushParagraph();
       flushList();
-      html.push(`<blockquote>${formatInline(blockquoteMatch[1])}</blockquote>`);
+      html.push(`<blockquote${blockquoteClass()}>${formatInline(blockquoteMatch[1])}</blockquote>`);
       return;
     }
 
