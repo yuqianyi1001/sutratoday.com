@@ -53,9 +53,10 @@ const SURANGAMA_VOLUMES = [
 
 const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => {
   const paddedIndex = String(item.volume_index).padStart(2, "0");
+  const volumeUnit = "卷";
   return {
     title: `大佛顶首楞严经 ${item.volume_label}`,
-    short_title: `楞严经${getCompactVolumeLabel(item.volume_index)}`,
+    short_title: `楞严经${getCompactVolumeLabel(item.volume_index, volumeUnit)}`,
     slug: `surangama-sutra-${paddedIndex}`,
     volume_label: item.volume_label,
     translation_status: "translated",
@@ -63,7 +64,7 @@ const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => {
     progress_percent: 100,
     updated_at: "2026-03-22",
     summary: item.summary,
-    tags: ["楞严", "长经", getCompactVolumeLabel(item.volume_index)],
+    tags: ["楞严", "长经", getCompactVolumeLabel(item.volume_index, volumeUnit)],
     path: `content/sutras/surangama-sutra-${paddedIndex}.md`,
     work_id: "surangama-sutra",
     work_title: "大佛顶首楞严经",
@@ -71,6 +72,7 @@ const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => {
     work_summary:
       "《楞严经》十卷次第展开，从破妄显真、圆通修证到戒行、道场、位次与魔境辨析，系统铺陈修行与见地的完整道路。",
     volume_index: item.volume_index,
+    volume_unit: volumeUnit,
   };
 });
 
@@ -137,24 +139,89 @@ const PLATFORM_SUTRA_VOLUMES = [
   },
 ];
 
-const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => ({
-  title: `六祖坛经 ${item.title}`,
-  short_title: `坛经${item.title.split("品")[0]}品`,
-  slug: `platform-sutra-${item.slug}`,
-  volume_label: item.title,
-  translation_status: "translated",
-  review_status: "ai_reviewed",
-  progress_percent: 100,
-  updated_at: "2026-03-23",
-  summary: item.summary,
-  tags: ["禅宗", "坛经", item.title.split("品")[0]],
-  path: `content/sutras/platform-sutra-${item.slug}.md`,
-  work_id: "platform-sutra",
-  work_title: "六祖坛经",
-  work_short_title: "坛经",
-  work_summary: "《六祖坛经》记载六祖慧能言教，强调顿悟见性、不二法门，是禅宗的核心经典。",
-  volume_index: item.index,
-}));
+const LANKAVATARA_VOLUMES = [
+  { index: 1, label: "卷第一", summary: "禅宗印心之经，系统宣说五法、三自性、八识、二无我及如来藏法门。" },
+  { index: 2, label: "卷第二", summary: "深入阐述阿赖耶识与如来藏的关系，区分八识之相，并开示三种意生身之胜境。" },
+  { index: 3, label: "卷第三", summary: "详析五法、三自性、八识、二无我等核心义理，并辩证说空、无生、不二之旨。" },
+  { index: 4, label: "卷第四", summary: "广说陀罗尼修持、如来涅槃之真实义，并严嘱断除肉食，以此成就慈悲佛种。" },
+];
+
+const LANKAVATARA_DOCUMENTS = LANKAVATARA_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `楞伽阿跋多罗宝经 ${item.label}`,
+    short_title: `楞伽经卷${item.index}`,
+    slug: `lankavatara-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: item.summary,
+    tags: ["楞伽", "唯识", "禅宗"],
+    path: `content/sutras/lankavatara-sutra-${paddedIndex}.md`,
+    work_id: "lankavatara-sutra",
+    work_title: "楞伽阿跋多罗宝经",
+    work_short_title: "楞伽经",
+    work_summary: "《楞伽经》系统宣说五法、三自性、八识、二无我，是唯识宗与禅宗共同重视的核心经典。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const SANDHINIRMOCANA_VOLUMES = [
+  { index: 1, label: "卷第一", summary: "系统宣说胜义谛相之义旨，显明超言绝相之真实境界。" },
+  { index: 2, label: "卷第二", summary: "详述心意识相与阿赖耶识之深细道理，揭示万法唯识之根源。" },
+  { index: 3, label: "卷第三", summary: "系统宣说遍计所执、依他起、圆成实三自性，及对应的三无性义。" },
+  { index: 4, label: "卷第四", summary: "详述菩萨地地转进之止观修持法要，阐明瑜伽行派之实修次第。" },
+  { index: 5, label: "卷第五", summary: "详述十地菩萨行愿、法身成就及诸佛功德，明究竟解脱之果位。" },
+];
+
+const SANDHINIRMOCANA_DOCUMENTS = SANDHINIRMOCANA_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `解深密经 ${item.label}`,
+    short_title: `解深密经卷${item.index}`,
+    slug: `sandhinirmocana-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: item.summary,
+    tags: ["解深密", "唯识", "瑜伽行派"],
+    path: `content/sutras/sandhinirmocana-sutra-${paddedIndex}.md`,
+    work_id: "sandhinirmocana-sutra",
+    work_title: "解深密经",
+    work_short_title: "解深密经",
+    work_summary: "《解深密经》是唯识宗的根本经典，系统宣说了阿赖耶识、三自性、三无性等核心法门。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => {
+  const volumeUnit = "品";
+  return {
+    title: `六祖坛经 ${item.title}`,
+    short_title: `坛经${item.title.split("品")[0]}品`,
+    slug: `platform-sutra-${item.slug}`,
+    volume_label: `全一卷 · ${item.title}`,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-23",
+    summary: item.summary,
+    tags: ["禅宗", "坛经", item.title.split("品")[0]],
+    path: `content/sutras/platform-sutra-${item.slug}.md`,
+    work_id: "platform-sutra",
+    work_title: "六祖坛经",
+    work_short_title: "坛经",
+    work_summary: "《六祖坛经》记载六祖慧能言教，强调顿悟见性、不二法门，是禅宗的核心经典。",
+    volume_index: item.index,
+    volume_unit: volumeUnit,
+  };
+});
 
 export const manifest = [
   "content/sutras/heart-sutra.md",
@@ -169,6 +236,8 @@ export const manifest = [
   "content/sutras/sutra-in-forty-two-sections.md",
   "content/sutras/sutra-of-eight-realizations.md",
   ...SURANGAMA_DOCUMENTS.map((doc) => doc.path),
+  ...LANKAVATARA_DOCUMENTS.map((doc) => doc.path),
+  ...SANDHINIRMOCANA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
 ];
@@ -326,6 +395,8 @@ export const documentIndex = [
   },
   ...PLATFORM_SUTRA_DOCUMENTS,
   ...SURANGAMA_DOCUMENTS,
+  ...LANKAVATARA_DOCUMENTS,
+  ...SANDHINIRMOCANA_DOCUMENTS,
   {
     title: "佛说四十二章经",
     short_title: "四十二章经",
@@ -494,11 +565,13 @@ function buildCatalogDocument(group) {
     return representative;
   }
 
+  const isPlatformSutra = representative.work_id === "platform-sutra";
+
   return {
     ...representative,
     title: representative.work_title || representative.title,
     short_title: representative.work_short_title || representative.short_title || representative.title,
-    volume_label: `共${sortedGroup.length}卷`,
+    volume_label: isPlatformSutra ? `全一卷（${sortedGroup.length}品）` : `共${sortedGroup.length}卷`,
     summary: representative.work_summary || representative.summary,
     translation_status: getAggregateTranslationStatus(sortedGroup),
     review_status: getAggregateReviewStatus(sortedGroup),
@@ -543,13 +616,20 @@ function compareVolumeDocs(a, b) {
 
 function getVolumeNavigationLabel(doc) {
   if (Number.isFinite(doc.volume_index)) {
-    return getCompactVolumeLabel(doc.volume_index);
+    const unit = doc.volume_unit || "卷";
+    if (unit === "品") {
+      return `第${toChineseNumeral(doc.volume_index)}品`;
+    }
+    return `${unit}${toChineseNumeral(doc.volume_index)}`;
   }
   return doc.volume_label || doc.short_title || doc.title;
 }
 
-function getCompactVolumeLabel(volume) {
-  return `卷${toChineseNumeral(volume)}`;
+function getCompactVolumeLabel(volume, unit = "卷") {
+  if (unit === "品") {
+    return `第${toChineseNumeral(volume)}品`;
+  }
+  return `${unit}${toChineseNumeral(volume)}`;
 }
 
 function toChineseNumeral(value) {
