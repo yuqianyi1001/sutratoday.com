@@ -1,7 +1,7 @@
 ---
 title: 地藏菩萨本愿经 卷上
 short_title: 地藏经卷上
-slug: ksitigarbha-vow-sutra-upper
+slug: ksitigarbha-vow-sutra-01
 volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T13n0412_001.xml
 translation_status: translated

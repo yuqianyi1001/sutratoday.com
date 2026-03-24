@@ -1,6 +1,6 @@
 ---
 title: 六祖坛经 宣诏品第九
-slug: platform-sutra-imperial
+slug: platform-sutra-09
 summary: 记录了神龙元年，武则天、中宗派遣薛简驰诏迎请六祖慧能，以及薛简与六祖关于禅法要旨的对话。
 order: 9
 category: 禅宗经典

@@ -1,7 +1,7 @@
 ---
 title: 六祖坛经 忏悔品第六
 short_title: 坛经忏悔品
-slug: platform-sutra-repentance
+slug: platform-sutra-06
 volume_label: 忏悔品第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated

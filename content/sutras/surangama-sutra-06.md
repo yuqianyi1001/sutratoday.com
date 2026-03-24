@@ -1,7 +1,7 @@
 ---
 title: 大佛顶首楞严经 卷第六
 short_title: 楞严经卷六
-slug: surangama-sutra-volume-6
+slug: surangama-sutra-06
 volume_label: 卷第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_006.xml
 translation_status: translated

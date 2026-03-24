@@ -1,7 +1,7 @@
 ---
 title: 六祖坛经 般若品第二
 short_title: 坛经般若品
-slug: platform-sutra-prajna
+slug: platform-sutra-02
 volume_label: 般若品第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated

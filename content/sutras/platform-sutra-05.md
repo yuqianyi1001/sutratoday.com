@@ -1,7 +1,7 @@
 ---
 title: 六祖坛经 坐禅品第五
 short_title: 坛经坐禅品
-slug: platform-sutra-zazen
+slug: platform-sutra-05
 volume_label: 坐禅品第五
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated

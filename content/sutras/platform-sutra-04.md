@@ -1,7 +1,7 @@
 ---
 title: 六祖坛经 定慧品第四
 short_title: 坛经定慧品
-slug: platform-sutra-samadhi-prajna
+slug: platform-sutra-04
 volume_label: 定慧品第四
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated

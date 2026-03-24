@@ -1,7 +1,7 @@
 ---
 title: 大佛顶首楞严经 卷第四
 short_title: 楞严经卷四
-slug: surangama-sutra-volume-4
+slug: surangama-sutra-04
 volume_label: 卷第四
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_004.xml
 translation_status: translated

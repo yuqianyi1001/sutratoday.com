@@ -1,7 +1,7 @@
 ---
 title: 佛说无量寿经 卷上
 short_title: 无量寿经卷上
-slug: larger-sukhavati-vyuha-upper
+slug: larger-sukhavati-vyuha-01
 volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0360_001.xml
 translation_status: translated

@@ -1,7 +1,7 @@
 ---
 title: 大佛顶首楞严经 卷第五
 short_title: 楞严经卷五
-slug: surangama-sutra-volume-5
+slug: surangama-sutra-05
 volume_label: 卷第五
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_005.xml
 translation_status: translated

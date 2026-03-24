@@ -1,7 +1,7 @@
 ---
 title: 六祖坛经 疑问品第三
 short_title: 坛经疑问品
-slug: platform-sutra-queries
+slug: platform-sutra-03
 volume_label: 疑问品第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
