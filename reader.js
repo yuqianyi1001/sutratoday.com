@@ -652,7 +652,7 @@ function initComments(slug) {
     return;
   }
   twikoo.init({
-    envId: "twikoo-cloudflare.jeffwoo2019.workers.dev",
+    envId: "https://twikoo-cloudflare.jeffwoo2019.workers.dev",
     el: "#tcomment",
     path: slug, // 使用 slug 区分不同经文的评论区
     lang: "zh-CN",
