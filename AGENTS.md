@@ -157,5 +157,5 @@ tags: 入门,示例
 - 推送远端时，使用 `--no-verify` 跳过 push hooks。例如：`git push --no-verify parent main`
 - 当用户要求提交并推送时，除非另有说明，否则默认按以下顺序执行：
   - `git add ...`
-  - 如果需要提交，执行 `git commit --no-verify -m "..."`
+  - 如果需要提交，执行 `git commit --no-verify -m "..."`，提交的message用中文写。
   - 然后执行 `git push --no-verify parent main`

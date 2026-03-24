@@ -2,7 +2,7 @@
 title: 六祖坛经 机缘品第七
 short_title: 坛经机缘品
 slug: platform-sutra-07
-volume_label: 机缘品第七
+volume_label: 全一卷 · 机缘品第七
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed

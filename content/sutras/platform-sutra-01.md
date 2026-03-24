@@ -2,7 +2,7 @@
 title: 六祖坛经 行由品第一
 short_title: 坛经行由品
 slug: platform-sutra-01
-volume_label: 行由品第一
+volume_label: 全一卷 · 行由品第一
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
