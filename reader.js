@@ -104,6 +104,7 @@ async function selectCurrent() {
   resetSelectionFeedback();
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
+  initComments(selected.slug);
 }
 
 function bindReadingModePicker() {
@@ -644,4 +645,16 @@ function hideSelectionFeedbackPanel() {
   dom.selectionFeedback.style.left = "";
   dom.selectionFeedback.style.top = "";
   delete dom.selectionFeedback.dataset.position;
+}
+
+function initComments(slug) {
+  if (typeof twikoo === "undefined") {
+    return;
+  }
+  twikoo.init({
+    envId: "twikoo-cloudflare.jeffwoo2019.workers.dev",
+    el: "#tcomment",
+    path: slug, // 使用 slug 区分不同经文的评论区
+    lang: "zh-CN",
+  });
 }
