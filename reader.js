@@ -270,9 +270,10 @@ function syncReaderUrl(slug) {
 }
 
 function updateSeo(doc) {
-  const names = [doc.short_title, doc.title].filter(Boolean);
-  const pageTitle = `${names[0] || doc.title}白话文与现代语译 | 今文佛典`;
-  const pageDescription = `阅读《${doc.title}》的导读、原文、现代语译与白话文对照，帮助读者更快理解这部佛经在说什么、目的是什么。`;
+  const isMultiVolume = !!doc.volume_index;
+  const fullTitle = isMultiVolume ? `${doc.work_short_title || doc.title} · ${doc.volume_label}` : doc.title;
+  const pageTitle = `${fullTitle}白话文与现代语译 | 今文佛典`;
+  const pageDescription = `阅读《${fullTitle}》的导读、原文、现代语译与白话文对照。${doc.summary || ""} 帮助读者更快理解这部佛经的深刻义理。`;
   const canonicalUrl = getReaderUrl(doc.slug, SITE_BASE_URL);
   const keywords = buildSeoKeywords(doc);
 
@@ -296,10 +297,14 @@ function updateSeo(doc) {
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        headline: doc.title,
+        headline: fullTitle,
         url: canonicalUrl,
         description: pageDescription,
         keywords,
+        author: {
+          "@type": "Organization",
+          name: "今文佛典",
+        },
         inLanguage: "zh-CN",
         isPartOf: {
           "@type": "WebSite",
