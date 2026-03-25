@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 由富楼那发问而广明迷妄起世界、如来藏随缘不变，并转入发心修证、六根优劣与闻性常住的关键开示。
 tags: 楞严,长经,卷四
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第四
 
 ## 导读

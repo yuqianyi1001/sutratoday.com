@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 佛陀临涅槃前的遗教，撮要开示持戒、少欲、精进与修心之道。
 tags: 遗教,戒律,修行
+translated_by: gpt5
 ---
-
 # 佛遗教经
 ## 导读
 

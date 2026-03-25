@@ -5,8 +5,8 @@ summary: 六祖慧能大师示寂前的最后教诲，详细说明了三十六�
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
+translated_by: gpt5
 ---
-
 ### 原文
 师一日唤门人法海、志诚、法达、神会、智常、智通、志彻、志道、法珍、法如等，曰：“汝等不同余人，吾灭度后，各为一方师。吾今教汝说法，不失本宗：先须举三科法门，动用三十六对，出没即离两边。说一切法，莫离自性。忽有人问汝法，出语尽双，皆取对法，来去相因。究竟二法尽除，更无去处。
 

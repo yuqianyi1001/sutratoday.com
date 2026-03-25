@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷广破六入、十二处、十八界与七大之执，显明一切法皆即如来藏妙真如性，并引发阿难深誓度生。
 tags: 楞严,长经,卷三
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第三
 
 ## 导读

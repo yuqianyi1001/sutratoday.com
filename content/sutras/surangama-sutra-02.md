@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 由波斯匿王问无常身入手，佛层层显发见性不灭，并进一步破除因缘、自然、和合等执，开示五阴本空。
 tags: 楞严,长经,卷二
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第二
 
 ## 导读

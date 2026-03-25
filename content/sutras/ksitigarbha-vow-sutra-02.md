@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-23
 summary: 卷下围绕临终助念、称佛名号、布施功德与见闻利益等开示，展开地藏法门在现实生死中的救拔路径。
 tags: 地藏,愿力,存亡
+translated_by: gpt5
 ---
-
 # 地藏菩萨本愿经 卷下
 
 ## 导读

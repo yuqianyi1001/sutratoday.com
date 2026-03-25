@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-24
 summary: 根据卷四内容，涵盖断肉食、如来常住、三解脱门等核心义理
 tags: 楞伽,唯识,禅宗,断肉
+translated_by: gemini3
 ---
-
 # 楞伽阿跋多罗宝经
 
 ## 一、三藐三佛陀的自性

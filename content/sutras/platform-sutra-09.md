@@ -14,8 +14,8 @@ tags:
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
+translated_by: gpt5
 ---
-
 ### 原文
 神龙元年上元日，则天、中宗诏云：“朕请安、秀二师宫中供养。万机之暇，每究一乘。二师推让云：‘南方有能禅师，密授忍大师衣法，传佛心印，可请彼问。’今遣内侍薛简，驰诏迎请，愿师慈念，速赴上京。”师上表辞疾，愿终林麓。
 

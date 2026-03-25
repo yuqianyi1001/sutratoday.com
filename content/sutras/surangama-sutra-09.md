@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷先收束色界、无色界与阿修罗诸趣，继而系统开示五阴魔境，重点分析色阴、受阴、想阴中的诸种偏差与魔扰。
 tags: 楞严,长经,卷九
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第九
 
 ## 导读

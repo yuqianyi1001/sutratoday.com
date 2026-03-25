@@ -71,6 +71,7 @@
 - `updated_at`: 最后更新时间
 - `summary`: 一句话摘要
 - `tags`: 标签，逗号分隔
+- `translated_by`: 翻译所使用的 AI 模型名称（如 gpt5, gemini3）
 
 ### 正文体例
 
@@ -124,6 +125,7 @@ progress_percent: 20
 updated_at: 2026-03-21
 summary: 这里写一行摘要
 tags: 入门,示例
+translated_by: gpt5
 ---
 
 # 示例经名

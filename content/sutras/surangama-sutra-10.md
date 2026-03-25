@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷继续辨析行阴、识阴中的外道邪执，收束五阴妄想根元，并以持经功德与法会圆满作为全经结尾。
 tags: 楞严,长经,卷十
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第十
 
 ## 导读

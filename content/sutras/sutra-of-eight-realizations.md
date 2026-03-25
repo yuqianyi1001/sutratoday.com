@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 以八条觉悟纲领总摄出离、少欲、精进、利他的修行次第。
 tags: 修行,提纲,短经
+translated_by: gpt5
 ---
-
 # 佛说八大人觉经
 ## 导读
 

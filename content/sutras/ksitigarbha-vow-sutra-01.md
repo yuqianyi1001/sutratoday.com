@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 以地藏菩萨大愿、因果业感与孝亲救苦为主线，展开卷上六品义理。
 tags: 地藏,愿力,孝道
+translated_by: gpt5
 ---
-
 # 地藏菩萨本愿经 卷上
 
 ## 导读

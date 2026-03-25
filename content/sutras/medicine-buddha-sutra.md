@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 以药师如来十二大愿为主，开示现世救苦、消灾除难与愿行并修之道。
 tags: 药师,愿力,消灾
+translated_by: gpt5
 ---
-
 # 药师琉璃光如来本愿功德经
 ## 导读
 

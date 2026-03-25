@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷广明六根结缚与解结次第，并集诸圣各陈圆通所由，最后以耳根圆通与念佛圆通显出入道关键。
 tags: 楞严,长经,卷五
+translated_by: gpt5
 ---
-
 # 大佛顶首楞严经 卷第五
 
 ## 导读

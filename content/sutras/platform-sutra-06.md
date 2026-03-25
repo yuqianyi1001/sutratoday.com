@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 传授自性五分法身香及无相忏悔，详述四弘誓愿与自性三归依，揭示一体三身佛之秘。
 tags: 禅宗,坛经,忏悔,法身,归依
+translated_by: gpt5
 ---
-
 # 六祖坛经 忏悔品第六
 
 ## 导读

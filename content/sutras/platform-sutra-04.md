@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 阐述定慧一体之理，主张一行三昧，立无念为宗、无相为体、无住为本。
 tags: 禅宗,坛经,定慧,无念
+translated_by: gpt5
 ---
-
 # 六祖坛经 定慧品第四
 
 ## 导读

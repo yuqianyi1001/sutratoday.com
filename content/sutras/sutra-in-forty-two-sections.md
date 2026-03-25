@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 以短章格言体开示出家、修心、离欲与解脱的佛法要点。
 tags: 入门,格言,短章
+translated_by: gpt5
 ---
-
 # 佛说四十二章经
 ## 导读
 

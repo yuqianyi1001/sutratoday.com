@@ -10,8 +10,8 @@ audio_url: ""
 translation_status: "translated"
 review_status: "ai_reviewed"
 progress_percent: 100
+translated_by: gpt5
 ---
-
 ### 原文
 时，祖师居曹溪宝林，神秀大师在荆南玉泉寺。于时两宗盛化，人皆称南能北秀，故有南北二宗顿渐之分，而学者莫知宗趣。师谓众曰：「法本一宗，人有南北。法即一种，见有迟疾。何名顿渐？法无顿渐，人有利钝，故名顿渐。」
 

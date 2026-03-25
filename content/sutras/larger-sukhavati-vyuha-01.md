@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 净土系根本长经卷上，铺陈法藏比丘发愿、修行与极乐国土庄严的成就因缘。
 tags: 净土,无量寿,愿海
+translated_by: gpt5
 ---
-
 # 佛说无量寿经 卷上
 ## 导读
 

@@ -10,8 +10,8 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 阐述摩诃般若波罗蜜之深义，强调自性本具智慧，顿悟见性。
 tags: 禅宗,坛经,般若
+translated_by: gpt5
 ---
-
 # 六祖坛经 般若品第二
 
 ## 导读
