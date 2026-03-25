@@ -216,7 +216,7 @@ const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => {
     updated_at: "2026-03-23",
     summary: item.summary,
     tags: ["禅宗", "坛经", item.title.split("品")[0]],
-    translated_by: "gpt5",
+    translated_by: "gemini3",
     path: `content/sutras/platform-sutra-${item.slug}.md`,
     work_id: "platform-sutra",
     work_title: "六祖坛经",

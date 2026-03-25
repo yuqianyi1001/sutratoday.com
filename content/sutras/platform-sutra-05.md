@@ -10,7 +10,7 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 重新定义坐禅与禅定，主张不著心、不著净、不著不动，强调外离相为禅、内不乱为定。
 tags: 禅宗,坛经,坐禅,禅定
-translated_by: gpt5
+translated_by: gemini3
 ---
 # 六祖坛经 坐禅品第五
 

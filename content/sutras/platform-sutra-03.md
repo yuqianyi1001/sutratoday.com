@@ -10,7 +10,7 @@ progress_percent: 100
 updated_at: 2026-03-22
 summary: 解答韦刺史关于功德与福德、西方净土等疑问，指明唯心净土之真义。
 tags: 禅宗,坛经,功德,净土
-translated_by: gpt5
+translated_by: gemini3
 ---
 # 六祖坛经 疑问品第三
 
