@@ -1,7 +1,6 @@
 import {
   documentIndex,
   escapeHtml,
-  GITHUB_REPO_BASE,
   getVolumeNavigation,
   getMarkdownSourceUrl,
   getReaderUrl,
@@ -40,7 +39,6 @@ let lastSelectionRect = null;
 let feedbackPanelOpen = false;
 let currentLoadId = 0;
 const documentCache = new Map();
-const GITHUB_ISSUES_NEW_BASE = GITHUB_REPO_BASE.replace("/blob/main/", "/issues/new");
 const SELECTION_FEEDBACK_OFFSET = 14;
 const READING_MODE_COOKIE = "sutra_reader_mode";
 const READING_MODE_DEFAULT = "parallel";
@@ -397,6 +395,7 @@ function bindSelectionFeedback() {
     }
     feedbackPanelOpen = true;
     dom.selectionFeedback.hidden = false;
+    dom.selectionFeedback.dataset.pendingQuote = selectedQuote;
     syncSelectionFeedbackPosition();
   });
   dom.selectionFeedbackLink.addEventListener("mousedown", (event) => {
@@ -410,12 +409,12 @@ function bindSelectionFeedback() {
     resetSelectionFeedback();
   });
   dom.selectionFeedbackLink.addEventListener("click", (event) => {
-    if (!selectedQuote) {
-      event.preventDefault();
+    event.preventDefault();
+    const quote = selectedQuote || dom.selectionFeedback.dataset.pendingQuote;
+    if (!quote) {
       return;
     }
-    event.preventDefault();
-    window.open(buildIssueUrl(selectedQuote), "_blank", "noopener,noreferrer");
+    sendQuoteToComment(quote);
   });
 }
 
@@ -447,7 +446,6 @@ function syncSelectionFeedback() {
   lastSelectionRect = getSelectionRect(selection);
   dom.selectionCommentTrigger.hidden = false;
   dom.selectionFeedbackQuote.textContent = `“${selectedQuote}”`;
-  dom.selectionFeedbackLink.href = buildIssueUrl(selectedQuote);
   syncSelectionTriggerPosition();
   if (quoteChanged) {
     hideSelectionFeedbackPanel();
@@ -594,27 +592,31 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function buildIssueUrl(quote) {
-  const pageUrl = window.location.href;
-  const sourceUrl = currentDocument ? getMarkdownSourceUrl(currentDocument.path) : "";
-  const titleSeed = quote.length > 24 ? `${quote.slice(0, 24)}...` : quote;
-  const title = `阅读页反馈：${currentDocument?.title || "文稿"} - ${titleSeed}`;
-  const body = [
-    "## 反馈位置",
-    `- 文稿：${currentDocument?.title || "未识别"}`,
-    `- 阅读页：${pageUrl}`,
-    sourceUrl ? `- Markdown 原稿：${sourceUrl}` : "",
-    "",
-    "## 选中文字",
-    `> ${quote.replace(/\n/g, "\n> ")}`,
-    "",
-    "## 问题或建议",
-    "- 请在这里补充你的评论、疑问或修订建议。",
-  ]
-    .filter(Boolean)
-    .join("\n");
+function sendQuoteToComment(quote) {
+  const commentSection =
+    document.getElementById("tk-comments") ||
+    document.querySelector(".tk-comments") ||
+    document.getElementById("tcomment");
+  if (!commentSection) {
+    return;
+  }
 
-  return `${GITHUB_ISSUES_NEW_BASE}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  const textarea = commentSection.querySelector("textarea");
+  if (textarea) {
+    const prefix = `> ${quote.replace(/\n/g, "\n> ")}\n\n`;
+    textarea.value = prefix + textarea.value;
+    textarea.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  const scrollTarget = document.getElementById("tcomment") || commentSection;
+  scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  if (textarea) {
+    setTimeout(() => textarea.focus(), 400);
+  }
+
+  clearSelection();
+  resetSelectionFeedback();
 }
 
 function resetSelectionFeedback() {
@@ -628,13 +630,13 @@ function resetSelectionFeedback() {
   dom.selectionCommentTrigger.hidden = true;
   dom.selectionFeedback.hidden = true;
   dom.selectionFeedbackQuote.textContent = "";
-  dom.selectionFeedbackLink.href = "#";
   dom.selectionCommentTrigger.style.left = "";
   dom.selectionCommentTrigger.style.top = "";
   dom.selectionFeedback.style.left = "";
   dom.selectionFeedback.style.top = "";
   delete dom.selectionCommentTrigger.dataset.position;
   delete dom.selectionFeedback.dataset.position;
+  delete dom.selectionFeedback.dataset.pendingQuote;
 }
 
 function clearSelection() {
