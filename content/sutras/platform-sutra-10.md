@@ -1,6 +1,7 @@
 ---
 title: 六祖坛经 付嘱品第十
 slug: platform-sutra-10
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 summary: 六祖慧能大师示寂前的最后教诲，详细说明了三十六对法门、传法脉络，以及真假动静、自性真佛等甚深义理。
 translation_status: translated
 review_status: ai_reviewed

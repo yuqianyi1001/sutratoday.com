@@ -3,7 +3,7 @@ title: 解深密经
 short_title: 解深密经
 slug: sandhinirmocana-sutra-04
 volume_label: 卷第四
-cbeta_source: sources/cbeta/T16n0676_004.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_004.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

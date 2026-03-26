@@ -3,7 +3,7 @@ title: 楞伽阿跋多罗宝经
 short_title: 楞伽经
 slug: lankavatara-sutra-02
 volume_label: 卷第二
-cbeta_source: sources/cbeta/T16n0670_002.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0670_002.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

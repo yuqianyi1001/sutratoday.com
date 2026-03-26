@@ -3,7 +3,7 @@ title: 佛说八大人觉经
 short_title: 八大人觉经
 slug: sutra-of-eight-realizations
 volume_label: 全一卷
-cbeta_source: file:///${workspaceFolder}/file://${workspaceFolder}/sources/cbeta/T17n0779_001.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T17n0779_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

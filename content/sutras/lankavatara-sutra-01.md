@@ -3,7 +3,7 @@ title: 楞伽阿跋多罗宝经
 short_title: 楞伽经
 slug: lankavatara-sutra-01
 volume_label: 卷第一
-cbeta_source: sources/cbeta/T16n0670_001.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0670_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
@@ -16,7 +16,11 @@ translated_by: gemini3
 
 ## 译者题记
 
+### 原文
 宋天竺三藏求那跋陀罗译
+
+### 现代语译
+由刘宋时期，天竺三藏法师求那跋陀罗翻译。
 
 ## 一、法会缘起与偈颂赞佛
 

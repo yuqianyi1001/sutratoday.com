@@ -203,6 +203,36 @@ const SANDHINIRMOCANA_DOCUMENTS = SANDHINIRMOCANA_VOLUMES.map((item) => {
   };
 });
 
+const VIMALAKIRTI_VOLUMES = [
+  { index: 1, label: "卷上", summary: "展现佛国净土之因，及维摩诘居士以疾设教，摄化诸声闻弟子与菩萨。" },
+  { index: 2, label: "卷中", summary: "涵盖文殊问疾、不可思议解脱、观众生、佛道及入不二法门等核心品第。" },
+  { index: 3, label: "卷下", summary: "通过香积佛品、菩萨行品至嘱累品，圆满显发不可思议之大乘境界。" },
+];
+
+const VIMALAKIRTI_DOCUMENTS = VIMALAKIRTI_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `维摩诘所说经 ${item.label}`,
+    short_title: `维摩诘经${item.label}`,
+    slug: `vimalakirti-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: item.summary,
+    tags: ["维摩诘", "在家修行", "不二法门"],
+    translated_by: "gemini3",
+    path: `content/sutras/vimalakirti-sutra-${paddedIndex}.md`,
+    work_id: "vimalakirti-sutra",
+    work_title: "维摩诘所说经",
+    work_short_title: "维摩诘经",
+    work_summary: "展现维摩诘居士以“亦俗亦真”身份示现，辩才无碍，阐发不可思议解脱法门的经典。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
 const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => {
   const volumeUnit = "品";
   return {
@@ -242,6 +272,10 @@ export const manifest = [
   ...SURANGAMA_DOCUMENTS.map((doc) => doc.path),
   ...LANKAVATARA_DOCUMENTS.map((doc) => doc.path),
   ...SANDHINIRMOCANA_DOCUMENTS.map((doc) => doc.path),
+  ...VIMALAKIRTI_DOCUMENTS.map((doc) => doc.path),
+  "content/sutras/amitayurdhyana-sutra.md",
+  "content/sutras/perfect-enlightenment-sutra.md",
+  "content/sutras/srimala-sutra.md",
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
 ];
@@ -411,6 +445,49 @@ export const documentIndex = [
   ...SURANGAMA_DOCUMENTS,
   ...LANKAVATARA_DOCUMENTS,
   ...SANDHINIRMOCANA_DOCUMENTS,
+  ...VIMALAKIRTI_DOCUMENTS,
+  {
+    title: "佛说观无量寿佛经",
+    short_title: "观无量寿经",
+    slug: "amitayurdhyana-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: "净土三经之一，详述十六观修持方法与九品往生阶位，是净土宗修行的重要依据。",
+    tags: ["净土", "观想", "十六观"],
+    translated_by: "gemini3",
+    path: "content/sutras/amitayurdhyana-sutra.md",
+  },
+  {
+    title: "大乘圆觉修多罗了义经",
+    short_title: "圆觉经",
+    slug: "perfect-enlightenment-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: "阐述如来圆觉境界及修行奢摩他、三摩钵提、禅那三种法门的圆顿经典。",
+    tags: ["圆觉", "圆顿", "实修"],
+    translated_by: "gemini3",
+    path: "content/sutras/perfect-enlightenment-sutra.md",
+  },
+  {
+    title: "胜鬘师子吼一乘大便利方广经",
+    short_title: "胜鬘经",
+    slug: "srimala-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-24",
+    summary: "以胜鬘夫人为主角，阐发“如来藏”与“一乘”大义的重要经典。",
+    tags: ["胜鬘", "如来藏", "一乘"],
+    translated_by: "gemini3",
+    path: "content/sutras/srimala-sutra.md",
+  },
   {
     title: "佛说四十二章经",
     short_title: "四十二章经",

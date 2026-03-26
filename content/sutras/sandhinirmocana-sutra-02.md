@@ -3,7 +3,7 @@ title: 解深密经
 short_title: 解深密经
 slug: sandhinirmocana-sutra-02
 volume_label: 卷第二
-cbeta_source: sources/cbeta/T16n0676_002.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_002.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100

@@ -1,6 +1,7 @@
 ---
 title: "六祖法宝坛经 顿渐品第八"
 slug: "platform-sutra-sudden-gradual"
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 volume_label: 全一卷 · 顿渐品第八
 summary: "本品记述禅宗南顿北渐之分，六祖慧能与神秀门人志诚、刺客行昌（志彻）以及少年神会的问答，深入阐述了自性戒定慧、常与无常等核心义理。"
 order: 8
