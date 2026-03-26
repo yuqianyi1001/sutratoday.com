@@ -276,6 +276,7 @@ export const manifest = [
   "content/sutras/amitayurdhyana-sutra.md",
   "content/sutras/perfect-enlightenment-sutra.md",
   "content/sutras/srimala-sutra.md",
+  "content/sutras/rice-seedling-sutra.md",
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
 ];
@@ -487,6 +488,20 @@ export const documentIndex = [
     tags: ["胜鬘", "如来藏", "一乘"],
     translated_by: "gemini3",
     path: "content/sutras/srimala-sutra.md",
+  },
+  {
+    title: "佛说稻秆经",
+    short_title: "稻秆经",
+    slug: "rice-seedling-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-25",
+    summary: "通过稻秆生长的比喻，系统阐述十二因缘的深刻义理，揭示万法缘起性空的本质。",
+    tags: ["缘起", "因缘", "比喻"],
+    translated_by: "gemini3",
+    path: "content/sutras/rice-seedling-sutra.md",
   },
   {
     title: "佛说四十二章经",
