@@ -880,40 +880,6 @@ code {
   color: var(--muted);
 }
 
-.raw-source {
-  margin-top: 22px;
-  width: min(100%, 820px);
-  max-width: 100%;
-  min-width: 0;
-  margin-left: auto;
-  margin-right: auto;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
-
-.raw-source summary {
-  cursor: pointer;
-  color: var(--accent);
-}
-
-.raw-source pre {
-  margin: 14px 0 0;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  padding: 16px;
-  overflow-x: hidden;
-  border-radius: 16px;
-  background: rgba(49, 36, 28, 0.06);
-  border: 1px solid rgba(49, 36, 28, 0.08);
-  font-family: "SFMono-Regular", "Menlo", monospace;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
 .reader-page .page-shell {
   width: min(1180px, calc(100% - 32px));
 }
@@ -1220,8 +1186,15 @@ code {
 }
 
 /* Twikoo Comments */
-#tcomment {
+.reader-comments {
   margin-top: 48px;
   padding-top: 32px;
   border-top: 1px solid var(--line);
+}
+
+.reader-comments-title {
+  margin: 0 0 18px;
+  font-size: 1.18rem;
+  line-height: 1.5;
+  color: #1f1813;
 }

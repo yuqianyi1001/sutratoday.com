@@ -2,7 +2,6 @@ import {
   documentIndex,
   escapeHtml,
   getVolumeNavigation,
-  getMarkdownSourceUrl,
   getReaderUrl,
   getReviewState,
   loadDocument,
@@ -15,7 +14,6 @@ const dom = {
   statusbar: document.getElementById("reader-statusbar"),
   title: document.getElementById("reader-title"),
   rendered: document.getElementById("reader-rendered"),
-  raw: document.getElementById("reader-raw"),
   modePicker: document.getElementById("reader-mode-picker"),
   modeButtons: Array.from(document.querySelectorAll("[data-reading-mode-value]")),
   fontPicker: document.getElementById("reader-font-picker"),
@@ -28,7 +26,6 @@ const dom = {
   selectionFeedbackDismiss: document.getElementById("selection-feedback-dismiss"),
   selectionFeedbackLink: document.getElementById("selection-feedback-link"),
   selectionFeedbackQuote: document.getElementById("selection-feedback-quote"),
-  sourceLink: document.getElementById("source-link"),
   summary: document.getElementById("reader-summary"),
 };
 
@@ -87,10 +84,8 @@ async function selectCurrent() {
 
   dom.title.textContent = selected.title;
   dom.summary.textContent = selected.summary || "";
-  dom.sourceLink.href = getMarkdownSourceUrl(selected.path);
   dom.rendered.innerHTML = renderMarkdown(selected.body);
   renderVolumeNavigation(selected);
-  dom.raw.textContent = selected.raw;
   updateSeo(selected);
   dom.statusbar.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
