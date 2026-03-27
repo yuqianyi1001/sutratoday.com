@@ -227,7 +227,69 @@ const VIMALAKIRTI_DOCUMENTS = VIMALAKIRTI_VOLUMES.map((item) => {
     work_id: "vimalakirti-sutra",
     work_title: "维摩诘所说经",
     work_short_title: "维摩诘经",
-    work_summary: "展现维摩诘居士以“亦俗亦真”身份示现，辩才无碍，阐发不可思议解脱法门的经典。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const LOTUS_SUTRA_VOLUMES = [
+  { index: 1, label: "卷第一", summary: "经中之王，宣说“开权显实、会三归一”的圆教真理。卷一包含序品与方便品。" },
+  { index: 2, label: "卷第二", summary: "包含譬喻品与信解品，通过著名的“火宅喻”与“穷子喻”开示一乘实相。" },
+  { index: 3, label: "卷第三", summary: "包含药草喻品、授记品与化城喻品，以“三草二木”与“化城”为喻，阐明如来随机设教之苦心。" },
+  { index: 4, label: "卷第四", summary: "涵盖五百弟子授记至劝持品，其中“见宝塔品”现多宝如来座，极显法华经之宏伟庄严。" },
+  { index: 5, label: "卷第五", summary: "包含核心章节“如来寿量品”，揭示如来久远成佛之真相，并阐述菩萨之安乐行。" },
+  { index: 6, label: "卷第六", summary: "涵盖随喜功德品至药王菩萨本事品，宣说读诵受持之殊胜功德，并记载常不轻菩萨之大忍。" },
+  { index: 7, label: "卷第七", summary: "涵盖普门品等重要品第，最后以普贤菩萨劝发品作为全经之庄严结尾。" },
+];
+
+const LOTUS_SUTRA_DOCUMENTS = LOTUS_SUTRA_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `妙法莲华经 ${item.label}`,
+    short_title: `法华经卷${item.index}`,
+    slug: `lotus-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-25",
+    summary: item.summary,
+    tags: ["法华", "圆教", "一乘"],
+    translated_by: "gemini3",
+    path: `content/sutras/lotus-sutra-${paddedIndex}.md`,
+    work_id: "lotus-sutra",
+    work_title: "妙法莲华经",
+    work_short_title: "法华经",
+    work_summary: "《妙法莲华经》被誉为经中之王，通过精彩的比喻宣说一乘实相，会三归一，是圆教的核心经典。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const DHARMAPADA_VOLUMES = [
+  { index: 1, label: "卷上", summary: "佛教智慧格言集，通过简短精炼的偈颂宣说出离、慈悲与觉悟的真理。" },
+  { index: 2, label: "卷下", summary: "继续阐述爱欲、利养及沙门行等深刻智慧，直至吉祥圆满。" },
+];
+
+const DHARMAPADA_DOCUMENTS = DHARMAPADA_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `法句经 ${item.label}`,
+    short_title: `法句经${item.label}`,
+    slug: `dharmapada-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-25",
+    summary: item.summary,
+    tags: ["格言", "智慧", "阿含"],
+    translated_by: "gemini3",
+    path: `content/sutras/dharmapada-${paddedIndex}.md`,
+    work_id: "dharmapada",
+    work_title: "法句经",
+    work_short_title: "法句经",
+    work_summary: "《法句经》是佛教智慧的结晶，以精炼的偈颂呈现，涵盖了修行的各个方面，易于诵读与实践。",
     volume_index: item.index,
     volume_unit: "卷",
   };
@@ -265,6 +327,7 @@ export const manifest = [
   "content/sutras/ksitigarbha-vow-sutra-01.md",
   "content/sutras/ksitigarbha-vow-sutra-02.md",
   "content/sutras/lotus-sutra-universal-gate.md",
+  "content/sutras/samantabhadra-vows.md",
   ...PLATFORM_SUTRA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/buddha-bequeathed-teaching.md",
   "content/sutras/sutra-in-forty-two-sections.md",
@@ -273,6 +336,8 @@ export const manifest = [
   ...LANKAVATARA_DOCUMENTS.map((doc) => doc.path),
   ...SANDHINIRMOCANA_DOCUMENTS.map((doc) => doc.path),
   ...VIMALAKIRTI_DOCUMENTS.map((doc) => doc.path),
+  ...LOTUS_SUTRA_DOCUMENTS.map((doc) => doc.path),
+  ...DHARMAPADA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/amitayurdhyana-sutra.md",
   "content/sutras/perfect-enlightenment-sutra.md",
   "content/sutras/srimala-sutra.md",
@@ -447,6 +512,22 @@ export const documentIndex = [
   ...LANKAVATARA_DOCUMENTS,
   ...SANDHINIRMOCANA_DOCUMENTS,
   ...VIMALAKIRTI_DOCUMENTS,
+  ...LOTUS_SUTRA_DOCUMENTS,
+  ...DHARMAPADA_DOCUMENTS,
+  {
+    title: "大方广佛华严经 普贤行愿品",
+    short_title: "普贤行愿品",
+    slug: "samantabhadra-vows",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-25",
+    summary: "华严经的压轴之作，系统宣说普贤菩萨十大愿王，是净土与华严修持的核心。",
+    tags: ["华严", "愿力", "普贤"],
+    translated_by: "gemini3",
+    path: "content/sutras/samantabhadra-vows.md",
+  },
   {
     title: "佛说观无量寿佛经",
     short_title: "观无量寿经",
