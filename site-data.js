@@ -342,6 +342,7 @@ export const manifest = [
   "content/sutras/perfect-enlightenment-sutra.md",
   "content/sutras/srimala-sutra.md",
   "content/sutras/rice-seedling-sutra.md",
+  "content/sutras/ten-good-karmic-actions-sutra.md",
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
 ];
@@ -583,6 +584,20 @@ export const documentIndex = [
     tags: ["缘起", "因缘", "比喻"],
     translated_by: "gemini3",
     path: "content/sutras/rice-seedling-sutra.md",
+  },
+  {
+    title: "佛说十善业道经",
+    short_title: "十善业道经",
+    slug: "ten-good-karmic-actions-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-26",
+    summary: "佛教道德观的基石，详细讲解十善业及其殊胜果报，是人天乘修行的根本。",
+    tags: ["业力", "道德", "十善业"],
+    translated_by: "gemini3",
+    path: "content/sutras/ten-good-karmic-actions-sutra.md",
   },
   {
     title: "佛说四十二章经",
