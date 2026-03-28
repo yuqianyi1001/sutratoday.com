@@ -978,6 +978,8 @@ export const documentIndex = [
     tags: ["地藏", "忏悔", "业报", "占察"],
     translated_by: "gemini3",
     path: "content/sutras/ksitigarbha-divination-sutra.md",
+  },
+  {
     title: "善生子经",
     short_title: "善生子经",
     slug: "shansheng-sutra",
@@ -1028,6 +1030,8 @@ export const documentIndex = [
     tags: ["论书", "一心二门", "如来藏"],
     translated_by: "gemini3",
     path: "content/sutras/awakening-of-faith.md",
+  },
+  {
     title: "佛说玉耶女经",
     short_title: "玉耶女经",
     slug: "yuye-sutra",
