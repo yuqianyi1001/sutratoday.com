@@ -438,6 +438,7 @@ export const manifest = [
   "content/sutras/satipatthana-sutra.md",
   "content/sutras/anapanasati-sutra.md",
   "content/sutras/ksitigarbha-divination-sutra.md",
+  "content/sutras/shansheng-sutra.md",
 ];
 
 export const documentIndex = [
@@ -769,6 +770,17 @@ export const documentIndex = [
     tags: ["地藏", "忏悔", "业报", "占察"],
     translated_by: "gemini3",
     path: "content/sutras/ksitigarbha-divination-sutra.md",
+    title: "善生子经",
+    short_title: "善生子经",
+    slug: "shansheng-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "unreviewed",
+    updated_at: "2026-03-28",
+    summary: "佛陀为居士善生子解说礼敬六方的真实义，教以四种罪行、六种损财之患、辨别真假朋友之道，并阐明对父母、师长、夫妻、朋友、仆役、沙门梵志六种关系的正确伦理。",
+    tags: ["在家伦理", "人际关系", "六方礼"],
+    translated_by: "claude-sonnet-4-6",
+    path: "content/sutras/shansheng-sutra.md",
   },
 ];
 
