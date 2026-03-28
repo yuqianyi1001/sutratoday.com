@@ -5,9 +5,9 @@ slug: renwang-sutra-01
 volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T08n0246_001.xml
 translation_status: translated
-review_status: unreviewed
+review_status: ai_reviewed
 progress_percent: 100
-updated_at: 2024-05-23
+updated_at: 2026-03-26
 summary: 《仁王经》卷上阐述了护国般若的深义，包括序品、观如来品、菩萨行品及二谛品，强调以般若智护国安民。
 tags: 般若,护国,仁王经
 translated_by: gemini3

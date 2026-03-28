@@ -7,7 +7,7 @@ cbeta_source: file://${workspaceFolder}/sources/cbeta/T24n1484_001.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
-updated_at: 2024-05-23
+updated_at: 2026-03-27
 summary: 卢舍那佛阐述菩萨修行的四十个阶位，包括十发趣心、十长养心、十金刚心和十地，是菩萨戒法的核心理论基础。
 tags: 戒律,大乘,菩萨道
 translated_by: gemini3

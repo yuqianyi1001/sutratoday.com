@@ -7,7 +7,7 @@ cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_009.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
-updated_at: 2024-05-23
+updated_at: 2026-03-27
 summary: 卷九涵盖善生王品、诸天药叉护持品、授记品、除病品及长者子流水品，开示护法大将之威德与慈悲救生之本愿。
 tags: 护国,祈福,金光明
 translated_by: gemini3

@@ -7,7 +7,7 @@ cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_008.xml
 translation_status: translated
 review_status: ai_reviewed
 progress_percent: 100
-updated_at: 2024-05-23
+updated_at: 2026-03-27
 summary: 卷八包含大辩才天女品后半部、大吉祥天女品及增长财物品、坚牢地神品、僧慎尔耶大将品，阐发吉祥繁荣与大地护持之深义。
 tags: 护国,祈福,金光明
 translated_by: gemini3
