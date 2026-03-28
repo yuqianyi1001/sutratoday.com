@@ -6,7 +6,6 @@ volume_label: 卷第五
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_005.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-01-24
 summary: 本卷包含《安乐行品》、《从地涌出品》、《如来寿量品》与《分别功德品》。详述菩萨恶世弘法之方，开显如来久远实成之真相。
 tags: 法华,实相,长寿,安乐行

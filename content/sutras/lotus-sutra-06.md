@@ -6,7 +6,6 @@ volume_label: 卷第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_006.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 卷六涵盖随喜功德品至药王菩萨本事品，宣说读诵受持之殊胜功德，并记载常不轻菩萨之大忍与如来之神力。
 tags: 法华,功德,常不轻,神力

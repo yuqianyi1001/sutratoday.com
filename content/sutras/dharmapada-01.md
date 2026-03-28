@@ -6,7 +6,6 @@ volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T04n0210_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 佛教智慧格言集，通过简短精炼的偈颂宣说出离、慈悲与觉悟的真理。
 tags: 格言,智慧,阿含

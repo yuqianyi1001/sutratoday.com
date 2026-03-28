@@ -6,7 +6,6 @@ volume_label: 卷第五
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_005.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-02-13
 summary: 唯识宗根本经典，卷五详述如来法身之相、如来言音的分类（契经、调伏、本母），深入解析四种道理与清净观察的准则，并阐明如来成所作事的深义。
 tags: 解深密,唯识,瑜伽行派,法身,如来功德

@@ -6,7 +6,6 @@ volume_label: 卷第七
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_007.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-27
 summary: 卷七涵盖无染著陀罗尼品、如意宝珠品、大辩才天女品，赞叹天女之智慧与护法。
 tags: 护国,祈福,金光明

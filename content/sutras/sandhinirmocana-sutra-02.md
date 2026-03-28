@@ -6,7 +6,6 @@ volume_label: 卷第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 唯识宗根本经典，卷一至卷二系统宣说胜义谛相与阿赖耶识之义旨。
 tags: 解深密,唯识,瑜伽行派

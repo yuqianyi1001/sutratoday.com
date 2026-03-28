@@ -6,7 +6,6 @@ volume_label: 卷第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0670_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 深入辨析如来藏与外道神我的本质区别，阐述菩萨修行的四大方便、意生身之理，并系统讲解顿渐修行、四种禅定及三自性的究竟义。
 tags: 楞伽,如来藏,唯识,禅宗

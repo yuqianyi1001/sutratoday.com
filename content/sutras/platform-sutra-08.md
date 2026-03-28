@@ -6,7 +6,6 @@ volume_label: 全一卷 · 顿渐品第八
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-23
 summary: 辨析顿悟与渐修的关系，强调法无顿渐、人有利钝的禅宗立场。
 tags: 禅宗,坛经,顿渐品

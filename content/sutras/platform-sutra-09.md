@@ -6,7 +6,6 @@ volume_label: 全一卷 · 宣诏品第九
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-23
 summary: 记录朝廷征诏及六祖与薛简的对话，论说坐禅、见性、道由心悟。
 tags: 禅宗,坛经,宣诏品

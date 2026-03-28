@@ -67,7 +67,6 @@
 - `cbeta_source`: 对应的 CBETA 底本文件路径
 - `translation_status`: 翻译状态
 - `review_status`: 校验状态
-- `progress_percent`: 当前进度，0-100
 - `updated_at`: 最后更新时间
 - `summary`: 一句话摘要
 - `tags`: 标签，逗号分隔
@@ -102,7 +101,7 @@
 
 1. 新建文稿时，先写 front matter 与提纲。
 2. 逐段补原文、现代语译。
-3. 每次提交时更新 `progress_percent` 与 `updated_at`。
+3. 每次提交时更新 `updated_at`。
 4. 开始核对时，把 `review_status` 改成 `reviewing`。
 5. 完成一轮 AI 辅助检查后，可标记为 `ai_reviewed`。
 6. 完成人工复核后，标记为 `human_reviewed`。
@@ -121,7 +120,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T00n0000_001.xml
 translation_status: translating
 review_status: unreviewed
-progress_percent: 20
 updated_at: 2026-03-21
 summary: 这里写一行摘要
 tags: 入门,示例

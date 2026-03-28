@@ -6,7 +6,6 @@ volume_label: 卷第十
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_010.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-27
 summary: 卷十为全经大圆满，包含舍身品、十方菩萨赞叹品、妙幢菩萨赞叹品、菩提树神赞叹品、大辩才天女赞叹品，并以嘱累品庄严结尾。
 tags: 护国,祈福,金光明

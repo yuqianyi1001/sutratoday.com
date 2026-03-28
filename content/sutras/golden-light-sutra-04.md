@@ -6,7 +6,6 @@ volume_label: 卷第四
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_004.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-01-30
 summary: 卷四包含最胜品、莲华胜品、金胜陀罗尼品等，宣说持经功德与陀罗尼妙法。
 tags: 护国,祈福,金光明

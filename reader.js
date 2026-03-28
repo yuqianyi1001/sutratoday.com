@@ -92,7 +92,6 @@ async function selectCurrent() {
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
     <span class="reader-fact">译者：${escapeHtml(selected.translated_by || "未标注")}</span>
     <span class="reader-fact">卷别：${escapeHtml(selected.volume_label || "单篇")}</span>
-    <span class="reader-fact">进度：${escapeHtml(String(selected.progress_percent || 0))}%</span>
     <span class="reader-fact">更新：${escapeHtml(selected.updated_at || "未标注")}</span>
   `;
   resetSelectionFeedback();

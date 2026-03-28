@@ -1,4 +1,13 @@
-import { escapeHtml, getCatalogDocuments, getReaderUrl, getReviewState, getTranslationState, loadDocuments } from "./site-data.js";
+import {
+  escapeHtml,
+  formatUpdatedAtBadgeLabel,
+  getCatalogDocuments,
+  getCatalogVolumeBadgeLabel,
+  getReaderUrl,
+  getReviewState,
+  getTranslationState,
+  loadDocuments,
+} from "./site-data.js";
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),
@@ -12,40 +21,31 @@ init().catch((error) => {
 async function init() {
   const documents = await loadDocuments();
   const catalogDocuments = getCatalogDocuments(documents);
-  dom.lead.textContent = `当前共整理共 ${catalogDocuments.length} 部佛典，共 ${documents.length} 卷。点击任一条目即可进入阅读页。`;
+  dom.lead.textContent = `当前共整理 ${catalogDocuments.length} 部佛典，共 ${documents.length} 卷。点击任一条目即可进入阅读页。`;
   renderCatalog(sortCatalogDocuments(catalogDocuments));
 }
 
 function renderCatalog(docs) {
   dom.catalogGrid.innerHTML = docs
     .map((doc) => {
+      const volumeLabel = getCatalogVolumeBadgeLabel(doc);
       const translationBadge = getTranslationState(doc.translation_status);
       const reviewBadge = getReviewState(doc.review_status);
-      const isMultiVolumeWork = Boolean(doc.work_id && /^共\d+卷$/.test(doc.volume_label || ""));
-      const displayVolumeLabel = isMultiVolumeWork ? doc.volume_label.replace(/^共/, "全") : doc.volume_label || "单篇";
-      const titleMarkup = isMultiVolumeWork
-        ? `<h3>${escapeHtml(doc.short_title || doc.title)} <span class="catalog-title-suffix">${escapeHtml(displayVolumeLabel)}</span></h3>`
-        : `<p>${escapeHtml(displayVolumeLabel)}</p><h3>${escapeHtml(doc.short_title || doc.title)}</h3>`;
 
       return `
         <article class="catalog-card">
           <div class="catalog-top">
             <div class="catalog-title-wrap">
-              ${titleMarkup}
+              <h3>${escapeHtml(doc.short_title || doc.title)}</h3>
             </div>
-            <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
+            <div class="badge-row catalog-badge-row">
+              <span class="badge badge-muted">${escapeHtml(volumeLabel)}</span>
+              <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
+              <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
+              <span class="badge badge-muted">${escapeHtml(formatUpdatedAtBadgeLabel(doc.updated_at))}</span>
+            </div>
           </div>
-          <p>${escapeHtml(doc.summary || "暂无摘要。")}</p>
-          <div class="badge-row">
-            <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
-          </div>
-          <div class="progress-track" aria-label="进度">
-            <span class="progress-bar" style="width: ${Math.max(0, Math.min(100, Number(doc.progress_percent) || 0))}%"></span>
-          </div>
-          <div class="catalog-meta">
-            <span>进度 ${escapeHtml(String(doc.progress_percent || 0))}%</span>
-            <span>${escapeHtml(doc.updated_at || "未标注日期")}</span>
-          </div>
+          <p class="catalog-summary">${escapeHtml(doc.summary || "暂无摘要。")}</p>
           <a class="catalog-open" href="${getReaderUrl(doc.slug)}">进入阅读页</a>
         </article>
       `;

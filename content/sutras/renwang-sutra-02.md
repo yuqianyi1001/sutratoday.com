@@ -6,7 +6,6 @@ volume_label: 卷下
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T08n0246_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 卷下包含护国品、散华品、受持品及嘱累品，详述持经护国之殊胜功德与感应。
 tags: 般若,护国,一乘

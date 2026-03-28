@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0709_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 通过稻秆生长的比喻，系统阐述十二因缘的深刻义理，揭示万法缘起性空的本质。
 tags: 缘起,因缘,比喻

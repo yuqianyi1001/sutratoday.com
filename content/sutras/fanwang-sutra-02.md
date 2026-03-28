@@ -4,7 +4,6 @@ short_title: 菩萨戒本
 slug: fanwang-sutra-02
 volume_label: 卷下
 updated_at: 2026-03-26
-progress_percent: 100
 translation_status: translated
 review_status: ai_reviewed
 summary: 卷下为菩萨戒本，详列十重四十八轻戒，是大乘修行者受持戒律、发菩提心的根本指南。

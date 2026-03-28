@@ -406,7 +406,7 @@ code {
 
 .catalog-card h3,
 .sample-intro h3 {
-  margin: 0 0 2px;
+  margin: 0;
   font-size: 1.16rem;
 }
 
@@ -418,30 +418,22 @@ code {
 
 .catalog-card {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   padding: 18px 18px 16px;
 }
 
 .catalog-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: start;
+  display: grid;
+  gap: 10px;
 }
 
-.catalog-title-wrap p {
-  margin: 0 0 2px;
-  color: var(--accent);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.catalog-title-wrap {
+  display: grid;
+  gap: 4px;
 }
 
-.catalog-title-suffix {
-  color: var(--accent);
-  font-size: 0.88rem;
-  font-weight: 500;
-  white-space: nowrap;
+.catalog-title-wrap h3 {
+  line-height: 1.28;
 }
 
 .catalog-summary {
@@ -453,6 +445,10 @@ code {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+
+.catalog-badge-row {
+  gap: 8px;
 }
 
 .badge-row {
@@ -496,32 +492,10 @@ code {
   border-color: rgba(95, 82, 69, 0.12);
 }
 
-.progress-track {
-  height: 7px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(57, 42, 31, 0.08);
-}
-
-.progress-bar {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #8f5331, #b78758);
-}
-
-.catalog-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 0.86rem;
-  color: var(--muted);
-}
-
 .catalog-open {
   display: inline-flex;
   width: fit-content;
-  margin-top: 0;
+  margin-top: auto;
   font-size: 0.96rem;
   color: var(--accent);
 }

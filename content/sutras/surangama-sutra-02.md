@@ -6,7 +6,6 @@ volume_label: 卷第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 由波斯匿王问无常身入手，佛层层显发见性不灭，并进一步破除因缘、自然、和合等执，开示五阴本空。
 tags: 楞严,长经,卷二

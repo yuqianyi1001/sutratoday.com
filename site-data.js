@@ -61,7 +61,6 @@ const SURANGAMA_DOCUMENTS = SURANGAMA_VOLUMES.map((item) => {
     volume_label: item.volume_label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: item.summary,
     tags: ["楞严", "长经", getCompactVolumeLabel(item.volume_index, volumeUnit)],
@@ -156,7 +155,6 @@ const LANKAVATARA_DOCUMENTS = LANKAVATARA_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: item.summary,
     tags: ["楞伽", "唯识", "禅宗"],
@@ -188,7 +186,6 @@ const SANDHINIRMOCANA_DOCUMENTS = SANDHINIRMOCANA_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: item.summary,
     tags: ["解深密", "唯识", "瑜伽行派"],
@@ -218,7 +215,6 @@ const VIMALAKIRTI_DOCUMENTS = VIMALAKIRTI_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: item.summary,
     tags: ["维摩诘", "在家修行", "不二法门"],
@@ -251,7 +247,6 @@ const LOTUS_SUTRA_DOCUMENTS = LOTUS_SUTRA_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-25",
     summary: item.summary,
     tags: ["法华", "圆教", "一乘"],
@@ -280,7 +275,6 @@ const DHARMAPADA_DOCUMENTS = DHARMAPADA_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-25",
     summary: item.summary,
     tags: ["格言", "智慧", "阿含"],
@@ -309,7 +303,6 @@ const RENWANG_DOCUMENTS = RENWANG_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-26",
     summary: item.summary,
     tags: ["般若", "护国", "一乘"],
@@ -338,7 +331,6 @@ const FANWANG_DOCUMENTS = FANWANG_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-26",
     summary: item.summary,
     tags: ["戒律", "菩萨道", "心地"],
@@ -375,7 +367,6 @@ const GOLDEN_LIGHT_DOCUMENTS = GOLDEN_LIGHT_VOLUMES.map((item) => {
     volume_label: item.label,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-26",
     summary: item.summary,
     tags: ["护国", "祈福", "金光明"],
@@ -399,7 +390,6 @@ const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => {
     volume_label: `全一卷 · ${item.title}`,
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-23",
     summary: item.summary,
     tags: ["禅宗", "坛经", item.title.split("品")[0]],
@@ -453,7 +443,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "净土宗常诵短经，摄极乐依正庄严与执持名号求生净土之旨。",
     tags: ["净土", "短经", "往生"],
@@ -467,7 +456,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "佛陀临涅槃前的遗教，撮要开示持戒、少欲、精进与修心之道。",
     tags: ["遗教", "戒律", "修行"],
@@ -481,7 +469,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "般若系重要经典，以反复破相破执开显无住、无我、无所得的菩萨行。",
     tags: ["般若", "破执", "问答"],
@@ -495,7 +482,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "般若系代表短经，直指五蕴皆空、无所得与离执解脱的核心义旨。",
     tags: ["般若", "入门", "短经"],
@@ -509,7 +495,6 @@ export const documentIndex = [
     volume_label: "卷上",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "以地藏菩萨大愿、因果业感与孝亲救苦为主线，展开卷上六品义理。",
     tags: ["地藏", "愿力", "孝道"],
@@ -528,7 +513,6 @@ export const documentIndex = [
     volume_label: "卷下",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-23",
     summary: "围绕临终助念、存亡修福、称佛名号与见闻利益等展开卷下七品的实践开示。",
     tags: ["地藏", "愿力", "存亡"],
@@ -547,7 +531,6 @@ export const documentIndex = [
     volume_label: "卷上",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "净土系根本长经卷上，铺陈法藏比丘发愿、修行与极乐国土庄严的成就因缘。",
     tags: ["净土", "无量寿", "愿海"],
@@ -566,7 +549,6 @@ export const documentIndex = [
     volume_label: "卷下",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-23",
     summary: "净土系根本长经卷下，广说三辈往生、五恶五善、胎化差别与闻经得益。",
     tags: ["净土", "无量寿", "愿海"],
@@ -585,7 +567,6 @@ export const documentIndex = [
     volume_label: "第二十五品",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "宣说观世音菩萨随类救苦、普门示现与称名感应的法华要义。",
     tags: ["法华", "观音", "救苦"],
@@ -599,7 +580,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "以药师如来十二大愿为主，开示现世救苦、消灾除难与愿行并修之道。",
     tags: ["药师", "愿力", "消灾"],
@@ -620,7 +600,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-25",
     summary: "华严经的压轴之作，系统宣说普贤菩萨十大愿王，是净土与华严修持的核心。",
     tags: ["华严", "愿力", "普贤"],
@@ -634,7 +613,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: "净土三经之一，详述十六观修持方法与九品往生阶位，是净土宗修行的重要依据。",
     tags: ["净土", "观想", "十六观"],
@@ -648,7 +626,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: "阐述如来圆觉境界及修行奢摩他、三摩钵提、禅那三种法门的圆顿经典。",
     tags: ["圆觉", "圆顿", "实修"],
@@ -662,7 +639,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-24",
     summary: "以胜鬘夫人为主角，阐发“如来藏”与“一乘”大义的重要经典。",
     tags: ["胜鬘", "如来藏", "一乘"],
@@ -676,7 +652,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-25",
     summary: "通过稻秆生长的比喻，系统阐述十二因缘的深刻义理，揭示万法缘起性空的本质。",
     tags: ["缘起", "因缘", "比喻"],
@@ -690,7 +665,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-26",
     summary: "佛教道德观的基石，详细讲解十善业及其殊胜果报，是人天乘修行的根本。",
     tags: ["业力", "道德", "十善业"],
@@ -707,7 +681,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "以短章格言体开示出家、修心、离欲与解脱的佛法要点。",
     tags: ["入门", "格言", "短章"],
@@ -721,7 +694,6 @@ export const documentIndex = [
     volume_label: "全一卷",
     translation_status: "translated",
     review_status: "ai_reviewed",
-    progress_percent: 100,
     updated_at: "2026-03-22",
     summary: "以八条觉悟纲领总摄出离、少欲、精进、利他的修行次第。",
     tags: ["修行", "提纲", "短经"],
@@ -827,6 +799,14 @@ export function getReviewState(status) {
   return reviewStates[status] || reviewStates.unreviewed;
 }
 
+export function getCatalogVolumeBadgeLabel(doc) {
+  return normalizeCatalogVolumeLabel(doc?.volume_label);
+}
+
+export function formatUpdatedAtBadgeLabel(value) {
+  return value ? `更新 ${value}` : "未标注日期";
+}
+
 export function getMarkdownSourceUrl(path) {
   return new URL(path, GITHUB_REPO_BASE).toString();
 }
@@ -876,13 +856,10 @@ function buildCatalogDocument(group) {
     ...representative,
     title: representative.work_title || representative.title,
     short_title: representative.work_short_title || representative.short_title || representative.title,
-    volume_label: isPlatformSutra ? `全一卷（${sortedGroup.length}品）` : `共${sortedGroup.length}卷`,
+    volume_label: isPlatformSutra ? `全一卷（${sortedGroup.length}品）` : `全${sortedGroup.length}卷`,
     summary: representative.work_summary || representative.summary,
     translation_status: getAggregateTranslationStatus(sortedGroup),
     review_status: getAggregateReviewStatus(sortedGroup),
-    progress_percent: Math.round(
-      sortedGroup.reduce((sum, item) => sum + (Number(item.progress_percent) || 0), 0) / sortedGroup.length,
-    ),
     updated_at: sortedGroup.reduce((latest, item) => (item.updated_at > latest ? item.updated_at : latest), ""),
   };
 }
@@ -951,7 +928,8 @@ function toChineseNumeral(value) {
 }
 
 function scoreDocument(doc) {
-  const progressScore = Number(doc.progress_percent) || 0;
+  const translationScore =
+    doc.translation_status === "translated" ? 40 : doc.translation_status === "translating" ? 20 : 0;
   const reviewScore =
     doc.review_status === "human_reviewed"
       ? 90
@@ -960,7 +938,17 @@ function scoreDocument(doc) {
         : doc.review_status === "reviewing"
           ? 30
           : 0;
-  return progressScore + reviewScore;
+  return translationScore + reviewScore;
+}
+
+function normalizeCatalogVolumeLabel(value) {
+  if (!value) {
+    return "单篇";
+  }
+  if (/^共\d+卷$/.test(value)) {
+    return value.replace(/^共/, "全");
+  }
+  return value;
 }
 
 function parseFrontMatter(raw) {

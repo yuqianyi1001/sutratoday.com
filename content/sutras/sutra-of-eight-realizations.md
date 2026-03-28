@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T17n0779_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 以八条觉悟纲领总摄出离、少欲、精进、利他的修行次第。
 tags: 修行,提纲,短经

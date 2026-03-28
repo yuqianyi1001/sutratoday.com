@@ -6,7 +6,6 @@ volume_label: 全一卷 · 行由品第一
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 叙述六祖惠能得法因缘，显出顿悟见性、直指本心的禅宗精神。
 tags: 禅宗,坛经,人物叙事

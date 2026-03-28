@@ -6,7 +6,6 @@ volume_label: 卷第七
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_007.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷详说末法修学的道场仪轨，重宣楞严神咒与护法功德，并转入干慧地总启、众生世界颠倒及十二类生的轮回业因。
 tags: 楞严,长经,卷七

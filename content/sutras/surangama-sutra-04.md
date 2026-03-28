@@ -6,7 +6,6 @@ volume_label: 卷第四
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_004.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 由富楼那发问而广明迷妄起世界、如来藏随缘不变，并转入发心修证、六根优劣与闻性常住的关键开示。
 tags: 楞严,长经,卷四

@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T15n0600_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 佛教道德观的基石，详细讲解十善业及其殊胜果报，是人天乘修行的根本。
 tags: 业力,道德,十善业

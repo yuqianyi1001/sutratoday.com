@@ -6,7 +6,6 @@ volume_label: 卷第五
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_005.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-01-30
 summary: 卷五涵盖莲华胜等品，开示菩萨修行之胜境与金光明大义。
 tags: 护国,祈福,金光明

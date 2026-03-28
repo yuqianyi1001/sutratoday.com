@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T10n0293_040.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 华严经的压轴之作，系统宣说普贤菩萨十大愿王，是净土与华严修持的核心。
 tags: 华严,愿力,普贤

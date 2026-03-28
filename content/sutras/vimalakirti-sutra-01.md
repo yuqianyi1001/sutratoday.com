@@ -6,7 +6,6 @@ volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0475_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 展现维摩诘居士以“亦俗亦真”身份示现，辩才无碍，阐发不可思议解脱法门的经典。
 tags: 维摩诘,在家修行,不二法门

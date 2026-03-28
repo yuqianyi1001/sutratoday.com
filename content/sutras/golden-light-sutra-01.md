@@ -6,7 +6,6 @@ volume_label: 卷第一
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 卷一包含序品及如来寿量品，开示如来寿量无量之真相，为全经之宏伟开端。
 tags: 护国,祈福,金光明

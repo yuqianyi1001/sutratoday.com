@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T17n0842_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 大乘了义经，通过佛陀与十二位菩萨的问答，深入阐述圆觉自性、修行阶次及远离幻化的法门。
 tags: 圆觉,了义,大乘

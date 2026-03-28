@@ -6,7 +6,6 @@ volume_label: 卷第八
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_008.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷由三种渐次与五十五位真菩提路展开修证位次，又广明十习因、六交报以及鬼畜人仙诸趣流转，系统说明业因与果报的相续。
 tags: 楞严,长经,卷八

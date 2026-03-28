@@ -6,7 +6,6 @@ volume_label: 卷下
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0475_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 本卷包含香积佛品、菩萨行品、见阿閦佛品、法供养品及嘱累品，展示了不可思议的解脱境界与诸佛平等的深广义理。
 tags: 维摩诘经,大乘,不可思议解脱

@@ -6,7 +6,6 @@ volume_label: 卷第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_006.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-27
 summary: 卷六包含四天王观察人天品等，宣说护世四天王护持国土之宏愿。
 tags: 护国,祈福,金光明

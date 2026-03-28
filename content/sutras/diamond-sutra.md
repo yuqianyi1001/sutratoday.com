@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T08n0235_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 般若系重要经典，以反复破相破执开显无住、无我、无所得的菩萨行。
 tags: 般若,破执,问答

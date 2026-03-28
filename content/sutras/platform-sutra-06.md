@@ -6,7 +6,6 @@ volume_label: 全一卷 · 忏悔品第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 传授自性五分法身香及无相忏悔，详述四弘誓愿与自性三归依，揭示一体三身佛之秘。
 tags: 禅宗,坛经,忏悔,法身,归依

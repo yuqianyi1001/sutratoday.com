@@ -6,7 +6,6 @@ volume_label: 卷第一
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 由阿难遭难起疑，层层破除攀缘妄心，开启楞严经卷一显真破妄的论证。
 tags: 楞严,长经,卷一

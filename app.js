@@ -1,7 +1,9 @@
 import {
   documentIndex,
   escapeHtml,
+  formatUpdatedAtBadgeLabel,
   getCatalogDocuments,
+  getCatalogVolumeBadgeLabel,
   getFeaturedDocuments,
   getDocumentIndexBySlug,
   getPrimarySample,
@@ -15,8 +17,8 @@ import {
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),
-  statTranslated: document.getElementById("stat-translated"),
-  statAiReviewed: document.getElementById("stat-ai-reviewed"),
+  statWorks: document.getElementById("stat-works"),
+  statVolumes: document.getElementById("stat-volumes"),
   catalogLead: document.getElementById("catalog-lead"),
   sampleTitle: document.getElementById("sample-title"),
   sampleMeta: document.getElementById("sample-meta"),
@@ -30,7 +32,7 @@ init().catch((error) => {
 });
 
 async function init() {
-  renderStats(getCatalogDocuments(documentIndex));
+  renderStats(getCatalogDocuments(documentIndex), documentIndex.length);
   renderCatalog(getFeaturedDocuments(documentIndex));
   dom.catalogLead.textContent = `首页仅展示精选的 ${HOME_FEATURED_LIMIT} 部经目。完整目录请进入单独的经文目录页查看。`;
   renderSample(getPrimarySample(documentIndex)).catch((error) => {
@@ -38,14 +40,15 @@ async function init() {
   });
 }
 
-function renderStats(docs) {
-  dom.statTranslated.textContent = String(docs.filter((doc) => doc.translation_status === "translated").length);
-  dom.statAiReviewed.textContent = String(docs.filter((doc) => doc.review_status === "ai_reviewed").length);
+function renderStats(catalogDocs, volumeCount) {
+  dom.statWorks.textContent = String(catalogDocs.length);
+  dom.statVolumes.textContent = String(volumeCount);
 }
 
 function renderCatalog(docs) {
   dom.catalogGrid.innerHTML = docs
     .map((doc) => {
+      const volumeLabel = getCatalogVolumeBadgeLabel(doc);
       const translationBadge = getTranslationState(doc.translation_status);
       const reviewBadge = getReviewState(doc.review_status);
 
@@ -53,22 +56,16 @@ function renderCatalog(docs) {
         <article class="catalog-card">
           <div class="catalog-top">
             <div class="catalog-title-wrap">
-              <p>${escapeHtml(doc.volume_label || "单篇")}</p>
               <h3>${escapeHtml(doc.short_title || doc.title)}</h3>
             </div>
-            <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
+            <div class="badge-row catalog-badge-row">
+              <span class="badge badge-muted">${escapeHtml(volumeLabel)}</span>
+              <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
+              <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
+              <span class="badge badge-muted">${escapeHtml(formatUpdatedAtBadgeLabel(doc.updated_at))}</span>
+            </div>
           </div>
           <p class="catalog-summary">${escapeHtml(doc.summary || "暂无摘要。")}</p>
-          <div class="badge-row">
-            <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
-          </div>
-          <div class="progress-track" aria-label="进度">
-            <span class="progress-bar" style="width: ${Math.max(0, Math.min(100, Number(doc.progress_percent) || 0))}%"></span>
-          </div>
-          <div class="catalog-meta">
-            <span>进度 ${escapeHtml(String(doc.progress_percent || 0))}%</span>
-            <span>${escapeHtml(doc.updated_at || "未标注日期")}</span>
-          </div>
           <a class="catalog-open" href="${getReaderUrl(doc.slug)}">进入阅读页</a>
         </article>
       `;

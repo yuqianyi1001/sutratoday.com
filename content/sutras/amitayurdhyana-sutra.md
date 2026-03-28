@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0365_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 净土三经之一，通过十六种观想法展示极乐世界的庄严，并阐述九品往生的修持方法。
 tags: 净土,十六观,九品往生

@@ -6,7 +6,6 @@ volume_label: 卷中
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0475_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 卷中包含著名的“文殊师利问疾”、“不可思议解脱”及“入不二法门”等篇章，通过维摩诘与文殊菩萨的辩论，阐述了大乘佛法深奥的空性与中道义理。
 tags: 维摩诘,文殊菩萨,不二法门,空性,不可思议解脱

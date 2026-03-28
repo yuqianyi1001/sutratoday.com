@@ -6,7 +6,6 @@ volume_label: 卷第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_002.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-26
 summary: 卷二核心为忏悔品，详述灭罪除障之法，是全经修行之精要所在。
 tags: 护国,祈福,忏悔

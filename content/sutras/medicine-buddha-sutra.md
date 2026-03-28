@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0450_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 以药师如来十二大愿为主，开示现世救苦、消灾除难与愿行并修之道。
 tags: 药师,愿力,消灾

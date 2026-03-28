@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0353_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 以胜鬘夫人为主角，阐发“如来藏”与“一乘”大义的重要经典。
 tags: 胜鬘,如来藏,一乘

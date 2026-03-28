@@ -6,7 +6,6 @@ volume_label: 卷第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-02-01
 summary: 卷三包含灭业障品，详尽宣说了忏悔、随喜、劝请、回向等修持法门，开示如何灭除重罪并积集无量功德。
 tags: 护国,祈福,金光明,忏悔,灭业障

@@ -6,7 +6,6 @@ volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T13n0412_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 以地藏菩萨大愿、因果业感与孝亲救苦为主线，展开卷上六品义理。
 tags: 地藏,愿力,孝道

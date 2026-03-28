@@ -6,7 +6,6 @@ volume_label: 卷第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-02-14
 summary: 记述慈氏（弥勒）菩萨与佛陀关于奢摩他（止）与毘钵舍那（观）的对话，详细阐述了修行止观的所缘、种类、方法及断障证果的逻辑。
 tags: 唯识,止观,瑜伽,弥勒菩萨

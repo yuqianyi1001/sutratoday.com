@@ -6,7 +6,6 @@ volume_label: 全一卷 · 般若品第二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 阐述摩诃般若波罗蜜之深义，强调自性本具智慧，顿悟见性。
 tags: 禅宗,坛经,般若

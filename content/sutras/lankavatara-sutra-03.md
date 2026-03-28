@@ -6,7 +6,6 @@ volume_label: 卷第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0670_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-24
 summary: 本卷详述三种意生身、五无间业的密意、佛的四种平等性，深入探讨宗通与说通的区别、智与识的差异、语义之辩及九种转变论，并破斥外道对涅槃的虚妄计著，确立自觉圣智的实相。
 tags: 楞伽经,意生身,五无间,宗通说通,智识

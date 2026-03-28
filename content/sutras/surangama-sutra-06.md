@@ -6,7 +6,6 @@ volume_label: 卷第六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_006.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷先详陈观世音耳根圆通与文殊拣选，后由阿难为末法众生再请修定根本，如来由此开出四种清净明诲，确立修三摩地的戒行基础。
 tags: 楞严,长经,卷六

@@ -6,7 +6,6 @@ volume_label: 全一卷
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0366_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 净土宗常诵短经，摄极乐依正庄严与执持名号求生净土之旨。
 tags: 净土,短经,往生

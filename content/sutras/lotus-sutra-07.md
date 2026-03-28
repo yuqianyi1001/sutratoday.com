@@ -6,7 +6,6 @@ volume_label: 卷第七
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_007.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-27
 summary: 卷七为法华经大圆满，涵盖普门品等重要品第，最后以普贤菩萨劝发品作为全经之庄严结尾。
 tags: 法华,普门品,观音,普贤,圆满

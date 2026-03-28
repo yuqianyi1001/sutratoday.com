@@ -6,7 +6,6 @@ volume_label: 卷第一
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 经中之王，宣说“开权显实、会三归一”的圆教真理。卷一包含序品与方便品，揭示如来出世之大圆满因缘。
 tags: 法华,圆教,一乘

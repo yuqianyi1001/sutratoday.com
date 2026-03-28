@@ -6,7 +6,6 @@ volume_label: 卷上
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0360_001.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 净土系根本长经卷上，铺陈法藏比丘发愿、修行与极乐国土庄严的成就因缘。
 tags: 净土,无量寿,愿海

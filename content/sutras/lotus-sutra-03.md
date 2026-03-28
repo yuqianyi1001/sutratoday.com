@@ -6,7 +6,6 @@ volume_label: 卷第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-25
 summary: 卷三包含药草喻品、授记品与化城喻品，以“三草二木”与“化城”为喻，阐明如来随机设教之苦心。
 tags: 法华,一乘,化城喻

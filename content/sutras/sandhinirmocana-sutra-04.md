@@ -6,7 +6,6 @@ volume_label: 卷第四
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0676_004.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2025-02-13
 summary: 唯识宗根本经典，卷四详述菩萨十地与佛地的修证特征，系统解析六波罗蜜多及十波罗蜜多的行持体系，并阐明一乘教法的密意。
 tags: 解深密,唯识,瑜伽行派,十地,波罗蜜多

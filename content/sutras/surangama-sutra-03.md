@@ -6,7 +6,6 @@ volume_label: 卷第三
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_003.xml
 translation_status: translated
 review_status: ai_reviewed
-progress_percent: 100
 updated_at: 2026-03-22
 summary: 本卷广破六入、十二处、十八界与七大之执，显明一切法皆即如来藏妙真如性，并引发阿难深誓度生。
 tags: 楞严,长经,卷三
