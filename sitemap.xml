@@ -2,70 +2,334 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sutratoday.com/</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/catalog.html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/participate.html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=amitabha-sutra</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=buddha-bequeathed-teaching</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=diamond-sutra</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=heart-sutra</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
-    <loc>https://sutratoday.com/reader.html?doc=ksitigarbha-vow-sutra-upper</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://sutratoday.com/reader.html?doc=ksitigarbha-vow-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
-    <loc>https://sutratoday.com/reader.html?doc=larger-sukhavati-vyuha-upper</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://sutratoday.com/reader.html?doc=ksitigarbha-vow-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=larger-sukhavati-vyuha-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=larger-sukhavati-vyuha-02</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-universal-gate</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=medicine-buddha-sutra</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
-    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-xingyou</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
-    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-imperial</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
-    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-volume-1</loc>
-    <lastmod>2026-03-22</lastmod>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-05</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-06</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-07</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-08</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-09</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=platform-sutra-10</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-05</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-06</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-07</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-08</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-09</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=surangama-sutra-10</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lankavatara-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lankavatara-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lankavatara-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lankavatara-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=sandhinirmocana-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=sandhinirmocana-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=sandhinirmocana-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=sandhinirmocana-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=sandhinirmocana-sutra-05</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=vimalakirti-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=vimalakirti-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=vimalakirti-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-05</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-06</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=lotus-sutra-07</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=dharmapada-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=dharmapada-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=samantabhadra-vows</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=amitayurdhyana-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=perfect-enlightenment-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=srimala-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=rice-seedling-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=ten-good-karmic-actions-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=renwang-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=renwang-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=fanwang-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=fanwang-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-01</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-02</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-03</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-04</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-05</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-06</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-07</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-08</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-09</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=golden-light-sutra-10</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=sutra-in-forty-two-sections</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=sutra-of-eight-realizations</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=ullambana-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=tathagatagarbha-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=satipatthana-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=anapanasati-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
   </url>
   <url>
     <loc>https://sutratoday.com/reader.html?doc=shansheng-sutra</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=milinda-panha</loc>
+    <lastmod>2026-03-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sutratoday.com/reader.html?doc=mulamadhyamakakarika</loc>
     <lastmod>2026-03-28</lastmod>
   </url>
   <url>
