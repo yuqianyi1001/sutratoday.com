@@ -2,7 +2,7 @@
 
 《今文佛典》是一个长期整理、持续校订的佛经现代语译项目。目标不是把经典简单白话化，而是在尽量尊重原义的前提下，借助现代大模型 AI 形成可工作的初稿，再由人工持续校验、修订与把关，逐步建立一套可扩展、可复核、可公开协作的佛典文库。
 
-网址： [SutraToday.com](https://SutraToday.com)
+网址：[SutraToday.com](https://SutraToday.com)
 
 ## 项目目标
 
@@ -10,20 +10,6 @@
 - 保留关键佛学概念，不把经典压扁成口号式浅白文字
 - 用 Markdown 管理文稿，让每次修改、校对和讨论都可以被记录
 - 形成一套 AI 初稿加人工校验的长期协作工作流
-
-## 仓库内容
-
-- `content/sutras/`：佛经文稿原始稿，使用 Markdown + front matter
-- `content/pages/`：站点页面文稿
-- `sources/cbeta/`：仓库内使用的 CBETA 底本备份
-- `content/README.md`：文稿格式与字段规范
-
-当前文稿工作方式是：
-
-- 先按 CBETA 等底本校原文
-- 原文在 markdown 中保持简体中文
-- 再逐句、逐段完成现代语译
-- 最后进行 AI 校验与人工复核
 
 ## AI 与人工分工
 
@@ -33,41 +19,26 @@
 
 ## 如何参与
 
-文稿协作默认发生在 GitHub 上。参与者至少需要能够：
+### 阅读和校验
 
-- 阅读仓库中的 Markdown 文稿
-- 直接编辑文件，或通过分支 / Pull Request 提交修改
-- 在评论区说明修改理由，并根据反馈继续修订
+直接在[SutraToday.com](https://SutraToday.com)上阅读，发现有问题的地方，可以直接在页面下方的评论区评论。或者在Issues里面创建一个Issue，创建Issue时，请记得带上 经文名 或经文阅读页面的 URL，引用“原文或译文”，留下评论或反馈问题。
 
-适合参与的工作包括：
+### 贡献内容、校验、翻译等
 
-- 补全短经的原文与现代语译
-- 对 AI 译稿做人工校验
-- 统一术语译法，减少同一概念的漂移
-- 优化卷、品、章的拆分方式与文稿结构
-- 从普通读者角度反馈难懂、歧义或说明不足的地方
-
-## 协作建议
-
+- 要求会 Github 的常见操作，最终提交 PR 即可。  
+- 阅读 Agents.md 要求，参考已有的 PR。   
+- 为了保持风格，同一部经，使用同一个提供商、同一个大模型、同一版本。尽量不要混淆。
 - 先从一篇短经或一个卷稿开始，不要一开始就覆盖整部大经
 - 修改正文、front matter 或状态字段时，尽量一次只做一类改动
 - 提交时写清楚这次修改做了什么
 - 大改优先通过 Pull Request 讨论
 - 对术语、句读、释义有争议时，把理由写在 GitHub 评论里，便于后续追溯
-
-## 参与前建议先看
-
-- 项目首页：了解整体目标和展示方式
-- 经文目录：查看当前稿件与状态
-- 示例文稿：先感受一篇完整稿的体例
-- `content/README.md`：查看当前文稿规范
-
-## VSCode Ext
-- 安装 Smart File Links 扩展，可以在经文md文件中跳转到Cbeta原文
+- 在VSCode 里面安装 Smart File Links 扩展，可以在经文 MD 文件中跳转到 Cbeta 原文
 
 ## 联系方式
 
 如有反馈，或暂时不会 GitHub 操作但仍想参与，可来信至 [jeffwoo2019@gmail.com](mailto:jeffwoo2019@gmail.com)。
 
 愚千一  
-[yuqianyi.com](https://yuqianyi.com/)
+- [yuqianyi.com](https://yuqianyi.com/)
+- [SutraToday.com](https://SutraToday.com)
