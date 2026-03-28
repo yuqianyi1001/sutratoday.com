@@ -439,6 +439,8 @@ export const manifest = [
   "content/sutras/anapanasati-sutra.md",
   "content/sutras/ksitigarbha-divination-sutra.md",
   "content/sutras/shansheng-sutra.md",
+  "content/sutras/yuye-sutra.md",
+  "content/sutras/wuchang-sutra.md",
 ];
 
 export const documentIndex = [
@@ -781,6 +783,32 @@ export const documentIndex = [
     tags: ["在家伦理", "人际关系", "六方礼"],
     translated_by: "claude-sonnet-4-6",
     path: "content/sutras/shansheng-sutra.md",
+  },
+  {
+    title: "佛说玉耶女经",
+    short_title: "玉耶女经",
+    slug: "yuye-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "unreviewed",
+    updated_at: "2026-03-28",
+    summary: "佛为给孤独家媳妇玉耶女说法，以五等妇道教化悍妇归依三宝，是佛教伦理与家庭教化的经典。",
+    tags: ["在家伦理", "妇道", "归依"],
+    translated_by: "claude-sonnet-4-6",
+    path: "content/sutras/yuye-sutra.md",
+  },
+  {
+    title: "佛说无常经",
+    short_title: "无常经",
+    slug: "wuchang-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "unreviewed",
+    updated_at: "2026-03-28",
+    summary: "唐义净译，以礼赞三宝偈开经，宣说老病死三种不可爱之法，并附临终助念与超度方诀，为佛教丧仪常用经典。",
+    tags: ["无常", "净土", "丧仪", "唐译"],
+    translated_by: "claude-sonnet-4-6",
+    path: "content/sutras/wuchang-sutra.md",
   },
 ];
 
