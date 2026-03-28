@@ -1,17 +1,15 @@
 import {
-  documentIndex,
   escapeHtml,
   formatUpdatedAtBadgeLabel,
   getCatalogDocuments,
   getCatalogVolumeBadgeLabel,
   getFeaturedDocuments,
-  getDocumentIndexBySlug,
   getPrimarySample,
   getReaderUrl,
   getReviewState,
   getTranslationState,
   HOME_FEATURED_LIMIT,
-  loadDocument,
+  loadDocuments,
   renderMarkdown,
 } from "./site-data.js";
 
@@ -32,10 +30,11 @@ init().catch((error) => {
 });
 
 async function init() {
-  renderStats(getCatalogDocuments(documentIndex), documentIndex.length);
-  renderCatalog(getFeaturedDocuments(documentIndex));
+  const documents = await loadDocuments();
+  renderStats(getCatalogDocuments(documents), documents.length);
+  renderCatalog(getFeaturedDocuments(documents));
   dom.catalogLead.textContent = `首页仅展示精选的 ${HOME_FEATURED_LIMIT} 部经目。完整目录请进入单独的经文目录页查看。`;
-  renderSample(getPrimarySample(documentIndex)).catch((error) => {
+  renderSample(getPrimarySample(documents)).catch((error) => {
     dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
   });
 }
@@ -74,8 +73,7 @@ function renderCatalog(docs) {
 }
 
 async function renderSample(sample) {
-  const selectedMeta = getDocumentIndexBySlug(sample.slug);
-  const selected = await loadDocument(selectedMeta.path);
+  const selected = sample;
   const translationBadge = getTranslationState(selected.translation_status);
   const reviewBadge = getReviewState(selected.review_status);
 
