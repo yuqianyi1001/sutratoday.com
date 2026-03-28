@@ -433,6 +433,7 @@ export const manifest = [
   ...GOLDEN_LIGHT_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
+  "content/sutras/shansheng-sutra.md",
 ];
 
 export const documentIndex = [
@@ -699,6 +700,19 @@ export const documentIndex = [
     tags: ["修行", "提纲", "短经"],
     translated_by: "gpt5",
     path: "content/sutras/sutra-of-eight-realizations.md",
+  },
+  {
+    title: "善生子经",
+    short_title: "善生子经",
+    slug: "shansheng-sutra",
+    volume_label: "全一卷",
+    translation_status: "translated",
+    review_status: "unreviewed",
+    updated_at: "2026-03-28",
+    summary: "佛陀为居士善生子解说礼敬六方的真实义，教以四种罪行、六种损财之患、辨别真假朋友之道，并阐明对父母、师长、夫妻、朋友、仆役、沙门梵志六种关系的正确伦理。",
+    tags: ["在家伦理", "人际关系", "六方礼"],
+    translated_by: "claude-sonnet-4-6",
+    path: "content/sutras/shansheng-sutra.md",
   },
 ];
 
