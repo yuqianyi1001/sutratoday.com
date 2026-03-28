@@ -118,7 +118,7 @@ title: 示例经名
 short_title: 示例
 slug: sample
 volume_label: 全一卷
-cbeta_source: sources/cbeta/T00n0000_001.xml
+cbeta_source: file://${workspaceFolder}/sources/cbeta/T00n0000_001.xml
 translation_status: translating
 review_status: unreviewed
 progress_percent: 20

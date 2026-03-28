@@ -295,6 +295,101 @@ const DHARMAPADA_DOCUMENTS = DHARMAPADA_VOLUMES.map((item) => {
   };
 });
 
+const RENWANG_VOLUMES = [
+  { index: 1, label: "卷上", summary: "般若系护国经典，卷上包含序品、观如来品、菩萨行品及二谛品，阐发般若甚深义理。" },
+  { index: 2, label: "卷下", summary: "卷下包含护国品、散华品、受持品及嘱累品，详述持经护国之殊胜功德与感应。" },
+];
+
+const RENWANG_DOCUMENTS = RENWANG_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `仁王护国般若波罗蜜多经 ${item.label}`,
+    short_title: `仁王经${item.label}`,
+    slug: `renwang-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-26",
+    summary: item.summary,
+    tags: ["般若", "护国", "一乘"],
+    translated_by: "gemini3",
+    path: `content/sutras/renwang-sutra-${paddedIndex}.md`,
+    work_id: "renwang-sutra",
+    work_title: "仁王护国般若波罗蜜多经",
+    work_short_title: "仁王经",
+    work_summary: "《仁王经》是般若系的重要护国经典，强调通过般若智慧的修持来护卫国家与众生的安宁。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const FANWANG_VOLUMES = [
+  { index: 1, label: "卷上", summary: "卷上宣说卢舍那佛为大众开示菩萨心地法门，阐明大乘修行的心要与位次。" },
+  { index: 2, label: "卷下", summary: "卷下为菩萨戒本，详列十重四十八轻戒，是大乘修行者受持戒律的根本指南。" },
+];
+
+const FANWANG_DOCUMENTS = FANWANG_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `梵网经 ${item.label}`,
+    short_title: `梵网经${item.label}`,
+    slug: `fanwang-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-26",
+    summary: item.summary,
+    tags: ["戒律", "菩萨道", "心地"],
+    translated_by: "gemini3",
+    path: `content/sutras/fanwang-sutra-${paddedIndex}.md`,
+    work_id: "fanwang-sutra",
+    work_title: "梵网经",
+    work_short_title: "梵网经",
+    work_summary: "《梵网经》是大乘菩萨戒的核心经典，卷上明心地法门，卷下详列菩萨戒条。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
+const GOLDEN_LIGHT_VOLUMES = [
+  { index: 1, label: "卷第一", summary: "包含序品及如来寿量品，开示如来寿量无量之真相，为全经之宏伟开端。" },
+  { index: 2, label: "卷第二", summary: "核心为忏悔品，详述灭罪除障之法，是全经修行之精要所在。" },
+  { index: 3, label: "卷第三", summary: "详述灭业障品，开示远离诸垢、净除恶业之深广义理。" },
+  { index: 4, label: "卷第四", summary: "包含最胜品、莲华胜品、金胜陀罗尼品等，宣说持经功德与陀罗尼妙法。" },
+  { index: 5, label: "卷第五", summary: "涵盖莲华胜等品，开示菩萨修行之胜境与金光明大义。" },
+  { index: 6, label: "卷第六", summary: "包含四天王观察人天品等，宣说护世四天王护持国土之宏愿。" },
+  { index: 7, label: "卷第七", summary: "涵盖正安品、大辩才天女品，赞叹辩才天女之智慧与护法。" },
+  { index: 8, label: "卷第八", summary: "包含大吉祥天女品、坚牢地神品，阐发吉祥繁荣与大地护持之深义。" },
+  { index: 9, label: "卷第九", summary: "涵盖僧慎尔耶大将品、王法正论品及善集品，开示护法大将之威德与护国王法。" },
+  { index: 10, label: "卷第十", summary: "为全经大圆满，包含舍身品、十方菩萨赞叹品等，并以嘱累品庄严结尾。" },
+];
+
+const GOLDEN_LIGHT_DOCUMENTS = GOLDEN_LIGHT_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  return {
+    title: `金光明最胜王经 ${item.label}`,
+    short_title: `金光明经${item.label}`,
+    slug: `golden-light-sutra-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "ai_reviewed",
+    progress_percent: 100,
+    updated_at: "2026-03-26",
+    summary: item.summary,
+    tags: ["护国", "祈福", "金光明"],
+    translated_by: "gemini3",
+    path: `content/sutras/golden-light-sutra-${paddedIndex}.md`,
+    work_id: "golden-light-sutra",
+    work_title: "金光明最胜王经",
+    work_short_title: "金光明经",
+    work_summary: "《金光明最胜王经》是著名的护国三经之一，宣说忏悔灭罪、护世利国及不思议之功德。",
+    volume_index: item.index,
+    volume_unit: "卷",
+  };
+});
+
 const PLATFORM_SUTRA_DOCUMENTS = PLATFORM_SUTRA_VOLUMES.map((item) => {
   const volumeUnit = "品";
   return {
@@ -343,6 +438,9 @@ export const manifest = [
   "content/sutras/srimala-sutra.md",
   "content/sutras/rice-seedling-sutra.md",
   "content/sutras/ten-good-karmic-actions-sutra.md",
+  ...RENWANG_DOCUMENTS.map((doc) => doc.path),
+  ...FANWANG_DOCUMENTS.map((doc) => doc.path),
+  ...GOLDEN_LIGHT_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/larger-sukhavati-vyuha-01.md",
   "content/sutras/larger-sukhavati-vyuha-02.md",
 ];
@@ -599,6 +697,9 @@ export const documentIndex = [
     translated_by: "gemini3",
     path: "content/sutras/ten-good-karmic-actions-sutra.md",
   },
+  ...RENWANG_DOCUMENTS,
+  ...FANWANG_DOCUMENTS,
+  ...GOLDEN_LIGHT_DOCUMENTS,
   {
     title: "佛说四十二章经",
     short_title: "四十二章经",
