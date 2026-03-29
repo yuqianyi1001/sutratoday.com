@@ -5,11 +5,11 @@ slug: samyukta-agama-30
 volume_label: 卷第三十
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T02n0099_030.xml
 translation_status: translated
-review_status: ai_reviewed
+review_status: reviewing
 updated_at: 2026-03-28
 summary: 卷第三十从乐学戒与三学开篇，继而广说四不坏净、入流分与法镜经，并以诸天天道、那梨迦亡者问答、难提及长者问法等因缘，说明正法信、正思惟与不放逸如何护持学人走向预流乃至究竟解脱。
 tags: 阿含,四不坏净,法镜经
-translated_by: gpt5
+translated_by: claude-opus-4-6
 ---
 
 # 杂阿含经
@@ -246,7 +246,7 @@ translated_by: gpt5
 
 意思就是：
 法门虽然很多，
-骨架其实并不复杂。
+纲要并不复杂。
 一切都离不开戒的端正，
 心的安定，
 和智慧的如实照见。
@@ -577,10 +577,9 @@ translated_by: gpt5
 其功德大得像五条大河汇入巨海，
 根本无法计算。
 
-换句话说，
-四不坏净不是一条小小的“信条”，
+四不坏净并非一条小小的”信条”，
 而是修行生命中的大水聚，
-许多功德都从这里汇流而来。
+许多功德皆从此处汇流而来。
 
 ## 五、外道邪路不足凭依，真正的入流之流是八圣道，入流分则有四种
 
@@ -1116,7 +1115,7 @@ translated_by: gpt5
 但到了那梨迦这段大规模追问时，
 佛明确指出：
 如果只是一个个名单不断追问下去，
-那其实很徒劳，
+终究徒劳，
 也不是如来乐意一一解答的方向。
 
 佛真正要弟子掌握的，

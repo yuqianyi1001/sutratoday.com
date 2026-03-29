@@ -5,11 +5,11 @@ slug: samyukta-agama-46
 volume_label: 卷第四十六
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T02n0099_046.xml
 translation_status: translated
-review_status: ai_reviewed
+review_status: reviewing
 updated_at: 2026-03-28
 summary: 卷第四十六前半卷先以帝释回车护鸟子、贫士正信生天和帝释为王舍城众人建立僧福田，说明慈心、净信与供僧福田的真实价值；后半卷转入波斯匿王相应，围绕年少不可轻、生者必死、自念自护、财利放逸、悭吝积财、不放逸与老病死等主题，层层归结到“善护身口意，修福而不放逸”。
 tags: 阿含,帝释,波斯匿王,不放逸
-translated_by: gpt5
+translated_by: claude-opus-4-6
 ---
 
 # 杂阿含经
@@ -133,7 +133,7 @@ translated_by: gpt5
 ### 现代语译
 
 （一二二三）我是这样听佛说的：
-这则经文专门把“贫”与“苦”拆开。
+此经将”贫”与”苦”加以区分。
 世间人往往只看见物质缺乏，
 就判定一个人可怜而贫苦；
 但佛法看得更深：
@@ -303,8 +303,7 @@ translated_by: gpt5
 ### 现代语译
 
 （一二二七）我是这样听佛说的：
-这则经很沉稳。
-佛不是要王马上“别难过”，
+佛并非要波斯匿王立即止住悲伤，
 而是把死亡的普遍性彻底讲开。
 祖母会死，
 国王会死，
@@ -501,7 +500,7 @@ translated_by: gpt5
 ### 现代语译
 
 （一二三二）（一二三三）我是这样听佛说的：
-这两则把“不会用财富”和“财富带不走”讲得很透。
+这两则分别阐明”不善用财”与”财不随身”之义。
 摩诃男有巨大财富，
 却既不能利益自己，
 也不能利益别人，

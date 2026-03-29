@@ -5,11 +5,11 @@ slug: samyukta-agama-40
 volume_label: 卷第四十
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T02n0099_040.xml
 translation_status: translated
-review_status: ai_reviewed
+review_status: reviewing
 updated_at: 2026-03-28
 summary: 卷第四十以帝释相应为主，先说帝释之所以得生天上及其种种名号，继而反复借帝释与阿修罗、夜叉、御者、仙人等因缘，赞叹不瞋、受谏、忍辱、礼敬、持斋、真实与不报扰乱；整卷把“天主何以为天主”的答案落在供养父母、平等布施、恭敬三宝、净戒与调伏瞋恚之上。
 tags: 阿含,帝释,忍辱
-translated_by: gpt5
+translated_by: claude-opus-4-6
 ---
 
 # 杂阿含经
@@ -107,7 +107,7 @@ translated_by: gpt5
 （一一〇四）我是这样听佛说的：
 佛直接指出，
 生到帝释天不是偶然，
-而是有非常具体的人间因。
+而是有明确的人间善因。
 这些因并不玄妙：
 孝养父母，
 敬重家中长辈，
@@ -116,9 +116,8 @@ translated_by: gpt5
 常说真实语，
 又能在居家生活里破除悭吝，
 平等布施。
-也就是说，
-帝释之位的根，
-其实种在人间伦理和施舍德行里。
+可见帝释之位的根本，
+正是种在人间伦理和施舍德行之中。
 
 （一一〇五）我是这样听佛说的：
 摩诃利问佛是否见过真正的帝释，
@@ -594,7 +593,7 @@ translated_by: gpt5
 ### 现代语译
 
 （一一一八）我是这样听佛说的：
-这段很有意思：
+此经所述颇值得留意：
 帝释原本也想学阿修罗的幻术，
 但一听说这种法会把人拖进地狱，
 马上就停了，

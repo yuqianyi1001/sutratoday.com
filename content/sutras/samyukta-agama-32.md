@@ -5,11 +5,11 @@ slug: samyukta-agama-32
 volume_label: 卷第三十二
 cbeta_source: file://${workspaceFolder}/sources/cbeta/T02n0099_032.xml
 translation_status: translated
-review_status: ai_reviewed
+review_status: reviewing
 updated_at: 2026-03-28
 summary: 卷第三十二以如来后有不可记与正法沉没因缘开篇，继而借聚落主问答批破伎乐、斗战、自苦、金银受畜等邪见，并广说现法苦集苦灭、布施福不减、慈悲净业以及良马善男子譬喻，显明中道与正法调御的标准。
 tags: 阿含,中道,正法
-translated_by: gpt5
+translated_by: claude-opus-4-6
 ---
 
 # 杂阿含经
@@ -363,7 +363,7 @@ translated_by: gpt5
 
 （九〇七）到（九〇九）
 
-我是这样听佛说的：这一组经都是在纠正世俗对于职业和功德的想象。
+我是这样听佛说的：
 戏子以为逗人发笑能生欢喜天，
 战士以为奋勇杀敌能生箭降伏天，
 但佛都指出，
@@ -380,8 +380,8 @@ translated_by: gpt5
 怕对方一时承受不了，
 但最后仍把因果关系说透。
 
-调马聚落主这一问更有意思。
-佛承认自己也会“杀”不受调伏的人，
+调马聚落主又问佛如何处置不受调伏之人。
+佛说自己也会”杀”不受调伏的人，
 但这里的“杀”，
 不是肉体消灭，
 而是停止对他说法、教授、教诫。
@@ -724,7 +724,7 @@ translated_by: gpt5
 只要想到他无常变异，
 心里立刻就会生忧苦。
 
-佛最后把结论说得很干净：
+佛以此结论：
 爱念有四分，
 忧苦就有四分；
 爱念有一分，
