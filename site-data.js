@@ -485,6 +485,56 @@ const SAMYUKTA_AGAMA_DOCUMENTS = SAMYUKTA_AGAMA_VOLUMES.map((item) => {
   };
 });
 
+const LONG_AGAMA_VOLUMES = [
+  { index: 1, label: "卷第一", summary: "佛以宿命智为比丘说过去七佛因缘，并详述毗婆尸菩萨从入胎、出生、出家、观十二因缘成道、梵天劝请、初转法轮的完整经过。" },
+  { index: 2, label: "卷第二", summary: "游行经前半，记述佛为跋祇国说七不退法、游历诸城教化众生、阿难未能请佛住世、佛舍寿命及地动八因缘。" },
+  { index: 3, label: "卷第三", summary: "游行经中段，记述佛陀宣告三月后般涅槃、说四大教法、接受纯陀最后供养、临终安排葬法，以及大善见王本生故事。" },
+  { index: 4, label: "卷第四", summary: "游行经后半部分，记述善见王修禅命终、佛陀最后教诫、般涅槃、阇维供养与八王分舍利。" },
+  { index: 5, label: "卷第五", summary: "典尊经讲述大典尊大臣治理七国、求见梵天、舍世出家的因缘；阇尼沙经记述阇尼沙梵天为佛说忉利天集会与三径路等正法。" },
+  { index: 6, label: "卷第六", summary: "小缘经说四姓平等、世界与人类社会起源；转轮圣王修行经说以正法治世则人寿增长，行恶则递减，末后弥勒佛出世。" },
+  { index: 7, label: "卷第七", summary: "弊宿经记述童女迦叶与弊宿婆罗门就有无来世展开辩论，迦叶以多重譬喻折服弊宿，弊宿最终归依三宝。" },
+  { index: 8, label: "卷第八", summary: "散陀那经记述佛为尼俱陀梵志开示苦行之净与垢；众集经记述舍利弗集说从一法到十法的如来正教。" },
+  { index: 9, label: "卷第九", summary: "十上经记述舍利弗宣说从一法到十法各含十门的五百五十法；增一经记述佛自说增一法门。" },
+  { index: 10, label: "卷第十", summary: "含三聚经、大缘方便经（十二因缘与七识住八解脱）、释提桓因问经（帝释天请问怨结因缘）。" },
+  { index: 11, label: "卷第十一", summary: "阿㝹夷经记述善宿比丘退失信心始末与世间起源辨正；善生经开示六方礼拜真义与人伦之道。" },
+  { index: 12, label: "卷第十二", summary: "清净经开示正法不可分裂与三十七道品；自欢喜经舍利弗赞叹佛智无上；大会经记述十方诸天大集礼敬佛陀。" },
+  { index: 13, label: "卷第十三", summary: "阿摩昼经记述阿摩昼婆罗门受师命考验佛陀三十二相，佛以种姓本缘调伏其傲慢并为其师说法。" },
+  { index: 14, label: "卷第十四", summary: "梵动经开示六十二见——本劫本见十八见与末劫末见四十四见——皆不出此六十二见，唯如来能知见处而不执著。" },
+  { index: 15, label: "卷第十五", summary: "种德经说真正婆罗门应以戒慧为本；究罗檀头经说古王仁政、不杀生之祭祀及布施修道诸福德层层胜上之理。" },
+  { index: 16, label: "卷第十六", summary: "坚固经说三种神足与识灭一切灭；裸形梵志经说戒具足超胜苦行；三明经以四无量心为生梵天正道。" },
+  { index: 17, label: "卷第十七", summary: "沙门果经记述阿阇世王问沙门现世果报；布吒婆楼经论想之因缘生灭；露遮经说不应遮障他人闻法。" },
+  { index: 18, label: "卷第十八", summary: "世记经前三品：阎浮提洲品描述须弥山与四大部洲；郁单曰品描述北俱卢洲殊胜；转轮圣王品描述七宝四德。" },
+  { index: 19, label: "卷第十九", summary: "世记经地狱品详述八大地狱及十六小狱苦报与阎罗王三天使；龙鸟品说四生龙与金翅鸟，以盲人摸象喻破邪见。" },
+  { index: 20, label: "卷第二十", summary: "世记经续篇，详述阿须伦王宫殿、四天王天、忉利天善见城与帝释天宫，以及诸天身量寿命等。" },
+  { index: 21, label: "卷第二十一", summary: "世记经续篇，详述火水风三灾毁坏与重建世界的过程，以及诸天与阿须伦的战斗故事。" },
+  { index: 22, label: "卷第二十二", summary: "世记经最后三品，述三中劫之因果、日月宫殿运行，以及世界初成众生因贪著而渐生男女种姓的本缘。" },
+];
+
+const LONG_AGAMA_DOCUMENTS = LONG_AGAMA_VOLUMES.map((item) => {
+  const paddedIndex = String(item.index).padStart(2, "0");
+  const volumeUnit = "卷";
+  return {
+    title: `长阿含经 ${item.label}`,
+    short_title: `长阿含经${getCompactVolumeLabel(item.index, volumeUnit)}`,
+    slug: `long-agama-${paddedIndex}`,
+    volume_label: item.label,
+    translation_status: "translated",
+    review_status: "unreviewed",
+    updated_at: "2026-03-28",
+    summary: item.summary,
+    tags: ["阿含", "长阿含", getCompactVolumeLabel(item.index, volumeUnit)],
+    translated_by: "claude-opus-4-6",
+    path: `content/sutras/long-agama-${paddedIndex}.md`,
+    work_id: "long-agama",
+    work_title: "长阿含经",
+    work_short_title: "长阿含经",
+    work_summary:
+      "《长阿含经》二十二卷，后秦佛陀耶舍共竺佛念译，含三十经分四分，系统记录佛陀教法、七佛因缘、游行涅槃、种姓辩论、六十二见、世界观等，是阿含系四部之一。",
+    volume_index: item.index,
+    volume_unit: volumeUnit,
+  };
+});
+
 const RENWANG_VOLUMES = [
   { index: 1, label: "卷上", summary: "般若系护国经典，卷上包含序品、观如来品、菩萨行品及二谛品，阐发般若甚深义理。" },
   { index: 2, label: "卷下", summary: "卷下包含护国品、散华品、受持品及嘱累品，详述持经护国之殊胜功德与感应。" },
@@ -620,6 +670,7 @@ export const manifest = [
   ...LOTUS_SUTRA_DOCUMENTS.map((doc) => doc.path),
   ...DHARMAPADA_DOCUMENTS.map((doc) => doc.path),
   ...SAMYUKTA_AGAMA_DOCUMENTS.map((doc) => doc.path),
+  ...LONG_AGAMA_DOCUMENTS.map((doc) => doc.path),
   "content/sutras/amitayurdhyana-sutra.md",
   "content/sutras/perfect-enlightenment-sutra.md",
   "content/sutras/srimala-sutra.md",
@@ -812,6 +863,7 @@ export const documentIndex = [
   ...LOTUS_SUTRA_DOCUMENTS,
   ...DHARMAPADA_DOCUMENTS,
   ...SAMYUKTA_AGAMA_DOCUMENTS,
+  ...LONG_AGAMA_DOCUMENTS,
   {
     title: "大方广佛华严经 普贤行愿品",
     short_title: "普贤行愿品",
