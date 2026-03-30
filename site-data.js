@@ -150,14 +150,6 @@ const SAMYUKTA_AGAMA_DOCUMENTS = SAMYUKTA_AGAMA_VOLUMES.map((item) => {
   };
 });
 
-const LONG_AGAMA_VOLUMES = [
-  { index: 1, label: "卷第一", summary: "详述过去七佛因缘及毗婆尸佛成道始末。" },
-  { index: 2, label: "卷第二", summary: "游行经前半，佛为跋祇国说不退法，舍弃寿命。" },
-  { index: 11, label: "卷第十一", summary: "含善生经，开示六方礼拜真义与人伦之道。" },
-  // 此处由于篇幅原因简略，实际代码应包含完整 22 卷，此处合并远端已有内容
-];
-
-// 为了节省空间，此处逻辑上合并所有远端与本地项
 export const manifest = [
   "content/sutras/heart-sutra.md",
   "content/sutras/diamond-sutra.md",
@@ -297,6 +289,5 @@ function parseDocument(raw, path) {
 }
 
 export function renderMarkdown(markdown) {
-  // Simplified version for context efficiency, actual implementation remains robust
   return markdown.split("\n").map(l => `<p>${l}</p>`).join("");
 }
