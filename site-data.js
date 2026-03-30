@@ -1332,6 +1332,7 @@ export const HOME_FEATURED_WORK_IDS = [
   "lotus-sutra",
   "larger-sukhavati-vyuha",
   "amitabha-sutra",
+  "medicine-buddha-sutra",
   "ksitigarbha-vow-sutra",
   "vimalakirti-sutra",
   "sutra-in-forty-two-sections",
