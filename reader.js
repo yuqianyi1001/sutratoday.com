@@ -328,25 +328,55 @@ function renderVolumeNavigation(doc) {
 
     container.hidden = false;
     container.innerHTML = markup;
+
+    const select = container.querySelector(".reader-volume-select");
+    if (select) {
+      select.addEventListener("change", (event) => {
+        const nextSlug = event.target.value;
+        if (nextSlug) {
+          window.location.href = getReaderUrl(nextSlug);
+        }
+      });
+    }
   });
 }
 
 function buildVolumeNavigationMarkup(items) {
-  const links = items
+  const currentIndex = items.findIndex((item) => item.isCurrent);
+  const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
+  const previousItem = currentIndex > 0 ? items[currentIndex - 1] : null;
+  const nextItem = currentIndex >= 0 && currentIndex < items.length - 1 ? items[currentIndex + 1] : null;
+  const options = items
     .map((item) => {
-      if (item.isCurrent) {
-        return `<span class="reader-volume-link is-current" aria-current="page">${escapeHtml(item.label)}</span>`;
-      }
-      return `<a class="reader-volume-link" href="${getReaderUrl(item.slug)}" title="${escapeHtml(item.title)}">${escapeHtml(item.label)}</a>`;
+      const selected = item.isCurrent ? " selected" : "";
+      return `<option value="${escapeHtml(item.slug)}"${selected}>${escapeHtml(item.label)}</option>`;
     })
     .join("");
 
   return `
     <div class="reader-volume-nav-inner">
-      <div class="reader-volume-link-list">
-        ${links}
+      <div class="reader-volume-nav-row">
+        ${
+          previousItem
+            ? `<a class="reader-volume-step" href="${getReaderUrl(previousItem.slug)}" title="${escapeHtml(previousItem.title)}">上一卷</a>`
+            : `<span class="reader-volume-step is-disabled" aria-disabled="true">上一卷</span>`
+        }
+        <span class="reader-volume-current" aria-live="polite">
+          ${escapeHtml(currentItem ? currentItem.label : "卷数导航")}
+        </span>
+        ${
+          nextItem
+            ? `<a class="reader-volume-step" href="${getReaderUrl(nextItem.slug)}" title="${escapeHtml(nextItem.title)}">下一卷</a>`
+            : `<span class="reader-volume-step is-disabled" aria-disabled="true">下一卷</span>`
+        }
       </div>
-    </div>
+      <label class="reader-volume-select-wrap">
+        <span class="reader-volume-select-label">跳转到</span>
+        <select class="reader-volume-select" aria-label="选择卷数">
+          ${options}
+        </select>
+      </label>
+      </div>
   `;
 }
 
