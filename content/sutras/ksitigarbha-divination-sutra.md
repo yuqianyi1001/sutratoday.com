@@ -1,6 +1,6 @@
 ---
 title: 占察善恶业报经
-short_title: 察经
+short_title: 占察经
 slug: ksitigarbha-divination-sutra
 volume_label: 全二卷
 cbeta_source: sources/cbeta/T17n0839_001.xml
