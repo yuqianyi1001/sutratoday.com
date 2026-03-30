@@ -11,7 +11,7 @@
   - 翻译成 `现代语译` -> translated -> 翻译校验 -> ai_reviewed -> 人工校验 -> human_reviewed
 
 - 添加和处理一个佛经时，先找到佛经原本，并保存一份在本地。如果有多个版本，找到最通用的版本：
-  - 优先查找本地：~/Downloads/bookcase_v090_20231219
+  - 优先查找本地：~/Downloads/bookcase_v098_20251216
   - 优先在线版本：https://github.com/cbeta-org/xml-p5
   - 如果上述方法都找不到，请在 Cbeta 查找： https://cbetaonline.dila.edu.tw/
   - 把佛经底本，保存到 `sources/cbeta/`
