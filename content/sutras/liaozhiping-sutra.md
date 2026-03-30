@@ -3,7 +3,7 @@ title: 佛说疗痔病经
 short_title: 疗痔病经
 slug: liaozhibing-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T21n1325_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T21n1325_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

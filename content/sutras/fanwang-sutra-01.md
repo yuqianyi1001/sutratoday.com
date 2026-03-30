@@ -3,7 +3,7 @@ title: 梵网经卢舍那佛说菩萨心地戒品（卷上）
 short_title: 梵网经卷上
 slug: fanwang-sutra-01
 volume_label: 卷上
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T24n1484_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T24n1484_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-27

@@ -3,7 +3,7 @@ title: 占察善恶业报经
 short_title: 占察经
 slug: ksitigarbha-divination-sutra
 volume_label: 全二卷
-cbeta_source: sources/cbeta/T17n0839_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T17n0839_001
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-27

@@ -3,7 +3,7 @@ title: 佛说四十二章经
 short_title: 四十二章经
 slug: sutra-in-forty-two-sections
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T17n0784_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T17n0784_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

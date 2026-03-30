@@ -3,7 +3,7 @@ title: 胜鬘师子吼一乘大便利方广经
 short_title: 胜鬘经
 slug: srimala-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0353_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T12n0353_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-24

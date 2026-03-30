@@ -3,7 +3,7 @@ title: 大佛顶首楞严经 卷第三
 short_title: 楞严经卷三
 slug: surangama-sutra-03
 volume_label: 卷第三
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_003.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T19n0945_003
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

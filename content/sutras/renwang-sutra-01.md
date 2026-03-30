@@ -3,7 +3,7 @@ title: 仁王护国般若波罗蜜多经 卷上
 short_title: 仁王经 卷上
 slug: renwang-sutra-01
 volume_label: 卷上
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T08n0246_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T08n0246_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-26

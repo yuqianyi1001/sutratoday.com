@@ -3,7 +3,7 @@ title: 长阿含经 卷第十二
 short_title: 长阿含经卷十二
 slug: long-agama-12
 volume_label: 卷第十二
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T01n0001_012.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T01n0001_012
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

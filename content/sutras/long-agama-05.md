@@ -3,7 +3,7 @@ title: 长阿含经 卷第五
 short_title: 长阿含经卷五
 slug: long-agama-05
 volume_label: 卷第五
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T01n0001_005.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T01n0001_005
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

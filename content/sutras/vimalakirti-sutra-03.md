@@ -3,7 +3,7 @@ title: 维摩诘所说经卷下
 short_title: 维摩诘经卷下
 slug: vimalakirti-sutra-03
 volume_label: 卷下
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0475_003.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T14n0475_003
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-26

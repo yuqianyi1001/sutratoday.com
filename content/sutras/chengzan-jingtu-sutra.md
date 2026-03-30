@@ -3,7 +3,7 @@ title: 称赞净土佛摄受经
 short_title: 称赞净土经
 slug: chengzan-jingtu-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0367_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T12n0367_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

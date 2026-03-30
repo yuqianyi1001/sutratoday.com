@@ -3,7 +3,7 @@ title: 杂阿含经
 short_title: 杂阿含经
 slug: samyukta-agama-14
 volume_label: 卷第14
-cbeta_source: sources/cbeta/T02n0099_014.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T02n0099_014
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-29

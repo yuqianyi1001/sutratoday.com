@@ -3,7 +3,7 @@ title: 大乘起信论
 short_title: 起信论
 slug: awakening-of-faith
 volume_label: 全一卷
-cbeta_source: sources/cbeta/T32n1666_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T32n1666_001
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-27

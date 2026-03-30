@@ -3,7 +3,7 @@ title: 地藏菩萨本愿经 卷下
 short_title: 地藏经卷下
 slug: ksitigarbha-vow-sutra-02
 volume_label: 卷下
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T13n0412_002.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T13n0412_002
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-23

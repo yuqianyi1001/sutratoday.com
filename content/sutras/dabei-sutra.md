@@ -3,7 +3,7 @@ title: 千手千眼观世音菩萨广大圆满无碍大悲心陀罗尼经
 short_title: 大悲心陀罗尼经
 slug: dabei-tuoluoni-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T20n1060_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T20n1060_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

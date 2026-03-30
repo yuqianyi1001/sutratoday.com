@@ -3,7 +3,7 @@ title: 大势至菩萨念佛圆通章
 short_title: 念佛圆通章
 slug: dashizhi-yuantong
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_005.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T19n0945_005
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

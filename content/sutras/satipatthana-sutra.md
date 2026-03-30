@@ -3,7 +3,7 @@ title: 佛说念处经
 short_title: 念处经
 slug: satipatthana-sutra
 volume_label: 中阿含卷第二十四（第98经）
-cbeta_source: sources/cbeta/T01n0026_024.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T01n0026_024
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-27

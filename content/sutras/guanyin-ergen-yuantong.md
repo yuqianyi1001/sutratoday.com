@@ -3,7 +3,7 @@ title: 观世音菩萨耳根圆通章
 short_title: 耳根圆通
 slug: guanyin-ergen-yuantong
 volume_label: 全一卷（出自《楞严经》卷六）
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T19n0945_006.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T19n0945_006
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

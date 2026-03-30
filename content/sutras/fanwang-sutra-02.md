@@ -9,7 +9,7 @@ review_status: ai_reviewed
 summary: 卷下为菩萨戒本，详列十重四十八轻戒，是大乘修行者受持戒律、发菩提心的根本指南。
 tags: 戒律,菩萨道,戒本
 translated_by: gemini3
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T24n1484_002.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T24n1484_002
 ---
 
 # 梵网经 菩萨戒本

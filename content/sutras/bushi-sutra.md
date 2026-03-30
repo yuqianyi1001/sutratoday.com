@@ -3,7 +3,7 @@ title: 佛说布施经
 short_title: 布施经
 slug: bushi-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0705_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T16n0705_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

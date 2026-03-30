@@ -3,7 +3,7 @@ title: 妙法莲华经 观世音菩萨普门品
 short_title: 普门品
 slug: lotus-sutra-universal-gate
 volume_label: 第二十五品
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T09n0262_007.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T09n0262_007
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

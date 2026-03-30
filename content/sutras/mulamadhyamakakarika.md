@@ -4,7 +4,7 @@ title: 中论
 short_title: 中论
 slug: mulamadhyamakakarika
 volume_label: 全四卷
-cbeta_source: sources/cbeta/T30n1564_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T30n1564_001
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-27

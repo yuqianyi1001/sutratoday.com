@@ -3,7 +3,7 @@ title: 杂阿含经
 short_title: 杂阿含经
 slug: samyukta-agama-45
 volume_label: 卷第45
-cbeta_source: sources/cbeta/T02n0099_045.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T02n0099_045
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-29

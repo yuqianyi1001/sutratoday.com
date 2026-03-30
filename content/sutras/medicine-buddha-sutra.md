@@ -3,7 +3,7 @@ title: 药师琉璃光如来本愿功德经
 short_title: 药师经
 slug: medicine-buddha-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T14n0450_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T14n0450_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

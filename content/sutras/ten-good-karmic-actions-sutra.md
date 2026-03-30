@@ -3,7 +3,7 @@ title: 佛说十善业道经
 short_title: 十善业道经
 slug: ten-good-karmic-actions-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T15n0600_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T15n0600_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-26

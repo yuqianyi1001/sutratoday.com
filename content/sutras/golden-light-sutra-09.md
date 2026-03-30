@@ -3,7 +3,7 @@ title: 金光明最胜王经
 short_title: 金光明经
 slug: golden-light-sutra-09
 volume_label: 卷第九
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T16n0665_009.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T16n0665_009
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-27

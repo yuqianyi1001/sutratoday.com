@@ -3,7 +3,7 @@ title: 佛说大安般守意经
 short_title: 大安般守意经
 slug: anapanasati-sutra
 volume_label: 全二卷
-cbeta_source: sources/cbeta/T15n0602_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T15n0602_001
 translation_status: segments_reviewed
 review_status: pending
 updated_at: 2026-03-27

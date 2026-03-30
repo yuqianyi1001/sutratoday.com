@@ -3,7 +3,7 @@ title: 杂阿含经
 short_title: 杂阿含经
 slug: samyukta-agama-25
 volume_label: 卷第二十五
-cbeta_source: sources/cbeta/T02n0099_025.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T02n0099_025
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-29

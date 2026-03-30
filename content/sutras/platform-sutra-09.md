@@ -3,7 +3,7 @@ title: 六祖坛经 宣诏品第九
 short_title: 坛经宣诏品
 slug: platform-sutra-09
 volume_label: 全一卷 · 宣诏品第九
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T48n2008_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-23

@@ -3,7 +3,7 @@ title: 佛说盂兰盆经
 short_title: 盂兰盆经
 slug: ullambana-sutra
 volume_label: 全一卷
-cbeta_source: sources/cbeta/T16n0685_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T16n0685_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-27

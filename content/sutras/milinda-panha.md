@@ -3,7 +3,7 @@ title: 那先比丘经
 short_title: 那先经
 slug: milinda-panha
 volume_label: 全三卷
-cbeta_source: sources/cbeta/T32n1670.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T32n1670
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-27

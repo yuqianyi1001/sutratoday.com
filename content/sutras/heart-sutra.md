@@ -3,7 +3,7 @@ title: 般若波罗蜜多心经
 short_title: 心经
 slug: heart-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T08n0251_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T08n0251_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

@@ -3,7 +3,7 @@ title: 信心铭
 short_title: 信心铭
 slug: xinxin-ming
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2010_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T48n2010_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

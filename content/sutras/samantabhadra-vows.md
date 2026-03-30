@@ -3,7 +3,7 @@ title: 大方广佛华严经 普贤行愿品
 short_title: 普贤行愿品
 slug: samantabhadra-vows
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T10n0293_040.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T10n0293_040
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-25

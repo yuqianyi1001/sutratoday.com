@@ -3,7 +3,7 @@ title: 六祖坛经 定慧品第四
 short_title: 坛经定慧品
 slug: platform-sutra-04
 volume_label: 全一卷 · 定慧品第四
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T48n2008_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T48n2008_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-22

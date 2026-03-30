@@ -3,7 +3,7 @@ title: 法句经
 short_title: 法句经
 slug: dharmapada-01
 volume_label: 卷上
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T04n0210_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T04n0210_001
 translation_status: translated
 review_status: ai_reviewed
 updated_at: 2026-03-25

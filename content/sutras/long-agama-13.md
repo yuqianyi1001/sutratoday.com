@@ -3,7 +3,7 @@ title: 长阿含经 卷第十三
 short_title: 长阿含经卷十三
 slug: long-agama-13
 volume_label: 卷第十三
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T01n0001_013.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T01n0001_013
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28

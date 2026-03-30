@@ -3,7 +3,7 @@ title: 佛说法灭尽经
 short_title: 法灭尽经
 slug: famiejin-sutra
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T12n0396_001.xml
+cbeta_web_source: https://cbetaonline.dila.edu.tw/T12n0396_001
 translation_status: translated
 review_status: unreviewed
 updated_at: 2026-03-28
