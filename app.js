@@ -1,15 +1,15 @@
 import {
   escapeHtml,
   formatUpdatedAtBadgeLabel,
-  getCatalogDocuments,
   getCatalogVolumeBadgeLabel,
-  getFeaturedDocuments,
-  getPrimarySample,
+  getEstimatedWorkCount,
+  getManifestVolumeCount,
   getReaderUrl,
   getReviewState,
   getTranslationState,
-  HOME_FEATURED_LIMIT,
-  loadDocuments,
+  HOME_FEATURED_WORK_IDS,
+  loadDocument,
+  loadFeaturedDocuments,
   renderMarkdown,
 } from "./site-data.js";
 
@@ -30,17 +30,23 @@ init().catch((error) => {
 });
 
 async function init() {
-  const documents = await loadDocuments();
-  renderStats(getCatalogDocuments(documents), documents.length);
-  renderCatalog(getFeaturedDocuments(documents));
-  dom.catalogLead.textContent = `首页仅展示精选的 ${HOME_FEATURED_LIMIT} 部经目。完整目录请进入单独的经文目录页查看。`;
-  renderSample(getPrimarySample(documents)).catch((error) => {
+  // 1. 立即渲染统计数据，无需加载文件
+  renderStats(getEstimatedWorkCount(), getManifestVolumeCount());
+
+  // 2. 仅加载首页展示所需的 11 部经目
+  const featuredDocuments = await loadFeaturedDocuments();
+  renderCatalog(featuredDocuments);
+
+  dom.catalogLead.textContent = `首页固定展示 ${HOME_FEATURED_WORK_IDS.length} 部精选经目。完整目录请进入单独的经文目录页查看。`;
+
+  // 3. 单独加载示例经文（心经）
+  renderSampleBySlug("heart-sutra").catch((error) => {
     dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
   });
 }
 
-function renderStats(catalogDocs, volumeCount) {
-  dom.statWorks.textContent = String(catalogDocs.length);
+function renderStats(workCount, volumeCount) {
+  dom.statWorks.textContent = String(workCount);
   dom.statVolumes.textContent = String(volumeCount);
 }
 
@@ -72,16 +78,19 @@ function renderCatalog(docs) {
     .join("");
 }
 
-async function renderSample(sample) {
-  const selected = sample;
-  const translationBadge = getTranslationState(selected.translation_status);
-  const reviewBadge = getReviewState(selected.review_status);
+async function renderSampleBySlug(slug) {
+  // 查找对应的路径并加载
+  const path = "content/sutras/heart-sutra.md";
+  const selected = await loadDocument(path);
+  
+  const translationBadge = getTranslationState(selected.translation_status || "translated");
+  const reviewBadge = getReviewState(selected.review_status || "ai_reviewed");
 
-  dom.sampleTitle.textContent = selected.title;
+  dom.sampleTitle.textContent = selected.title || "般若波罗蜜多心经";
   dom.sampleMeta.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
   `;
   dom.sampleRendered.innerHTML = renderMarkdown(selected.body);
-  dom.sampleLink.href = getReaderUrl(selected.slug);
+  dom.sampleLink.href = getReaderUrl(slug);
 }

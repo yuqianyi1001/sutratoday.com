@@ -1326,7 +1326,62 @@ export const documentIndex = [
   },
 ];
 
-export const HOME_FEATURED_LIMIT = 6;
+export const HOME_FEATURED_WORK_IDS = [
+  "diamond-sutra",
+  "heart-sutra",
+  "lotus-sutra",
+  "larger-sukhavati-vyuha",
+  "amitabha-sutra",
+  "ksitigarbha-vow-sutra",
+  "vimalakirti-sutra",
+  "sutra-in-forty-two-sections",
+  "perfect-enlightenment-sutra",
+  "surangama-sutra",
+  "platform-sutra",
+];
+
+export async function loadFeaturedDocuments() {
+  const featuredWorkIds = new Set(HOME_FEATURED_WORK_IDS);
+  
+  // 找出代表性的卷（通常是第一卷或全一卷）来渲染卡片
+  const representativePaths = manifest.filter(path => {
+    const matched = documentIndex.find(item => item.path === path);
+    if (!matched) return false;
+    const workId = matched.work_id || matched.slug;
+    // 只取该作品的第一卷作为代表，避免首页并行请求太多
+    return featuredWorkIds.has(workId) && (matched.volume_index === 1 || !matched.volume_index);
+  });
+
+  const loaded = (
+    await Promise.all(
+      representativePaths.map(async (path) => {
+        try {
+          const doc = await loadDocument(path);
+          return mergeDocumentMeta(doc);
+        } catch (e) {
+          return null;
+        }
+      }),
+    )
+  ).filter(Boolean);
+
+  // 按照指定的顺序进行重排
+  return HOME_FEATURED_WORK_IDS.map(workId => {
+    const group = loaded.filter(doc => (doc.work_id || doc.slug) === workId);
+    if (group.length === 0) return null;
+    return buildCatalogDocument(group);
+  }).filter(Boolean);
+}
+
+export function getManifestVolumeCount() {
+  return manifest.length;
+}
+
+export function getEstimatedWorkCount() {
+  // 从索引中估算作品总数，无需加载文件
+  const workIds = new Set(documentIndex.map(item => item.work_id || item.slug));
+  return workIds.size;
+}
 export const SITE_BASE_URL = "https://sutratoday.com/";
 export const GITHUB_REPO_BASE = "https://github.com/yuqianyi1001/sutratoday.com/blob/main/";
 
