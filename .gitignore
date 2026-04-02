@@ -1,4 +1,7 @@
 .DS_Store
+translation_jobs.db
+translation_jobs.db-wal
+translation_jobs.db-shm
 .alma-snapshots
 __pycache__/
 *.pyc

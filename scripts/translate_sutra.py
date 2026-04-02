@@ -11,14 +11,24 @@ import sys
 import re
 import time
 import argparse
+import os
 from pathlib import Path
 import urllib.request
 import urllib.error
 import json
 
+# ── 从 .env 加载环境变量 ───────────────────────────────────────────────────────
+_env_file = Path(__file__).parent.parent / ".env"
+if _env_file.exists():
+    for _line in _env_file.read_text().splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _k, _v = _line.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
+
 # ── 配置 ──────────────────────────────────────────────────────────────────────
-LMSTUDIO_URL = "http://localhost:1234/v1/chat/completions"
-MODEL_ID = "qwen3.5-9b"
+LMSTUDIO_URL = os.environ.get("LMSTUDIO_URL", "http://localhost:1234/v1/chat/completions")
+MODEL_ID     = os.environ.get("LMSTUDIO_MODEL", "qwen3.5-9b")
 SUTRAS_DIR = Path(__file__).parent.parent / "content" / "sutras-raw"
 
 SYSTEM_PROMPT = """你是一位精通汉语佛教典籍的学者，擅长将古代佛经文言文翻译成通俗易懂的现代汉语白话文。

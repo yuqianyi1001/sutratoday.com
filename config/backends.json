@@ -1,0 +1,20 @@
+[
+  {"key": "azure-deepseek",    "label": "Azure DeepSeek-V3.2",  "group": "Azure #1", "backend": "azure",      "model": "DeepSeek-V3.2"},
+  {"key": "azure-kimi",        "label": "Azure Kimi-K2.5",      "group": "Azure #1", "backend": "azure",      "model": "Kimi-K2.5"},
+  {"key": "azure-grok41",      "label": "Azure Grok-4.1 Fast",  "group": "Azure #1", "backend": "azure",      "model": "grok-4-1-fast-reasoning"},
+  {"key": "azure2-gpt53",      "label": "Azure GPT-5.3",        "group": "Azure #2", "backend": "azure2",     "model": "gpt-5.3-chat"},
+  {"key": "azure2-gpt54mini",  "label": "Azure GPT-5.4-mini",   "group": "Azure #2", "backend": "azure2",     "model": "gpt-5.4-mini"},
+  {"key": "gemini-flash",      "label": "Gemini 2.5 Flash",     "group": "Gemini CLI","backend": "gemini",     "model": "gemini-2.5-flash"},
+  {"key": "gemini-pro",        "label": "Gemini 2.5 Pro",       "group": "Gemini CLI","backend": "gemini",     "model": "gemini-2.5-pro"},
+  {"key": "openrouter-qwen36", "label": "Qwen3.6 Plus（免费）", "group": "OpenRouter","backend": "openrouter", "model": "qwen/qwen3.6-plus-preview:free"},
+  {"key": "openrouter-qwen3coder","label": "Qwen3 Coder（免费）","group": "OpenRouter","backend": "openrouter", "model": "qwen/qwen3-coder:free"},
+  {"key": "openrouter-qwen3next", "label": "Qwen3 Next 80B（免费）","group": "OpenRouter","backend": "openrouter","model": "qwen/qwen3-next-80b-a3b-instruct:free"},
+  {"key": "nvidia-deepseek",   "label": "NVIDIA DeepSeek-V3.2", "group": "NVIDIA NIM","backend": "nvidia",     "model": "deepseek-ai/deepseek-v3.2"},
+  {"key": "nvidia-llama",      "label": "NVIDIA Llama-3.3-70B", "group": "NVIDIA NIM","backend": "nvidia",     "model": "meta/llama-3.3-70b-instruct"},
+  {"key": "groq-qwen3-32b",         "label": "Groq Qwen3-32B",      "group": "Groq",  "backend": "groq",      "model": "qwen/qwen3-32b"},
+  {"key": "dashscope-qwen35-flash", "label": "百炼 Qwen3.5-Flash", "group": "百炼",  "backend": "dashscope", "model": "qwen3.5-flash"},
+  {"key": "dashscope-qwen35-plus",  "label": "百炼 Qwen3.5-Plus",  "group": "百炼",  "backend": "dashscope", "model": "qwen3.5-plus"},
+  {"key": "dashscope-qwen3-max",    "label": "百炼 Qwen3-Max",     "group": "百炼",  "backend": "dashscope", "model": "qwen3-max"},
+  {"key": "anyrouter",         "label": "AnyRouter Claude",     "group": "其他",     "backend": "anyrouter",  "model": "claude-3-5-haiku-20241022"},
+  {"key": "lmstudio",          "label": "LM Studio（本地）",    "group": "其他",     "backend": "lmstudio",   "model": ""}
+]
