@@ -261,12 +261,28 @@ HTML = """<!DOCTYPE html>
   </div>
 
   <!-- 总进度条 -->
-  <div class="card p-4 mb-6">
+  <div class="card p-4 mb-4">
     <div class="flex justify-between text-sm text-slate-400 mb-2">
       <span>总翻译进度（卷）</span>
       <span id="pct-label">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="total-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- 翻译速度 -->
+  <div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="card p-4 text-center">
+      <div class="stat-num text-yellow-400" id="spd-1h">-</div>
+      <div class="text-slate-400 text-xs mt-1">卷/h（最近1h）</div>
+    </div>
+    <div class="card p-4 text-center">
+      <div class="stat-num text-yellow-400" id="spd-8h">-</div>
+      <div class="text-slate-400 text-xs mt-1">卷/h（最近8h均）</div>
+    </div>
+    <div class="card p-4 text-center">
+      <div class="stat-num text-yellow-400" id="spd-24h">-</div>
+      <div class="text-slate-400 text-xs mt-1">卷/h（最近24h均）</div>
+    </div>
   </div>
 
   <!-- 三栏布局：items-start 让各列独立高度，向下自然延伸 -->
@@ -366,6 +382,10 @@ async function refresh() {
     document.getElementById('pct-label').textContent = pct + '%';
     document.getElementById('total-bar').style.width = pct + '%';
     document.getElementById('last-update').textContent = '更新于 ' + new Date().toLocaleTimeString();
+
+    document.getElementById('spd-1h').textContent  = q.speed_1h  ?? '-';
+    document.getElementById('spd-8h').textContent  = q.speed_8h  ?? '-';
+    document.getElementById('spd-24h').textContent = q.speed_24h ?? '-';
 
     // ── Workers ─────────────────────────────────────────────────────────────
     const wEl = document.getElementById('workers-list');
@@ -665,6 +685,17 @@ def api_status():
             ORDER BY updated_at DESC LIMIT 10
         """).fetchall()]
 
+        # 翻译速度：最近 1h / 8h / 24h 完成卷数
+        now_ts = time.time()
+        def _vols_since(hours):
+            ts = time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime(now_ts - hours * 3600))
+            return conn.execute(
+                "SELECT COUNT(*) FROM jobs WHERE status='done' AND completed_at > ?", (ts,)
+            ).fetchone()[0]
+        speed_1h  = _vols_since(1)
+        speed_8h  = round(_vols_since(8)  / 8,  1)
+        speed_24h = round(_vols_since(24) / 24, 1)
+
     with _workers_lock:
         workers_list = []
         dead = []
@@ -699,6 +730,9 @@ def api_status():
             "in_progress_sutras": in_progress_sutras,
             "completed_sutras":   completed_sutras,
             "failed_jobs":        failed_jobs,
+            "speed_1h":           speed_1h,
+            "speed_8h":           speed_8h,
+            "speed_24h":          speed_24h,
         },
         "workers": workers_list,
     })

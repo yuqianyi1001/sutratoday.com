@@ -1,4 +1,34 @@
 {
+  "30ca6f5e": {
+    "wid": "30ca6f5e",
+    "pid": 65779,
+    "backend": "nvidia",
+    "backend_key": "nvidia",
+    "model": "deepseek-ai/deepseek-v3.2",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_30ca6f5e.log",
+    "started_at": 1775099473.77178
+  },
+  "af924f5a": {
+    "wid": "af924f5a",
+    "pid": 54193,
+    "backend": "dashscope",
+    "backend_key": "dashscope",
+    "model": "qwen3.5-flash",
+    "batch_size": 10,
+    "log_path": "/tmp/sutra_workers/worker_af924f5a.log",
+    "started_at": 1775098816.223031
+  },
+  "0a2e1399": {
+    "wid": "0a2e1399",
+    "pid": 53708,
+    "backend": "dashscope",
+    "backend_key": "dashscope",
+    "model": "qwen3.5-plus",
+    "batch_size": 10,
+    "log_path": "/tmp/sutra_workers/worker_0a2e1399.log",
+    "started_at": 1775098792.8926878
+  },
   "699dab34": {
     "wid": "699dab34",
     "pid": 94725,
@@ -29,34 +59,14 @@
     "log_path": "/tmp/sutra_workers/worker_c7da47eb.log",
     "started_at": 1775018902.922063
   },
-  "af924f5a": {
-    "wid": "af924f5a",
-    "pid": 54193,
-    "backend": "dashscope",
-    "backend_key": "dashscope",
-    "model": "qwen3.5-flash",
-    "batch_size": 10,
-    "log_path": "/tmp/sutra_workers/worker_af924f5a.log",
-    "started_at": 1775098816.223031
-  },
-  "0a2e1399": {
-    "wid": "0a2e1399",
-    "pid": 53708,
-    "backend": "dashscope",
-    "backend_key": "dashscope",
-    "model": "qwen3.5-plus",
-    "batch_size": 10,
-    "log_path": "/tmp/sutra_workers/worker_0a2e1399.log",
-    "started_at": 1775098792.8926878
-  },
-  "30ca6f5e": {
-    "wid": "30ca6f5e",
-    "pid": 65779,
-    "backend": "nvidia",
-    "backend_key": "nvidia-deepseek",
-    "model": "deepseek-ai/deepseek-v3.2",
+  "a9e0c924": {
+    "wid": "a9e0c924",
+    "pid": 85739,
+    "backend": "groq",
+    "backend_key": "groq",
+    "model": "qwen/qwen3-32b",
     "batch_size": 5,
-    "log_path": "/tmp/sutra_workers/worker_30ca6f5e.log",
-    "started_at": 1775099473.77178
+    "log_path": "/tmp/sutra_workers/worker_a9e0c924.log",
+    "started_at": 1775100627.3169868
   }
 }
