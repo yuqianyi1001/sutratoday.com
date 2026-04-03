@@ -29,7 +29,8 @@ if _env_file.exists():
         _line = _line.strip()
         if _line and not _line.startswith("#") and "=" in _line:
             _k, _v = _line.split("=", 1)
-            os.environ.setdefault(_k.strip(), _v.strip())
+            _v = _v.strip().strip('"').strip("'")
+            os.environ.setdefault(_k.strip(), _v)
 
 import job_queue
 
@@ -114,8 +115,12 @@ def _load_workers_state():
         ("lmstudio",   ""):                               "lmstudio",
         ("anyrouter",  "claude-3-5-haiku-20241022"):      "anyrouter",
         ("gemini",     "gemini-2.5-flash"):               "gemini-flash",
+        ("gemini",     "flash-nothink"):                  "gemini-flash-nt",
         ("gemini",     "gemini-2.5-pro"):                 "gemini-pro",
+        ("gemini",     "pro-nothink"):                    "gemini-pro-nt",
         ("openrouter", "qwen/qwen3.6-plus-preview:free"): "openrouter-qwen36",
+        ("codex",      "gpt-5.4"):                        "codex-gpt54",
+        ("codex",      "gpt-5.4-mini"):                   "codex-gpt54-mini",
     }
 
     found = []

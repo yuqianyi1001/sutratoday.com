@@ -43,7 +43,8 @@ if _env_file.exists():
         _line = _line.strip()
         if _line and not _line.startswith("#") and "=" in _line:
             _k, _v = _line.split("=", 1)
-            os.environ.setdefault(_k.strip(), _v.strip())
+            _v = _v.strip().strip('"').strip("'")
+            os.environ.setdefault(_k.strip(), _v)
 
 # ── Telegram 通知 ─────────────────────────────────────────────────────────────
 
@@ -146,6 +147,8 @@ _CANONICAL = {
     ("anyrouter",  "claude-3-opus-20240229"):                "anyrouter-claude-3-opus",
     ("gemini",     "gemini-2.5-flash"):                      "gemini-2.5-flash",
     ("gemini",     "gemini-2.5-pro"):                        "gemini-2.5-pro",
+    ("gemini",     "flash-nothink"):                         "gemini-2.5-flash-nothink",
+    ("gemini",     "pro-nothink"):                           "gemini-2.5-pro-nothink",
     ("openrouter", "qwen/qwen3.6-plus-preview:free"):        "openrouter-qwen3.6-plus",
     ("openrouter", "qwen/qwen3-coder:free"):                 "openrouter-qwen3-coder",
     ("openrouter", "qwen/qwen3-next-80b-a3b-instruct:free"): "openrouter-qwen3-next-80b",
@@ -163,6 +166,8 @@ _CANONICAL = {
     ("dashscope",  "qwen3.5-plus"):                          "dashscope-qwen3.5-plus",
     ("dashscope",  "qwen3-max"):                             "dashscope-qwen3-max",
     ("dashscope",  "qwen3-max-2026-01-23"):                  "dashscope-qwen3-max-0123",
+    ("codex",      "gpt-5.4"):                              "codex-gpt-5.4",
+    ("codex",      "gpt-5.4-mini"):                         "codex-gpt-5.4-mini",
 }
 
 def canonical_model(backend: str, model: str) -> str:
@@ -623,14 +628,14 @@ def _gemini_call(messages: list, model: str, max_tokens: int = 8192, retries: in
     parts = [m["content"] for m in messages if m["role"] in ("system", "user")]
     prompt = "\n\n".join(parts)
 
-    cmd = [gemini_bin, "-p", prompt, "--approval-mode", "yolo", "-o", "json"]
+    cmd = [gemini_bin, "-p", prompt, "--approval-mode", "plan", "-o", "json"]
     if model:
         cmd += ["-m", model]
 
     for attempt in range(retries + 1):
         try:
             result = subprocess.run(
-                cmd, capture_output=True, text=True, timeout=180, env=env
+                cmd, capture_output=True, text=True, timeout=300, env=env
             )
             if result.returncode != 0:
                 raise RuntimeError(f"exit {result.returncode}: {result.stderr[:300]}")
@@ -645,6 +650,65 @@ def _gemini_call(messages: list, model: str, max_tokens: int = 8192, retries: in
                 time.sleep(5)
             else:
                 return f"【翻译失败: {e}】"
+    return "【翻译失败，待补充】"
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Backend: Codex CLI（子进程调用，read-only sandbox，纯文本输出）
+# ════════════════════════════════════════════════════════════════════════════
+
+def _codex_call(messages: list, model: str, max_tokens: int = 8192, retries: int = 3) -> str:
+    """
+    通过 Codex CLI 子进程翻译。
+    - 使用 codex exec --sandbox read-only 禁止一切写操作
+    - --ephemeral 不持久化会话
+    - --skip-git-repo-check 不依赖 git
+    - -o tempfile 获取纯文本输出
+    """
+    codex_bin = os.environ.get("CODEX_CLI_PATH", "/opt/homebrew/bin/codex")
+    env = {**os.environ, "PATH": f"/opt/homebrew/bin:{os.environ.get('PATH', '')}"}
+
+    # 合并 system + user 内容为单一 prompt
+    parts = [m["content"] for m in messages if m["role"] in ("system", "user")]
+    prompt = "\n\n".join(parts)
+
+    import tempfile
+    for attempt in range(retries + 1):
+        tmp_out = None
+        try:
+            tmp_out = tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False)
+            tmp_out.close()
+
+            cmd = [
+                codex_bin, "exec", prompt,
+                "--sandbox", "read-only",
+                "--ephemeral",
+                "--skip-git-repo-check",
+                "-c", 'model_reasoning_effort="low"',
+                "-o", tmp_out.name,
+            ]
+            if model:
+                cmd += ["-m", model]
+
+            result = subprocess.run(
+                cmd, capture_output=True, text=True, timeout=300, env=env,
+                stdin=subprocess.DEVNULL,
+            )
+            if result.returncode != 0:
+                raise RuntimeError(f"exit {result.returncode}: {result.stderr[:300]}")
+            response = Path(tmp_out.name).read_text(encoding="utf-8").strip()
+            if response:
+                return response
+            raise ValueError("output 为空")
+        except Exception as e:
+            if attempt < retries:
+                print(f" [重试{attempt+1}: {e}]", end="", flush=True)
+                time.sleep(5)
+            else:
+                return f"【翻译失败: {e}】"
+        finally:
+            if tmp_out and Path(tmp_out.name).exists():
+                Path(tmp_out.name).unlink(missing_ok=True)
     return "【翻译失败，待补充】"
 
 
@@ -685,6 +749,9 @@ def call_groq(text: str, model: str, retries: int = 3) -> str:
 def call_dashscope(text: str, model: str, retries: int = 3) -> str:
     return _dashscope_call(_single_messages(text), model, retries=retries)
 
+def call_codex(text: str, model: str, retries: int = 3) -> str:
+    return _codex_call(_single_messages(text), model, retries=retries)
+
 
 BACKENDS = {
     "azure":     {"call": call_azure,     "raw": _azure_call,
@@ -696,7 +763,8 @@ BACKENDS = {
     "anyrouter": {"call": call_anyrouter, "raw": _anyrouter_call,
                   "default_model": "claude-3-5-haiku-20241022"},
     "gemini":      {"call": call_gemini,      "raw": _gemini_call,
-                    "default_model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")},
+                    "default_model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),
+                    "force_batch_size": 1},
     "openrouter":  {"call": call_openrouter,  "raw": _openrouter_call,
                     "default_model": os.environ.get("OPENROUTER_MODEL", "qwen/qwen3.6-plus-preview:free")},
     "nvidia":      {"call": call_nvidia,      "raw": _nvidia_call,
@@ -705,6 +773,9 @@ BACKENDS = {
                     "default_model": "qwen/qwen3-32b"},
     "dashscope":   {"call": call_dashscope,   "raw": _dashscope_call,
                     "default_model": "qwen3.5-plus"},
+    "codex":       {"call": call_codex,       "raw": _codex_call,
+                    "default_model": os.environ.get("CODEX_DEFAULT_MODEL", "gpt-5.4"),
+                    "force_batch_size": 1},
 }
 
 
@@ -870,6 +941,11 @@ def main():
     model      = args.model or BACKENDS[args.backend]["default_model"]
     full_model = canonical_model(args.backend, model)
     agent_id   = str(uuid.uuid4())[:8]
+
+    # CLI 型 backend 强制逐段翻译（避免超长 prompt 导致超时）
+    forced = BACKENDS[args.backend].get("force_batch_size")
+    if forced is not None:
+        args.batch_size = forced
 
     print(f"[Worker {agent_id}] {full_model}  batch={args.batch_size}")
 

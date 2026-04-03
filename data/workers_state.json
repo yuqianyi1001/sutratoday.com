@@ -1,1 +1,92 @@
-{}
+{
+  "0de1eaa4": {
+    "wid": "0de1eaa4",
+    "pid": 58388,
+    "backend": "nvidia",
+    "backend_key": "nvidia-deepseek",
+    "model": "deepseek-ai/deepseek-v3.2",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_0de1eaa4.log",
+    "started_at": 1775182487.027154
+  },
+  "36bb79b9": {
+    "wid": "36bb79b9",
+    "pid": 58389,
+    "backend": "nvidia",
+    "backend_key": "nvidia-deepseek",
+    "model": "deepseek-ai/deepseek-v3.2",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_36bb79b9.log",
+    "started_at": 1775182490.188216
+  },
+  "bdbcb1d5": {
+    "wid": "bdbcb1d5",
+    "pid": 58393,
+    "backend": "dashscope",
+    "backend_key": "dashscope-qwen35-flash",
+    "model": "qwen3.5-flash",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_bdbcb1d5.log",
+    "started_at": 1775182508.043669
+  },
+  "445470dd": {
+    "wid": "445470dd",
+    "pid": 58394,
+    "backend": "dashscope",
+    "backend_key": "dashscope-qwen35-plus",
+    "model": "qwen3.5-plus",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_445470dd.log",
+    "started_at": 1775182511.194164
+  },
+  "bd66d5b2": {
+    "wid": "bd66d5b2",
+    "pid": 66934,
+    "backend": "gemini",
+    "backend_key": "gemini-flash",
+    "model": "gemini-2.5-flash",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_bd66d5b2.log",
+    "started_at": 1775188369.766027
+  },
+  "241f8407": {
+    "wid": "241f8407",
+    "pid": 68989,
+    "backend": "codex",
+    "backend_key": "codex-gpt54-mini",
+    "model": "gpt-5.4-mini",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_241f8407.log",
+    "started_at": 1775190430.213998
+  },
+  "a931df05": {
+    "wid": "a931df05",
+    "pid": 73511,
+    "backend": "gemini",
+    "backend_key": "gemini-flash-nt",
+    "model": "flash-nothink",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_a931df05.log",
+    "started_at": 1775190894.842526
+  },
+  "1e7cc5a5": {
+    "wid": "1e7cc5a5",
+    "pid": 73829,
+    "backend": "codex",
+    "backend_key": "codex-gpt54-mini",
+    "model": "gpt-5.4-mini",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_1e7cc5a5.log",
+    "started_at": 1775190911.529753
+  },
+  "4913a08f": {
+    "wid": "4913a08f",
+    "pid": 75881,
+    "backend": "openrouter",
+    "backend_key": "openrouter-qwen3next",
+    "model": "qwen/qwen3-next-80b-a3b-instruct:free",
+    "batch_size": 5,
+    "log_path": "/tmp/sutra_workers/worker_4913a08f.log",
+    "started_at": 1775190975.5321631
+  }
+}
