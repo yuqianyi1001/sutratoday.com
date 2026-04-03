@@ -638,7 +638,14 @@ def _gemini_call(messages: list, model: str, max_tokens: int = 8192, retries: in
                 cmd, capture_output=True, text=True, timeout=300, env=env
             )
             if result.returncode != 0:
-                raise RuntimeError(f"exit {result.returncode}: {result.stderr[:300]}")
+                stderr = result.stderr[:500]
+                # 配额/限速错误：长等待后重试
+                if "QuotaError" in stderr or "TerminalQuota" in stderr or "429" in stderr:
+                    wait = 60 * (attempt + 1)
+                    print(f" [配额限制，等{wait}s]", end="", flush=True)
+                    time.sleep(wait)
+                    continue
+                raise RuntimeError(f"exit {result.returncode}: {stderr[:300]}")
             data = json.loads(result.stdout)
             response = data.get("response", "").strip()
             if response:
@@ -697,9 +704,17 @@ def _codex_call(messages: list, model: str, max_tokens: int = 8192, retries: int
             if result.returncode != 0:
                 raise RuntimeError(f"exit {result.returncode}: {result.stderr[:300]}")
             response = Path(tmp_out.name).read_text(encoding="utf-8").strip()
-            if response:
+            # 过滤 Codex CLI 可能混入的日志头
+            response = re.sub(
+                r'(?:OpenAI Codex v[\d.]+.*?session id: [^\n]*\n?)',
+                '', response, flags=re.DOTALL).strip()
+            response = re.sub(
+                r'(?:Reading additional input from stdin[^\n]*\n?)',
+                '', response).strip()
+            response = re.sub(r'^tokens used\n[\d,]+\n?', '', response, flags=re.MULTILINE).strip()
+            if response and 'OpenAI Codex' not in response:
                 return response
-            raise ValueError("output 为空")
+            raise ValueError("output 为空或含 CLI 日志")
         except Exception as e:
             if attempt < retries:
                 print(f" [重试{attempt+1}: {e}]", end="", flush=True)
