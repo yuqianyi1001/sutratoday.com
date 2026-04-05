@@ -22,3 +22,4 @@ coverage.xml
 *.cover
 .hypothesis/
 translation_jobs.db.bak
+content/cbeta-raw/
