@@ -206,10 +206,13 @@ def _scan_all_files():
                         k, v = line.split(":", 1)
                         fm[k.strip()] = v.strip()
 
-        # 只扫描已翻译完成的卷（跳过 untranslated / translating）
+        # 只扫描已翻译完成且未审阅的卷
         ts = fm.get("translation_status", "untranslated")
         if ts != "translated":
             continue
+        rs = fm.get("review_status", "unreviewed")
+        if rs.startswith("reviewed"):
+            continue  # 已审阅，跳过
 
         slug = fm.get("slug", path.stem)
         cbeta_id = fm.get("cbeta_id", slug.rsplit("-", 1)[0])
@@ -393,6 +396,36 @@ def api_review_fix():
     return jsonify({"ok": True, "action": action, "section_index": section_index})
 
 
+def _mark_reviewed(md_path: Path, label: str = "reviewed-4-4"):
+    """在 frontmatter 中标记 review_status。"""
+    content = md_path.read_text(encoding="utf-8")
+    if re.search(r'^review_status:\s*' + re.escape(label) + r'\s*$', content, re.MULTILINE):
+        return False  # 已标记
+    content = re.sub(
+        r'^(review_status:\s*).*$',
+        r'\g<1>' + label,
+        content,
+        count=1,
+        flags=re.MULTILINE,
+    )
+    md_path.write_text(content, encoding="utf-8")
+    return True
+
+
+@review_bp.route("/api/review/mark-reviewed", methods=["POST"])
+def api_review_mark_reviewed():
+    """手动标记一卷为已审阅。"""
+    data = request.json or {}
+    slug = data.get("slug")
+    md_path = SUTRAS_DIR / f"{slug}.md"
+    if not md_path.exists():
+        return jsonify({"ok": False, "error": "file not found"}), 404
+    changed = _mark_reviewed(md_path)
+    if changed:
+        _index_cache["data"] = None
+    return jsonify({"ok": True, "changed": changed})
+
+
 @review_bp.route("/api/review/fix-all", methods=["POST"])
 def api_review_fix_all():
     data = request.json or {}
@@ -416,6 +449,8 @@ def api_review_fix_all():
     if fixed > 0:
         md_path.write_text(new_content, encoding="utf-8")
         _index_cache["data"] = None
+    # 修复后自动标记为已审阅
+    _mark_reviewed(md_path)
     return jsonify({"ok": True, "fixed_count": fixed})
 
 
@@ -589,6 +624,7 @@ body { font-family: -apple-system, "PingFang SC", "Noto Serif SC", serif; backgr
               <option value="">加载中...</option>
             </select>
             <button class="btn btn-fixall" onclick="fixAll()">一键修复全部</button>
+            <button class="btn" style="background:#1e40af;color:white" onclick="markReviewed()">✓ 标记已审阅</button>
           </div>
         </div>
         <div id="sections-container"></div>
@@ -852,6 +888,18 @@ async function fixAll() {
   if (d.ok) {
     showToast(`已修复 ${d.fixed_count} 段`);
     loadFile(currentSlug);
+  }
+}
+
+async function markReviewed() {
+  const r = await fetch('/api/review/mark-reviewed', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({slug: currentSlug})
+  });
+  const d = await r.json();
+  if (d.ok) {
+    showToast(`${currentSlug} 已标记为 reviewed-4-4，下次扫描将跳过`);
+    loadTree();  // 刷新左侧树
   }
 }
 
