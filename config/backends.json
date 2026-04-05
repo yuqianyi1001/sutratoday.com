@@ -1,9 +1,4 @@
 [
-  {"key": "azure-deepseek",    "label": "Azure DeepSeek-V3.2",  "group": "Azure #1", "backend": "azure",      "model": "DeepSeek-V3.2"},
-  {"key": "azure-kimi",        "label": "Azure Kimi-K2.5",      "group": "Azure #1", "backend": "azure",      "model": "Kimi-K2.5"},
-  {"key": "azure-grok41",      "label": "Azure Grok-4.1 Fast",  "group": "Azure #1", "backend": "azure",      "model": "grok-4-1-fast-reasoning"},
-  {"key": "azure2-gpt53",      "label": "Azure GPT-5.3",        "group": "Azure #2", "backend": "azure2",     "model": "gpt-5.3-chat"},
-  {"key": "azure2-gpt54mini",  "label": "Azure GPT-5.4-mini",   "group": "Azure #2", "backend": "azure2",     "model": "gpt-5.4-mini"},
   {"key": "gemini-flash",      "label": "Gemini 2.5 Flash",     "group": "Gemini CLI","backend": "gemini",     "model": "gemini-2.5-flash"},
   {"key": "gemini-flash-nt",   "label": "Gemini 2.5 Flash（无思考）","group": "Gemini CLI","backend": "gemini",  "model": "flash-nothink"},
   {"key": "gemini-pro",        "label": "Gemini 2.5 Pro",       "group": "Gemini CLI","backend": "gemini",     "model": "gemini-2.5-pro"},
@@ -19,6 +14,7 @@
   {"key": "dashscope-qwen3-max",    "label": "百炼 Qwen3-Max",     "group": "百炼",  "backend": "dashscope", "model": "qwen3-max"},
   {"key": "codex-gpt54",       "label": "Codex GPT-5.4",        "group": "Codex CLI","backend": "codex",      "model": "gpt-5.4"},
   {"key": "codex-gpt54-mini",  "label": "Codex GPT-5.4-mini",   "group": "Codex CLI","backend": "codex",      "model": "gpt-5.4-mini"},
+  {"key": "minimax-m2.1",      "label": "MiniMax M2.1",         "group": "其他",     "backend": "minimax",    "model": "MiniMax-M2.1"},
   {"key": "anyrouter",         "label": "AnyRouter Claude",     "group": "其他",     "backend": "anyrouter",  "model": "claude-3-5-haiku-20241022"},
   {"key": "lmstudio",          "label": "LM Studio（本地）",    "group": "其他",     "backend": "lmstudio",   "model": ""}
 ]

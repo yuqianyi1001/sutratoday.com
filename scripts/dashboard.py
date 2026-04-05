@@ -35,6 +35,10 @@ if _env_file.exists():
 import job_queue
 
 app = Flask(__name__)
+
+# ── 注册 Review 模块 ─────────────────────────────────────────────────────────
+from review_page import review_bp
+app.register_blueprint(review_bp)
 LOG_DIR = Path("/tmp/sutra_workers")
 LOG_DIR.mkdir(exist_ok=True)
 WORKERS_STATE_FILE = ROOT / "data" / "workers_state.json"
@@ -244,7 +248,7 @@ HTML = """<!DOCTYPE html>
   <div class="flex items-center justify-between mb-6">
     <div>
       <h1 class="text-2xl font-bold text-white">今文佛典 · 翻译面板</h1>
-      <p class="text-slate-400 text-sm mt-1">实时监控多 Agent 翻译进度 · 按经分配</p>
+      <p class="text-slate-400 text-sm mt-1">实时监控多 Agent 翻译进度 · 按经分配 · <a href="/review" class="text-blue-400 hover:underline">译文审阅 →</a></p>
     </div>
     <div class="text-slate-400 text-sm" id="last-update">-</div>
   </div>
