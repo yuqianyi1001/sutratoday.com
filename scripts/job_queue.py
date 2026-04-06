@@ -122,14 +122,6 @@ def claim_job(agent_id: str, backend: str, model: str,
                   -- backend + model 双重锁：同 backend 不同 model 不能互相抢
                   AND (j.locked_backend IS NULL OR j.locked_backend = ?)
                   AND (j.locked_model   IS NULL OR j.locked_model   = ?)
-                  -- 同一部经不能被两个不同 agent 同时翻译
-                  AND NOT EXISTS (
-                      SELECT 1 FROM jobs j2
-                      WHERE j2.cbeta_id = j.cbeta_id
-                        AND j2.cbeta_id IS NOT NULL AND j2.cbeta_id != ''
-                        AND j2.status = 'running'
-                        AND j2.agent_id != ?
-                  )
                 ORDER BY
                   -- 1. 优先继续本 agent 正在翻的经
                   CASE WHEN j.locked_agent_id = ? THEN 0 ELSE 1 END,
@@ -139,7 +131,7 @@ def claim_job(agent_id: str, backend: str, model: str,
                   j.cbeta_id ASC,
                   j.juan_index ASC
                 LIMIT 1
-            """, (backend, model, agent_id, agent_id, backend, model)).fetchone()
+            """, (backend, model, agent_id, backend, model)).fetchone()
         if not row:
             conn.execute("ROLLBACK")
             return None
@@ -233,6 +225,38 @@ def check_sutra_complete(slug: str):
                 "full_model": stats["full_model"] or "",
             }
     return None
+
+
+def get_progress() -> dict:
+    """返回整体翻译进度统计，包括最近2小时速率。"""
+    with get_conn() as conn:
+        total   = conn.execute("SELECT COUNT(*) FROM jobs").fetchone()[0]
+        done    = conn.execute("SELECT COUNT(*) FROM jobs WHERE status='done'").fetchone()[0]
+        pending = conn.execute("SELECT COUNT(*) FROM jobs WHERE status='pending'").fetchone()[0]
+        running = conn.execute("SELECT COUNT(*) FROM jobs WHERE status='running'").fetchone()[0]
+        remaining_segs = conn.execute("""
+            SELECT COALESCE(SUM(CASE WHEN status='pending' THEN seg_total
+                                     ELSE seg_total - seg_done END), 0)
+            FROM jobs WHERE status IN ('pending', 'running')
+        """).fetchone()[0]
+        # 用多个窗口取最可靠的速率
+        best_rate = 0
+        for mins, hours in [(30, 0.5), (60, 1), (120, 2)]:
+            segs = conn.execute(f"""
+                SELECT COALESCE(SUM(seg_total), 0)
+                FROM jobs
+                WHERE status='done'
+                  AND completed_at > datetime('now', '-{mins} minutes')
+                  AND ABS(julianday(completed_at) - julianday(updated_at)) < 0.001
+            """).fetchone()[0]
+            if segs > 0:
+                best_rate = segs / hours
+                break  # 用最短有数据的窗口
+        rate_2h = best_rate
+    return {
+        "total": total, "done": done, "pending": pending, "running": running,
+        "remaining_segs": remaining_segs, "rate_2h": rate_2h,
+    }
 
 
 def mark_failed(slug: str, agent_id: str, error: str):

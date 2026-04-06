@@ -90,13 +90,34 @@ def notify_sutra_done(slug: str, md_path: Path, full_model: str):
     vol_total = info["vol_total"]
     seg_total = info["seg_total"]
     model_tag = full_model or info["full_model"] or "unknown"
+    # 查询整体翻译进度
+    progress = job_queue.get_progress()
+    total_vols   = progress["total"]
+    done_vols    = progress["done"]
+    remain_vols  = progress["pending"] + progress["running"]
+    remain_segs  = progress["remaining_segs"]
+    pct          = done_vols * 100 / total_vols if total_vols else 0
+    # 估算剩余时间：用最近2小时速率
+    eta_str = ""
+    rate_2h = progress.get("rate_2h", 0)
+    if rate_2h > 0 and remain_segs > 0:
+        hours_left = remain_segs / rate_2h
+        if hours_left < 1:
+            eta_str = f"⏱ 预计 {hours_left*60:.0f} 分钟后完成"
+        else:
+            eta_str = f"⏱ 预计 {hours_left:.1f} 小时后完成"
+
     msg = (
         f"🪷 <b>今文佛典</b> · 部经完成\n\n"
         f"📖 <b>{title}</b>\n"
         f"🔖 {cbeta_id}  ·  {category}\n"
         f"📚 {vol_total} 卷  ·  {seg_total} 段\n"
-        f"🤖 {model_tag}"
+        f"🤖 {model_tag}\n\n"
+        f"📊 总进度: {done_vols}/{total_vols}（{pct:.1f}%）\n"
+        f"📝 剩余: {remain_vols} 卷 · {remain_segs} 段"
     )
+    if eta_str:
+        msg += f"\n{eta_str}"
     ok = send_telegram(msg)
     if ok:
         print(f"  [Telegram] ✓ 已通知完成: {cbeta_id} {title}")
@@ -165,6 +186,14 @@ _CANONICAL = {
     ("dashscope",  "qwen3.5-flash"):                         "dashscope-qwen3.5-flash",
     ("dashscope",  "qwen3.5-plus"):                          "dashscope-qwen3.5-plus",
     ("dashscope",  "qwen3-max"):                             "dashscope-qwen3-max",
+    ("dashscope",  "qwen3.6-plus-2026-04-02"):               "dashscope-qwen3.6-plus",
+    ("dashscope",  "qwen3.5-27b"):                           "dashscope-qwen3.5-27b",
+    ("dashscope",  "glm-5"):                                 "dashscope-glm-5",
+    ("dashscope",  "qwen3.5-122b-a10b"):                     "dashscope-qwen3.5-122b",
+    ("dashscope",  "qwen3.5-35b-a3b"):                       "dashscope-qwen3.5-35b",
+    ("dashscope",  "qwen3.5-plus-2026-02-15"):               "dashscope-qwen3.5-plus-0215",
+    ("dashscope",  "kimi-k2.5"):                             "dashscope-kimi-k2.5",
+    ("dashscope",  "MiniMax-M2.1"):                          "dashscope-minimax-m2.1",
     ("dashscope",  "qwen3-max-2026-01-23"):                  "dashscope-qwen3-max-0123",
     ("codex",      "gpt-5.4"):                              "codex-gpt-5.4",
     ("codex",      "gpt-5.4-mini"):                         "codex-gpt-5.4-mini",
@@ -563,13 +592,16 @@ def _dashscope_call(messages: list, model: str, max_tokens: int = 4096, retries:
 
     url = f"{base_url.rstrip('/')}/chat/completions"
 
-    payload = json.dumps({
+    body = {
         "model":       model,
         "messages":    messages,
         "max_tokens":  max_tokens,
         "temperature": 0.3,
-        "enable_thinking": False,   # 关闭 thinking 模式，节省 token 和时间
-    }).encode("utf-8")
+    }
+    # 只对 Qwen 系列关闭 thinking，其他模型不支持此参数
+    if "qwen" in model.lower():
+        body["enable_thinking"] = False
+    payload = json.dumps(body).encode("utf-8")
 
     req = urllib.request.Request(url, data=payload, method="POST",
         headers={
