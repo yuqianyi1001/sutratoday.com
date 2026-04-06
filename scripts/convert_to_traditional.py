@@ -157,7 +157,17 @@ def main():
     parser.add_argument("--stats", action="store_true")
     args = parser.parse_args()
 
-    paths = ([SUTRAS_DIR / f if not Path(f).is_absolute() else Path(f) for f in args.files]
+    def _resolve(f):
+        p = Path(f)
+        if p.is_absolute():
+            return p
+        # 如果是倉庫相對路徑（如 content/sutras-raw/T0005-001.md），直接用
+        if p.exists():
+            return p
+        # 否則當作檔名拼到 SUTRAS_DIR
+        return SUTRAS_DIR / p.name
+
+    paths = ([_resolve(f) for f in args.files]
              if args.files else sorted(SUTRAS_DIR.glob("*.md")))
 
     if args.stats:

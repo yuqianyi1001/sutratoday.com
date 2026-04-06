@@ -56,7 +56,7 @@ def _is_allowed(slug: str, section_index: int) -> bool:
     return _allowlist_key(slug, section_index) in _load_allowlist()
 
 RE_SECTION = re.compile(
-    r'(### 原文\n)(.*?)(\n### 现代语译\n)(.*?)(?=\n### 原文|\Z)',
+    r'(### 原文\n)(.*?)(\n### (?:現代語譯|现代语译)\n)(.*?)(?=\n### 原文|\Z)',
     re.DOTALL
 )
 
@@ -219,18 +219,40 @@ def _scan_all_files():
         title = fm.get("title", slug)
         juan_index = int(fm.get("juan_index", 0))
 
+        # 文件級快速預篩：逐行掃描是否有連續相同行
+        lines = content.split('\n')
+        has_any_suspect = False
+        for li in range(1, len(lines)):
+            if lines[li].strip() and lines[li] == lines[li - 1]:
+                has_any_suspect = True
+                break
+        # 也檢查是否有段落行數比 >= 2（通過計算 原文/譯文 段數比）
+        if not has_any_suspect:
+            orig_count = content.count('### 原文')
+            trans_sections = RE_SECTION.findall(content)
+            for orig_t, trans_t in trans_sections:
+                tl = len([l for l in trans_t.splitlines() if l.strip()])
+                ol = len([l for l in orig_t.splitlines() if l.strip()])
+                n_e = effective_orig_count(orig_t, [l for l in orig_t.splitlines() if l.strip()])
+                if n_e > 0 and tl / n_e >= 2.0:
+                    has_any_suspect = True
+                    break
+
         issue_count = 0
         max_repeat = 1
         total_sections = 0
-        for idx, m in enumerate(RE_SECTION.finditer(content), 1):
-            total_sections += 1
-            if _allowlist_key(slug, idx) in allowlist:
-                continue
-            issues, _, rc = _analyze_section(m.group(2).strip(), m.group(4))
-            if issues:
-                issue_count += 1
-                if rc > max_repeat:
-                    max_repeat = rc
+        if has_any_suspect:
+            for idx, m in enumerate(RE_SECTION.finditer(content), 1):
+                total_sections += 1
+                if _allowlist_key(slug, idx) in allowlist:
+                    continue
+                issues, _, rc = _analyze_section(m.group(2).strip(), m.group(4))
+                if issues:
+                    issue_count += 1
+                    if rc > max_repeat:
+                        max_repeat = rc
+        else:
+            total_sections = len(RE_SECTION.findall(content))
 
         result.setdefault(cbeta_id, []).append({
             "slug": slug,
@@ -249,35 +271,28 @@ def _scan_all_files():
 
 # ── API 路由 ────────────────────────────────────────────────────────────────────
 
-_index_cache = {"data": None, "ts": 0}
-_INDEX_TTL = 60  # 缓存60秒
+REVIEW_INDEX_FILE = ROOT / "data" / "review_index.json"
 
 
 @review_bp.route("/api/review/index")
 def api_review_index():
-    now = time.time()
-    if _index_cache["data"] and now - _index_cache["ts"] < _INDEX_TTL:
-        return jsonify(_index_cache["data"])
-
-    raw = _scan_all_files()
-    filtered = {}
-    for cid, juans in raw.items():
-        if any(j["issue_count"] > 0 for j in juans):
-            filtered[cid] = {
-                "juans": juans,
-                "total_issues": sum(j["issue_count"] for j in juans),
-            }
-    sorted_items = sorted(filtered.items(), key=lambda x: -x[1]["total_issues"])
-    result = {"sutras": [{"cbeta_id": k, **v} for k, v in sorted_items]}
-    _index_cache["data"] = result
-    _index_cache["ts"] = now
-    return jsonify(result)
+    """直接讀取離線掃描生成的索引文件。先跑 scan_review_index.py 生成。"""
+    if REVIEW_INDEX_FILE.exists():
+        try:
+            data = json.loads(REVIEW_INDEX_FILE.read_text(encoding="utf-8"))
+            return jsonify(data)
+        except Exception:
+            pass
+    return jsonify({
+        "sutras": [],
+        "error": "索引文件不存在，請先執行: python3 scripts/scan_review_index.py"
+    })
 
 
 @review_bp.route("/api/review/invalidate", methods=["POST"])
 def api_review_invalidate():
-    _index_cache["data"] = None
-    _index_cache["ts"] = 0
+    """刪除索引緩存，下次需重新執行 scan_review_index.py。"""
+    REVIEW_INDEX_FILE.unlink(missing_ok=True)
     return jsonify({"ok": True})
 
 
@@ -311,7 +326,7 @@ def api_review_dismiss():
         "dismissed_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
     }
     _save_allowlist(al)
-    _index_cache["data"] = None
+    REVIEW_INDEX_FILE.unlink(missing_ok=True)
     return jsonify({"ok": True, "key": key})
 
 
@@ -326,7 +341,7 @@ def api_review_undismiss():
     if key in al:
         del al[key]
         _save_allowlist(al)
-        _index_cache["data"] = None
+        REVIEW_INDEX_FILE.unlink(missing_ok=True)
     return jsonify({"ok": True})
 
 
@@ -391,7 +406,7 @@ def api_review_fix():
     new_block = m.group(1) + m.group(2) + m.group(3) + replacement
     new_content = content.replace(old_block, new_block, 1)
     md_path.write_text(new_content, encoding="utf-8")
-    _index_cache["data"] = None  # 清缓存
+    REVIEW_INDEX_FILE.unlink(missing_ok=True)  # 清缓存
 
     return jsonify({"ok": True, "action": action, "section_index": section_index})
 
@@ -422,7 +437,7 @@ def api_review_mark_reviewed():
         return jsonify({"ok": False, "error": "file not found"}), 404
     changed = _mark_reviewed(md_path)
     if changed:
-        _index_cache["data"] = None
+        REVIEW_INDEX_FILE.unlink(missing_ok=True)
     return jsonify({"ok": True, "changed": changed})
 
 
@@ -448,7 +463,7 @@ def api_review_fix_all():
 
     if fixed > 0:
         md_path.write_text(new_content, encoding="utf-8")
-        _index_cache["data"] = None
+        REVIEW_INDEX_FILE.unlink(missing_ok=True)
     # 修复后自动标记为已审阅
     _mark_reviewed(md_path)
     return jsonify({"ok": True, "fixed_count": fixed})
