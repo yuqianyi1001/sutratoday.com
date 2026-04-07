@@ -13,7 +13,7 @@ from pathlib import Path
 from _dup_common import effective_orig_count, char_jaccard, has_trad_simp_mixing, is_sequential_enum
 
 SUTRAS_DIR = Path(__file__).parent.parent / "content" / "sutras-raw"
-RE_SECTION = re.compile(r'### 原文\n(.*?)\n### 现代语译\n(.*?)(?=\n### 原文|\Z)', re.DOTALL)
+RE_SECTION = re.compile(r'### 原文\n(.*?)\n### (?:現代語譯|现代语译)\n(.*?)(?=\n### 原文|\Z)', re.DOTALL)
 SIM_T = 0.25
 
 
@@ -76,7 +76,13 @@ def main():
     parser.add_argument("--summary", action="store_true")
     args = parser.parse_args()
 
-    paths = ([SUTRAS_DIR / f if not Path(f).is_absolute() else Path(f) for f in args.files]
+    def _resolve(f):
+        p = Path(f)
+        if p.is_absolute(): return p
+        if p.exists(): return p
+        return SUTRAS_DIR / p.name
+
+    paths = ([_resolve(f) for f in args.files]
              if args.files else sorted(SUTRAS_DIR.glob("*.md")))
 
     total_files, total_issues = 0, 0

@@ -19,8 +19,8 @@ import job_queue
 
 SUTRAS_DIR = Path(__file__).parent.parent / "content" / "sutras-raw"
 
-RE_ORIG = re.compile(r'### 原文\n(.*?)(?=\n### 现代语译)', re.DOTALL)
-RE_TRANS = re.compile(r'### 现代语译\n(.*?)(?=\n### 原文|\Z)', re.DOTALL)
+RE_ORIG = re.compile(r'### 原文\n(.*?)(?=\n### (?:現代語譯|现代语译))', re.DOTALL)
+RE_TRANS = re.compile(r'### (?:現代語譯|现代语译)\n(.*?)(?=\n### 原文|\Z)', re.DOTALL)
 
 # 类别优先级（越高越先翻）
 CATEGORY_PRIORITY = {

@@ -1,0 +1,2206 @@
+{
+  "sutras": [
+    {
+      "cbeta_id": "T1851",
+      "juans": [
+        {
+          "slug": "T1851-001",
+          "title": "大乘義章 卷第一",
+          "juan_index": 1,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 313
+        },
+        {
+          "slug": "T1851-002",
+          "title": "大乘義章 卷第二",
+          "juan_index": 2,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 302
+        },
+        {
+          "slug": "T1851-003",
+          "title": "大乘義章 卷第三",
+          "juan_index": 3,
+          "issue_count": 1,
+          "max_repeat": 3,
+          "total_sections": 387
+        },
+        {
+          "slug": "T1851-004",
+          "title": "大乘義章 卷第四",
+          "juan_index": 4,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 280
+        },
+        {
+          "slug": "T1851-005",
+          "title": "大乘義章 卷第五",
+          "juan_index": 5,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 270
+        },
+        {
+          "slug": "T1851-006",
+          "title": "大乘義章 卷第六",
+          "juan_index": 6,
+          "issue_count": 1,
+          "max_repeat": 3,
+          "total_sections": 217
+        },
+        {
+          "slug": "T1851-007",
+          "title": "大乘義章 卷第七",
+          "juan_index": 7,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 238
+        },
+        {
+          "slug": "T1851-008",
+          "title": "大乘義章 卷第八",
+          "juan_index": 8,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 277
+        },
+        {
+          "slug": "T1851-009",
+          "title": "大乘義章 卷第九",
+          "juan_index": 9,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 232
+        },
+        {
+          "slug": "T1851-010",
+          "title": "大乘義章 卷第十",
+          "juan_index": 10,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 265
+        },
+        {
+          "slug": "T1851-011",
+          "title": "大乘義章 卷第十一",
+          "juan_index": 11,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 279
+        },
+        {
+          "slug": "T1851-012",
+          "title": "大乘義章 卷第十二",
+          "juan_index": 12,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 299
+        },
+        {
+          "slug": "T1851-013",
+          "title": "大乘義章 卷第十三",
+          "juan_index": 13,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 278
+        },
+        {
+          "slug": "T1851-014",
+          "title": "大乘義章 卷第十四",
+          "juan_index": 14,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 239
+        },
+        {
+          "slug": "T1851-015",
+          "title": "大乘義章 卷第十五",
+          "juan_index": 15,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 180
+        },
+        {
+          "slug": "T1851-016",
+          "title": "大乘義章 卷第十六",
+          "juan_index": 16,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 230
+        },
+        {
+          "slug": "T1851-017",
+          "title": "大乘義章 卷第十七",
+          "juan_index": 17,
+          "issue_count": 1,
+          "max_repeat": 3,
+          "total_sections": 309
+        },
+        {
+          "slug": "T1851-020",
+          "title": "大乘義章 卷第二十",
+          "juan_index": 20,
+          "issue_count": 1,
+          "max_repeat": 3,
+          "total_sections": 328
+        }
+      ],
+      "total_issues": 4
+    },
+    {
+      "cbeta_id": "T1545",
+      "juans": [
+        {
+          "slug": "T1545-001",
+          "title": "阿毘達磨大毘婆沙論 卷第一",
+          "juan_index": 1,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-002",
+          "title": "阿毘達磨大毘婆沙論 卷第二",
+          "juan_index": 2,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-003",
+          "title": "阿毘達磨大毘婆沙論 卷第三",
+          "juan_index": 3,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-004",
+          "title": "阿毘達磨大毘婆沙論 卷第四",
+          "juan_index": 4,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-005",
+          "title": "阿毘達磨大毘婆沙論 卷第五",
+          "juan_index": 5,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-006",
+          "title": "阿毘達磨大毘婆沙論 卷第六",
+          "juan_index": 6,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 69
+        },
+        {
+          "slug": "T1545-007",
+          "title": "阿毘達磨大毘婆沙論 卷第七",
+          "juan_index": 7,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-008",
+          "title": "阿毘達磨大毘婆沙論 卷第八",
+          "juan_index": 8,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-009",
+          "title": "阿毘達磨大毘婆沙論 卷第九",
+          "juan_index": 9,
+          "issue_count": 1,
+          "max_repeat": 3,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-010",
+          "title": "阿毘達磨大毘婆沙論 卷第十",
+          "juan_index": 10,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-011",
+          "title": "阿毘達磨大毘婆沙論 卷第十一",
+          "juan_index": 11,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-012",
+          "title": "阿毘達磨大毘婆沙論 卷第十二",
+          "juan_index": 12,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 72
+        },
+        {
+          "slug": "T1545-013",
+          "title": "阿毘達磨大毘婆沙論 卷第十三",
+          "juan_index": 13,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-014",
+          "title": "阿毘達磨大毘婆沙論 卷第十四",
+          "juan_index": 14,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-015",
+          "title": "阿毘達磨大毘婆沙論 卷第十五",
+          "juan_index": 15,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-016",
+          "title": "阿毘達磨大毘婆沙論 卷第十六",
+          "juan_index": 16,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-017",
+          "title": "阿毘達磨大毘婆沙論 卷第十七",
+          "juan_index": 17,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-018",
+          "title": "阿毘達磨大毘婆沙論 卷第十八",
+          "juan_index": 18,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 68
+        },
+        {
+          "slug": "T1545-019",
+          "title": "阿毘達磨大毘婆沙論 卷第十九",
+          "juan_index": 19,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-020",
+          "title": "阿毘達磨大毘婆沙論 卷第二十",
+          "juan_index": 20,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-021",
+          "title": "阿毘達磨大毘婆沙論 卷第二十一",
+          "juan_index": 21,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-022",
+          "title": "阿毘達磨大毘婆沙論 卷第二十二",
+          "juan_index": 22,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-023",
+          "title": "阿毘達磨大毘婆沙論 卷第二十三",
+          "juan_index": 23,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-024",
+          "title": "阿毘達磨大毘婆沙論 卷第二十四",
+          "juan_index": 24,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-025",
+          "title": "阿毘達磨大毘婆沙論 卷第二十五",
+          "juan_index": 25,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-026",
+          "title": "阿毘達磨大毘婆沙論 卷第二十六",
+          "juan_index": 26,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-027",
+          "title": "阿毘達磨大毘婆沙論 卷第二十七",
+          "juan_index": 27,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-028",
+          "title": "阿毘達磨大毘婆沙論 卷第二十八",
+          "juan_index": 28,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-029",
+          "title": "阿毘達磨大毘婆沙論 卷第二十九",
+          "juan_index": 29,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-030",
+          "title": "阿毘達磨大毘婆沙論 卷第三十",
+          "juan_index": 30,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-031",
+          "title": "阿毘達磨大毘婆沙論 卷第三十一",
+          "juan_index": 31,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-032",
+          "title": "阿毘達磨大毘婆沙論 卷第三十二",
+          "juan_index": 32,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 69
+        },
+        {
+          "slug": "T1545-033",
+          "title": "阿毘達磨大毘婆沙論 卷第三十三",
+          "juan_index": 33,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 71
+        },
+        {
+          "slug": "T1545-034",
+          "title": "阿毘達磨大毘婆沙論 卷第三十四",
+          "juan_index": 34,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-035",
+          "title": "阿毘達磨大毘婆沙論 卷第三十五",
+          "juan_index": 35,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-036",
+          "title": "阿毘達磨大毘婆沙論 卷第三十六",
+          "juan_index": 36,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-037",
+          "title": "阿毘達磨大毘婆沙論 卷第三十七",
+          "juan_index": 37,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-038",
+          "title": "阿毘達磨大毘婆沙論 卷第三十八",
+          "juan_index": 38,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-039",
+          "title": "阿毘達磨大毘婆沙論 卷第三十九",
+          "juan_index": 39,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-040",
+          "title": "阿毘達磨大毘婆沙論 卷第四十",
+          "juan_index": 40,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-041",
+          "title": "阿毘達磨大毘婆沙論 卷第四十一",
+          "juan_index": 41,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-042",
+          "title": "阿毘達磨大毘婆沙論 卷第四十二",
+          "juan_index": 42,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-043",
+          "title": "阿毘達磨大毘婆沙論 卷第四十三",
+          "juan_index": 43,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-045",
+          "title": "阿毘達磨大毘婆沙論 卷第四十五",
+          "juan_index": 45,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-046",
+          "title": "阿毘達磨大毘婆沙論 卷第四十六",
+          "juan_index": 46,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-047",
+          "title": "阿毘達磨大毘婆沙論 卷第四十七",
+          "juan_index": 47,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-048",
+          "title": "阿毘達磨大毘婆沙論 卷第四十八",
+          "juan_index": 48,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-049",
+          "title": "阿毘達磨大毘婆沙論 卷第四十九",
+          "juan_index": 49,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-050",
+          "title": "阿毘達磨大毘婆沙論 卷第五十",
+          "juan_index": 50,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-051",
+          "title": "阿毘達磨大毘婆沙論 卷第51",
+          "juan_index": 51,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-052",
+          "title": "阿毘達磨大毘婆沙論 卷第52",
+          "juan_index": 52,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-053",
+          "title": "阿毘達磨大毘婆沙論 卷第53",
+          "juan_index": 53,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-054",
+          "title": "阿毘達磨大毘婆沙論 卷第54",
+          "juan_index": 54,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-055",
+          "title": "阿毘達磨大毘婆沙論 卷第55",
+          "juan_index": 55,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-056",
+          "title": "阿毘達磨大毘婆沙論 卷第56",
+          "juan_index": 56,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-057",
+          "title": "阿毘達磨大毘婆沙論 卷第57",
+          "juan_index": 57,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-058",
+          "title": "阿毘達磨大毘婆沙論 卷第58",
+          "juan_index": 58,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-059",
+          "title": "阿毘達磨大毘婆沙論 卷第59",
+          "juan_index": 59,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-060",
+          "title": "阿毘達磨大毘婆沙論 卷第60",
+          "juan_index": 60,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-061",
+          "title": "阿毘達磨大毘婆沙論 卷第61",
+          "juan_index": 61,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-062",
+          "title": "阿毘達磨大毘婆沙論 卷第62",
+          "juan_index": 62,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-063",
+          "title": "阿毘達磨大毘婆沙論 卷第63",
+          "juan_index": 63,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-064",
+          "title": "阿毘達磨大毘婆沙論 卷第64",
+          "juan_index": 64,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-065",
+          "title": "阿毘達磨大毘婆沙論 卷第65",
+          "juan_index": 65,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-066",
+          "title": "阿毘達磨大毘婆沙論 卷第66",
+          "juan_index": 66,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-067",
+          "title": "阿毘達磨大毘婆沙論 卷第67",
+          "juan_index": 67,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-068",
+          "title": "阿毘達磨大毘婆沙論 卷第68",
+          "juan_index": 68,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-069",
+          "title": "阿毘達磨大毘婆沙論 卷第69",
+          "juan_index": 69,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-070",
+          "title": "阿毘達磨大毘婆沙論 卷第70",
+          "juan_index": 70,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-071",
+          "title": "阿毘達磨大毘婆沙論 卷第71",
+          "juan_index": 71,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-072",
+          "title": "阿毘達磨大毘婆沙論 卷第72",
+          "juan_index": 72,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-074",
+          "title": "阿毘達磨大毘婆沙論 卷第74",
+          "juan_index": 74,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-075",
+          "title": "阿毘達磨大毘婆沙論 卷第75",
+          "juan_index": 75,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-076",
+          "title": "阿毘達磨大毘婆沙論 卷第76",
+          "juan_index": 76,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-077",
+          "title": "阿毘達磨大毘婆沙論 卷第77",
+          "juan_index": 77,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-078",
+          "title": "阿毘達磨大毘婆沙論 卷第78",
+          "juan_index": 78,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-079",
+          "title": "阿毘達磨大毘婆沙論 卷第79",
+          "juan_index": 79,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-080",
+          "title": "阿毘達磨大毘婆沙論 卷第80",
+          "juan_index": 80,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-081",
+          "title": "阿毘達磨大毘婆沙論 卷第81",
+          "juan_index": 81,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-082",
+          "title": "阿毘達磨大毘婆沙論 卷第82",
+          "juan_index": 82,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-083",
+          "title": "阿毘達磨大毘婆沙論 卷第83",
+          "juan_index": 83,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-084",
+          "title": "阿毘達磨大毘婆沙論 卷第84",
+          "juan_index": 84,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-085",
+          "title": "阿毘達磨大毘婆沙論 卷第85",
+          "juan_index": 85,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-086",
+          "title": "阿毘達磨大毘婆沙論 卷第86",
+          "juan_index": 86,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-087",
+          "title": "阿毘達磨大毘婆沙論 卷第87",
+          "juan_index": 87,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-088",
+          "title": "阿毘達磨大毘婆沙論 卷第88",
+          "juan_index": 88,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-089",
+          "title": "阿毘達磨大毘婆沙論 卷第89",
+          "juan_index": 89,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-090",
+          "title": "阿毘達磨大毘婆沙論 卷第90",
+          "juan_index": 90,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-091",
+          "title": "阿毘達磨大毘婆沙論 卷第91",
+          "juan_index": 91,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-093",
+          "title": "阿毘達磨大毘婆沙論 卷第93",
+          "juan_index": 93,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-094",
+          "title": "阿毘達磨大毘婆沙論 卷第94",
+          "juan_index": 94,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 66
+        },
+        {
+          "slug": "T1545-095",
+          "title": "阿毘達磨大毘婆沙論 卷第95",
+          "juan_index": 95,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-096",
+          "title": "阿毘達磨大毘婆沙論 卷第96",
+          "juan_index": 96,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-097",
+          "title": "阿毘達磨大毘婆沙論 卷第97",
+          "juan_index": 97,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-098",
+          "title": "阿毘達磨大毘婆沙論 卷第98",
+          "juan_index": 98,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-099",
+          "title": "阿毘達磨大毘婆沙論 卷第99",
+          "juan_index": 99,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-100",
+          "title": "阿毘達磨大毘婆沙論 卷第100",
+          "juan_index": 100,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-101",
+          "title": "阿毘達磨大毘婆沙論 卷第101",
+          "juan_index": 101,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-102",
+          "title": "阿毘達磨大毘婆沙論 卷第102",
+          "juan_index": 102,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-103",
+          "title": "阿毘達磨大毘婆沙論 卷第103",
+          "juan_index": 103,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 66
+        },
+        {
+          "slug": "T1545-104",
+          "title": "阿毘達磨大毘婆沙論 卷第104",
+          "juan_index": 104,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-105",
+          "title": "阿毘達磨大毘婆沙論 卷第105",
+          "juan_index": 105,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-106",
+          "title": "阿毘達磨大毘婆沙論 卷第106",
+          "juan_index": 106,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-107",
+          "title": "阿毘達磨大毘婆沙論 卷第107",
+          "juan_index": 107,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-108",
+          "title": "阿毘達磨大毘婆沙論 卷第108",
+          "juan_index": 108,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-109",
+          "title": "阿毘達磨大毘婆沙論 卷第109",
+          "juan_index": 109,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 63
+        },
+        {
+          "slug": "T1545-110",
+          "title": "阿毘達磨大毘婆沙論 卷第110",
+          "juan_index": 110,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-111",
+          "title": "阿毘達磨大毘婆沙論 卷第111",
+          "juan_index": 111,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-112",
+          "title": "阿毘達磨大毘婆沙論 卷第112",
+          "juan_index": 112,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-113",
+          "title": "阿毘達磨大毘婆沙論 卷第113",
+          "juan_index": 113,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 81
+        },
+        {
+          "slug": "T1545-114",
+          "title": "阿毘達磨大毘婆沙論 卷第114",
+          "juan_index": 114,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 76
+        },
+        {
+          "slug": "T1545-115",
+          "title": "阿毘達磨大毘婆沙論 卷第115",
+          "juan_index": 115,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 70
+        },
+        {
+          "slug": "T1545-116",
+          "title": "阿毘達磨大毘婆沙論 卷第116",
+          "juan_index": 116,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 68
+        },
+        {
+          "slug": "T1545-117",
+          "title": "阿毘達磨大毘婆沙論 卷第117",
+          "juan_index": 117,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 70
+        },
+        {
+          "slug": "T1545-118",
+          "title": "阿毘達磨大毘婆沙論 卷第118",
+          "juan_index": 118,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-119",
+          "title": "阿毘達磨大毘婆沙論 卷第119",
+          "juan_index": 119,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-120",
+          "title": "阿毘達磨大毘婆沙論 卷第120",
+          "juan_index": 120,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 67
+        },
+        {
+          "slug": "T1545-121",
+          "title": "阿毘達磨大毘婆沙論 卷第121",
+          "juan_index": 121,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 66
+        },
+        {
+          "slug": "T1545-122",
+          "title": "阿毘達磨大毘婆沙論 卷第122",
+          "juan_index": 122,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 75
+        },
+        {
+          "slug": "T1545-123",
+          "title": "阿毘達磨大毘婆沙論 卷第123",
+          "juan_index": 123,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-124",
+          "title": "阿毘達磨大毘婆沙論 卷第124",
+          "juan_index": 124,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-125",
+          "title": "阿毘達磨大毘婆沙論 卷第125",
+          "juan_index": 125,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-126",
+          "title": "阿毘達磨大毘婆沙論 卷第126",
+          "juan_index": 126,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 80
+        },
+        {
+          "slug": "T1545-127",
+          "title": "阿毘達磨大毘婆沙論 卷第127",
+          "juan_index": 127,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-128",
+          "title": "阿毘達磨大毘婆沙論 卷第128",
+          "juan_index": 128,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-129",
+          "title": "阿毘達磨大毘婆沙論 卷第129",
+          "juan_index": 129,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-130",
+          "title": "阿毘達磨大毘婆沙論 卷第130",
+          "juan_index": 130,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-131",
+          "title": "阿毘達磨大毘婆沙論 卷第131",
+          "juan_index": 131,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-133",
+          "title": "阿毘達磨大毘婆沙論 卷第133",
+          "juan_index": 133,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-134",
+          "title": "阿毘達磨大毘婆沙論 卷第134",
+          "juan_index": 134,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-135",
+          "title": "阿毘達磨大毘婆沙論 卷第135",
+          "juan_index": 135,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-136",
+          "title": "阿毘達磨大毘婆沙論 卷第136",
+          "juan_index": 136,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-137",
+          "title": "阿毘達磨大毘婆沙論 卷第137",
+          "juan_index": 137,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-138",
+          "title": "阿毘達磨大毘婆沙論 卷第138",
+          "juan_index": 138,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-139",
+          "title": "阿毘達磨大毘婆沙論 卷第139",
+          "juan_index": 139,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-141",
+          "title": "阿毘達磨大毘婆沙論 卷第141",
+          "juan_index": 141,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-142",
+          "title": "阿毘達磨大毘婆沙論 卷第142",
+          "juan_index": 142,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-143",
+          "title": "阿毘達磨大毘婆沙論 卷第143",
+          "juan_index": 143,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-144",
+          "title": "阿毘達磨大毘婆沙論 卷第144",
+          "juan_index": 144,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 60
+        },
+        {
+          "slug": "T1545-145",
+          "title": "阿毘達磨大毘婆沙論 卷第145",
+          "juan_index": 145,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-146",
+          "title": "阿毘達磨大毘婆沙論 卷第146",
+          "juan_index": 146,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-147",
+          "title": "阿毘達磨大毘婆沙論 卷第147",
+          "juan_index": 147,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-148",
+          "title": "阿毘達磨大毘婆沙論 卷第148",
+          "juan_index": 148,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-149",
+          "title": "阿毘達磨大毘婆沙論 卷第149",
+          "juan_index": 149,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 47
+        },
+        {
+          "slug": "T1545-150",
+          "title": "阿毘達磨大毘婆沙論 卷第150",
+          "juan_index": 150,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-151",
+          "title": "阿毘達磨大毘婆沙論 卷第151",
+          "juan_index": 151,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 47
+        },
+        {
+          "slug": "T1545-152",
+          "title": "阿毘達磨大毘婆沙論 卷第152",
+          "juan_index": 152,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-153",
+          "title": "阿毘達磨大毘婆沙論 卷第153",
+          "juan_index": 153,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-154",
+          "title": "阿毘達磨大毘婆沙論 卷第154",
+          "juan_index": 154,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-155",
+          "title": "阿毘達磨大毘婆沙論 卷第155",
+          "juan_index": 155,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-156",
+          "title": "阿毘達磨大毘婆沙論 卷第156",
+          "juan_index": 156,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-157",
+          "title": "阿毘達磨大毘婆沙論 卷第157",
+          "juan_index": 157,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-158",
+          "title": "阿毘達磨大毘婆沙論 卷第158",
+          "juan_index": 158,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-159",
+          "title": "阿毘達磨大毘婆沙論 卷第159",
+          "juan_index": 159,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-160",
+          "title": "阿毘達磨大毘婆沙論 卷第160",
+          "juan_index": 160,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-161",
+          "title": "阿毘達磨大毘婆沙論 卷第161",
+          "juan_index": 161,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 46
+        },
+        {
+          "slug": "T1545-162",
+          "title": "阿毘達磨大毘婆沙論 卷第162",
+          "juan_index": 162,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-163",
+          "title": "阿毘達磨大毘婆沙論 卷第163",
+          "juan_index": 163,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 45
+        },
+        {
+          "slug": "T1545-164",
+          "title": "阿毘達磨大毘婆沙論 卷第164",
+          "juan_index": 164,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-165",
+          "title": "阿毘達磨大毘婆沙論 卷第165",
+          "juan_index": 165,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-166",
+          "title": "阿毘達磨大毘婆沙論 卷第166",
+          "juan_index": 166,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-167",
+          "title": "阿毘達磨大毘婆沙論 卷第167",
+          "juan_index": 167,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-168",
+          "title": "阿毘達磨大毘婆沙論 卷第168",
+          "juan_index": 168,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-169",
+          "title": "阿毘達磨大毘婆沙論 卷第169",
+          "juan_index": 169,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-170",
+          "title": "阿毘達磨大毘婆沙論 卷第170",
+          "juan_index": 170,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-171",
+          "title": "阿毘達磨大毘婆沙論 卷第171",
+          "juan_index": 171,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1545-172",
+          "title": "阿毘達磨大毘婆沙論 卷第172",
+          "juan_index": 172,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 61
+        },
+        {
+          "slug": "T1545-173",
+          "title": "阿毘達磨大毘婆沙論 卷第173",
+          "juan_index": 173,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 51
+        },
+        {
+          "slug": "T1545-174",
+          "title": "阿毘達磨大毘婆沙論 卷第174",
+          "juan_index": 174,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 47
+        },
+        {
+          "slug": "T1545-175",
+          "title": "阿毘達磨大毘婆沙論 卷第175",
+          "juan_index": 175,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-176",
+          "title": "阿毘達磨大毘婆沙論 卷第176",
+          "juan_index": 176,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-177",
+          "title": "阿毘達磨大毘婆沙論 卷第177",
+          "juan_index": 177,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-178",
+          "title": "阿毘達磨大毘婆沙論 卷第178",
+          "juan_index": 178,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 51
+        },
+        {
+          "slug": "T1545-179",
+          "title": "阿毘達磨大毘婆沙論 卷第179",
+          "juan_index": 179,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-180",
+          "title": "阿毘達磨大毘婆沙論 卷第180",
+          "juan_index": 180,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 59
+        },
+        {
+          "slug": "T1545-181",
+          "title": "阿毘達磨大毘婆沙論 卷第181",
+          "juan_index": 181,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-182",
+          "title": "阿毘達磨大毘婆沙論 卷第182",
+          "juan_index": 182,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 48
+        },
+        {
+          "slug": "T1545-183",
+          "title": "阿毘達磨大毘婆沙論 卷第183",
+          "juan_index": 183,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 66
+        },
+        {
+          "slug": "T1545-184",
+          "title": "阿毘達磨大毘婆沙論 卷第184",
+          "juan_index": 184,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1545-185",
+          "title": "阿毘達磨大毘婆沙論 卷第185",
+          "juan_index": 185,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 50
+        },
+        {
+          "slug": "T1545-186",
+          "title": "阿毘達磨大毘婆沙論 卷第186",
+          "juan_index": 186,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 76
+        },
+        {
+          "slug": "T1545-187",
+          "title": "阿毘達磨大毘婆沙論 卷第187",
+          "juan_index": 187,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 47
+        },
+        {
+          "slug": "T1545-188",
+          "title": "阿毘達磨大毘婆沙論 卷第188",
+          "juan_index": 188,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-189",
+          "title": "阿毘達磨大毘婆沙論 卷第189",
+          "juan_index": 189,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 51
+        },
+        {
+          "slug": "T1545-190",
+          "title": "阿毘達磨大毘婆沙論 卷第190",
+          "juan_index": 190,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 50
+        },
+        {
+          "slug": "T1545-191",
+          "title": "阿毘達磨大毘婆沙論 卷第191",
+          "juan_index": 191,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 58
+        },
+        {
+          "slug": "T1545-192",
+          "title": "阿毘達磨大毘婆沙論 卷第192",
+          "juan_index": 192,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 65
+        },
+        {
+          "slug": "T1545-193",
+          "title": "阿毘達磨大毘婆沙論 卷第193",
+          "juan_index": 193,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 56
+        },
+        {
+          "slug": "T1545-194",
+          "title": "阿毘達磨大毘婆沙論 卷第194",
+          "juan_index": 194,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 52
+        },
+        {
+          "slug": "T1545-195",
+          "title": "阿毘達磨大毘婆沙論 卷第195",
+          "juan_index": 195,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        },
+        {
+          "slug": "T1545-196",
+          "title": "阿毘達磨大毘婆沙論 卷第196",
+          "juan_index": 196,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1545-197",
+          "title": "阿毘達磨大毘婆沙論 卷第197",
+          "juan_index": 197,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1545-198",
+          "title": "阿毘達磨大毘婆沙論 卷第198",
+          "juan_index": 198,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 64
+        },
+        {
+          "slug": "T1545-199",
+          "title": "阿毘達磨大毘婆沙論 卷第199",
+          "juan_index": 199,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 67
+        },
+        {
+          "slug": "T1545-200",
+          "title": "阿毘達磨大毘婆沙論 卷第200",
+          "juan_index": 200,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 62
+        }
+      ],
+      "total_issues": 1
+    },
+    {
+      "cbeta_id": "T1546",
+      "juans": [
+        {
+          "slug": "T1546-001",
+          "title": "阿毘曇毘婆沙論 卷第一",
+          "juan_index": 1,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 134
+        },
+        {
+          "slug": "T1546-002",
+          "title": "阿毘曇毘婆沙論 卷第二",
+          "juan_index": 2,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 139
+        },
+        {
+          "slug": "T1546-003",
+          "title": "阿毘曇毘婆沙論 卷第三",
+          "juan_index": 3,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 145
+        },
+        {
+          "slug": "T1546-004",
+          "title": "阿毘曇毘婆沙論 卷第四",
+          "juan_index": 4,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 99
+        },
+        {
+          "slug": "T1546-005",
+          "title": "阿毘曇毘婆沙論 卷第五",
+          "juan_index": 5,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 87
+        },
+        {
+          "slug": "T1546-006",
+          "title": "阿毘曇毘婆沙論 卷第六",
+          "juan_index": 6,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 121
+        },
+        {
+          "slug": "T1546-007",
+          "title": "阿毘曇毘婆沙論 卷第七",
+          "juan_index": 7,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 104
+        },
+        {
+          "slug": "T1546-008",
+          "title": "阿毘曇毘婆沙論 卷第八",
+          "juan_index": 8,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 98
+        },
+        {
+          "slug": "T1546-009",
+          "title": "阿毘曇毘婆沙論 卷第九",
+          "juan_index": 9,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 130
+        },
+        {
+          "slug": "T1546-010",
+          "title": "阿毘曇毘婆沙論 卷第十",
+          "juan_index": 10,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 172
+        },
+        {
+          "slug": "T1546-011",
+          "title": "阿毘曇毘婆沙論 卷第十一",
+          "juan_index": 11,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 166
+        },
+        {
+          "slug": "T1546-012",
+          "title": "阿毘曇毘婆沙論 卷第十二",
+          "juan_index": 12,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 132
+        },
+        {
+          "slug": "T1546-013",
+          "title": "阿毘曇毘婆沙論 卷第十三",
+          "juan_index": 13,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 132
+        },
+        {
+          "slug": "T1546-014",
+          "title": "阿毘曇毘婆沙論 卷第十四",
+          "juan_index": 14,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 127
+        },
+        {
+          "slug": "T1546-015",
+          "title": "阿毘曇毘婆沙論 卷第十五",
+          "juan_index": 15,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 118
+        },
+        {
+          "slug": "T1546-016",
+          "title": "阿毘曇毘婆沙論 卷第十六",
+          "juan_index": 16,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 90
+        },
+        {
+          "slug": "T1546-017",
+          "title": "阿毘曇毘婆沙論 卷第十七",
+          "juan_index": 17,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 136
+        },
+        {
+          "slug": "T1546-018",
+          "title": "阿毘曇毘婆沙論 卷第十八",
+          "juan_index": 18,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 103
+        },
+        {
+          "slug": "T1546-019",
+          "title": "阿毘曇毘婆沙論 卷第十九",
+          "juan_index": 19,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 137
+        },
+        {
+          "slug": "T1546-020",
+          "title": "阿毘曇毘婆沙論 卷第二十",
+          "juan_index": 20,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 162
+        },
+        {
+          "slug": "T1546-021",
+          "title": "阿毘曇毘婆沙論 卷第二十一",
+          "juan_index": 21,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 128
+        },
+        {
+          "slug": "T1546-022",
+          "title": "阿毘曇毘婆沙論 卷第二十二",
+          "juan_index": 22,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 117
+        },
+        {
+          "slug": "T1546-023",
+          "title": "阿毘曇毘婆沙論 卷第二十三",
+          "juan_index": 23,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 131
+        },
+        {
+          "slug": "T1546-024",
+          "title": "阿毘曇毘婆沙論 卷第二十四",
+          "juan_index": 24,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 99
+        },
+        {
+          "slug": "T1546-025",
+          "title": "阿毘曇毘婆沙論 卷第二十五",
+          "juan_index": 25,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 112
+        },
+        {
+          "slug": "T1546-026",
+          "title": "阿毘曇毘婆沙論 卷第二十六",
+          "juan_index": 26,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 113
+        },
+        {
+          "slug": "T1546-027",
+          "title": "阿毘曇毘婆沙論 卷第二十七",
+          "juan_index": 27,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 91
+        },
+        {
+          "slug": "T1546-028",
+          "title": "阿毘曇毘婆沙論 卷第二十八",
+          "juan_index": 28,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 108
+        },
+        {
+          "slug": "T1546-029",
+          "title": "阿毘曇毘婆沙論 卷第二十九",
+          "juan_index": 29,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 109
+        },
+        {
+          "slug": "T1546-030",
+          "title": "阿毘曇毘婆沙論 卷第三十",
+          "juan_index": 30,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 91
+        },
+        {
+          "slug": "T1546-031",
+          "title": "阿毘曇毘婆沙論 卷第三十一",
+          "juan_index": 31,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 123
+        },
+        {
+          "slug": "T1546-032",
+          "title": "阿毘曇毘婆沙論 卷第三十二",
+          "juan_index": 32,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 93
+        },
+        {
+          "slug": "T1546-033",
+          "title": "阿毘曇毘婆沙論 卷第三十三",
+          "juan_index": 33,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 123
+        },
+        {
+          "slug": "T1546-034",
+          "title": "阿毘曇毘婆沙論 卷第三十四",
+          "juan_index": 34,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 102
+        },
+        {
+          "slug": "T1546-035",
+          "title": "阿毘曇毘婆沙論 卷第三十五",
+          "juan_index": 35,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 140
+        },
+        {
+          "slug": "T1546-036",
+          "title": "阿毘曇毘婆沙論 卷第三十六",
+          "juan_index": 36,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 147
+        },
+        {
+          "slug": "T1546-037",
+          "title": "阿毘曇毘婆沙論 卷第三十七",
+          "juan_index": 37,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 129
+        },
+        {
+          "slug": "T1546-038",
+          "title": "阿毘曇毘婆沙論 卷第三十八",
+          "juan_index": 38,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 94
+        },
+        {
+          "slug": "T1546-040",
+          "title": "阿毘曇毘婆沙論 卷第四十",
+          "juan_index": 40,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 178
+        },
+        {
+          "slug": "T1546-041",
+          "title": "阿毘曇毘婆沙論 卷第四十一",
+          "juan_index": 41,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 137
+        },
+        {
+          "slug": "T1546-042",
+          "title": "阿毘曇毘婆沙論 卷第四十二",
+          "juan_index": 42,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 145
+        },
+        {
+          "slug": "T1546-043",
+          "title": "阿毘曇毘婆沙論 卷第四十三",
+          "juan_index": 43,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 145
+        },
+        {
+          "slug": "T1546-044",
+          "title": "阿毘曇毘婆沙論 卷第四十四",
+          "juan_index": 44,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 135
+        },
+        {
+          "slug": "T1546-045",
+          "title": "阿毘曇毘婆沙論 卷第四十五",
+          "juan_index": 45,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 136
+        },
+        {
+          "slug": "T1546-046",
+          "title": "阿毘曇毘婆沙論 卷第四十六",
+          "juan_index": 46,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 129
+        },
+        {
+          "slug": "T1546-047",
+          "title": "阿毘曇毘婆沙論 卷第四十七",
+          "juan_index": 47,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 108
+        },
+        {
+          "slug": "T1546-048",
+          "title": "阿毘曇毘婆沙論 卷第四十八",
+          "juan_index": 48,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 93
+        },
+        {
+          "slug": "T1546-049",
+          "title": "阿毘曇毘婆沙論 卷第四十九",
+          "juan_index": 49,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 108
+        },
+        {
+          "slug": "T1546-050",
+          "title": "阿毘曇毘婆沙論 卷第五十",
+          "juan_index": 50,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 57
+        },
+        {
+          "slug": "T1546-051",
+          "title": "阿毘曇毘婆沙論 卷第51",
+          "juan_index": 51,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 55
+        },
+        {
+          "slug": "T1546-052",
+          "title": "阿毘曇毘婆沙論 卷第52",
+          "juan_index": 52,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 43
+        },
+        {
+          "slug": "T1546-053",
+          "title": "阿毘曇毘婆沙論 卷第53",
+          "juan_index": 53,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 44
+        },
+        {
+          "slug": "T1546-054",
+          "title": "阿毘曇毘婆沙論 卷第54",
+          "juan_index": 54,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 53
+        },
+        {
+          "slug": "T1546-055",
+          "title": "阿毘曇毘婆沙論 卷第55",
+          "juan_index": 55,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 72
+        },
+        {
+          "slug": "T1546-056",
+          "title": "阿毘曇毘婆沙論 卷第56",
+          "juan_index": 56,
+          "issue_count": 1,
+          "max_repeat": 4,
+          "total_sections": 73
+        },
+        {
+          "slug": "T1546-057",
+          "title": "阿毘曇毘婆沙論 卷第57",
+          "juan_index": 57,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 44
+        },
+        {
+          "slug": "T1546-058",
+          "title": "阿毘曇毘婆沙論 卷第58",
+          "juan_index": 58,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 54
+        },
+        {
+          "slug": "T1546-059",
+          "title": "阿毘曇毘婆沙論 卷第59",
+          "juan_index": 59,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 48
+        },
+        {
+          "slug": "T1546-060",
+          "title": "阿毘曇毘婆沙論 卷第60",
+          "juan_index": 60,
+          "issue_count": 0,
+          "max_repeat": 1,
+          "total_sections": 69
+        }
+      ],
+      "total_issues": 1
+    }
+  ],
+  "generated_at": "2026-04-06T13:22:33",
+  "stats": {
+    "scanned": 8371,
+    "skipped_not_translated": 1406,
+    "skipped_reviewed": 1,
+    "files_with_issues": 3,
+    "total_issues": 6
+  }
+}
