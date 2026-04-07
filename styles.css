@@ -410,6 +410,21 @@ code {
   font-size: 1.16rem;
 }
 
+.reader-error {
+  padding: 32px 0;
+  line-height: 1.9;
+}
+
+.reader-error ul {
+  padding-left: 1.5em;
+  margin: 8px 0 16px;
+}
+
+.reader-error a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .catalog-search {
   margin-bottom: 20px;
 }

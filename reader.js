@@ -51,7 +51,23 @@ let readingMode = getSavedReadingMode();
 let fontSize = getSavedFontSize();
 
 init().catch((error) => {
-  dom.rendered.innerHTML = `<p class="loading-text">请通过站点地址访问本页，避免直接打开本地文件。</p>`;
+  const slug = getCurrentSlug() || "";
+  dom.title.textContent = "经文未找到";
+  dom.rendered.innerHTML = `
+    <div class="reader-error">
+      <p>抱歉，未能找到经文「<strong>${escapeHtml(slug)}</strong>」。</p>
+      <p>可能的原因：</p>
+      <ul>
+        <li>该经文编号不存在或链接已过期</li>
+        <li>本站近期更新了经文编号格式（如 T0251-001）</li>
+      </ul>
+      <p>您可以：</p>
+      <ul>
+        <li><a href="./catalog.html">前往经文目录</a>搜索您要阅读的经典</li>
+        <li><a href="./index.html">返回首页</a>浏览精选经目</li>
+      </ul>
+    </div>
+  `;
 });
 
 async function init() {
@@ -258,7 +274,14 @@ function syncReaderUrl(slug) {
 }
 
 function handleReaderLoadError() {
-  dom.rendered.innerHTML = `<p class="loading-text">当前经文加载失败，请稍后重试。</p>`;
+  const slug = getCurrentSlug() || "";
+  dom.title.textContent = "加载失败";
+  dom.rendered.innerHTML = `
+    <div class="reader-error">
+      <p>经文「<strong>${escapeHtml(slug)}</strong>」加载失败。</p>
+      <p>您可以<a href="./catalog.html">前往经文目录</a>搜索其他经典，或稍后重试。</p>
+    </div>
+  `;
   renderVolumeNavigation({ slug: "" });
 }
 
