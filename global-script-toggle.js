@@ -1,9 +1,8 @@
 const SCRIPT_MODE_COOKIE = "sutra_reader_script_mode";
-const SCRIPT_MODE_DEFAULT = "simplified";
-const VALID_SCRIPT_MODES = new Set([SCRIPT_MODE_DEFAULT, "traditional"]);
+const SCRIPT_MODE_DEFAULT = "traditional";
+const VALID_SCRIPT_MODES = new Set(["simplified", "traditional"]);
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 const NON_TRANSLATABLE_TAGS = new Set(["SCRIPT", "STYLE", "PRE", "CODE", "TEXTAREA"]);
-const originalTextContent = new WeakMap();
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   init();
@@ -11,7 +10,8 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 
 function init() {
   const openCC = window.OpenCC || null;
-  const simplifiedToTraditionalConverter = openCC?.Converter?.({ from: "cn", to: "tw" }) || null;
+  const toSimplified = openCC?.Converter?.({ from: "tw", to: "cn" }) || null;
+  const toTraditional = openCC?.Converter?.({ from: "cn", to: "tw" }) || null;
   let scriptMode = getSavedScriptMode();
   let isApplyingScriptMode = false;
 
@@ -45,24 +45,24 @@ function init() {
       tools.insertAdjacentHTML(
         "beforeend",
         `
-          <div class="site-script-picker" role="radiogroup" aria-label="简繁切换选项">
+          <div class="site-script-picker" role="radiogroup" aria-label="簡繁切換選項">
             <button
               class="site-script-option"
               type="button"
               role="radio"
               aria-checked="true"
-              data-site-script-mode-value="simplified"
+              data-site-script-mode-value="traditional"
             >
-              简体
+              繁體
             </button>
             <button
               class="site-script-option"
               type="button"
               role="radio"
               aria-checked="false"
-              data-site-script-mode-value="traditional"
+              data-site-script-mode-value="simplified"
             >
-              繁体
+              簡體
             </button>
           </div>
         `,
@@ -86,13 +86,18 @@ function init() {
 
   function observeAddedNodes() {
     const observer = new MutationObserver((mutations) => {
-      if (isApplyingScriptMode || scriptMode !== "traditional") {
+      if (isApplyingScriptMode) {
+        return;
+      }
+
+      const converter = scriptMode === "simplified" ? toSimplified : toTraditional;
+      if (!converter) {
         return;
       }
 
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
-          convertNodeTree(node);
+          convertNodeTree(node, converter);
         });
       });
     });
@@ -114,20 +119,16 @@ function init() {
       saveCookie(SCRIPT_MODE_COOKIE, nextMode);
     }
 
-    if (!simplifiedToTraditionalConverter) {
-      document.documentElement.lang = "zh-CN";
+    const converter = nextMode === "simplified" ? toSimplified : toTraditional;
+    if (!converter) {
+      document.documentElement.lang = nextMode === "simplified" ? "zh-CN" : "zh-TW";
       return;
     }
 
     isApplyingScriptMode = true;
     try {
-      if (nextMode === "traditional") {
-        convertNodeTree(document.body);
-        document.documentElement.lang = "zh-TW";
-      } else {
-        restoreNodeTree(document.body);
-        document.documentElement.lang = "zh-CN";
-      }
+      convertNodeTree(document.body, converter);
+      document.documentElement.lang = nextMode === "simplified" ? "zh-CN" : "zh-TW";
     } finally {
       isApplyingScriptMode = false;
     }
@@ -141,21 +142,11 @@ function init() {
     });
   }
 
-  function convertNodeTree(root) {
+  function convertNodeTree(root, converter) {
     walkTextNodes(root, (textNode) => {
-      if (!originalTextContent.has(textNode)) {
-        originalTextContent.set(textNode, textNode.nodeValue);
-      }
-      textNode.nodeValue = normalizeTraditionalText(
-        simplifiedToTraditionalConverter(originalTextContent.get(textNode)),
-      );
-    });
-  }
-
-  function restoreNodeTree(root) {
-    walkTextNodes(root, (textNode) => {
-      if (originalTextContent.has(textNode)) {
-        textNode.nodeValue = originalTextContent.get(textNode);
+      const converted = converter(textNode.nodeValue);
+      if (converted !== textNode.nodeValue) {
+        textNode.nodeValue = normalizeVolumeText(converted);
       }
     });
   }
@@ -194,11 +185,10 @@ function init() {
   }
 }
 
-function normalizeTraditionalText(text) {
+function normalizeVolumeText(text) {
   if (!text) {
     return text;
   }
-
   return text
     .replace(/捲(?=[上下中])/g, "卷")
     .replace(/捲(?=第)/g, "卷")

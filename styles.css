@@ -410,6 +410,37 @@ code {
   font-size: 1.16rem;
 }
 
+.catalog-search {
+  margin-bottom: 20px;
+}
+
+.catalog-search input {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #d0cec8;
+  border-radius: 6px;
+  background: #faf9f6;
+  color: #2c2a25;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.catalog-search input:focus {
+  border-color: #8b7e6a;
+}
+
+.catalog-search input::placeholder {
+  color: #9e978a;
+}
+
+.catalog-load-more-wrap {
+  text-align: center;
+  margin-top: 24px;
+}
+
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

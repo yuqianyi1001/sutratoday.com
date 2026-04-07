@@ -85,15 +85,21 @@
             <h2>全部经目</h2>
           </div>
           <p class="section-description" id="catalog-page-lead">正在读取全部经目…</p>
+          <div class="catalog-search">
+            <input type="text" id="catalog-search-input" placeholder="搜索经名（支持简体自动转繁体）…" autocomplete="off" />
+          </div>
           <div class="catalog-grid" id="catalog-grid">
             <p class="loading-text">正在读取文稿目录…</p>
+          </div>
+          <div class="catalog-load-more-wrap" id="catalog-load-more-wrap" hidden>
+            <button class="secondary-link" id="catalog-load-more">加载更多</button>
           </div>
         </section>
       </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js"></script>
-    <script type="module" src="./global-script-toggle.js"></script>
+    <script type="module" src="./global-script-toggle.js?v=2"></script>
     <script type="module" src="./catalog.js"></script>
   </body>
 </html>
