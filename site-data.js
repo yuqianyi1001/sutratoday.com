@@ -91,7 +91,12 @@ function buildVolumeNavLabel(slug, totalVolumes) {
 export async function loadDocument(path) {
   const response = await fetch(path);
   if (!response.ok) throw new Error(`无法读取 ${path} (Status: ${response.status})`);
+  const contentType = response.headers.get("content-type") || "";
   const raw = await response.text();
+  // Guard against SPA fallback: if the server returned HTML instead of markdown, treat as not found
+  if (contentType.includes("text/html") || (!raw.startsWith("---") && raw.trimStart().startsWith("<!DOCTYPE"))) {
+    throw new Error(`经文文件不存在: ${path}`);
+  }
   return parseDocument(raw, path);
 }
 
