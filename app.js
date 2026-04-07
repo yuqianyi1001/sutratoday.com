@@ -2,14 +2,14 @@ import {
   escapeHtml,
   formatUpdatedAtBadgeLabel,
   getCatalogVolumeBadgeLabel,
-  getEstimatedWorkCount,
-  getManifestVolumeCount,
   getReaderUrl,
   getReviewState,
   getTranslationState,
+  getVolumeSlugPath,
   HOME_FEATURED_WORK_IDS,
   loadDocument,
-  loadFeaturedDocuments,
+  loadFeaturedWorks,
+  loadWorksIndex,
   renderMarkdown,
 } from "./site-data.js";
 
@@ -30,67 +30,72 @@ init().catch((error) => {
 });
 
 async function init() {
-  // 1. 立即渲染统计数据，无需加载文件
-  renderStats(getEstimatedWorkCount(), getManifestVolumeCount());
+  // 1. Load index for stats
+  const indexPromise = loadWorksIndex();
 
-  // 2. 仅加载首页展示所需的 11 部经目
-  const featuredDocuments = await loadFeaturedDocuments();
-  renderCatalog(featuredDocuments);
+  // 2. Load featured works and render catalog
+  const featuredPromise = loadFeaturedWorks();
 
+  // 3. Load sample sutra (Heart Sutra = T0251-001)
+  const samplePromise = loadDocument(getVolumeSlugPath("T0251-001")).catch((error) => {
+    dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
+    return null;
+  });
+
+  const [index, featuredWorks, sampleDoc] = await Promise.all([indexPromise, featuredPromise, samplePromise]);
+
+  // Render stats
+  dom.statWorks.textContent = String(index.stats.workCount);
+  dom.statVolumes.textContent = String(index.stats.volumeCount);
+
+  // Render featured catalog
+  renderCatalog(featuredWorks);
   dom.catalogLead.textContent = `首页固定展示 ${HOME_FEATURED_WORK_IDS.length} 部精选经目。完整目录请进入单独的经文目录页查看。`;
 
-  // 3. 单独加载示例经文（心经）
-  renderSampleBySlug("heart-sutra").catch((error) => {
-    dom.sampleRendered.innerHTML = `<p class="loading-text">加载示例佛经失败：${escapeHtml(error.message)}</p>`;
-  });
+  // Render sample
+  if (sampleDoc) {
+    renderSample(sampleDoc);
+  }
 }
 
-function renderStats(workCount, volumeCount) {
-  dom.statWorks.textContent = String(workCount);
-  dom.statVolumes.textContent = String(volumeCount);
-}
-
-function renderCatalog(docs) {
-  dom.catalogGrid.innerHTML = docs
-    .map((doc) => {
-      const volumeLabel = getCatalogVolumeBadgeLabel(doc);
-      const translationBadge = getTranslationState(doc.translation_status);
-      const reviewBadge = getReviewState(doc.review_status);
+function renderCatalog(works) {
+  dom.catalogGrid.innerHTML = works
+    .map((work) => {
+      const volumeLabel = getCatalogVolumeBadgeLabel(work);
+      const translationBadge = getTranslationState(work.translation_status);
+      const reviewBadge = getReviewState(work.review_status);
+      const readerSlug = work.first_slug || work.cbeta_id;
 
       return `
         <article class="catalog-card">
           <div class="catalog-top">
             <div class="catalog-title-wrap">
-              <h3>${escapeHtml(doc.short_title || doc.title)}</h3>
+              <h3>${escapeHtml(work.short_title || work.title)}</h3>
             </div>
             <div class="badge-row catalog-badge-row">
               <span class="badge badge-muted">${escapeHtml(volumeLabel)}</span>
               <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
               <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
-              <span class="badge badge-muted">${escapeHtml(formatUpdatedAtBadgeLabel(doc.updated_at))}</span>
+              <span class="badge badge-muted">${escapeHtml(formatUpdatedAtBadgeLabel(work.updated_at))}</span>
             </div>
           </div>
-          <p class="catalog-summary">${escapeHtml(doc.summary || "暂无摘要。")}</p>
-          <a class="catalog-open" href="${getReaderUrl(doc.slug)}">进入阅读页</a>
+          <p class="catalog-summary">${escapeHtml(work.category || "")}${work.translator ? " · " + escapeHtml(work.translator) : ""}</p>
+          <a class="catalog-open" href="${getReaderUrl(readerSlug)}">进入阅读页</a>
         </article>
       `;
     })
     .join("");
 }
 
-async function renderSampleBySlug(slug) {
-  // 查找对应的路径并加载
-  const path = "content/sutras/heart-sutra.md";
-  const selected = await loadDocument(path);
-  
-  const translationBadge = getTranslationState(selected.translation_status || "translated");
-  const reviewBadge = getReviewState(selected.review_status || "ai_reviewed");
+function renderSample(doc) {
+  const translationBadge = getTranslationState(doc.translation_status || "translated");
+  const reviewBadge = getReviewState(doc.review_status || "unreviewed");
 
-  dom.sampleTitle.textContent = selected.title || "般若波罗蜜多心经";
+  dom.sampleTitle.textContent = doc.title || "般若波罗蜜多心经";
   dom.sampleMeta.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
     <span class="badge ${reviewBadge.className}">${reviewBadge.label}</span>
   `;
-  dom.sampleRendered.innerHTML = renderMarkdown(selected.body);
-  dom.sampleLink.href = getReaderUrl(slug);
+  dom.sampleRendered.innerHTML = renderMarkdown(doc.body);
+  dom.sampleLink.href = getReaderUrl("T0251-001");
 }
