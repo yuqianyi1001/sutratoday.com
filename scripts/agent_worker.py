@@ -151,7 +151,7 @@ BATCH_SYSTEM_PROMPT = """你是一位精通汉语佛教典籍的学者，擅长�
 只输出 JSON 数组，不加任何前言后语。"""
 
 RE_SECTION = re.compile(
-    r'(### 原文\n)(.*?)(\n### 现代语译\n)(.*?)(?=\n### 原文|\Z)',
+    r'(### 原文\n(?:<!-- sid:(\d{3}) -->\n)?)(.*?)(\n### (?:现代语译|現代語譯)\n(?:<!-- sid:\d{3} -->\n)?)(.*?)(?=\n### 原文|\Z)',
     re.DOTALL
 )
 
@@ -894,7 +894,8 @@ def translate_file(md_path: Path, backend_key: str, model: str,
 
     content      = md_path.read_text(encoding="utf-8")
     sections     = list(RE_SECTION.finditer(content))
-    untranslated = [s for s in sections if not s.group(4).strip()]
+    # group 索引: 1=原文头(含sid), 2=sid号, 3=原文, 4=译文头(含sid), 5=译文
+    untranslated = [s for s in sections if not s.group(5).strip()]
     seg_done_base = len(sections) - len(untranslated)
 
     print(f"  → {md_path.name}: {len(untranslated)}/{len(sections)} 段待翻译  "
@@ -905,8 +906,8 @@ def translate_file(md_path: Path, backend_key: str, model: str,
         batch = untranslated[i : i + batch_size]
 
         # 筛出有内容的段（id = 在 batch 内的位置索引）
-        segs = [{"id": j, "text": m.group(2).strip()}
-                for j, m in enumerate(batch) if m.group(2).strip()]
+        segs = [{"id": j, "text": m.group(3).strip()}
+                for j, m in enumerate(batch) if m.group(3).strip()]
 
         if not segs:
             i += len(batch)
@@ -932,16 +933,38 @@ def translate_file(md_path: Path, backend_key: str, model: str,
         elapsed = time.time() - t0
         print(f" ({elapsed:.1f}s)")
 
-        # ── 3. 一次性写回文件 ────────────────────────────────────────────────
+        # ── 3. 用 sid 精确匹配写回 ──────────────────────────────────────────
         current = md_path.read_text(encoding="utf-8")
-        for j, match in enumerate(batch):
+        for j, orig_match in enumerate(batch):
             trans = translations.get(j)
             if trans is None:
                 continue
-            old_block = match.group(0)
-            new_block = (match.group(1) + match.group(2) + match.group(3)
-                         + "\n" + trans + "\n")
-            current = current.replace(old_block, new_block, 1)
+            sid = orig_match.group(2)  # sid 编号，如 "001"
+            if sid:
+                # 有 sid：用 sid 精确定位
+                pattern = re.compile(
+                    r'(### 原文\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+                    r'(.*?)'
+                    r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+                    r'(.*?)'
+                    r'(?=\n### 原文|\Z)',
+                    re.DOTALL
+                )
+                m = pattern.search(current)
+                if m:
+                    new_block = m.group(1) + m.group(2) + m.group(3) + "\n" + trans + "\n"
+                    current = current[:m.start()] + new_block + current[m.end():]
+            else:
+                # 无 sid（旧文件）：回退到按原文内容匹配空段
+                cur_sections = list(RE_SECTION.finditer(current))
+                cur_empty = [s for s in cur_sections if not s.group(5).strip()]
+                orig_text = orig_match.group(3).strip()
+                for cm in cur_empty:
+                    if cm.group(3).strip() == orig_text:
+                        new_block = (cm.group(1) + cm.group(3) + cm.group(4)
+                                     + "\n" + trans + "\n")
+                        current = current[:cm.start()] + new_block + current[cm.end():]
+                        break
         md_path.write_text(current, encoding="utf-8")
 
         i += len(batch)
@@ -950,7 +973,7 @@ def translate_file(md_path: Path, backend_key: str, model: str,
     # ── 全卷完成：更新 frontmatter ────────────────────────────────────────────
     if not _shutdown:
         final = md_path.read_text(encoding="utf-8")
-        remaining = [s for s in RE_SECTION.finditer(final) if not s.group(4).strip()]
+        remaining = [s for s in RE_SECTION.finditer(final) if not s.group(5).strip()]
         if not remaining:
             final = re.sub(r'^translation_status: \w+',
                            'translation_status: translated', final, flags=re.MULTILINE)
@@ -967,7 +990,7 @@ def translate_file(md_path: Path, backend_key: str, model: str,
 
     seg_total      = len(sections)
     final_content  = md_path.read_text(encoding="utf-8")
-    seg_done_final = sum(1 for s in RE_SECTION.finditer(final_content) if s.group(4).strip())
+    seg_done_final = sum(1 for s in RE_SECTION.finditer(final_content) if s.group(5).strip())
     return seg_done_final, seg_total
 
 
