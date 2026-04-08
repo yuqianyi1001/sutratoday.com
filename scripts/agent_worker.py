@@ -1079,5 +1079,160 @@ def main():
     print(f"\n[Worker {agent_id}] 共翻译 {jobs_done} 卷，退出。")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# 查重模式
+# ═══════════════════════════════════════════════════════════════════════════════
+
+DEDUP_SYSTEM_PROMPT = """你是一位精通汉语佛教典籍的校对专家。你的任务是检查"现代语译"是否存在重复翻译。
+
+## 什么是重复翻译（需要修正）
+
+同一句原文被翻译了多次，产生了多个不同措辞的译文版本。例如：
+
+原文：「王復問曰：」
+错误的译文（有重复）：
+  國王又問道：
+  國王又問道：
+  國王再次問道：
+  國王又詢問說：
+正确的译文（只保留一个）：
+  國王又問道：
+
+## 什么不是重复翻译（必须保留）
+
+1. 原文包含多个不同的句子，译文逐句对应翻译。例如：
+   原文：「復次，三眼，是佛所說。謂肉眼、天眼、慧眼。復次，三言說事，是佛所說。謂過去言說事、未來言說事、現在言說事。」
+   译文（正确，两句分别翻译）：
+     再者，有三种眼，是佛所说的。即：肉眼、天眼、慧眼。
+     再者，有三种言说所指的事，是佛所说的。即：过去、未来、现在。
+
+2. 原文本身有排比、对仗结构，译文对应保持排比。例如：
+   原文中"眼、耳、鼻、舌、身、意"六根分别展开，译文也应分别展开。
+
+3. 偈颂中结构类似但内容不同的句子（如"悲心"→"喜心"、"贪欲"→"瞋恚"）。
+
+## 判断方法
+
+1. 先数原文有几个独立的句子/子句
+2. 再看译文有几段，是否与原文句子一一对应
+3. 如果译文段数明显多于原文句子数，且多出的部分是同一句的不同翻译版本 → 重复
+4. 如果译文段数与原文句子数大致对应 → 不是重复
+
+## 输出规则
+
+- 如果有重复：输出修正后的译文（只保留最好的一个版本），不加任何解释
+- 如果没有重复：原样输出译文，不做任何修改，不加任何解释
+- 只输出译文内容本身，不要加"修正后："等前缀"""
+
+
+def dedup_file(md_path: Path, backend_key: str, model: str):
+    """对文件中标记了 review:dup_suspect 的段落进行 AI 查重修正。"""
+    cfg     = BACKENDS[backend_key]
+    raw_fn  = cfg["raw"]
+
+    text = md_path.read_text(encoding="utf-8")
+    if "<!-- review:dup_suspect" not in text:
+        return 0
+
+    # 找所有有标记的 sid
+    suspect_sids = set(re.findall(r'<!-- review:dup_suspect sid:(\d{3})', text))
+    if not suspect_sids:
+        return 0
+
+    sections = list(RE_SECTION.finditer(text))
+    fixed = 0
+
+    for s in sections:
+        sid = s.group(2)
+        if sid not in suspect_sids:
+            continue
+
+        orig = s.group(3).strip()
+        trans = s.group(5).strip()
+        if not orig or not trans:
+            continue
+
+        # 发给 AI 判断
+        messages = [
+            {"role": "system", "content": DEDUP_SYSTEM_PROMPT},
+            {"role": "user", "content": f"原文：\n{orig}\n\n现代语译：\n{trans}"},
+        ]
+        result = raw_fn(messages, model, max_tokens=4096)
+        result = result.strip()
+
+        if not result or "翻译失败" in result:
+            print(f"    sid:{sid} AI 返回失败，跳过")
+            continue
+
+        # 检查 AI 是否修改了内容
+        if result.strip() == trans.strip():
+            # AI 判定无重复，移除标记
+            marker = f"<!-- review:dup_suspect sid:{sid}"
+            text = re.sub(r'<!-- review:dup_suspect sid:' + re.escape(sid) + r'[^>]*-->\n?', '', text)
+            print(f"    sid:{sid} 无重复，移除标记")
+        else:
+            # AI 修正了，用 sid 精确替换
+            pattern = re.compile(
+                r'(### 原文\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+                r'(.*?)'
+                r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+                r'(?:<!-- review:dup_suspect[^>]*-->\n?)?'
+                r'(.*?)'
+                r'(?=\n### 原文|\Z)',
+                re.DOTALL
+            )
+            m = pattern.search(text)
+            if m:
+                new_block = m.group(1) + m.group(2) + m.group(3) + "\n" + result + "\n"
+                text = text[:m.start()] + new_block + text[m.end():]
+                fixed += 1
+                print(f"    sid:{sid} ✓ 已修正")
+
+    md_path.write_text(text, encoding="utf-8")
+    return fixed
+
+
+def main_dedup():
+    """查重模式入口"""
+    parser = argparse.ArgumentParser(description="查重 Worker — 用 AI 检查并修正重复翻译")
+    parser.add_argument("--backend",  required=True, choices=BACKENDS.keys())
+    parser.add_argument("--model",    help="覆盖默认模型名")
+    parser.add_argument("--slug",     help="只处理指定 slug")
+    parser.add_argument("--limit",    type=int, default=0, help="最多处理 N 个文件")
+    args = parser.parse_args()
+
+    model = args.model or BACKENDS[args.backend]["default_model"]
+    print(f"[Dedup] backend={args.backend} model={model}")
+
+    files = sorted(Path("content/sutras-raw").rglob("*.md"))
+    done = 0
+
+    for f in files:
+        if _shutdown:
+            break
+        if args.limit and done >= args.limit:
+            break
+        if args.slug and f.stem != args.slug:
+            continue
+
+        text = f.read_text(encoding="utf-8")
+        if "<!-- review:dup_suspect" not in text:
+            continue
+
+        suspect_count = len(re.findall(r'<!-- review:dup_suspect', text))
+        print(f"\n[{f.stem}] {suspect_count} 段待查重")
+
+        fixed = dedup_file(f, args.backend, model)
+        print(f"  → 修正 {fixed} 段")
+        done += 1
+
+    print(f"\n[Dedup] 共处理 {done} 个文件")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "dedup":
+        sys.argv.pop(1)  # 移除 "dedup" 子命令
+        main_dedup()
+    else:
+        main()
