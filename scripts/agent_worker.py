@@ -977,8 +977,8 @@ def translate_file(md_path: Path, backend_key: str, model: str,
         if not remaining:
             final = re.sub(r'^translation_status: \w+',
                            'translation_status: translated', final, flags=re.MULTILINE)
-            # 写入或更新 ai_translator 为规范全名
-            label = full_model or model
+            # 写入或更新 ai_translator（只记录模型名，不含 provider）
+            label = model
             if "ai_translator:" in final:
                 final = re.sub(r'^ai_translator:.*$', f'ai_translator: {label}',
                                final, flags=re.MULTILINE)
