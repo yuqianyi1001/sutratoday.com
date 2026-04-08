@@ -260,6 +260,8 @@ export function renderMarkdown(markdown) {
       return;
     }
 
+    if (/^<!--.*-->$/.test(line.trim())) return;
+
     if (/^---+$/.test(line.trim())) {
       flushParagraph();
       flushList();
