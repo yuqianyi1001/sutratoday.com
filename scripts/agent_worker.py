@@ -1229,10 +1229,145 @@ def main_dedup():
     print(f"\n[Dedup] 共处理 {done} 个文件")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# 重译模式：原文与译文完全一致的段落
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def _strip_all(s):
+    return re.compile(r'[^\u4e00-\u9fff\u3400-\u4dbfa-zA-Z0-9]').sub('', s)
+
+def _is_title_or_colophon(text):
+    text = text.strip()
+    if re.match(r'^.{2,20}(卷[上中下]|卷第?[一二三四五六七八九十百千\d]+|品[上中下]?)$', text.replace('\n', '')):
+        return True
+    keywords = ['譯經', '奉詔譯', '奉詔翻譯', '沙門', '大夫', '傳法', '賜紫', '試光祿', '朝奉', '朝散', '三藏']
+    if any(k in text for k in keywords):
+        return True
+    lines = [l for l in text.split('\n') if l.strip()]
+    if len(lines) == 1 and len(_strip_all(text)) < 30 and ('品' in text or '卷' in text or '經' in text or '論' in text):
+        return True
+    return False
+
+
+def retranslate_file(md_path: Path, backend_key: str, model: str):
+    """找出原文=译文的段落，发给 AI 重新翻译。"""
+    cfg    = BACKENDS[backend_key]
+    call_fn = cfg["call"]
+
+    text = md_path.read_text(encoding="utf-8")
+    sections = list(RE_SECTION.finditer(text))
+    if not sections:
+        return 0
+
+    # 找出需要重译的 sid
+    targets = []
+    for s in sections:
+        orig = s.group(3).strip()
+        trans = s.group(5).strip()
+        sid = s.group(2)
+        if not orig or not trans or not sid:
+            continue
+        if len(_strip_all(orig)) < 20:
+            continue
+        if _strip_all(orig) != _strip_all(trans):
+            continue
+        if _is_title_or_colophon(orig):
+            continue
+        targets.append(sid)
+
+    if not targets:
+        return 0
+
+    fixed = 0
+    for sid in targets:
+        if _shutdown:
+            break
+        # 每次重新读取
+        text = md_path.read_text(encoding="utf-8")
+        pattern = re.compile(
+            r'(### 原文\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+            r'(.*?)'
+            r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
+            r'(.*?)'
+            r'(?=\n### 原文|\Z)',
+            re.DOTALL
+        )
+        m = pattern.search(text)
+        if not m:
+            continue
+
+        orig = m.group(2).strip()
+        result = call_fn(orig, model)
+        if not result or "翻译失败" in result:
+            print(f" [sid:{sid} 失败]", end="", flush=True)
+            continue
+
+        new_block = m.group(1) + m.group(2) + m.group(3) + "\n" + result + "\n"
+        text = text[:m.start()] + new_block + text[m.end():]
+        md_path.write_text(text, encoding="utf-8")
+        fixed += 1
+
+    return fixed
+
+
+def main_retranslate():
+    parser = argparse.ArgumentParser(description="重译 Worker — 修复原文=译文的段落")
+    parser.add_argument("--backend",  required=True, choices=BACKENDS.keys())
+    parser.add_argument("--model",    help="覆盖默认模型名")
+    parser.add_argument("--slug",     help="只处理指定 slug")
+    parser.add_argument("--limit",    type=int, default=0, help="最多处理 N 个文件")
+    args = parser.parse_args()
+
+    model = args.model or BACKENDS[args.backend]["default_model"]
+    print(f"[Retranslate] backend={args.backend} model={model}")
+
+    files = sorted(Path("content/sutras-raw").rglob("*.md"))
+    done = 0
+    total_fixed = 0
+
+    for f in files:
+        if _shutdown:
+            break
+        if args.limit and done >= args.limit:
+            break
+        if args.slug and f.stem != args.slug:
+            continue
+
+        text = f.read_text(encoding="utf-8")
+        # 快速检查是否有需要处理的段
+        sections = list(RE_SECTION.finditer(text))
+        has_copy = False
+        for s in sections:
+            orig = s.group(3).strip()
+            trans = s.group(5).strip()
+            if orig and trans and len(_strip_all(orig)) >= 20 and _strip_all(orig) == _strip_all(trans) and not _is_title_or_colophon(orig):
+                has_copy = True
+                break
+        if not has_copy:
+            continue
+
+        count = sum(1 for s in sections
+                    if s.group(3).strip() and s.group(5).strip()
+                    and len(_strip_all(s.group(3).strip())) >= 20
+                    and _strip_all(s.group(3).strip()) == _strip_all(s.group(5).strip())
+                    and not _is_title_or_colophon(s.group(3).strip()))
+
+        print(f"[{f.stem}] {count} 段", end="", flush=True)
+        fixed = retranslate_file(f, args.backend, model)
+        total_fixed += fixed
+        print(f" → {fixed} 重译")
+        done += 1
+
+    print(f"\n[Retranslate] 共处理 {done} 个文件, {total_fixed} 段重译")
+
+
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "dedup":
-        sys.argv.pop(1)  # 移除 "dedup" 子命令
+        sys.argv.pop(1)
         main_dedup()
+    elif len(sys.argv) > 1 and sys.argv[1] == "retranslate":
+        sys.argv.pop(1)
+        main_retranslate()
     else:
         main()
