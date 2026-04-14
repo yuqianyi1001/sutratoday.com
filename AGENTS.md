@@ -17,7 +17,7 @@
   - 把佛经底本，保存到 `sources/cbeta/`
 
 - 整理成 佛经 md 文件
-  - 把 `sources/cbeta/` 的佛经原文，提取成 md 文件，并存放在 `content/sutras/` ，md要求见下方“佛经 md 文稿规范”
+  - 把 `sources/cbeta/` 的佛经原文，提取成 md 文件，并存放在 `content/sutras-raw/` ，md要求见下方“佛经 md 文稿规范”
   - 用 opencc 工具，把繁体中文转成简体中文
   - 把 异体字、用字、句式以 CBETA 为先；若极少数字形不适合直接放进 markdown，则改用最常见、最通行的简体写法。
   - 分组和分段：
@@ -55,8 +55,8 @@
 
 ## 佛经 md 文稿规范
 
-- 文稿统一存放在 `content/sutras/` 下，使用 Markdown + front matter。
-- 当前正式参考稿：`content/sutras/heart-sutra.md`
+- 文稿统一存放在 `content/sutras-raw/` 下，使用 Markdown + front matter。
+- 当前正式参考稿：`content/sutras-raw/<cbeta-number>-<juan-number>.md`
 
 ### front matter 字段
 

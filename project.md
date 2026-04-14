@@ -19,7 +19,7 @@
 
 ### 3.1 生产流水线 (GitHub Actions)
 ```
-content/sutras/*.md  (Source of Truth)
+content/sutras-raw/*.md  (Source of Truth)
         │
         ▼
   [Build: Python 扫描脚本]
@@ -171,10 +171,10 @@ content/sutras/*.md  (Source of Truth)
 
 ### 阶段零：经目数据准备
 - [x] **经目清单**：从 CBETA catalog.txt 提取目标经目，生成 `target_sutra_list.tsv`（2,482 部，10,349 卷）。
-- [ ] **XML → MD 转换脚本**：编写 Python 脚本，读取 `target_sutra_list.tsv`，从 CBETA XML 提取原文，生成 `content/sutras/*.md`（含 frontmatter）。
+- [ ] **XML → MD 转换脚本**：编写 Python 脚本，读取 `target_sutra_list.tsv`，从 CBETA XML 提取原文，生成 `content/sutras-raw/*.md`（含 frontmatter）。
 
 ### 阶段一：自动化基础（解除手工维护依赖）
-- [ ] **构建脚本**：编写 Python 脚本扫描 `content/sutras/`，自动提取 Front Matter，生成 `catalog.json`。
+- [ ] **构建脚本**：编写 Python 脚本扫描 `content/sutras-raw/`，自动提取 Front Matter，生成 `catalog.json`。
 - [ ] **切换目录页**：`catalog.html` 改为从 `catalog.json` 加载，**同步删除** `site-data.js` 中手工维护的 `documentIndex` / `documentMetadata` 区块，不允许两套并存。
 - [ ] **GitHub Actions 集成**：Push 时自动运行构建脚本，产物提交或直接部署。
 

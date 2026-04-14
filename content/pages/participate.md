@@ -73,7 +73,7 @@
 
 ## 文稿工作方式
 
-所有原始稿都使用 Markdown 管理，并放在 `content/sutras/` 下。每篇文稿都带有 front matter，用于记录：
+所有原始稿都使用 Markdown 管理，并放在 `content/sutras-raw/` 下。每篇文稿都带有 front matter，用于记录：
 
 - 标题
 - 卷别
