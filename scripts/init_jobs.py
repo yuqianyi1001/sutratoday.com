@@ -56,11 +56,16 @@ def parse_frontmatter(text: str) -> dict:
 
 
 def count_segments(text: str) -> tuple[int, int]:
-    """返回 (seg_total, seg_done)"""
+    """返回 (seg_total, seg_done)。判断"已翻译"时剔除 <!-- sid:NNN --> 注释。"""
     orig_blocks = RE_ORIG.findall(text)
     trans_blocks = RE_TRANS.findall(text)
     total = len(orig_blocks)
-    done = sum(1 for t in trans_blocks if t.strip())
+    done = 0
+    for t in trans_blocks:
+        # 把 sid 注释行剥掉再判空
+        cleaned = re.sub(r'<!--\s*sid:\d+\s*-->', '', t).strip()
+        if cleaned:
+            done += 1
     return total, done
 
 

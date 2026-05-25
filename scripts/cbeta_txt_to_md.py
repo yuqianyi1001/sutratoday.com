@@ -332,18 +332,29 @@ def build_md(frontmatter, title, preface_paras, body_lines):
     md.append(f"# {title}")
     md.append("")
 
+    # sid 计数器：从 001 开始，每对 `### 原文 / ### 现代语译` 共用一个 sid。
+    # 注入格式与现有文件一致：header 紧接 `<!-- sid:NNN -->` 行，再空行再内容。
+    sid_counter = [0]
+
+    def emit_pair(content: str):
+        sid_counter[0] += 1
+        sid = f"{sid_counter[0]:03d}"
+        md.append("### 原文")
+        md.append(f"<!-- sid:{sid} -->")
+        md.append("")
+        md.append(content)
+        md.append("")
+        md.append("### 现代语译")
+        md.append(f"<!-- sid:{sid} -->")
+        md.append("")
+        md.append("")
+
     # 序文
     if preface_paras:
         md.append("## 序")
         md.append("")
         for para in preface_paras:
-            md.append("### 原文")
-            md.append("")
-            md.append(para)
-            md.append("")
-            md.append("### 现代语译")
-            md.append("")
-            md.append("")
+            emit_pair(para)
 
     # 正文
     paragraphs = split_paragraphs(body_lines)
@@ -358,22 +369,9 @@ def build_md(frontmatter, title, preface_paras, body_lines):
             # 如果标题段落里还有后续内容（极少见），也输出
             rest = "\n".join(para.split("\n")[1:]).strip()
             if rest:
-                md.append("### 原文")
-                md.append("")
-                md.append(rest)
-                md.append("")
-                md.append("### 现代语译")
-                md.append("")
-                md.append("")
+                emit_pair(rest)
         else:
-            # 普通段落 → 原文 + 待译
-            md.append("### 原文")
-            md.append("")
-            md.append(para)
-            md.append("")
-            md.append("### 现代语译")
-            md.append("")
-            md.append("")
+            emit_pair(para)
 
     # 清理末尾空行
     while md and md[-1].strip() == "":
@@ -436,13 +434,27 @@ def convert_volume(sutra_id, collection, sutra_no, juan_idx, juan_total,
 
 # ── 主入口 ────────────────────────────────────────────────
 
+def _read_translation_status(md_path):
+    """从已有 md 的 frontmatter 读 translation_status，读不到就当 untranslated。"""
+    try:
+        with open(md_path, "r", encoding="utf-8") as f:
+            head = f.read(1024)
+        m = re.search(r'^translation_status:\s*(\w+)', head, re.MULTILINE)
+        return m.group(1) if m else "untranslated"
+    except Exception:
+        return "untranslated"
+
+
 def main():
     if len(sys.argv) < 2:
-        print("用法: python3 scripts/cbeta_txt_to_md.py T0001 [--force]")
+        print("用法: python3 scripts/cbeta_txt_to_md.py T0001 "
+              "[--force | --force-overwrite-translated]")
         sys.exit(1)
 
     sutra_id = sys.argv[1]
     force = "--force" in sys.argv
+    # 危险开关：连已翻译的 md 也覆盖。仅在确认要重做时使用。
+    force_overwrite = "--force-overwrite-translated" in sys.argv
 
     collection = sutra_id[0]
     sutra_no = sutra_id[1:]
@@ -467,9 +479,17 @@ def main():
         slug = f"{collection}{sutra_no}-{juan_idx:03d}"
         out_path = os.path.join(OUTPUT_DIR, f"{slug}.md")
 
-        if os.path.exists(out_path) and not force:
-            skipped += 1
-            continue
+        if os.path.exists(out_path):
+            existing_status = _read_translation_status(out_path)
+            if not force:
+                skipped += 1
+                continue
+            # 已翻译的文件除非显式要求，否则不许覆盖
+            if existing_status != "untranslated" and not force_overwrite:
+                print(f"  跳过 {slug}.md：translation_status={existing_status}。"
+                      "如确需重做，加 --force-overwrite-translated。")
+                skipped += 1
+                continue
 
         md_content = convert_volume(
             sutra_id, collection, sutra_no, juan_idx, juan_total,
