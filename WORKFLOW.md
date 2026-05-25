@@ -209,7 +209,25 @@ sed -n '20,40p' content/sutras-raw/T0002-001.md
 
 ---
 
-## 5. 后续校验（独立流程，不在本工作流必走）
+## 5. 重建前端索引 — `build-index.js`（必做）
+
+```bash
+node scripts/build-index.js
+```
+
+**为什么必须做**：网站搜索靠根目录的 `sutras-raw-index.json`。新经入站、卷的 `translation_status` / `review_status` 变化，都必须重跑这个脚本，否则前端搜不到。曾经因为漏跑导致 T2087 翻完了但网站搜不到《大唐西域記》。
+
+**附带**：如果想让该经进 sitemap（影响 SEO 收录，不影响站内搜索），还要跑：
+
+```bash
+node scripts/build-sitemap.js
+```
+
+但 sitemap 只取索引中得分前 100 的经，权重 = `PRIORITY_WORKS` (1000) + `human_reviewed` (100) + `ai_reviewed` (50) + `translated` (30)。普通 `translated` 状态的小众经一般进不了 top 100，要进 sitemap 通常得人工 review 或加进 `scripts/build-sitemap.js` 的 `PRIORITY_WORKS` 列表。
+
+---
+
+## 6. 后续校验（独立流程，不在本工作流必走）
 
 | 目的 | 命令 |
 | --- | --- |
@@ -252,8 +270,12 @@ python3 scripts/init_jobs.py T0002
 # 4. 翻译
 python3 scripts/agent_worker.py --backend dashscope --slug T0002-001
 
-# 5. 验收
+# 5. 重建索引（让网站搜得到，必做！）
+node scripts/build-index.js
+
+# 6. 验收
 grep "translation_status\|ai_translator" content/sutras-raw/T0002-001.md
+grep "T0002" sutras-raw-index.json   # 索引里应该有
 ```
 
 每一步都是幂等的：重跑只会跳过已完成的部分，不会破坏现有翻译。
