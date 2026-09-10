@@ -43,8 +43,27 @@ RE_PIN = re.compile(r"^(佛說.+)?(.+品第[一二三四五六七八九十百千
 RE_CONTINUATION = re.compile(r"^(.+經第[一二三四五六七八九十]+[初中後]?)$")
 # 卷标题行
 RE_VOLUME_TITLE = re.compile(r".*卷第?[一二三四五六七八九十百千廿卅]+")
-# 译者行
-RE_TRANSLATOR = re.compile(r"^.{3,25}譯$")
+# 译者/作者行
+RE_TRANSLATOR = re.compile(r"^.{3,40}(譯|撰|述|集|編|錄)$")
+
+# 《高僧傳》科名、传主标题、论曰、目录卷标
+RE_GSZ_CATEGORY = re.compile(
+    r"^(譯經[上中下]|義解[一二三四五]|神異[上下]|"
+    r"習禪(第[一二三四五六七八九十]+)?(（[^）]*）)?(　明律.*)?"
+    r"|明律(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|亡身(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|誦經(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|興福(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|經師(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|唱導(第[一二三四五六七八九十]+)?(（[^）]*）)?"
+    r"|序錄|序)$"
+)
+RE_GSZ_BIO_NUM_PREFIX = re.compile(r"^(\d+)\s+(\S{2,20})$")
+RE_GSZ_BIO_NUM_SUFFIX = re.compile(
+    r"^(.{2,20}?)第?([一二三四五六七八九十百]+)$"
+)
+RE_GSZ_LUN = re.compile(r"^論曰[：:]?")
+RE_GSZ_CATALOG = re.compile(r"^高僧傳第.+卷")
 
 
 def load_tsv_entry(sutra_id):
@@ -283,7 +302,47 @@ def split_paragraphs(lines):
 
         consolidated.append(para)
 
-    return consolidated
+    # 第五步：上一句未结束（不以 。！？；」』 收尾）则与下一段拼接，避免「而奉戒 / 精峻」
+    SENTENCE_END = "。！？；」』"
+    CATALOG_START = "漢魏晉宋齊梁秦"
+
+    def _is_catalog_line(line: str) -> bool:
+        line = line.strip()
+        return bool(line) and line[0] in CATALOG_START and "。" not in line
+
+    glued = []
+    for para in consolidated:
+        prev = glued[-1] if glued else ""
+        prev_first = prev.split("\n")[0] if prev else ""
+        para_first = para.split("\n")[0] if para else ""
+        prev_last = prev.rstrip().split("\n")[-1] if prev.rstrip() else ""
+        prev_tail = prev.rstrip()[-1] if prev.rstrip() else ""
+        if (glued
+                and not is_verse_line(para_first)
+                and not is_verse_line(prev_first)
+                and not is_section_heading(para)
+                and prev_tail
+                and prev_tail not in SENTENCE_END):
+            # 目录人名行本身不以句号收尾，应换行保留，不可黏成「帛尸梨蜜晉長安…」
+            if _is_catalog_line(prev_last) and _is_catalog_line(para_first) and len(prev_last) >= 6:
+                glued[-1] = prev.rstrip() + "\n" + para.lstrip()
+                continue
+            glued[-1] = prev.rstrip() + para.lstrip()
+            continue
+        glued.append(para)
+
+    return glued
+
+
+def is_gsz_bio_heading(first_line):
+    """高僧传传主标题：`1 攝摩騰` 或 `鳩摩羅什一`。"""
+    if RE_GSZ_BIO_NUM_PREFIX.match(first_line):
+        return True
+    if RE_GSZ_CATEGORY.match(first_line):
+        return False
+    if RE_GSZ_BIO_NUM_SUFFIX.match(first_line) and len(first_line) < 24:
+        return True
+    return False
 
 
 def is_section_heading(text):
@@ -295,7 +354,33 @@ def is_section_heading(text):
         return True
     if RE_CONTINUATION.match(first_line) and len(first_line) < 20:
         return True
+    if RE_GSZ_CATEGORY.match(first_line):
+        return True
+    if RE_GSZ_LUN.match(first_line):
+        return True
+    if RE_GSZ_CATALOG.match(first_line) and len(first_line) < 40:
+        return True
+    if is_gsz_bio_heading(first_line) and "\n" not in text.strip():
+        return True
     return False
+
+
+def format_section_heading(text):
+    """把传主标题规范成 `一、攝摩騰`；科名、论曰保持原样。"""
+    first = text.split("\n")[0].strip()
+    if RE_GSZ_CATEGORY.match(first) or RE_GSZ_CATALOG.match(first):
+        return first
+    if first in ("論曰", "論曰：", "論曰:"):
+        return "論曰"
+    m = RE_GSZ_BIO_NUM_PREFIX.match(first)
+    if m:
+        n = int(m.group(1))
+        cn = CHINESE_NUMS.get(n, str(n))
+        return f"{cn}、{m.group(2)}"
+    m = RE_GSZ_BIO_NUM_SUFFIX.match(first)
+    if m and not RE_GSZ_CATEGORY.match(first):
+        return f"{m.group(2)}、{m.group(1)}"
+    return first
 
 
 def build_md(frontmatter, title, preface_paras, body_lines):
@@ -363,11 +448,14 @@ def build_md(frontmatter, title, preface_paras, body_lines):
         first_line = para.split("\n")[0].strip()
 
         if is_section_heading(first_line):
-            # 章节标题 → ## 级
-            md.append(f"## {first_line}")
-            md.append("")
-            # 如果标题段落里还有后续内容（极少见），也输出
+            heading = format_section_heading(first_line)
             rest = "\n".join(para.split("\n")[1:]).strip()
+            lun = RE_GSZ_LUN.match(first_line)
+            if lun and len(first_line) > 4:
+                heading = "論曰"
+                rest = first_line[lun.end():].lstrip("：:").strip() or rest
+            md.append(f"## {heading}")
+            md.append("")
             if rest:
                 emit_pair(rest)
         else:
