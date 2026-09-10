@@ -302,7 +302,36 @@ def split_paragraphs(lines):
 
         consolidated.append(para)
 
-    return consolidated
+    # 第五步：上一句未结束（不以 。！？；」』 收尾）则与下一段拼接，避免「而奉戒 / 精峻」
+    SENTENCE_END = "。！？；」』"
+    CATALOG_START = "漢魏晉宋齊梁秦"
+
+    def _is_catalog_line(line: str) -> bool:
+        line = line.strip()
+        return bool(line) and line[0] in CATALOG_START and "。" not in line
+
+    glued = []
+    for para in consolidated:
+        prev = glued[-1] if glued else ""
+        prev_first = prev.split("\n")[0] if prev else ""
+        para_first = para.split("\n")[0] if para else ""
+        prev_last = prev.rstrip().split("\n")[-1] if prev.rstrip() else ""
+        prev_tail = prev.rstrip()[-1] if prev.rstrip() else ""
+        if (glued
+                and not is_verse_line(para_first)
+                and not is_verse_line(prev_first)
+                and not is_section_heading(para)
+                and prev_tail
+                and prev_tail not in SENTENCE_END):
+            # 目录人名行本身不以句号收尾，应换行保留，不可黏成「帛尸梨蜜晉長安…」
+            if _is_catalog_line(prev_last) and _is_catalog_line(para_first) and len(prev_last) >= 6:
+                glued[-1] = prev.rstrip() + "\n" + para.lstrip()
+                continue
+            glued[-1] = prev.rstrip() + para.lstrip()
+            continue
+        glued.append(para)
+
+    return glued
 
 
 def is_gsz_bio_heading(first_line):

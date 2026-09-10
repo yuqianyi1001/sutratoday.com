@@ -228,7 +228,7 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     """
     把一段 TEI XML 转成 bookcase 风格纯文本：
     - <lb .../> → 换行
-    - <pb .../> → 换行（页边界）
+    - <pb .../> → 删除（分页不是段界，避免把一句从中切断）
     - <caesura/> → 全角空格 `　`
     - <l>...</l> → 该行末尾补 \n
     - </p> → 段末空行
@@ -266,9 +266,9 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     # caesura 全角空格
     s = re.sub(r'<caesura\s*/>', '　　', s)
 
-    # 行/页边界 → 换行（保留 CBETA 原版式参考）
+    # 行界换行；分页不是段界，去掉以免「而奉戒 / 精峻」被空行切开
     s = re.sub(r'<lb\s+[^>]*/>', '\n', s)
-    s = re.sub(r'<pb\s+[^>]*/>', '\n', s)
+    s = re.sub(r'<pb\s+[^>]*/>', '', s)
 
     # 剥掉其余标签
     s = _strip_tags(s)
@@ -278,9 +278,22 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     out_lines = []
     buf = ""
     PUNC_END = "。！？；：、，」』）】〕》〉…—"
+    SENTENCE_END = "。！？；」』"
+
+    def _is_complete_catalog_item(text: str) -> bool:
+        """高僧传目录人名行虽不以句号收尾，仍是完整条目，不可与下一条黏在一起。"""
+        if not text or "。" in text:
+            return False
+        if text[0] not in "漢魏晉宋齊梁秦":
+            return False
+        return len(text) >= 6
+
     for ln in s.split("\n"):
         ln = ln.strip()
         if not ln:
+            # 空行而上一句未结束：多半是分页残留，不能当成段界
+            if buf and buf[-1] not in SENTENCE_END and not _is_complete_catalog_item(buf):
+                continue
             if buf:
                 out_lines.append(buf)
                 buf = ""
