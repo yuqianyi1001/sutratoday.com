@@ -134,7 +134,49 @@ RE_CB_JUAN_OPEN = re.compile(r'<cb:juan\s+n="(\d+)"\s+fun="open"[^>]*>', re.DOTA
 RE_BODY         = re.compile(r'<body[^>]*>(.*?)</body>', re.DOTALL)
 RE_DOC_NUMBER   = re.compile(r'<cb:docNumber>(.*?)</cb:docNumber>', re.DOTALL)
 RE_JHEAD        = re.compile(r'<cb:jhead>(.*?)</cb:jhead>', re.DOTALL)
-RE_BYLINE_TR    = re.compile(r'<byline[^>]*cb:type="Translator"[^>]*>(.*?)</byline>', re.DOTALL)
+RE_BYLINE_TR    = re.compile(
+    r'<byline[^>]*cb:type="(?:Translator|author|Author)"[^>]*>(.*?)</byline>',
+    re.DOTALL,
+)
+_AUTHORSHIP_END = ("譯", "撰", "述", "集", "編", "錄", "註", "注", "說", "製")
+
+# 僧传等史传：cb:mulu 有人名、后面直接接 <p>、没有 <head> 时，补一条标题。
+# 目录内容不得跨过 </cb:mulu>，否则会把「1 譯經」一直吃到第一位传主的 </cb:mulu><p>。
+RE_MULU_THEN_P = re.compile(
+    r'(<cb:mulu[^>]*>)((?:(?!</cb:mulu>).)*?)(</cb:mulu>)'
+    r'((?:\s|<lb[^>]*/?>)*)'
+    r'(<p\b)',
+    re.DOTALL,
+)
+_MULU_SKIP_NAMES = {
+    "", "上", "中", "下", "一", "二", "三", "四", "五",
+    "譯經", "義解", "神異", "習禪", "明律", "亡身",
+    "誦經", "興福", "經師", "唱導", "序錄", "序",
+}
+RE_GAIJI_MAP = re.compile(
+    r'<char xml:id="(CB\d+)">.*?'
+    r'<mapping[^>]*type="(?:normal_unicode|unicode)"[^>]*>U\+([0-9A-Fa-f]+)</mapping>',
+    re.DOTALL,
+)
+RE_G_TAG = re.compile(r'<g[^>]*ref="#(CB\d+)"[^>]*>(.*?)</g>', re.DOTALL)
+
+# 高僧傳各卷科名（XML 有的卷只有 mulu「二」「三」而无 <head>）
+T2059_JUAN_CATEGORY = {
+    1: "譯經上",
+    2: "譯經中",
+    3: "譯經下",
+    4: "義解一",
+    5: "義解二",
+    6: "義解三",
+    7: "義解四",
+    8: "義解五",
+    9: "神異上",
+    10: "神異下",
+    11: "習禪",
+    12: "亡身",
+    13: "興福",
+    14: "序錄",
+}
 
 
 def _strip_tags(s: str) -> str:
@@ -151,7 +193,38 @@ def _normalize_text(s: str) -> str:
     return "\n".join(lines)
 
 
-def _xml_to_plain(xml_chunk: str) -> str:
+def _load_gaiji_map(xml_text: str) -> dict:
+    """从 teiHeader 的 charDecl 取出 CBETA 缺字 → Unicode。"""
+    mapping = {}
+    for m in RE_GAIJI_MAP.finditer(xml_text):
+        mapping[m.group(1)] = chr(int(m.group(2), 16))
+    return mapping
+
+
+def _replace_gaiji(s: str, gaiji_map: dict) -> str:
+    def repl(m):
+        return gaiji_map.get(m.group(1), m.group(2))
+    return RE_G_TAG.sub(repl, s)
+
+
+def _inject_heads_from_mulu(xml_chunk: str) -> str:
+    """僧传常见：传主只有 <cb:mulu>1 攝摩騰</cb:mulu> 后直接 <p>，没有 <head>。补上。"""
+    def repl(m):
+        raw = re.sub(r'\s+', '', _strip_tags(m.group(2))).strip()
+        # mulu 形如 "1 攝摩騰" / "8 釋僧肇"
+        name = re.sub(r'^\d+', '', raw).strip()
+        if name in _MULU_SKIP_NAMES or not (2 <= len(name) <= 20):
+            return m.group(0)
+        # 保留原编号，便于 md 转成「一、攝摩騰」
+        numbered = re.sub(r'^(\d+)(?=\S)', r'\1 ', raw)
+        return (
+            f"{m.group(1)}{m.group(2)}{m.group(3)}"
+            f"{m.group(4)}<head>{numbered}</head>\n{m.group(5)}"
+        )
+    return RE_MULU_THEN_P.sub(repl, xml_chunk)
+
+
+def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     """
     把一段 TEI XML 转成 bookcase 风格纯文本：
     - <lb .../> → 换行
@@ -163,17 +236,27 @@ def _xml_to_plain(xml_chunk: str) -> str:
     - 其他标签剥光
     """
     s = xml_chunk
+    if gaiji_map:
+        s = _replace_gaiji(s, gaiji_map)
+    s = _inject_heads_from_mulu(s)
 
     # cb:mulu 是 CBETA 内部目录树，对正文无用，整块剥掉
     s = re.sub(r'<cb:mulu[^>]*>.*?</cb:mulu>', '', s, flags=re.DOTALL)
     s = re.sub(r'<cb:mulu[^/]*/>', '', s)
-    # <note> 是 CBETA 给读者的小注（多为校勘、读音），与正文混排会污染，剥掉
+    # 行内小注（人数、附见人名）保留为括号；校勘注剥掉
+    s = re.sub(
+        r'<note[^>]*place="inline"[^>]*>(.*?)</note>',
+        lambda m: "（" + _strip_tags(m.group(1)) + "）",
+        s,
+        flags=re.DOTALL,
+    )
     s = re.sub(r'<note[^>]*>.*?</note>', '', s, flags=re.DOTALL)
 
     # 段落/标题/标签块边界 → 空行（保证不同结构块之间一定分段）
     for closing in ('p', 'lg', 'head', 'byline', 'title',
-                    'cb:jhead', 'cb:juan', 'cb:div'):
+                    'cb:jhead', 'cb:juan', 'cb:div', 'list'):
         s = re.sub(rf'</{re.escape(closing)}>', '\n\n', s)
+    s = re.sub(r'</item>', '、', s)
     s = re.sub(r'<lg[^>]*>', '\n', s)
 
     # 偈颂单行结束 → 换行（在标签处理前先标记）
@@ -247,7 +330,8 @@ def split_juans(body_xml: str):
     return juans
 
 
-def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str) -> str:
+def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
+                   gaiji_map: dict | None = None) -> str:
     """生成一卷 bookcase 风格 TXT：
        # 头注释 / No.X / 序文 / 卷标题 / 译者 / 正文
     """
@@ -273,7 +357,7 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str) -
     # 序文（仅第一卷）：剥掉 docNumber 后再转纯文本，避免与上面的 No.X 行重复
     if preface_xml:
         preface_clean = RE_DOC_NUMBER.sub('', preface_xml)
-        preface_txt   = _xml_to_plain(preface_clean)
+        preface_txt   = _xml_to_plain(preface_clean, gaiji_map)
         if preface_txt:
             lines.append(preface_txt)
             lines.append("")
@@ -295,16 +379,15 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str) -
     lines.append(jh)
     lines.append("")
 
-    # 译者：优先 byline cb:type=Translator，否则用 TSV。
-    # byline 常被 <lb/> 拆成多行，要合并成单行，否则 cbeta_txt_to_md.py 的
-    # RE_TRANSLATOR (^.{3,25}譯$) 识别不到。
+    # 译者/作者：优先 byline（Translator 或 author），否则用 TSV。
+    # byline 常被 <lb/> 拆成多行，要合并成单行，否则 cbeta_txt_to_md.py 识别不到。
     byline = RE_BYLINE_TR.search(juan_xml)
     if byline:
         tr = _strip_tags(byline.group(1))
         tr = re.sub(r'\s+', '', tr).strip()
     else:
         tr = tsv_translator.replace(" ", "") or "失譯"
-    if not tr.endswith("譯"):
+    if not tr.endswith(_AUTHORSHIP_END):
         tr += "譯"
     lines.append(tr)
     lines.append("")
@@ -314,13 +397,31 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str) -
     # 剩下的扔给 _xml_to_plain
     body = juan_xml
     body = RE_CB_JUAN_OPEN.sub('', body)
+    body = re.sub(r'<cb:juan\s+n="\d+"\s+fun="close"[^>]*>.*?</cb:juan>', '', body, flags=re.DOTALL)
     body = re.sub(r'<cb:juan\s+n="\d+"\s+fun="close"\s*/>', '', body)
     body = re.sub(r'<cb:jhead>.*?</cb:jhead>',  '', body, flags=re.DOTALL)
     # 卷正文里的所有 byline（Translator/author/Scribe）已在头部处理过，全剥
     body = re.sub(r'<byline[^>]*>.*?</byline>', '', body, flags=re.DOTALL)
     body = RE_DOC_NUMBER.sub('', body)
 
-    body_txt = _xml_to_plain(body)
+    body_txt = _xml_to_plain(body, gaiji_map)
+    # 《高僧傳》部分卷只有 mulu 而无科名 <head>，按卷补科名，便于转 md 时分节
+    if entry.get("sutra_no") == "2059":
+        cat = T2059_JUAN_CATEGORY.get(juan_no)
+        if cat:
+            first_line = next((ln.strip() for ln in body_txt.split("\n") if ln.strip()), "")
+            already = (
+                first_line.startswith(cat)
+                or first_line.startswith("譯經")
+                or first_line.startswith("義解")
+                or first_line.startswith("神異")
+                or first_line.startswith("習禪")
+                or first_line.startswith("亡身")
+                or first_line.startswith("興福")
+                or first_line.startswith("序")
+            )
+            if not already:
+                body_txt = cat + "\n\n" + body_txt
     lines.append(body_txt)
     lines.append("")
 
@@ -352,6 +453,7 @@ def main():
 
     # 2. 解析切卷
     xml_text = xml_file.read_text(encoding="utf-8")
+    gaiji_map = _load_gaiji_map(xml_text)
     body_match = RE_BODY.search(xml_text)
     if not body_match:
         raise SystemExit("XML 中找不到 <body> 标签")
@@ -370,7 +472,7 @@ def main():
         if out_path.exists() and not args.force:
             skipped += 1
             continue
-        txt = build_juan_txt(entry, juan_no, juan_xml, preface_xml)
+        txt = build_juan_txt(entry, juan_no, juan_xml, preface_xml, gaiji_map)
         out_path.write_text(txt, encoding="utf-8")
         written += 1
 
