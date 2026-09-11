@@ -11,6 +11,14 @@ import {
   renderMarkdown,
   SITE_BASE_URL,
 } from "./site-data.js";
+import {
+  assignReadingAnchors,
+  mountResumeBanner,
+  readHashBlockIndex,
+  readReadingProgress,
+  startReadingProgressTracker,
+  workTitleForProgress,
+} from "./reading-progress.js?v=4";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -38,7 +46,9 @@ let lastSelectionRect = null;
 let feedbackPanelOpen = false;
 let currentLoadId = 0;
 let worksIndex = null;
+let stopReadingProgress = null;
 const documentCache = new Map();
+let bootHashIndex = readHashBlockIndex();
 const SELECTION_FEEDBACK_OFFSET = 14;
 const READING_MODE_COOKIE = "sutra_reader_mode";
 const READING_MODE_DEFAULT = "parallel";
@@ -52,6 +62,7 @@ let fontSize = getSavedFontSize();
 
 init().catch((error) => {
   const slug = getCurrentSlug() || "";
+  mountResumeBanner();
   dom.title.textContent = "经文未找到";
   dom.rendered.innerHTML = `
     <div class="reader-error">
@@ -82,6 +93,7 @@ async function init() {
 
   await selectCurrent();
   window.addEventListener("hashchange", () => {
+    if (isParagraphHashChange()) return;
     selectCurrent().catch(handleReaderLoadError);
   });
   window.addEventListener("popstate", () => {
@@ -91,11 +103,15 @@ async function init() {
 
 async function selectCurrent() {
   const requestedSlug = getCurrentSlug();
+  const hashIndex = readHashBlockIndex() ?? bootHashIndex;
+  bootHashIndex = null;
   const slug = requestedSlug || "T0251-001"; // Default to Heart Sutra
   const loadId = ++currentLoadId;
   const selected = await getDocumentBySlug(slug);
 
-  syncReaderUrl(selected.slug);
+  if (loadId !== currentLoadId) return;
+  stopReadingProgressTracker();
+  syncReaderUrl(selected.slug, hashIndex);
   if (loadId !== currentLoadId) return;
 
   currentDocument = selected;
@@ -119,6 +135,8 @@ async function selectCurrent() {
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
   initComments(selected.slug);
+  restoreAndTrackReadingProgress(selected, hashIndex);
+  mountResumeBanner({ currentSlug: selected.slug });
 }
 
 async function getDocumentBySlug(slug) {
@@ -265,15 +283,59 @@ function getCurrentSlug() {
   return new URLSearchParams(location.hash.replace(/^#/, "")).get("doc");
 }
 
-function syncReaderUrl(slug) {
-  const nextRelativeUrl = getReaderUrl(slug);
+function restoreAndTrackReadingProgress(doc, hashIndex) {
+  assignReadingAnchors(dom.rendered);
+  const saved = readReadingProgress();
+  let restoreIndex = null;
+  let restorePreview = "";
+  if (hashIndex != null) restoreIndex = hashIndex;
+  else if (saved?.slug === doc.slug) {
+    restoreIndex = saved.blockIndex;
+    restorePreview = saved.textPreview || "";
+  }
+
+  const work = worksIndex ? getWorkBySlug(worksIndex, doc.slug) : null;
+  const title = workTitleForProgress(doc, work);
+  stopReadingProgress = startReadingProgressTracker(
+    dom.rendered,
+    () => ({
+      slug: currentDocument?.slug || doc.slug,
+      title,
+      volumeLabel: (currentDocument || doc).volume_label || "",
+    }),
+    { restoreIndex, restorePreview },
+  );
+}
+
+function stopReadingProgressTracker() {
+  if (!stopReadingProgress) return;
+  stopReadingProgress();
+  stopReadingProgress = null;
+}
+
+function isParagraphHashChange() {
+  const slug = getCurrentSlug();
+  if (currentDocument && slug && slug === currentDocument.slug) return true;
+  return false;
+}
+
+function syncReaderUrl(slug, blockIndex) {
+  const paragraphHash =
+    Number.isInteger(blockIndex) && blockIndex >= 0
+      ? `#p-${blockIndex}`
+      : /^#p-\d+$/.test(location.hash)
+        ? location.hash
+        : "";
+  const nextRelativeUrl = `${getReaderUrl(slug)}${paragraphHash}`;
   const nextSearch = `?doc=${encodeURIComponent(slug)}`;
-  if (location.search !== nextSearch || location.hash) {
+  if (location.search !== nextSearch || location.hash !== paragraphHash) {
     history.replaceState(null, "", nextRelativeUrl);
   }
 }
 
 function handleReaderLoadError() {
+  stopReadingProgressTracker();
+  mountResumeBanner();
   const slug = getCurrentSlug() || "";
   dom.title.textContent = "加载失败";
   dom.rendered.innerHTML = `

@@ -12,6 +12,9 @@ import {
   loadWorksIndex,
   renderMarkdown,
 } from "./site-data.js";
+import { mountResumeBanner } from "./reading-progress.js?v=4";
+
+mountResumeBanner();
 
 const dom = {
   catalogGrid: document.getElementById("catalog-grid"),

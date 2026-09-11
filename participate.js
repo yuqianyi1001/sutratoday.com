@@ -1,4 +1,7 @@
 import { escapeHtml, getMarkdownSourceUrl, renderMarkdown } from "./site-data.js";
+import { mountResumeBanner } from "./reading-progress.js?v=4";
+
+mountResumeBanner();
 
 const CONTENT_PATH = "content/pages/participate.md";
 const rendered = document.getElementById("content-rendered");
