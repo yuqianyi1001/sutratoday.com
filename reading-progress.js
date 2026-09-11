@@ -5,8 +5,8 @@ const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
 const READING_BLOCK_SELECTOR = "h1, h2, h3, h4, p, blockquote, pre";
 const SKIP_HEADING_CLASS = new Set(["sutra-original-heading", "sutra-translation-heading"]);
 const SKIP_HEADING_TEXT = new Set(["原文", "现代语译", "現代語譯"]);
-const SCROLL_ARM_DELTA = 48;
-const HEADER_MARKER_OFFSET = 120;
+const SCROLL_ARM_DELTA = 24;
+const RESTORE_RETRY_MS = [0, 50, 200, 500, 1000];
 
 export function readReadingProgress() {
   const raw = storageGet(localStorage, READING_PROGRESS_KEY);
@@ -21,6 +21,7 @@ export function readReadingProgress() {
       title: String(parsed.title || "").trim(),
       volumeLabel: String(parsed.volumeLabel || "").trim(),
       blockIndex,
+      textPreview: String(parsed.textPreview || "").trim(),
       savedAt: Number(parsed.savedAt) || 0,
     };
   } catch {
@@ -38,6 +39,7 @@ export function saveReadingProgress(progress) {
     title: String(progress.title || "").trim(),
     volumeLabel: String(progress.volumeLabel || "").trim(),
     blockIndex,
+    textPreview: String(progress.textPreview || "").trim(),
     savedAt: Number(progress.savedAt) || Date.now(),
   };
   storageSet(localStorage, READING_PROGRESS_KEY, JSON.stringify(payload));
@@ -66,7 +68,7 @@ export function getResumeUrl(slug, blockIndex) {
 }
 
 export function readHashBlockIndex() {
-  const match = location.hash.match(/^#p-(\d+)$/);
+  const match = String(location.hash || "").match(/^#p-(\d+)$/);
   if (!match) return null;
   return Number(match[1]);
 }
@@ -88,48 +90,56 @@ export function assignReadingAnchors(container) {
   return index;
 }
 
-export function restoreReadingPosition(container, blockIndex) {
-  const target = findVisibleRestoreTarget(container, blockIndex);
+export function restoreReadingPosition(container, blockIndex, textPreview = "") {
+  const target = findRestoreTarget(container, blockIndex, textPreview);
   if (!target) return false;
-  const root = document.documentElement;
-  const previousBehavior = root.style.scrollBehavior;
-  root.style.scrollBehavior = "auto";
-  target.scrollIntoView({ behavior: "auto", block: "start" });
-  root.style.scrollBehavior = previousBehavior;
+  scrollToReadingBlock(target);
   return true;
 }
 
-export function startReadingProgressTracker(container, getMeta) {
+export function startReadingProgressTracker(container, getMeta, options = {}) {
   if (!container) return () => {};
 
   assignReadingAnchors(container);
+  if (typeof history !== "undefined" && history.scrollRestoration) {
+    history.scrollRestoration = "manual";
+  }
 
   const abort = new AbortController();
   const { signal } = abort;
   let armed = false;
   let ticking = false;
-  let baselineY = window.scrollY;
+  let restoring = false;
   let stopped = false;
+  let baselineY = getScrollY();
+  let initialBlockIndex = null;
+  const restoreTimers = [];
+  const restoreIndex = Number.isInteger(options.restoreIndex) ? options.restoreIndex : null;
+  const restorePreview = String(options.restorePreview || "");
 
   const persist = () => {
-    if (stopped || !armed) return;
+    if (stopped || restoring) return;
     const block = getActiveReadingBlock(container);
     if (!block) return;
+    const blockIndex = Number(block.dataset.readingBlock);
+    if (!armed) {
+      const moved = Math.abs(getScrollY() - baselineY) >= SCROLL_ARM_DELTA;
+      const blockChanged = initialBlockIndex != null && blockIndex !== initialBlockIndex;
+      if (!moved && !blockChanged) return;
+      armed = true;
+    }
     const meta = getMeta?.() || {};
     saveReadingProgress({
       slug: meta.slug,
       title: meta.title,
       volumeLabel: meta.volumeLabel,
-      blockIndex: Number(block.dataset.readingBlock),
+      blockIndex,
+      textPreview: normalizePreview(block.textContent),
     });
   };
 
   const onScroll = () => {
     if (stopped) return;
-    if (!armed) {
-      if (Math.abs(window.scrollY - baselineY) < SCROLL_ARM_DELTA) return;
-      armed = true;
-    }
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
@@ -138,17 +148,49 @@ export function startReadingProgressTracker(container, getMeta) {
     });
   };
 
+  const cancelRestoreLock = () => {
+    restoring = false;
+    restoreTimers.splice(0).forEach((id) => clearTimeout(id));
+    baselineY = getScrollY();
+    initialBlockIndex = Number(getActiveReadingBlock(container)?.dataset.readingBlock);
+    if (Number.isInteger(initialBlockIndex) && initialBlockIndex < 0) initialBlockIndex = null;
+  };
+
+  const applyRestore = () => {
+    if (stopped || !restoring) return;
+    const ok = restoreReadingPosition(container, restoreIndex, restorePreview);
+    baselineY = getScrollY();
+    const target = findRestoreTarget(container, restoreIndex, restorePreview);
+    initialBlockIndex = Number(target?.dataset.readingBlock);
+    if (ok && target) {
+      const meta = getMeta?.() || {};
+      if (meta.slug) {
+        saveReadingProgress({
+          slug: meta.slug,
+          title: meta.title,
+          volumeLabel: meta.volumeLabel,
+          blockIndex: Number(target.dataset.readingBlock),
+          textPreview: normalizePreview(target.textContent),
+        });
+      }
+    }
+  };
+
   const onKey = (event) => {
     if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
+      cancelRestoreLock();
       armed = true;
     }
   };
 
   const onHide = () => persist();
 
-  window.addEventListener("scroll", onScroll, { passive: true, signal });
-  window.addEventListener("wheel", onScroll, { passive: true, signal });
-  window.addEventListener("touchmove", onScroll, { passive: true, signal });
+  addPassive(window, "scroll", onScroll, signal);
+  addPassive(document, "scroll", onScroll, signal);
+  addPassive(window, "wheel", onScroll, signal);
+  addPassive(window, "touchmove", onScroll, signal);
+  addPassive(window, "wheel", cancelRestoreLock, signal);
+  addPassive(window, "touchmove", cancelRestoreLock, signal);
   window.addEventListener("keydown", onKey, { signal });
   window.addEventListener("pagehide", onHide, { signal });
   document.addEventListener(
@@ -159,13 +201,46 @@ export function startReadingProgressTracker(container, getMeta) {
     { signal },
   );
 
-  requestAnimationFrame(() => {
-    baselineY = window.scrollY;
-  });
+  let observer = null;
+  if (typeof IntersectionObserver === "function") {
+    observer = new IntersectionObserver(() => onScroll(), {
+      root: null,
+      rootMargin: "-20% 0px -65% 0px",
+      threshold: [0, 0.25, 0.5, 1],
+    });
+    getReadingBlocks(container).forEach((el) => observer.observe(el));
+  }
+
+  if (restoreIndex != null || restorePreview) {
+    restoring = true;
+    applyRestore();
+    requestAnimationFrame(applyRestore);
+    RESTORE_RETRY_MS.forEach((ms) => {
+      restoreTimers.push(setTimeout(applyRestore, ms));
+    });
+    restoreTimers.push(
+      setTimeout(() => {
+        restoring = false;
+        baselineY = getScrollY();
+        initialBlockIndex = Number(getActiveReadingBlock(container)?.dataset.readingBlock);
+      }, 1100),
+    );
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => applyRestore()).catch(() => {});
+    }
+  } else {
+    requestAnimationFrame(() => {
+      baselineY = getScrollY();
+      initialBlockIndex = Number(getActiveReadingBlock(container)?.dataset.readingBlock);
+    });
+  }
 
   return () => {
+    restoring = false;
+    restoreTimers.splice(0).forEach((id) => clearTimeout(id));
     persist();
     stopped = true;
+    observer?.disconnect();
     abort.abort();
   };
 }
@@ -207,11 +282,25 @@ export function mountResumeBanner(options = {}) {
   return banner;
 }
 
-function findVisibleRestoreTarget(container, blockIndex) {
-  if (!container || !Number.isInteger(blockIndex) || blockIndex < 0) return null;
+function findRestoreTarget(container, blockIndex, textPreview) {
   const blocks = getReadingBlocks(container);
   if (!blocks.length) return null;
+  const preview = normalizePreview(textPreview);
 
+  if (preview) {
+    const match = blocks.find((el) => {
+      if (!isBlockVisible(el)) return false;
+      const text = normalizePreview(el.textContent);
+      return Boolean(text) && (text.startsWith(preview.slice(0, 16)) || preview.startsWith(text.slice(0, 16)));
+    });
+    if (match) return match;
+  }
+
+  return findVisibleRestoreTarget(blocks, blockIndex);
+}
+
+function findVisibleRestoreTarget(blocks, blockIndex) {
+  if (!Number.isInteger(blockIndex) || blockIndex < 0) return null;
   const exact = blocks.find((el) => Number(el.dataset.readingBlock) === blockIndex);
   if (exact && isBlockVisible(exact)) return exact;
 
@@ -227,15 +316,49 @@ function findVisibleRestoreTarget(container, blockIndex) {
 }
 
 function getActiveReadingBlock(container) {
+  const markerY = getReadMarkerY();
+  const rect = container.getBoundingClientRect();
+  const x = Math.min(Math.max(rect.left + 32, 24), window.innerWidth - 24);
+  let node = document.elementFromPoint(x, markerY);
+  while (node && node !== document.body) {
+    if (node.dataset?.readingBlock && container.contains(node) && isBlockVisible(node)) {
+      return node;
+    }
+    node = node.parentElement;
+  }
+
   const blocks = getReadingBlocks(container).filter(isBlockVisible);
   if (!blocks.length) return null;
-  const marker = HEADER_MARKER_OFFSET;
   let current = blocks[0];
   for (const el of blocks) {
-    if (el.getBoundingClientRect().top <= marker) current = el;
+    if (el.getBoundingClientRect().top <= markerY) current = el;
     else break;
   }
   return current;
+}
+
+function getReadMarkerY() {
+  const header = document.querySelector(".site-header");
+  if (header) {
+    const style = window.getComputedStyle(header);
+    const rect = header.getBoundingClientRect();
+    if ((style.position === "sticky" || style.position === "fixed") && rect.bottom > 0) {
+      return Math.min(rect.bottom + 18, window.innerHeight * 0.4);
+    }
+  }
+  return Math.min(88, Math.max(48, window.innerHeight * 0.18));
+}
+
+function scrollToReadingBlock(target) {
+  const markerY = getReadMarkerY();
+  const y = Math.max(0, Math.round(target.getBoundingClientRect().top + getScrollY() - markerY));
+  const root = document.documentElement;
+  const previousBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  window.scrollTo(0, y);
+  root.scrollTop = y;
+  document.body.scrollTop = y;
+  root.style.scrollBehavior = previousBehavior;
 }
 
 function getReadingBlocks(container) {
@@ -247,6 +370,21 @@ function isBlockVisible(el) {
   const style = window.getComputedStyle(el);
   if (style.display === "none" || style.visibility === "hidden") return false;
   return el.getClientRects().length > 0;
+}
+
+function getScrollY() {
+  return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+}
+
+function normalizePreview(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 48);
+}
+
+function addPassive(target, event, handler, signal) {
+  target.addEventListener(event, handler, { passive: true, capture: true, signal });
 }
 
 function isBannerDismissed() {

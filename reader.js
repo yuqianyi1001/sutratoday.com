@@ -16,10 +16,9 @@ import {
   mountResumeBanner,
   readHashBlockIndex,
   readReadingProgress,
-  restoreReadingPosition,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js";
+} from "./reading-progress.js?v=4";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -49,6 +48,7 @@ let currentLoadId = 0;
 let worksIndex = null;
 let stopReadingProgress = null;
 const documentCache = new Map();
+let bootHashIndex = readHashBlockIndex();
 const SELECTION_FEEDBACK_OFFSET = 14;
 const READING_MODE_COOKIE = "sutra_reader_mode";
 const READING_MODE_DEFAULT = "parallel";
@@ -93,6 +93,7 @@ async function init() {
 
   await selectCurrent();
   window.addEventListener("hashchange", () => {
+    if (isParagraphHashChange()) return;
     selectCurrent().catch(handleReaderLoadError);
   });
   window.addEventListener("popstate", () => {
@@ -102,14 +103,15 @@ async function init() {
 
 async function selectCurrent() {
   const requestedSlug = getCurrentSlug();
+  const hashIndex = readHashBlockIndex() ?? bootHashIndex;
+  bootHashIndex = null;
   const slug = requestedSlug || "T0251-001"; // Default to Heart Sutra
   const loadId = ++currentLoadId;
   const selected = await getDocumentBySlug(slug);
 
   if (loadId !== currentLoadId) return;
-  const hashIndex = readHashBlockIndex();
   stopReadingProgressTracker();
-  syncReaderUrl(selected.slug);
+  syncReaderUrl(selected.slug, hashIndex);
   if (loadId !== currentLoadId) return;
 
   currentDocument = selected;
@@ -285,17 +287,24 @@ function restoreAndTrackReadingProgress(doc, hashIndex) {
   assignReadingAnchors(dom.rendered);
   const saved = readReadingProgress();
   let restoreIndex = null;
+  let restorePreview = "";
   if (hashIndex != null) restoreIndex = hashIndex;
-  else if (saved?.slug === doc.slug) restoreIndex = saved.blockIndex;
-  restoreReadingPosition(dom.rendered, restoreIndex);
+  else if (saved?.slug === doc.slug) {
+    restoreIndex = saved.blockIndex;
+    restorePreview = saved.textPreview || "";
+  }
 
   const work = worksIndex ? getWorkBySlug(worksIndex, doc.slug) : null;
   const title = workTitleForProgress(doc, work);
-  stopReadingProgress = startReadingProgressTracker(dom.rendered, () => ({
-    slug: currentDocument?.slug || doc.slug,
-    title,
-    volumeLabel: (currentDocument || doc).volume_label || "",
-  }));
+  stopReadingProgress = startReadingProgressTracker(
+    dom.rendered,
+    () => ({
+      slug: currentDocument?.slug || doc.slug,
+      title,
+      volumeLabel: (currentDocument || doc).volume_label || "",
+    }),
+    { restoreIndex, restorePreview },
+  );
 }
 
 function stopReadingProgressTracker() {
@@ -304,10 +313,22 @@ function stopReadingProgressTracker() {
   stopReadingProgress = null;
 }
 
-function syncReaderUrl(slug) {
-  const nextRelativeUrl = getReaderUrl(slug);
+function isParagraphHashChange() {
+  const slug = getCurrentSlug();
+  if (currentDocument && slug && slug === currentDocument.slug) return true;
+  return false;
+}
+
+function syncReaderUrl(slug, blockIndex) {
+  const paragraphHash =
+    Number.isInteger(blockIndex) && blockIndex >= 0
+      ? `#p-${blockIndex}`
+      : /^#p-\d+$/.test(location.hash)
+        ? location.hash
+        : "";
+  const nextRelativeUrl = `${getReaderUrl(slug)}${paragraphHash}`;
   const nextSearch = `?doc=${encodeURIComponent(slug)}`;
-  if (location.search !== nextSearch || location.hash) {
+  if (location.search !== nextSearch || location.hash !== paragraphHash) {
     history.replaceState(null, "", nextRelativeUrl);
   }
 }
