@@ -37,6 +37,11 @@ CHINESE_NUMS = {
 # ── 段落分类 ──────────────────────────────────────────────
 # 经文标题行：如 （一）第一分初大本經第一
 RE_SECTION = re.compile(r"^（[一二三四五六七八九十〇百千]+）(.+)")
+# 仅有序号的经号：如杂阿含 （一八）、（一四〇、一四一）、（七五五～七）。
+# CBETA 里这是 <head>，应单独成章。
+RE_SUTRA_NUM = re.compile(
+    r"^（[一二三四五六七八九十〇百千]+(?:[、～][一二三四五六七八九十〇百千]+)*）$"
+)
 # 品目行：如 閻浮提州品第一 / 佛說長阿含第四分世記經XX品第N
 RE_PIN = re.compile(r"^(佛說.+)?(.+品第[一二三四五六七八九十百千]+.*)$")
 # 续卷标题：如 遊行經第二中
@@ -227,14 +232,20 @@ def split_paragraphs(lines):
     - 偈颂：每 4 行一段
     - 散文：超过 100 字在句末标点处拆分
     """
-    # 第一步：按空行切成原始块
+    # 第一步：按空行切成原始块；独立经号即使没有空行也单独成块
     raw_blocks = []
     current = []
     for line in lines:
-        if line.strip() == "":
+        stripped = line.strip()
+        if stripped == "":
             if current:
                 raw_blocks.append(current)
                 current = []
+        elif RE_SUTRA_NUM.match(stripped):
+            if current:
+                raw_blocks.append(current)
+                current = []
+            raw_blocks.append([stripped])
         else:
             current.append(line)
     if current:
@@ -296,7 +307,10 @@ def split_paragraphs(lines):
             prev = consolidated[-1]
             prev_is_verse = is_verse_line(prev.split("\n")[0]) if prev else False
             combined_len = len(prev.replace("\n", "")) + para_len
-            if not prev_is_verse and combined_len <= MAX_PARA_LEN:
+            # 经号标题即使很短，也不能并入上一段，也不能把后文并进来。
+            if (not prev_is_verse
+                    and not is_section_heading(prev)
+                    and combined_len <= MAX_PARA_LEN):
                 consolidated[-1] = prev + "\n" + para
                 continue
 
@@ -321,6 +335,7 @@ def split_paragraphs(lines):
                 and not is_verse_line(para_first)
                 and not is_verse_line(prev_first)
                 and not is_section_heading(para)
+                and not is_section_heading(prev)
                 and prev_tail
                 and prev_tail not in SENTENCE_END):
             # 目录人名行本身不以句号收尾，应换行保留，不可黏成「帛尸梨蜜晉長安…」
@@ -348,6 +363,8 @@ def is_gsz_bio_heading(first_line):
 def is_section_heading(text):
     """判断段落是否为章节标题"""
     first_line = text.split("\n")[0].strip()
+    if RE_SUTRA_NUM.match(first_line):
+        return True
     if RE_SECTION.match(first_line):
         return True
     if RE_PIN.match(first_line) and len(first_line) < 40:
@@ -450,6 +467,13 @@ def build_md(frontmatter, title, preface_paras, body_lines):
         if is_section_heading(first_line):
             heading = format_section_heading(first_line)
             rest = "\n".join(para.split("\n")[1:]).strip()
+            # （一八）如是我聞： 被粘成一行时，经号仍是标题，后文归入正文
+            sec_m = RE_SECTION.match(first_line)
+            if sec_m and not RE_SUTRA_NUM.match(first_line):
+                after_num = sec_m.group(1).lstrip()
+                if after_num.startswith(("如是我聞", "我聞如是", "爾時")):
+                    heading = first_line[: sec_m.start(1)]
+                    rest = after_num + (("\n" + rest) if rest else "")
             lun = RE_GSZ_LUN.match(first_line)
             if lun and len(first_line) > 4:
                 heading = "論曰"
