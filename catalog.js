@@ -7,6 +7,9 @@ import {
   getTranslationState,
   loadWorksIndex,
 } from "./site-data.js";
+import { mountResumeBanner } from "./reading-progress.js";
+
+mountResumeBanner();
 
 const PAGE_SIZE = 50;
 

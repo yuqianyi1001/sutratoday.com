@@ -11,6 +11,15 @@ import {
   renderMarkdown,
   SITE_BASE_URL,
 } from "./site-data.js";
+import {
+  assignReadingAnchors,
+  mountResumeBanner,
+  readHashBlockIndex,
+  readReadingProgress,
+  restoreReadingPosition,
+  startReadingProgressTracker,
+  workTitleForProgress,
+} from "./reading-progress.js";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -38,6 +47,7 @@ let lastSelectionRect = null;
 let feedbackPanelOpen = false;
 let currentLoadId = 0;
 let worksIndex = null;
+let stopReadingProgress = null;
 const documentCache = new Map();
 const SELECTION_FEEDBACK_OFFSET = 14;
 const READING_MODE_COOKIE = "sutra_reader_mode";
@@ -52,6 +62,7 @@ let fontSize = getSavedFontSize();
 
 init().catch((error) => {
   const slug = getCurrentSlug() || "";
+  mountResumeBanner();
   dom.title.textContent = "经文未找到";
   dom.rendered.innerHTML = `
     <div class="reader-error">
@@ -95,6 +106,9 @@ async function selectCurrent() {
   const loadId = ++currentLoadId;
   const selected = await getDocumentBySlug(slug);
 
+  if (loadId !== currentLoadId) return;
+  const hashIndex = readHashBlockIndex();
+  stopReadingProgressTracker();
   syncReaderUrl(selected.slug);
   if (loadId !== currentLoadId) return;
 
@@ -119,6 +133,8 @@ async function selectCurrent() {
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
   initComments(selected.slug);
+  restoreAndTrackReadingProgress(selected, hashIndex);
+  mountResumeBanner({ currentSlug: selected.slug });
 }
 
 async function getDocumentBySlug(slug) {
@@ -265,6 +281,29 @@ function getCurrentSlug() {
   return new URLSearchParams(location.hash.replace(/^#/, "")).get("doc");
 }
 
+function restoreAndTrackReadingProgress(doc, hashIndex) {
+  assignReadingAnchors(dom.rendered);
+  const saved = readReadingProgress();
+  let restoreIndex = null;
+  if (hashIndex != null) restoreIndex = hashIndex;
+  else if (saved?.slug === doc.slug) restoreIndex = saved.blockIndex;
+  restoreReadingPosition(dom.rendered, restoreIndex);
+
+  const work = worksIndex ? getWorkBySlug(worksIndex, doc.slug) : null;
+  const title = workTitleForProgress(doc, work);
+  stopReadingProgress = startReadingProgressTracker(dom.rendered, () => ({
+    slug: currentDocument?.slug || doc.slug,
+    title,
+    volumeLabel: (currentDocument || doc).volume_label || "",
+  }));
+}
+
+function stopReadingProgressTracker() {
+  if (!stopReadingProgress) return;
+  stopReadingProgress();
+  stopReadingProgress = null;
+}
+
 function syncReaderUrl(slug) {
   const nextRelativeUrl = getReaderUrl(slug);
   const nextSearch = `?doc=${encodeURIComponent(slug)}`;
@@ -274,6 +313,8 @@ function syncReaderUrl(slug) {
 }
 
 function handleReaderLoadError() {
+  stopReadingProgressTracker();
+  mountResumeBanner();
   const slug = getCurrentSlug() || "";
   dom.title.textContent = "加载失败";
   dom.rendered.innerHTML = `
