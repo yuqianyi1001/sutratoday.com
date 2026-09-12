@@ -930,6 +930,38 @@ code {
   color: rgba(143, 83, 49, 0.78);
 }
 
+.markdown-view .sutra-sentence {
+  border-radius: 6px;
+  transition: background-color 0.18s ease;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.markdown-view [data-sync-key].is-sync-active {
+  background-color: rgba(149, 105, 47, 0.18);
+}
+
+.markdown-view [data-sync-key].is-sync-pinned {
+  background-color: rgba(149, 105, 47, 0.3);
+}
+
+.markdown-view p[data-sync-key].is-sync-active,
+.markdown-view blockquote[data-sync-key].is-sync-active,
+.markdown-view ul[data-sync-key].is-sync-active,
+.markdown-view ol[data-sync-key].is-sync-active,
+.markdown-view pre[data-sync-key].is-sync-active {
+  border-radius: 8px;
+  box-shadow: 0 0 0 6px rgba(149, 105, 47, 0.18);
+}
+
+.markdown-view p[data-sync-key].is-sync-pinned,
+.markdown-view blockquote[data-sync-key].is-sync-pinned,
+.markdown-view ul[data-sync-key].is-sync-pinned,
+.markdown-view ol[data-sync-key].is-sync-pinned,
+.markdown-view pre[data-sync-key].is-sync-pinned {
+  box-shadow: 0 0 0 6px rgba(149, 105, 47, 0.3);
+}
+
 .markdown-view ul,
 .markdown-view ol {
   margin: 0;
