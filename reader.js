@@ -19,6 +19,7 @@ import {
   startReadingProgressTracker,
   workTitleForProgress,
 } from "./reading-progress.js?v=4";
+import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -87,6 +88,7 @@ async function init() {
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
   bindSelectionFeedback();
+  bindSentenceSync(dom.rendered, () => readingMode === READING_MODE_DEFAULT);
 
   // Load works index for volume navigation
   worksIndex = await loadWorksIndex();
@@ -122,6 +124,7 @@ async function selectCurrent() {
   dom.title.textContent = selected.title;
   dom.summary.textContent = selected.summary || "";
   dom.rendered.innerHTML = renderMarkdown(selected.body);
+  setupSentenceSync(dom.rendered);
   renderVolumeNavigation(selected);
   updateSeo(selected);
   dom.statusbar.innerHTML = `
@@ -250,6 +253,7 @@ function applyReadingMode(mode, options = {}) {
   if (persist) saveCookie(READING_MODE_COOKIE, nextMode);
   clearSelection();
   resetSelectionFeedback();
+  clearSentenceSync(dom.rendered);
 }
 
 function applyFontSize(size, options = {}) {

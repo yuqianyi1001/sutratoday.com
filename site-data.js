@@ -193,6 +193,10 @@ export function renderMarkdown(markdown) {
   let codeBuffer = [];
   let sectionTone = null;
   let sectionHeadingClass = "";
+  let sectionSid = "";
+
+  // sid 用于把「原文」与「現代語譯」区块配对（见 sentence-sync.js）
+  const sidAttr = () => (sectionTone && sectionSid ? ` data-sid="${sectionSid}"` : "");
 
   const toneClassName = () => {
     if (sectionTone === "sutra-original") return "sutra-original";
@@ -222,21 +226,21 @@ export function renderMarkdown(markdown) {
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
-    html.push(`<p${paragraphClass()}>${formatInline(paragraph.join(" "))}</p>`);
+    html.push(`<p${paragraphClass()}${sidAttr()}>${formatInline(paragraph.join(" "))}</p>`);
     paragraph = [];
   };
 
   const flushList = () => {
     if (!listBuffer.length) return;
     const tag = listType === "ol" ? "ol" : "ul";
-    html.push(`<${tag}${listClass()}>${listBuffer.map((item) => `<li>${formatInline(item)}</li>`).join("")}</${tag}>`);
+    html.push(`<${tag}${listClass()}${sidAttr()}>${listBuffer.map((item) => `<li>${formatInline(item)}</li>`).join("")}</${tag}>`);
     listBuffer = [];
     listType = null;
   };
 
   const flushCode = () => {
     if (!codeBuffer.length) return;
-    html.push(`<pre${codeClass()}><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
+    html.push(`<pre${codeClass()}${sidAttr()}><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
     codeBuffer = [];
   };
 
@@ -260,7 +264,11 @@ export function renderMarkdown(markdown) {
       return;
     }
 
-    if (/^<!--.*-->$/.test(line.trim())) return;
+    if (/^<!--.*-->$/.test(line.trim())) {
+      const sidMatch = line.trim().match(/^<!--\s*sid:\s*([\w.-]+)\s*-->$/);
+      if (sidMatch) sectionSid = sidMatch[1];
+      return;
+    }
 
     if (/^---+$/.test(line.trim())) {
       flushParagraph();
@@ -276,6 +284,7 @@ export function renderMarkdown(markdown) {
       const level = headingMatch[1].length;
       const headingText = headingMatch[2].trim();
       sectionHeadingClass = "";
+      sectionSid = "";
       if (level >= 3) {
         if (headingText === "原文") {
           sectionTone = "sutra-original";
@@ -297,7 +306,7 @@ export function renderMarkdown(markdown) {
     if (blockquoteMatch) {
       flushParagraph();
       flushList();
-      html.push(`<blockquote${blockquoteClass()}>${formatInline(blockquoteMatch[1])}</blockquote>`);
+      html.push(`<blockquote${blockquoteClass()}${sidAttr()}>${formatInline(blockquoteMatch[1])}</blockquote>`);
       return;
     }
 
