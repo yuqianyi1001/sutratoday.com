@@ -49,7 +49,9 @@ RE_CONTINUATION = re.compile(r"^(.+經第[一二三四五六七八九十]+[初�
 # 卷标题行
 RE_VOLUME_TITLE = re.compile(r".*卷第?[一二三四五六七八九十百千廿卅]+")
 # 译者/作者行
-RE_TRANSLATOR = re.compile(r"^.{3,40}(譯|撰|述|集|編|錄)$")
+RE_TRANSLATOR = re.compile(
+    r"^.{3,50}(譯|撰|述|集|編|錄|記|箋)(遊天竺事)?$"
+)
 
 # 《高僧傳》科名、传主标题、论曰、目录卷标
 RE_GSZ_CATEGORY = re.compile(
@@ -68,7 +70,25 @@ RE_GSZ_BIO_NUM_SUFFIX = re.compile(
     r"^(.{2,20}?)第?([一二三四五六七八九十百]+)$"
 )
 RE_GSZ_LUN = re.compile(r"^論曰[：:]?")
-RE_GSZ_CATALOG = re.compile(r"^高僧傳第.+卷")
+RE_GSZ_CATALOG = re.compile(r"^((續)?高僧傳|比丘尼傳)第.+卷")
+# 求法僧传：太州玄照法師 / 并州常愍禪師
+RE_BIO_PERSON = re.compile(
+    r"^(.{2,24}(?:法師|禪師|律師|尊者|和尚)|.{2,16}師)$"
+)
+# 比丘尼傳：晉竹林寺淨撿尼傳一
+RE_NI_BIO = re.compile(
+    r"^(.{2,30}尼傳[一二三四五六七八九十]*)$"
+)
+# 遊方記抄等：徃五天竺國傳 / 悟空入竺記 / 繼業西域行程
+RE_TRAVEL_HEAD = re.compile(
+    r"^(.{2,40}(?:傳考|記逸文|銘并序|行程|傳|記|考|碑))$"
+)
+# 南海寄歸內法傳：一破夏非小 / 四十古德不為
+RE_CN_ENUM_HEAD = re.compile(
+    r"^([一二三四五六七八九十百]+)([\u4e00-\u9fff]{2,8})$"
+)
+# 釋迦方志：釋迦方志封疆篇第一
+RE_PIAN = re.compile(r"^(.{2,40}篇第[一二三四五六七八九十百]+.*)$")
 
 
 def load_tsv_entry(sutra_id):
@@ -134,10 +154,20 @@ def extract_header(lines):
         i += 1
 
     # 跳译者行
-    if i < len(lines) and RE_TRANSLATOR.match(lines[i].strip()):
-        i += 1
-        while i < len(lines) and lines[i].strip() == "":
+    if i < len(lines):
+        tr = lines[i].strip()
+        looks_like_byline = (
+            RE_TRANSLATOR.match(tr)
+            or (
+                3 <= len(tr) <= 50
+                and "。" not in tr
+                and any(m in tr for m in ("譯", "撰", "述", "集", "編", "錄", "自記", "箋"))
+            )
+        )
+        if looks_like_byline:
             i += 1
+            while i < len(lines) and lines[i].strip() == "":
+                i += 1
 
     preface_paragraphs = split_paragraphs(preface_lines) if preface_lines else []
     return preface_paragraphs, lines[i:]
@@ -379,6 +409,20 @@ def is_section_heading(text):
         return True
     if is_gsz_bio_heading(first_line) and "\n" not in text.strip():
         return True
+    if "\n" in text.strip() or "。" in first_line or "！" in first_line:
+        return False
+    if first_line in ("序", "并序", "序文"):
+        return True
+    if RE_PIAN.match(first_line) and len(first_line) < 40:
+        return True
+    if RE_NI_BIO.match(first_line):
+        return True
+    if RE_BIO_PERSON.match(first_line) and len(first_line) < 24:
+        return True
+    if RE_TRAVEL_HEAD.match(first_line) and 4 <= len(first_line) <= 40:
+        return True
+    if RE_CN_ENUM_HEAD.match(first_line) and len(first_line) <= 14:
+        return True
     return False
 
 
@@ -397,6 +441,20 @@ def format_section_heading(text):
     m = RE_GSZ_BIO_NUM_SUFFIX.match(first)
     if m and not RE_GSZ_CATEGORY.match(first):
         return f"{m.group(2)}、{m.group(1)}"
+    m = RE_CN_ENUM_HEAD.match(first)
+    if m and len(first) <= 14:
+        return f"{m.group(1)}、{m.group(2)}"
+    m = RE_NI_BIO.match(first)
+    if m:
+        body = first
+        num = ""
+        nm = re.search(r"([一二三四五六七八九十]+)$", body)
+        if nm:
+            num = nm.group(1)
+            body = body[: nm.start()]
+        if num:
+            return f"{num}、{body}"
+        return first
     return first
 
 
@@ -460,6 +518,13 @@ def build_md(frontmatter, title, preface_paras, body_lines):
 
     # 正文
     paragraphs = split_paragraphs(body_lines)
+    catalog_heads = []
+
+    def flush_catalog():
+        if not catalog_heads:
+            return
+        emit_pair("、".join(catalog_heads) + "、")
+        catalog_heads.clear()
 
     for para in paragraphs:
         first_line = para.split("\n")[0].strip()
@@ -478,12 +543,27 @@ def build_md(frontmatter, title, preface_paras, body_lines):
             if lun and len(first_line) > 4:
                 heading = "論曰"
                 rest = first_line[lun.end():].lstrip("：:").strip() or rest
-            md.append(f"## {heading}")
-            md.append("")
             if rest:
+                flush_catalog()
+                md.append(f"## {heading}")
+                md.append("")
                 emit_pair(rest)
+            else:
+                catalog_heads.append(heading)
         else:
-            emit_pair(para)
+            if len(catalog_heads) == 1:
+                md.append(f"## {catalog_heads[0]}")
+                md.append("")
+                catalog_heads.clear()
+                emit_pair(para)
+            else:
+                flush_catalog()
+                emit_pair(para)
+    if len(catalog_heads) == 1:
+        md.append(f"## {catalog_heads[0]}")
+        md.append("")
+        catalog_heads.clear()
+    flush_catalog()
 
     # 清理末尾空行
     while md and md[-1].strip() == "":
