@@ -83,6 +83,12 @@ RE_NI_BIO = re.compile(
 RE_TRAVEL_HEAD = re.compile(
     r"^(.{2,40}(?:傳考|記逸文|銘并序|行程|傳|記|考|碑))$"
 )
+# 出三藏記集：法顯法師傳第六 / 新集經律論錄第一（目錄條目帶頓號的不在此列）
+RE_CSZJJ_HEAD = re.compile(
+    r"^(.{2,40}?(?:傳|記|錄|序|緣記))第([一二三四五六七八九十百]+)$"
+)
+# 神僧傳短人名標題
+RE_SHORT_NAME_HEAD = re.compile(r"^[\u4e00-\u9fff]{2,8}$")
 # 南海寄歸內法傳：一破夏非小 / 四十古德不為
 RE_CN_ENUM_HEAD = re.compile(
     r"^([一二三四五六七八九十百]+)([\u4e00-\u9fff]{2,8})$"
@@ -392,7 +398,7 @@ def is_gsz_bio_heading(first_line):
 
 def is_section_heading(text):
     """判断段落是否为章节标题"""
-    first_line = text.split("\n")[0].strip()
+    first_line = text.split("\n")[0].strip().lstrip("、")
     if RE_SUTRA_NUM.match(first_line):
         return True
     if RE_SECTION.match(first_line):
@@ -417,6 +423,14 @@ def is_section_heading(text):
         return True
     if RE_NI_BIO.match(first_line):
         return True
+    if RE_CSZJJ_HEAD.match(first_line) and len(first_line) <= 50:
+        return True
+    if (
+        RE_SHORT_NAME_HEAD.match(first_line)
+        and "\n" not in text.strip()
+        and not any(ch in first_line for ch in "經律論卷品")
+    ):
+        return True
     if RE_BIO_PERSON.match(first_line) and len(first_line) < 24:
         return True
     if RE_TRAVEL_HEAD.match(first_line) and 4 <= len(first_line) <= 40:
@@ -428,7 +442,7 @@ def is_section_heading(text):
 
 def format_section_heading(text):
     """把传主标题规范成 `一、攝摩騰`；科名、论曰保持原样。"""
-    first = text.split("\n")[0].strip()
+    first = text.split("\n")[0].strip().lstrip("、")
     if RE_GSZ_CATEGORY.match(first) or RE_GSZ_CATALOG.match(first):
         return first
     if first in ("論曰", "論曰：", "論曰:"):
@@ -455,6 +469,9 @@ def format_section_heading(text):
         if num:
             return f"{num}、{body}"
         return first
+    m = RE_CSZJJ_HEAD.match(first)
+    if m:
+        return f"{m.group(2)}、{m.group(1)}"
     return first
 
 

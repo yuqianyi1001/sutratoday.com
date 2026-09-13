@@ -306,9 +306,19 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
             text,
         ):
             return True
+        # 出三藏記集等：法顯法師傳第六 / 新集經律論錄第一
+        if re.search(r"(傳|記|錄|序|緣記)第[一二三四五六七八九十百]+", text) and len(text) <= 50:
+            return True
         if re.match(r"^[一二三四五六七八九十百]+[\u4e00-\u9fff]{2,8}$", text) and len(text) <= 14:
             return True
         if re.search(r"(傳考|記逸文|銘并序|行程|傳|記|考|碑)$", text) and 4 <= len(text) <= 40:
+            return True
+        # 神僧傳等：<head>法顯</head> 這類短人名（排除經名卷題）
+        if (
+            2 <= len(text) <= 8
+            and re.fullmatch(r"[\u4e00-\u9fff]+", text)
+            and not any(ch in text for ch in "經律論卷品")
+        ):
             return True
         if re.match(r"^（[一二三四五六七八九十]+）.+", text):
             return True

@@ -2485,6 +2485,7 @@ phase	collection	category	sub_category	cbeta_id	volume	sutra_no	juan_count	title
 2	T	史傳部類	史傳	T50n2053	50	2053	10	大唐大慈恩寺三藏法師傳	唐 慧立本．彥悰箋
 2	T	史傳部類	史傳	T50n2059	50	2059	14	高僧傳	梁 慧皎撰
 2	T	史傳部類	史傳	T50n2063	50	2063	4	比丘尼傳	梁 寶唱撰
+2	T	史傳部類	史傳	T50n2064	50	2064	9	神僧傳	明 成祖敕撰
 2	T	史傳部類	史傳	T51n2066	51	2066	2	大唐西域求法高僧傳	唐 義淨撰
 2	T	史傳部類	史傳	T51n2085	51	2085	1	高僧法顯傳	東晉 法顯記
 2	T	史傳部類	史傳	T51n2086	51	2086	1	北魏僧惠生使西域記	北魏 惠生記
@@ -2492,3 +2493,4 @@ phase	collection	category	sub_category	cbeta_id	volume	sutra_no	juan_count	title
 2	T	史傳部類	史傳	T51n2088	51	2088	2	釋迦方志	唐 道宣撰
 2	T	史傳部類	史傳	T51n2089	51	2089	1	遊方記抄	新羅 慧超．唐 圓照等撰
 2	T	事彙部類	事彙	T54n2125	54	2125	4	南海寄歸內法傳	唐 義淨撰
+2	T	事彙部類	目錄	T55n2145	55	2145	15	出三藏記集	梁 僧祐撰
