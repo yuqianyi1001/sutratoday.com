@@ -138,7 +138,7 @@ RE_BYLINE_TR    = re.compile(
     r'<byline[^>]*cb:type="(?:Translator|author|Author)"[^>]*>(.*?)</byline>',
     re.DOTALL,
 )
-_AUTHORSHIP_END = ("譯", "撰", "述", "集", "編", "錄", "註", "注", "說", "製")
+_AUTHORSHIP_END = ("譯", "撰", "述", "集", "編", "錄", "註", "注", "說", "製", "記", "箋")
 
 # 僧传等史传：cb:mulu 有人名、后面直接接 <p>、没有 <head> 时，补一条标题。
 # 目录内容不得跨过 </cb:mulu>，否则会把「1 譯經」一直吃到第一位传主的 </cb:mulu><p>。
@@ -288,11 +288,39 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
             return False
         return len(text) >= 6
 
+    def _is_heading_line(text: str) -> bool:
+        """传主、篇名、游记篇题：不以句号收尾，但不能跟下一段黏在一起。"""
+        if not text or any(ch in text for ch in "。！？"):
+            return False
+        if len(text) > 40:
+            return False
+        if text in ("序", "并序", "序文"):
+            return True
+        if text.endswith("序") and 2 <= len(text) <= 20:
+            return True
+        if re.match(r"^\d+\s+\S{2,20}$", text):
+            return True
+        if re.search(
+            r"(法師|禪師|律師|論師|尊者|和尚|尼傳[一二三四五六七八九十]*|"
+            r"篇第[一二三四五六七八九十百]+.*)$",
+            text,
+        ):
+            return True
+        if re.match(r"^[一二三四五六七八九十百]+[\u4e00-\u9fff]{2,8}$", text) and len(text) <= 14:
+            return True
+        if re.search(r"(傳考|記逸文|銘并序|行程|傳|記|考|碑)$", text) and 4 <= len(text) <= 40:
+            return True
+        if re.match(r"^（[一二三四五六七八九十]+）.+", text):
+            return True
+        if text.endswith("師") and 4 <= len(text) <= 16:
+            return True
+        return False
+
     for ln in s.split("\n"):
         ln = ln.strip()
         if not ln:
             # 空行而上一句未结束：多半是分页残留，不能当成段界
-            if buf and buf[-1] not in SENTENCE_END and not _is_complete_catalog_item(buf):
+            if buf and buf[-1] not in SENTENCE_END and not _is_complete_catalog_item(buf) and not _is_heading_line(buf):
                 continue
             if buf:
                 out_lines.append(buf)
@@ -306,7 +334,7 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
                 buf = ""
             out_lines.append(ln)
             continue
-        if buf and buf[-1] in PUNC_END:
+        if buf and (buf[-1] in PUNC_END or _is_heading_line(buf)):
             out_lines.append(buf)
             buf = ln
         elif buf:
@@ -386,21 +414,27 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
         jh = re.sub(r'\s+', '', _strip_tags(jh_raw))
     else:
         jh = title
-    if not re.search(rf'卷第?[{CN_NUMS}]+', jh):
-        # 单卷经 / jhead 不含卷号 → 补上
-        jh = f"{jh}卷第{_cn_num(juan_no)}"
+    if not re.search(rf'卷第[{CN_NUMS}]+', jh):
+        # 单卷经 / jhead 不含卷号 → 补上。已有「一卷」则改成「卷第一」
+        if re.search(rf'卷[{CN_NUMS}]+$', jh):
+            jh = re.sub(rf'卷[{CN_NUMS}]+$', f'卷第{_cn_num(juan_no)}', jh)
+        elif re.search(rf'[{CN_NUMS}]+卷$', jh):
+            jh = re.sub(rf'[{CN_NUMS}]+卷$', f'卷第{_cn_num(juan_no)}', jh)
+        else:
+            jh = f"{jh}卷第{_cn_num(juan_no)}"
     lines.append(jh)
     lines.append("")
 
-    # 译者/作者：优先 byline（Translator 或 author），否则用 TSV。
+    # 译者/作者：优先卷首 byline（Translator 或 author），否则用 TSV。
+    # 只看卷首，避免把后文某篇作者（如《遊方記抄》裡的金守溫）當成整书作者。
     # byline 常被 <lb/> 拆成多行，要合并成单行，否则 cbeta_txt_to_md.py 识别不到。
-    byline = RE_BYLINE_TR.search(juan_xml)
+    byline = RE_BYLINE_TR.search(juan_xml[:4000])
     if byline:
         tr = _strip_tags(byline.group(1))
         tr = re.sub(r'\s+', '', tr).strip()
     else:
         tr = tsv_translator.replace(" ", "") or "失譯"
-    if not tr.endswith(_AUTHORSHIP_END):
+    if not any(mark in tr for mark in _AUTHORSHIP_END):
         tr += "譯"
     lines.append(tr)
     lines.append("")
