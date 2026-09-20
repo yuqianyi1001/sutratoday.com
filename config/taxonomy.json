@@ -1,0 +1,32 @@
+{
+  "origins": [
+    { "id": "indian", "label": "印度撰述（汉译）", "short": "印度撰述" },
+    { "id": "chinese", "label": "中国撰述", "short": "中国撰述" },
+    { "id": "other_east_asian", "label": "其他东亚撰述", "short": "其他东亚" }
+  ],
+  "genres": [
+    { "id": "sutra", "label": "经", "origins": ["indian"] },
+    { "id": "vinaya", "label": "律", "origins": ["indian"] },
+    { "id": "sastra", "label": "论", "origins": ["indian", "other_east_asian"] },
+    { "id": "commentary", "label": "注疏", "origins": ["chinese", "other_east_asian"] },
+    { "id": "yulu", "label": "语录灯史", "origins": ["chinese", "other_east_asian"] },
+    { "id": "history", "label": "史传事汇", "origins": ["chinese", "other_east_asian", "indian"] }
+  ],
+  "doctrines": [
+    { "id": "agama", "label": "阿含·早期" },
+    { "id": "avadana", "label": "本缘" },
+    { "id": "prajna", "label": "般若" },
+    { "id": "madhyamaka", "label": "中观" },
+    { "id": "yogacara", "label": "瑜伽·唯识" },
+    { "id": "tathagatagarbha", "label": "如来藏·涅槃" },
+    { "id": "lotus", "label": "法华" },
+    { "id": "avatamsaka", "label": "华严" },
+    { "id": "pureland", "label": "净土" },
+    { "id": "vaipulya", "label": "宝积·方等" },
+    { "id": "vinaya_d", "label": "戒律" },
+    { "id": "abhidharma", "label": "毘昙" },
+    { "id": "chan", "label": "禅" },
+    { "id": "sastra_misc", "label": "其他论" },
+    { "id": "misc", "label": "综合·未定" }
+  ]
+}
