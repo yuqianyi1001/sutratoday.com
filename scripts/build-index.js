@@ -2,9 +2,11 @@
 
 const fs = require("fs");
 const path = require("path");
+const { classifyWork } = require("./classify-work");
 
 const SUTRAS_RAW_DIR = path.join(__dirname, "..", "content", "sutras-raw");
 const OUTPUT_PATH = path.join(__dirname, "..", "sutras-raw-index.json");
+const TAXONOMY_PATH = path.join(__dirname, "..", "config", "taxonomy.json");
 
 function parseFrontMatter(raw) {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n?/);
@@ -91,6 +93,11 @@ function buildIndex() {
     // Build compact volume list: just slug and title for volume navigation
     work.volumes = work._volumes.map((v) => [v.slug, v.title]);
 
+    const taxonomy = classifyWork(work);
+    work.origin = taxonomy.origin;
+    work.genre = taxonomy.genre;
+    work.doctrine = taxonomy.doctrine;
+
     totalVolumes += work._volumes.length;
     delete work._volumes;
     works.push(work);
@@ -98,7 +105,10 @@ function buildIndex() {
 
   works.sort((a, b) => a.cbeta_id.localeCompare(b.cbeta_id));
 
+  const taxonomyDef = JSON.parse(fs.readFileSync(TAXONOMY_PATH, "utf-8"));
+
   const index = {
+    taxonomy: taxonomyDef,
     works,
     stats: { workCount: works.length, volumeCount: totalVolumes },
   };

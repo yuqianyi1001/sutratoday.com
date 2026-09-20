@@ -85,6 +85,26 @@
             <h2>全部经目</h2>
           </div>
           <p class="section-description" id="catalog-page-lead">正在读取全部经目…</p>
+
+          <div class="catalog-taxonomy" aria-label="佛典分类筛选">
+            <div class="tax-row">
+              <span class="tax-label">产地</span>
+              <div class="tax-chips" id="filter-origin"></div>
+            </div>
+            <div class="tax-row">
+              <span class="tax-label">文体</span>
+              <div class="tax-chips" id="filter-genre"></div>
+            </div>
+            <div class="tax-row">
+              <span class="tax-label">思想系</span>
+              <div class="tax-chips" id="filter-doctrine"></div>
+            </div>
+            <div class="tax-meta">
+              <p class="catalog-breadcrumb" id="catalog-breadcrumb">全部经目</p>
+              <button type="button" class="tax-clear" id="catalog-clear-filters" hidden>清除筛选</button>
+            </div>
+          </div>
+
           <div class="catalog-search">
             <input type="text" id="catalog-search-input" placeholder="搜索经名（支持简体自动转繁体）…" autocomplete="off" />
           </div>
@@ -100,6 +120,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js"></script>
     <script type="module" src="./global-script-toggle.js?v=2"></script>
-    <script type="module" src="./catalog.js?v=4"></script>
+    <script type="module" src="./catalog.js?v=5"></script>
   </body>
 </html>
