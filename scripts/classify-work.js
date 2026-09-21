@@ -10,6 +10,7 @@ const DOCTRINE_BY_CATEGORY = {
   法華部類: ["lotus"],
   華嚴部類: ["avatamsaka"],
   淨土宗部類: ["pureland"],
+  密教部類: ["esoteric"],
   涅槃部類: ["tathagatagarbha"],
   寶積部類: ["vaipulya"],
   大集部類: ["vaipulya"],
