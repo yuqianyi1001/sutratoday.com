@@ -22,6 +22,7 @@
     { "id": "lotus", "label": "法华" },
     { "id": "avatamsaka", "label": "华严" },
     { "id": "pureland", "label": "净土" },
+    { "id": "esoteric", "label": "密教·真言" },
     { "id": "vaipulya", "label": "宝积·方等" },
     { "id": "vinaya_d", "label": "戒律" },
     { "id": "abhidharma", "label": "毘昙" },
