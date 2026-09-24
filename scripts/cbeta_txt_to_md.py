@@ -87,19 +87,34 @@ RE_TRAVEL_HEAD = re.compile(
 RE_CN_ENUM_HEAD = re.compile(
     r"^([一二三四五六七八九十百]+)([\u4e00-\u9fff]{2,8})$"
 )
+# 大般若经分、会标题：第九能斷金剛分 / 第十一布施波羅蜜多分之一 / 大般若經第六會施波羅蜜多分
+RE_FEN = re.compile(r"^第[一二三四五六七八九十百]+.{2,12}分(之[一二三四五六七八九十百]+)?$")
+RE_HUI = re.compile(r"^大般若.{0,12}第[一二三四五六七八九十百]+會.{0,14}$")
+# 大般若经会序作者行、咒名：沙門玄則撰 / 般若佛姆心呪
+RE_STANDALONE_LINE = re.compile(r"^(沙門.{1,6}撰|般若佛姆.{0,2}心[呪咒])$")
+RE_DHARANI_HEAD = re.compile(r"^般若佛姆.{0,2}心[呪咒]$")
 # 釋迦方志：釋迦方志封疆篇第一
 RE_PIAN = re.compile(r"^(.{2,40}篇第[一二三四五六七八九十百]+.*)$")
 
 
-def load_tsv_entry(sutra_id):
-    """从 target_sutra_list.tsv 读取元数据"""
+def load_tsv_entries(sutra_id):
+    """从 target_sutra_list.tsv 读取元数据。
+
+    一部经分在几册时（如 T0220 大般若经分 T05/T06/T07 三册），TSV 有多行，
+    按行序全部返回。
+    """
+    rows = []
     with open(TSV_PATH, "r", encoding="utf-8") as f:
         header = f.readline().strip().split("\t")
         for line in f:
             row = dict(zip(header, line.strip().split("\t")))
             if row.get("collection") + row.get("sutra_no") == sutra_id:
-                return row
-    return None
+                rows.append(row)
+    return rows
+
+
+# 分册经名里的「(第1卷-第200卷)」只标本册范围，合并成整部经时去掉
+RE_TITLE_RANGE = re.compile(r"\(第\d+卷-第\d+卷\)$")
 
 
 # ── 文本预处理 ────────────────────────────────────────────
@@ -116,7 +131,9 @@ def strip_tail_title(lines, title_prefix):
     """去掉文末重复的卷标题行"""
     while lines and lines[-1].strip() == "":
         lines.pop()
-    if lines and title_prefix in lines[-1]:
+    # 只删短的标题行；正文末段若提到经名（如「此大般若波羅蜜多甚深經」）不能删
+    last = lines[-1].strip() if lines else ""
+    if last and title_prefix in last and len(last) <= 40 and "。" not in last:
         lines.pop()
     while lines and lines[-1].strip() == "":
         lines.pop()
@@ -176,6 +193,12 @@ def extract_header(lines):
 # ── 分段逻辑 (核心) ──────────────────────────────────────
 
 MAX_PARA_LEN = 150  # 散文段落最大汉字数（中文 1 字 = 1 字符）
+HARD_MAX_PARA_LEN = 250  # 原文每段上限（AGENTS.md）；逗号处切开的句子接回后不得超过它
+# 大般若经整句是一长串名相（数十种三摩地名、成百的「A真如即B真如」），
+# 句中没有句号。这类经要按顿号再拆，逗号处切开后不再接回。
+# 其他经的目录、人名列表也用顿号串联，按此拆会丢标题，所以只对下列经开启。
+SPLIT_LONG_ENUMERATIONS = {"T0220"}
+_split_long_enumerations = False
 VERSE_GROUP_SIZE = 4  # 偈颂每 N 行一段
 
 
@@ -243,6 +266,20 @@ def split_prose(text):
                     comma_points.append(i + 1)
             parts = _split_at_points(para, comma_points)
             final.extend(parts)
+
+    if not _split_long_enumerations:
+        return final
+
+    # 第三轮：仍超长的多是一口气列出的名相（如数十种三摩地名）或咒语，
+    # 按顿号、咒语句号「（N）　」再拆
+    result, final = final, []
+    for para in result:
+        if len(para) <= MAX_PARA_LEN:
+            final.append(para)
+            continue
+        list_points = [i + 1 for i, ch in enumerate(para)
+                       if ch == "、" or (ch == "）" and para[i + 1:i + 2] == "　")]
+        final.extend(_split_at_points(para, list_points))
 
     return final
 
@@ -367,7 +404,14 @@ def split_paragraphs(lines):
                 and not is_section_heading(para)
                 and not is_section_heading(prev)
                 and prev_tail
-                and prev_tail not in SENTENCE_END):
+                and prev_tail not in SENTENCE_END
+                # 会序作者行、咒名、咒文各自成段
+                and not RE_STANDALONE_LINE.match(prev_last)
+                and not RE_STANDALONE_LINE.match(para_first)
+                # split_prose 在逗号、顿号处切开的超长句（大般若经的长串名相）不再接回
+                and not (_split_long_enumerations
+                         and prev_tail in "，、）"
+                         and len(prev.rstrip()) + len(para.lstrip()) > HARD_MAX_PARA_LEN)):
             # 目录人名行本身不以句号收尾，应换行保留，不可黏成「帛尸梨蜜晉長安…」
             if _is_catalog_line(prev_last) and _is_catalog_line(para_first) and len(prev_last) >= 6:
                 glued[-1] = prev.rstrip() + "\n" + para.lstrip()
@@ -415,6 +459,10 @@ def is_section_heading(text):
         return True
     if RE_PIAN.match(first_line) and len(first_line) < 40:
         return True
+    if RE_FEN.match(first_line) or RE_HUI.match(first_line):
+        return True
+    if RE_DHARANI_HEAD.match(first_line):
+        return True
     if RE_NI_BIO.match(first_line):
         return True
     if RE_BIO_PERSON.match(first_line) and len(first_line) < 24:
@@ -430,6 +478,10 @@ def format_section_heading(text):
     """把传主标题规范成 `一、攝摩騰`；科名、论曰保持原样。"""
     first = text.split("\n")[0].strip()
     if RE_GSZ_CATEGORY.match(first) or RE_GSZ_CATALOG.match(first):
+        return first
+    # 品名、分名、会名保持原样，不能被当成「名+序号」改成「二十、…品第三十四之」
+    if (RE_PIN.match(first) or RE_FEN.match(first) or RE_HUI.match(first)
+            or RE_DHARANI_HEAD.match(first)):
         return first
     if first in ("論曰", "論曰：", "論曰:"):
         return "論曰"
@@ -651,16 +703,25 @@ def main():
     collection = sutra_id[0]
     sutra_no = sutra_id[1:]
 
-    entry = load_tsv_entry(sutra_id)
-    if not entry:
+    global _split_long_enumerations
+    _split_long_enumerations = sutra_id in SPLIT_LONG_ENUMERATIONS
+
+    entries = load_tsv_entries(sutra_id)
+    if not entries:
         print(f"错误: {sutra_id} 不在 target_sutra_list.tsv 中")
         sys.exit(1)
 
+    entry = entries[0]
     title = entry["title"]
+    if len(entries) > 1:
+        title = RE_TITLE_RANGE.sub("", title)
     translator = entry.get("translator", "")
-    juan_total = int(entry.get("juan_count", "1"))
     category = entry.get("category", "")
-    vol_str = entry.get("volume", "")
+    # 每卷所在的册号（cbeta 网址要用），按 TSV 行序依次排
+    juan_vols = []
+    for e in entries:
+        juan_vols += [e.get("volume", "")] * int(e.get("juan_count", "1"))
+    juan_total = len(juan_vols)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -685,7 +746,7 @@ def main():
 
         md_content = convert_volume(
             sutra_id, collection, sutra_no, juan_idx, juan_total,
-            title, translator, category, vol_str
+            title, translator, category, juan_vols[juan_idx - 1]
         )
 
         if md_content is None:
