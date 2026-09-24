@@ -239,6 +239,8 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     if gaiji_map:
         s = _replace_gaiji(s, gaiji_map)
     s = _inject_heads_from_mulu(s)
+    # 悉昙字是 CBETA 私用区字形，markdown 里无法显示；咒语保留对照的汉字音译
+    s = re.sub(r'<cb:t xml:lang="sa-Sidd"[^>]*>.*?</cb:t>', '', s, flags=re.DOTALL)
 
     # cb:mulu 是 CBETA 内部目录树，对正文无用，整块剥掉
     s = re.sub(r'<cb:mulu[^>]*>.*?</cb:mulu>', '', s, flags=re.DOTALL)
@@ -256,6 +258,8 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
     for closing in ('p', 'lg', 'head', 'byline', 'title',
                     'cb:jhead', 'cb:juan', 'cb:div', 'list'):
         s = re.sub(rf'</{re.escape(closing)}>', '\n\n', s)
+    # <head> 是块级标题，前面也要断开（咒文 <p> 后紧接咒名 <head> 时不在同一行）
+    s = re.sub(r'<head\b', '\n\n<head', s)
     s = re.sub(r'</item>', '、', s)
     s = re.sub(r'<lg[^>]*>', '\n', s)
 
@@ -312,6 +316,19 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
             return True
         if re.match(r"^（[一二三四五六七八九十]+）.+", text):
             return True
+        # 大般若经：初分難信解品第三十四之二十 / 第九能斷金剛分 / 大般若經第六會施波羅蜜多分
+        if re.search(r"品第[一二三四五六七八九十百]+(之[一二三四五六七八九十百]+)?$", text):
+            return True
+        if re.match(r"^第[一二三四五六七八九十百]+.{2,12}分(之[一二三四五六七八九十百]+)?$", text):
+            return True
+        if re.match(r"^大般若.{0,12}第[一二三四五六七八九十百]+會.{0,14}$", text):
+            return True
+        # 咒名：般若佛姆心呪
+        if re.fullmatch(r"般若佛姆.{0,2}心[呪咒]", text):
+            return True
+        # 会序作者：沙門玄則撰
+        if re.match(r"^沙門.{1,6}撰$", text):
+            return True
         if text.endswith("師") and 4 <= len(text) <= 16:
             return True
         return False
@@ -333,6 +350,12 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
                 out_lines.append(buf)
                 buf = ""
             out_lines.append(ln)
+            continue
+        # 咒名（<head>）前面是没有标点的咒文，要另起一段
+        if buf and re.fullmatch(r"般若佛姆.{0,2}心[呪咒]", ln):
+            out_lines.append(buf)
+            out_lines.append("")
+            buf = ln
             continue
         if buf and (buf[-1] in PUNC_END or _is_heading_line(buf)):
             out_lines.append(buf)
@@ -395,6 +418,12 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
         lines.append(f"No. {int(entry['sutra_no'])}")
     lines.append("")
 
+    # 大般若经 T06/T07 两册开头是会序（第二会序），属正文，放到卷标题之后
+    body_preface = ""
+    if preface_xml and entry.get("sutra_no") == "0220":
+        body_preface = _xml_to_plain(RE_DOC_NUMBER.sub('', preface_xml), gaiji_map)
+        preface_xml = None
+
     # 序文（仅第一卷）：剥掉 docNumber 后再转纯文本，避免与上面的 No.X 行重复
     if preface_xml:
         preface_clean = RE_DOC_NUMBER.sub('', preface_xml)
@@ -452,6 +481,8 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
     body = RE_DOC_NUMBER.sub('', body)
 
     body_txt = _xml_to_plain(body, gaiji_map)
+    if body_preface:
+        body_txt = body_preface + "\n\n" + body_txt
     # 《高僧傳》部分卷只有 mulu 而无科名 <head>，按卷补科名，便于转 md 时分节
     if entry.get("sutra_no") == "2059":
         cat = T2059_JUAN_CATEGORY.get(juan_no)
@@ -472,7 +503,13 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
     lines.append(body_txt)
     lines.append("")
 
-    return "\n".join(lines)
+    txt = "\n".join(lines)
+    if entry.get("sutra_no") == "0220":
+        # 会序的标题在 XML 里分成「大般若經第二會」「序」两个 <head>，合成一个
+        txt = re.sub(
+            r"^(大般若[^\n]{0,12}第[一二三四五六七八九十百]+會[^\n]{0,12})\n\n序\n",
+            r"\1序\n", txt, flags=re.MULTILINE)
+    return txt
 
 
 # ── 主流程 ────────────────────────────────────────────────────────────────────
@@ -489,9 +526,22 @@ def main():
         print(f"错误：在 {TSV_PATH.name} 中找不到 {args.key}")
         sys.exit(1)
 
+    # 一部经分在几册（如 T0220 大般若经分 T05/T06/T07 三册）时，TSV 有多行，
+    # 同一 sutra_id 的每一行各对应一个 XML 文件，逐个处理。
+    if args.key.strip() != entry.get("cbeta_id"):
+        rows = [r for r in load_tsv()
+                if r["collection"] == entry["collection"]
+                and r["sutra_no"] == entry["sutra_no"]]
+    else:
+        rows = [entry]
+    for e in rows:
+        process_entry(e, args)
+
+
+def process_entry(entry: dict, args):
     sutra_id   = entry["collection"] + entry["sutra_no"]   # 如 T0001
     juan_total = int(entry["juan_count"])
-    print(f"匹配到：{sutra_id} {entry['title']}（共 {juan_total} 卷，{entry['category']}）")
+    print(f"匹配到：{entry['cbeta_id']} {entry['title']}（共 {juan_total} 卷，{entry['category']}）")
 
     # 1. 下载 XML
     xml_file = download_xml(entry, force=args.force)

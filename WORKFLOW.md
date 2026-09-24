@@ -60,6 +60,8 @@ sed -n '1,15p' content/cbeta-raw/T/T0002/T0002_001.txt   # 头部结构正确
 - `XML 中找不到 <body>`：XML 文件残缺，加 `--force` 重下；
 - `XML 切出 N 卷，TSV 记 M 卷`：以 XML 实际为准，回去更正 TSV。
 
+**分册的经**：一部经跨几册时（如 T0220 大般若经分 `T05n0220` / `T06n0220` / `T07n0220`），TSV 每册一行、`sutra_no` 相同。按经号拉取（`fetch_cbeta.py T0220`）会依次处理所有分册；只拉一册用 `cbeta_id`（`fetch_cbeta.py T06n0220`）。`cbeta_txt_to_md.py T0220` 把各行卷数相加作为 `juan_total`，经名去掉「(第1卷-第200卷)」这类分册范围。
+
 ---
 
 ## 2. TXT 转 Markdown — `cbeta_txt_to_md.py`
