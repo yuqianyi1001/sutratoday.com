@@ -155,6 +155,20 @@ python3 scripts/job_queue.py locks         # 看各部经被哪个 backend+model
 
 ---
 
+## 4b. AI agent 直接翻译 — `seg_io.py`
+
+没有翻译 API 时，由 AI agent（Claude Code 等）自己翻译：
+
+```bash
+# 导出待译段（只列空段；--all 连已译段一起导出）
+python3 scripts/seg_io.py export T0220-201 > 201.src.txt
+
+# 译文按 @@sid 分段写好后回填
+python3 scripts/seg_io.py apply T0220-201 201.tr.txt --model claude-opus-5.5
+```
+
+译文文件格式：每段以单独一行 `@@001` 开头，下面是译文，段间空一行。`apply` 会检查 sid 一一对应、译文里没有标题或注释标记、译文字数不明显少于原文，全部通过才写回，并把 `translation_status` 改为 `translated`。
+
 ## 4. 翻译 — `agent_worker.py`（默认 dashscope qwen3.5-plus）
 
 ```bash
