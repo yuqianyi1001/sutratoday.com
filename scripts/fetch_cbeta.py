@@ -326,8 +326,8 @@ def _xml_to_plain(xml_chunk: str, gaiji_map: dict | None = None) -> str:
         # 咒名：般若佛姆心呪
         if re.fullmatch(r"般若佛姆.{0,2}心[呪咒]", text):
             return True
-        # 会序作者：沙門玄則撰
-        if re.match(r"^沙門.{1,6}撰$", text):
+        # 会序作者：沙門玄則撰 / 西明寺沙門玄則製
+        if re.match(r"^.{0,4}沙門.{1,6}[撰製]$", text):
             return True
         if text.endswith("師") and 4 <= len(text) <= 16:
             return True
@@ -386,6 +386,13 @@ def split_juans(body_xml: str):
 
     juans = []
     preface = body_xml[: matches[0].start()].strip() or None
+    # 大般若经 T05 卷一只有收卷标签、没有开卷标签：卷一正文落在第一个开卷标签之前，
+    # 要单独切成卷一，不能当作序文并进卷二
+    first_no = int(matches[0].group(1))
+    if preface and first_no > 1 and re.search(
+            rf'<cb:juan\s+n="0*{first_no - 1}"\s+fun="close"', preface):
+        juans.append((first_no - 1, preface, None))
+        preface = None
     for i, m in enumerate(matches):
         no = int(m.group(1))
         start = m.start()
@@ -476,6 +483,10 @@ def build_juan_txt(entry: dict, juan_no: int, juan_xml: str, preface_xml: str,
     body = re.sub(r'<cb:juan\s+n="\d+"\s+fun="close"[^>]*>.*?</cb:juan>', '', body, flags=re.DOTALL)
     body = re.sub(r'<cb:juan\s+n="\d+"\s+fun="close"\s*/>', '', body)
     body = re.sub(r'<cb:jhead>.*?</cb:jhead>',  '', body, flags=re.DOTALL)
+    # 大般若经会序的作者行（西明寺沙門玄則製）属正文，保留成单独一段
+    if entry.get("sutra_no") == "0220":
+        body = re.sub(r'<byline[^>]*>((?:(?!</byline>).)*玄則(?:(?!</byline>).)*)</byline>',
+                      r'<p>\1</p>', body, flags=re.DOTALL)
     # 卷正文里的所有 byline（Translator/author/Scribe）已在头部处理过，全剥
     body = re.sub(r'<byline[^>]*>.*?</byline>', '', body, flags=re.DOTALL)
     body = RE_DOC_NUMBER.sub('', body)

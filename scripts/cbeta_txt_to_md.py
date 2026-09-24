@@ -91,7 +91,7 @@ RE_CN_ENUM_HEAD = re.compile(
 RE_FEN = re.compile(r"^第[一二三四五六七八九十百]+.{2,12}分(之[一二三四五六七八九十百]+)?$")
 RE_HUI = re.compile(r"^大般若.{0,12}第[一二三四五六七八九十百]+會.{0,14}$")
 # 大般若经会序作者行、咒名：沙門玄則撰 / 般若佛姆心呪
-RE_STANDALONE_LINE = re.compile(r"^(沙門.{1,6}撰|般若佛姆.{0,2}心[呪咒])$")
+RE_STANDALONE_LINE = re.compile(r"^(.{0,4}沙門.{1,6}[撰製]|般若佛姆.{0,2}心[呪咒])$")
 RE_DHARANI_HEAD = re.compile(r"^般若佛姆.{0,2}心[呪咒]$")
 # 釋迦方志：釋迦方志封疆篇第一
 RE_PIAN = re.compile(r"^(.{2,40}篇第[一二三四五六七八九十百]+.*)$")
