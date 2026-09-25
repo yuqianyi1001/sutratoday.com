@@ -131,6 +131,7 @@ def download_xml(entry: dict, force: bool = False) -> Path:
 # ── XML → TXT ─────────────────────────────────────────────────────────────────
 
 RE_CB_JUAN_OPEN = re.compile(r'<cb:juan\s+n="(\d+)"\s+fun="open"[^>]*>', re.DOTALL)
+RE_MILESTONE_JUAN = re.compile(r'<milestone\b[^>]*\bunit="juan"[^>]*/>')
 RE_BODY         = re.compile(r'<body[^>]*>(.*?)</body>', re.DOTALL)
 RE_DOC_NUMBER   = re.compile(r'<cb:docNumber>(.*?)</cb:docNumber>', re.DOTALL)
 RE_JHEAD        = re.compile(r'<cb:jhead>(.*?)</cb:jhead>', re.DOTALL)
@@ -380,6 +381,17 @@ def split_juans(body_xml: str):
     preface_xml 仅在第一卷出现（第一个 cb:juan 标签之前的内容）。
     """
     matches = list(RE_CB_JUAN_OPEN.finditer(body_xml))
+    # 有的 XML 开卷标签写作 fun="open" n="1"（属性顺序不同），或卷号带子卷后缀
+    # （n="001a"），上面的正则切不出来。这时按每卷开头的 <milestone unit="juan"> 切分。
+    milestones = list(RE_MILESTONE_JUAN.finditer(body_xml))
+    if len(milestones) > len(matches):
+        juans = []
+        preface = body_xml[: milestones[0].start()].strip() or None
+        for i, m in enumerate(milestones):
+            no = int(re.search(r'\bn="(\d+)"', m.group(0)).group(1))
+            end = milestones[i + 1].start() if i + 1 < len(milestones) else len(body_xml)
+            juans.append((no, body_xml[m.start():end], preface if i == 0 else None))
+        return juans
     if not matches:
         # 没有 cb:juan 标签 → 整篇视为一卷
         return [(1, body_xml, None)]
