@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "content" / "sutras-raw"
 
 RE_PAIR = re.compile(
-    r"### 原文\n<!-- sid:(\d{3}) -->\n(.*?)\n### (?:现代语译|現代語譯)\n<!-- sid:\1 -->\n(.*?)(?=\n#{2,3} |\Z)",
+    r"### 原文\n<!-- sid:(\d{3,}) -->\n(.*?)\n### (?:现代语译|現代語譯)\n<!-- sid:\1 -->\n(.*?)(?=\n#{2,3} |\Z)",
     re.DOTALL,
 )
 RE_HEAD = re.compile(r"^## (.+)$", re.MULTILINE)
@@ -71,7 +71,7 @@ def cmd_export(args):
 
 def parse_translations(path):
     content = Path(path).read_text(encoding="utf-8")
-    chunks = re.split(r"^@@(\d{3})\s*$", content, flags=re.MULTILINE)
+    chunks = re.split(r"^@@(\d{3,})\s*$", content, flags=re.MULTILINE)
     result = {}
     for i in range(1, len(chunks), 2):
         sid, body = chunks[i], chunks[i + 1].strip()
