@@ -19,7 +19,7 @@ import {
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=6";
+} from "./reading-progress.js?v=7";
 import {
   addFavorite,
   checkin,
@@ -32,8 +32,8 @@ import {
   removeFavorite,
   suggestRetranslate,
   workIdFromSlug,
-} from "./account-api.js?v=2";
-import { openAccountDialog } from "./account.js?v=2";
+} from "./account-api.js?v=3";
+import { openAccountDialog } from "./account.js?v=3";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 
 const dom = {
@@ -110,7 +110,12 @@ async function init() {
   bindSentenceSync(dom.rendered, () => readingMode === READING_MODE_DEFAULT);
   bindFavoriteButton();
   bindRetranslateButtons();
+  // 只在登录 / 退出时刷新打卡区（进度更新也会触发账号事件）
+  let checkinUserId = getUser()?.id ?? null;
   onAccountChange(() => {
+    const userId = getUser()?.id ?? null;
+    if (userId === checkinUserId) return;
+    checkinUserId = userId;
     if (currentDocument) renderCheckins(currentDocument);
   });
   // 登录用户先拉取云端进度（最多等 2 秒），与经文加载并行

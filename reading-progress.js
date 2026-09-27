@@ -1,5 +1,5 @@
 import { escapeHtml, getReaderUrl } from "./site-data.js";
-import { getLibrary, getRemoteProgress, isLoggedIn, queueProgressSync, workIdFromSlug } from "./account-api.js?v=2";
+import { getLibrary, getRemoteProgress, isLoggedIn, queueProgressSync, workIdFromSlug } from "./account-api.js?v=3";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
@@ -137,6 +137,7 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
   let stopped = false;
   let baselineY = getScrollY();
   let initialBlockIndex = null;
+  let lastSavedKey = "";
   const restoreTimers = [];
   const restoreIndex = Number.isInteger(options.restoreIndex) ? options.restoreIndex : null;
   const restorePreview = String(options.restorePreview || "");
@@ -153,6 +154,10 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
       armed = true;
     }
     const meta = getMeta?.() || {};
+    // 位置没变就不重新保存：否则闲置的标签页切到后台时，会用"现在"的时间覆盖别处更新的进度
+    const key = `${meta.slug}#${blockIndex}`;
+    if (key === lastSavedKey) return;
+    lastSavedKey = key;
     saveReadingProgress({
       slug: meta.slug,
       title: meta.title,
@@ -188,7 +193,9 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
     initialBlockIndex = Number(target?.dataset.readingBlock);
     if (ok && target) {
       const meta = getMeta?.() || {};
-      if (meta.slug) {
+      const key = `${meta.slug}#${Number(target.dataset.readingBlock)}`;
+      if (meta.slug && key !== lastSavedKey) {
+        lastSavedKey = key;
         saveReadingProgress({
           slug: meta.slug,
           title: meta.title,

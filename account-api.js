@@ -9,17 +9,22 @@ const SESSION_KEY = "sutra_account_session";
 const LIBRARY_KEY = "sutra_account_library";
 const SYNC_DELAY_MS = 3000;
 const REFRESH_TIMEOUT_MS = 2000;
+const REFOCUS_REFRESH_MS = 10_000;
 
 let session = readJson(SESSION_KEY);
 let library = readJson(LIBRARY_KEY) || [];
 let pendingProgress = new Map();
 let syncTimer = 0;
 let refreshPromise = null;
+let lastRefreshAt = 0;
+let emitTimer = 0;
 
 if (typeof window !== "undefined") {
   window.addEventListener("pagehide", () => flushProgress(true));
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") flushProgress(true);
+    // 回到页面时拉取其他设备的最新进度
+    else if (Date.now() - lastRefreshAt > REFOCUS_REFRESH_MS) refreshLibrary();
   });
   // 其他标签页登录/退出时同步状态
   window.addEventListener("storage", (event) => {
@@ -110,9 +115,10 @@ function clearSession() {
 export function refreshLibrary() {
   if (!isLoggedIn()) return Promise.resolve(library);
   if (!refreshPromise) {
+    lastRefreshAt = Date.now();
     refreshPromise = request("GET", "/library")
       .then((data) => {
-        setLibrary(data.favorites || []);
+        setLibrary(mergeLibrary(data.favorites || []));
         return library;
       })
       .catch(() => library)
@@ -127,6 +133,20 @@ export function refreshLibrary() {
 export function refreshLibraryWithTimeout(ms = REFRESH_TIMEOUT_MS) {
   if (!isLoggedIn()) return Promise.resolve(library);
   return Promise.race([refreshLibrary(), new Promise((resolve) => setTimeout(() => resolve(library), ms))]);
+}
+
+// 服务器数据可能落后于本机（进度尚未发出，或正在发送），同一部经保留较新的进度
+function mergeLibrary(remote) {
+  return remote.map((item) => {
+    const local = getFavorite(item.workId)?.progress;
+    return isNewer(local, item.progress) ? { ...item, progress: local } : item;
+  });
+}
+
+function isNewer(a, b) {
+  if (!a?.slug) return false;
+  if (!b?.slug) return true;
+  return (Number(a.savedAt) || 0) > (Number(b.savedAt) || 0);
 }
 
 export async function addFavorite(workId, title, progress = null) {
@@ -158,6 +178,7 @@ export function queueProgressSync(progress) {
   pendingProgress.set(workId, next);
   clearTimeout(syncTimer);
   syncTimer = setTimeout(() => flushProgress(), SYNC_DELAY_MS);
+  emitSoon();
 }
 
 // 取本经文在云端（缓存）中的进度
@@ -172,17 +193,27 @@ export async function flushProgress(keepalive = false) {
   pendingProgress = new Map();
   await Promise.all(
     entries.map(([workId, progress]) =>
-      request("PUT", `/progress/${encodeURIComponent(workId)}`, progress, true, keepalive).catch((error) => {
-        // 网络失败时放回队列，下次再试；未收藏（409）等错误直接丢弃
-        if (error.status === 0 && !pendingProgress.has(workId)) pendingProgress.set(workId, progress);
-      }),
+      request("PUT", `/progress/${encodeURIComponent(workId)}`, progress, true, keepalive)
+        .then((data) => {
+          // 服务器返回最终保存的进度；若其他设备有更新的进度，以服务器为准
+          const fav = getFavorite(workId);
+          if (fav && data.progress && isNewer(data.progress, fav.progress)) {
+            fav.progress = data.progress;
+            writeJson(LIBRARY_KEY, library);
+            emitSoon();
+          }
+        })
+        .catch((error) => {
+          // 网络失败时放回队列，下次再试；未收藏（409）等错误直接丢弃
+          if (error.status === 0 && !pendingProgress.has(workId)) pendingProgress.set(workId, progress);
+        }),
     ),
   );
 }
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=6");
+  const { readReadingProgress } = await import("./reading-progress.js?v=7");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
@@ -264,7 +295,14 @@ function setLibrary(next) {
 }
 
 function emit() {
+  clearTimeout(emitTimer);
+  emitTimer = 0;
   window.dispatchEvent(new CustomEvent("sutra:account"));
+}
+
+// 滚动时进度更新很频繁，界面最多每秒刷新一次
+function emitSoon() {
+  if (!emitTimer) emitTimer = setTimeout(emit, 1000);
 }
 
 function readApiOverride() {

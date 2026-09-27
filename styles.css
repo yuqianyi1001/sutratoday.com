@@ -1913,3 +1913,53 @@ code {
 .markdown-view[data-reading-mode="translation"] .retranslate-button-inline {
   display: inline-flex;
 }
+
+.site-account-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.site-account-top .site-account-heading {
+  margin: 0;
+}
+
+.site-account-refresh {
+  padding: 2px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.site-account-refresh:hover {
+  color: var(--accent);
+}
+
+.site-account-panel.is-syncing .site-account-refresh {
+  opacity: 0.5;
+}
+
+.site-account-subheading {
+  margin: 12px 0 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.site-account-list .site-account-when {
+  margin-left: 4px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.site-account-list .site-account-preview {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.82rem;
+}

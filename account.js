@@ -1,12 +1,15 @@
 // 页头的"登录 / 我的收藏"入口，以及登录注册弹窗。
 import { escapeHtml } from "./site-data.js";
-import { getResumeUrl } from "./reading-progress.js?v=6";
-import { getLibrary, getUser, isLoggedIn, login, logout, onAccountChange, refreshLibrary, register } from "./account-api.js?v=2";
+import { getResumeUrl, readReadingProgress } from "./reading-progress.js?v=7";
+import { getLibrary, getUser, isLoggedIn, login, logout, onAccountChange, refreshLibrary, register } from "./account-api.js?v=3";
 
 const USERNAME_RE = /^[A-Za-z0-9_]{5,20}$/;
+const PANEL_REFRESH_MS = 15_000;
 
 let entryButton = null;
 let panel = null;
+let panelTimer = 0;
+let lastSyncedAt = 0;
 let dialog = null;
 let dialogMode = "login";
 let dialogOptions = {};
@@ -46,6 +49,10 @@ function init() {
     if (event.target.closest("[data-account-logout]")) {
       togglePanel(false);
       await logout();
+    } else if (event.target.closest("[data-account-refresh]")) {
+      syncPanel();
+    } else if (event.target.closest("a")) {
+      togglePanel(false);
     }
   });
 
@@ -57,7 +64,7 @@ function init() {
 function render() {
   if (!entryButton) return;
   const user = getUser();
-  entryButton.textContent = user ? `我的收藏 · ${user.username}` : "登录";
+  entryButton.textContent = user ? `收藏和进度 · ${user.username}` : "登录";
   entryButton.setAttribute("aria-haspopup", user ? "true" : "dialog");
   if (!user) togglePanel(false);
   else if (!panel.hidden) renderPanel();
@@ -66,21 +73,49 @@ function render() {
 function togglePanel(open = panel.hidden) {
   panel.hidden = !open;
   entryButton.setAttribute("aria-expanded", String(open));
+  clearInterval(panelTimer);
+  panelTimer = 0;
   if (open) {
     renderPanel();
-    refreshLibrary();
+    syncPanel();
+    // 打开期间定期拉取最新进度（包括其他设备上的）
+    panelTimer = setInterval(syncPanel, PANEL_REFRESH_MS);
   }
+}
+
+async function syncPanel() {
+  if (!isLoggedIn()) return;
+  panel.classList.add("is-syncing");
+  await refreshLibrary();
+  lastSyncedAt = Date.now();
+  panel.classList.remove("is-syncing");
+  if (!panel.hidden) renderPanel();
 }
 
 function renderPanel() {
   const user = getUser();
-  const items = getLibrary();
+  const items = [...getLibrary()].sort((a, b) => sortTime(b) - sortTime(a));
+  const favoriteIds = new Set(items.map((item) => item.workId));
+  // 本机最后读的经若未收藏，也列出来（只存在本机，不同步）
+  const local = readReadingProgress();
+  const localWorkId = local?.slug?.replace(/-\d+$/, "");
+  const localItem =
+    local && !favoriteIds.has(localWorkId)
+      ? `<p class="site-account-subheading">最近阅读（未收藏，仅本机）</p>
+         <ul class="site-account-list">${renderItem({ workId: localWorkId, title: local.title, progress: local })}</ul>`
+      : "";
   const list = items.length
     ? `<ul class="site-account-list">${items.map(renderItem).join("")}</ul>`
     : `<p class="site-account-empty">还没有收藏的经文。在阅读页点击"收藏本经"，阅读进度就会在多台设备间同步。</p>`;
   panel.innerHTML = `
-    <p class="site-account-heading">我的收藏</p>
+    <div class="site-account-top">
+      <p class="site-account-heading">收藏和进度</p>
+      <button class="site-account-refresh" type="button" data-account-refresh title="立即刷新">
+        ${lastSyncedAt ? `${formatTime(lastSyncedAt)} 已同步` : "同步中…"} · 刷新
+      </button>
+    </div>
     ${list}
+    ${localItem}
     <div class="site-account-footer">
       <span>${escapeHtml(user?.username || "")}</span>
       <button type="button" data-account-logout>退出登录</button>
@@ -88,20 +123,45 @@ function renderPanel() {
   `;
 }
 
+function sortTime(item) {
+  return Number(item.progress?.savedAt) || Number(item.createdAt) || 0;
+}
+
 function renderItem(item) {
   const p = item.progress;
   const title = item.title || p?.title || item.workId;
   const url = p ? getResumeUrl(p.slug, p.blockIndex) : getResumeUrl(`${item.workId}-001`);
   const volume = p?.volumeLabel && !["全一卷", "单篇", "單篇"].includes(p.volumeLabel) ? p.volumeLabel : "";
-  const status = p ? `读到${volume ? ` ${volume}` : ""}${p.textPreview ? `：${p.textPreview.slice(0, 18)}…` : ""}` : "尚未开始阅读";
+  const where = p ? (volume ? `读到${volume}` : "读到") : "尚未开始阅读";
+  const preview = p?.textPreview ? `<span class="site-account-preview">${escapeHtml(p.textPreview.slice(0, 24))}…</span>` : "";
+  const when = p?.savedAt ? `<span class="site-account-when">${escapeHtml(formatAgo(p.savedAt))}</span>` : "";
   return `
     <li>
       <a href="${escapeHtml(url)}">
         <strong>《${escapeHtml(title)}》</strong>
-        <span>${escapeHtml(status)}</span>
+        <span class="site-account-where">${escapeHtml(where)} ${when}</span>
+        ${preview}
       </a>
     </li>
   `;
+}
+
+function formatAgo(ms) {
+  const diff = Math.max(0, Date.now() - ms);
+  const minutes = Math.floor(diff / 60_000);
+  if (minutes < 1) return "刚刚";
+  if (minutes < 60) return `${minutes} 分钟前`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} 小时前`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days} 天前`;
+  const d = new Date(ms);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function formatTime(ms) {
+  const d = new Date(ms);
+  return [d.getHours(), d.getMinutes(), d.getSeconds()].map((n) => String(n).padStart(2, "0")).join(":");
 }
 
 // ── 登录 / 注册弹窗 ─────────────────────────────────────────
