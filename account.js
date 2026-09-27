@@ -1,7 +1,7 @@
 // 页头的"登录 / 我的收藏"入口，以及登录注册弹窗。
 import { escapeHtml } from "./site-data.js";
-import { getResumeUrl, readReadingProgress } from "./reading-progress.js?v=9";
-import { getLibrary, getUser, isLoggedIn, login, logout, onAccountChange, refreshLibrary, register } from "./account-api.js?v=5";
+import { getResumeUrl, readReadingProgress } from "./reading-progress.js?v=10";
+import { getLibrary, getUser, isLoggedIn, login, logout, onAccountChange, refreshLibrary, register } from "./account-api.js?v=6";
 
 const USERNAME_RE = /^[A-Za-z0-9_]{5,20}$/;
 const PANEL_REFRESH_MS = 15_000;

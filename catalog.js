@@ -7,7 +7,7 @@ import {
   getTranslationState,
   loadWorksIndex,
 } from "./site-data.js";
-import { mountResumeBanner } from "./reading-progress.js?v=9";
+import { mountResumeBanner } from "./reading-progress.js?v=10";
 
 mountResumeBanner();
 

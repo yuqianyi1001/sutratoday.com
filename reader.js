@@ -19,7 +19,7 @@ import {
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=9";
+} from "./reading-progress.js?v=10";
 import {
   addFavorite,
   checkin,
@@ -32,10 +32,10 @@ import {
   removeFavorite,
   suggestRetranslate,
   workIdFromSlug,
-} from "./account-api.js?v=5";
-import { openAccountDialog } from "./account.js?v=5";
+} from "./account-api.js?v=6";
+import { openAccountDialog } from "./account.js?v=6";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
-import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=2";
+import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=3";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),

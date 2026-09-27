@@ -7,7 +7,8 @@ export const API_BASE = readApiOverride() || "https://sutratoday-api.jeffwoo2019
 
 const SESSION_KEY = "sutra_account_session";
 const LIBRARY_KEY = "sutra_account_library";
-const SYNC_DELAY_MS = 3000;
+// 进度最多每 30 秒同步一次；离开页面、切走标签或窗口时立即同步
+const SYNC_INTERVAL_MS = 30_000;
 const REFRESH_TIMEOUT_MS = 2000;
 const REFOCUS_REFRESH_MS = 10_000;
 
@@ -21,6 +22,8 @@ let emitTimer = 0;
 
 if (typeof window !== "undefined") {
   window.addEventListener("pagehide", () => flushProgress(true));
+  // 切到别的窗口（浏览器仍可见时不会触发 visibilitychange）
+  window.addEventListener("blur", () => flushProgress(true));
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") flushProgress(true);
     // 回到页面时拉取其他设备的最新进度
@@ -176,8 +179,8 @@ export function queueProgressSync(progress) {
   fav.progress = { workId, ...next };
   writeJson(LIBRARY_KEY, library);
   pendingProgress.set(workId, next);
-  clearTimeout(syncTimer);
-  syncTimer = setTimeout(() => flushProgress(), SYNC_DELAY_MS);
+  // 节流而不是防抖：一直在读也会按时同步，期间的多次更新合并成一次请求
+  if (!syncTimer) syncTimer = setTimeout(() => flushProgress(), SYNC_INTERVAL_MS);
   emitSoon();
 }
 
@@ -188,6 +191,7 @@ export function getRemoteProgress(workId) {
 
 export async function flushProgress(keepalive = false) {
   clearTimeout(syncTimer);
+  syncTimer = 0;
   if (!isLoggedIn() || !pendingProgress.size) return;
   const entries = [...pendingProgress.entries()];
   pendingProgress = new Map();
@@ -205,7 +209,10 @@ export async function flushProgress(keepalive = false) {
         })
         .catch((error) => {
           // 网络失败时放回队列，下次再试；未收藏（409）等错误直接丢弃
-          if (error.status === 0 && !pendingProgress.has(workId)) pendingProgress.set(workId, progress);
+          if (error.status === 0 && !pendingProgress.has(workId)) {
+            pendingProgress.set(workId, progress);
+            if (!syncTimer) syncTimer = setTimeout(() => flushProgress(), SYNC_INTERVAL_MS);
+          }
         }),
     ),
   );
@@ -213,7 +220,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=9");
+  const { readReadingProgress } = await import("./reading-progress.js?v=10");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();

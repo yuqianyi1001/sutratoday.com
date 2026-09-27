@@ -1,5 +1,5 @@
 import { escapeHtml, getReaderUrl } from "./site-data.js";
-import { getLibrary, getRemoteProgress, isLoggedIn, onAccountChange, queueProgressSync, workIdFromSlug } from "./account-api.js?v=5";
+import { getLibrary, getRemoteProgress, isLoggedIn, onAccountChange, queueProgressSync, workIdFromSlug } from "./account-api.js?v=6";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
