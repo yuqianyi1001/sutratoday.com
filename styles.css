@@ -1900,3 +1900,16 @@ code {
 .reader-checkin-more {
   margin-top: 8px;
 }
+
+.sutra-translation-heading .retranslate-button {
+  margin-left: 6px;
+  vertical-align: -0.15em;
+}
+
+.retranslate-button-inline {
+  display: none;
+}
+
+.markdown-view[data-reading-mode="translation"] .retranslate-button-inline {
+  display: inline-flex;
+}

@@ -468,20 +468,37 @@ function rememberSentRetranslation(key) {
 function mountRetranslateButtons(doc) {
   const sources = extractParagraphSources(doc.body);
   const sent = readSentRetranslations();
-  const lastBySid = new Map();
-  dom.rendered.querySelectorAll(".sutra-translation[data-sid]").forEach((el) => lastBySid.set(el.dataset.sid, el));
-
-  lastBySid.forEach((el, sid) => {
-    if (!sources.has(sid)) return;
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "retranslate-button";
-    button.dataset.sid = sid;
-    setRetranslateState(button, sent.has(`${doc.slug}#${sid}`) ? "sent" : "idle");
-    // 段落、引文内直接跟在文字后面；列表等其他块放在其后
-    if (el.tagName === "P" || el.tagName === "BLOCKQUOTE") el.append(" ", button);
-    else el.insertAdjacentElement("afterend", button);
+  const groups = new Map();
+  dom.rendered.querySelectorAll(".sutra-translation[data-sid]").forEach((el) => {
+    const group = groups.get(el.dataset.sid) || [];
+    group.push(el);
+    groups.set(el.dataset.sid, group);
   });
+
+  groups.forEach((elements, sid) => {
+    if (!sources.has(sid)) return;
+    const state = sent.has(`${doc.slug}#${sid}`) ? "sent" : "idle";
+    // 图标放在每段译文前的「现代语译」小标题后面
+    const heading = elements[0].previousElementSibling;
+    if (heading?.classList.contains("sutra-translation-heading")) {
+      heading.append(createRetranslateButton(sid, state));
+    }
+    // 「只读现代语译」模式会隐藏小标题，此时改用段末的图标（其他模式下由 CSS 隐藏）
+    const last = elements[elements.length - 1];
+    const fallback = createRetranslateButton(sid, state);
+    fallback.classList.add("retranslate-button-inline");
+    if (last.tagName === "P" || last.tagName === "BLOCKQUOTE") last.append(fallback);
+    else last.insertAdjacentElement("afterend", fallback);
+  });
+}
+
+function createRetranslateButton(sid, state) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "retranslate-button";
+  button.dataset.sid = sid;
+  setRetranslateState(button, state);
+  return button;
 }
 
 function setRetranslateState(button, state) {
@@ -506,7 +523,8 @@ function bindRetranslateButtons() {
     const source = extractParagraphSources(doc.body).get(sid);
     if (!source) return;
     const work = currentWork();
-    setRetranslateState(button, "sending");
+    const siblings = dom.rendered.querySelectorAll(`.retranslate-button[data-sid="${CSS.escape(sid)}"]`);
+    siblings.forEach((el) => setRetranslateState(el, "sending"));
     try {
       await suggestRetranslate({
         slug: doc.slug,
@@ -517,10 +535,10 @@ function bindRetranslateButtons() {
         translation: source.translation,
       });
       rememberSentRetranslation(`${doc.slug}#${sid}`);
-      setRetranslateState(button, "sent");
+      dom.rendered.querySelectorAll(`.retranslate-button[data-sid="${CSS.escape(sid)}"]`).forEach((el) => setRetranslateState(el, "sent"));
       showToast("已提交重翻建议，谢谢！");
     } catch (error) {
-      setRetranslateState(button, "idle");
+      siblings.forEach((el) => setRetranslateState(el, "idle"));
       showToast(error.message || "提交失败，请稍后再试");
     }
   });
