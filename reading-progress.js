@@ -1,5 +1,5 @@
 import { escapeHtml, getReaderUrl } from "./site-data.js";
-import { getLibrary, getRemoteProgress, isLoggedIn, queueProgressSync, workIdFromSlug } from "./account-api.js?v=4";
+import { getLibrary, getRemoteProgress, isLoggedIn, onAccountChange, queueProgressSync, workIdFromSlug } from "./account-api.js?v=5";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
@@ -281,6 +281,10 @@ export function mountResumeBanner(options = {}) {
   const existing = document.querySelector(".reading-resume-banner");
   if (existing) existing.remove();
 
+  // 登录后进度在页头"收藏和进度"里，不再显示这个提示；只给未登录的读者用
+  if (isLoggedIn()) return null;
+  watchLoginForBanner();
+
   const progress = latestProgress();
   if (!progress) return null;
   if (isBannerDismissed()) return null;
@@ -311,6 +315,17 @@ export function mountResumeBanner(options = {}) {
   });
 
   return banner;
+}
+
+let bannerWatcherBound = false;
+
+// 在当前页登录后，立即收起提示
+function watchLoginForBanner() {
+  if (bannerWatcherBound) return;
+  bannerWatcherBound = true;
+  onAccountChange(() => {
+    if (isLoggedIn()) document.querySelector(".reading-resume-banner")?.remove();
+  });
 }
 
 function findRestoreTarget(container, blockIndex, textPreview) {

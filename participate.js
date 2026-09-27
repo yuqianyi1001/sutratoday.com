@@ -1,5 +1,5 @@
 import { escapeHtml, getMarkdownSourceUrl, renderMarkdown } from "./site-data.js";
-import { mountResumeBanner } from "./reading-progress.js?v=8";
+import { mountResumeBanner } from "./reading-progress.js?v=9";
 
 mountResumeBanner();
 
