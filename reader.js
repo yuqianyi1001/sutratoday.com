@@ -19,7 +19,7 @@ import {
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=7";
+} from "./reading-progress.js?v=8";
 import {
   addFavorite,
   checkin,
@@ -32,9 +32,10 @@ import {
   removeFavorite,
   suggestRetranslate,
   workIdFromSlug,
-} from "./account-api.js?v=3";
-import { openAccountDialog } from "./account.js?v=3";
+} from "./account-api.js?v=4";
+import { openAccountDialog } from "./account.js?v=4";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
+import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=1";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -54,10 +55,12 @@ const dom = {
   selectionFeedbackQuote: document.getElementById("selection-feedback-quote"),
   summary: document.getElementById("reader-summary"),
   checkin: document.getElementById("reader-checkin"),
+  comments: document.getElementById("reader-comments"),
 };
 
 let currentDocument = null;
 let selectedQuote = "";
+let selectedContext = { sid: "", target: "" };
 let selectionSyncFrame = 0;
 let lastSelectionRect = null;
 let feedbackPanelOpen = false;
@@ -110,6 +113,7 @@ async function init() {
   bindSentenceSync(dom.rendered, () => readingMode === READING_MODE_DEFAULT);
   bindFavoriteButton();
   bindRetranslateButtons();
+  if (dom.comments) initComments({ container: dom.comments, showToast, onJumpToParagraph: jumpToParagraph });
   // 只在登录 / 退出时刷新打卡区（进度更新也会触发账号事件）
   let checkinUserId = getUser()?.id ?? null;
   onAccountChange(() => {
@@ -170,7 +174,7 @@ async function selectCurrent() {
   resetSelectionFeedback();
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
-  initComments(selected.slug);
+  loadComments(selected.slug);
   renderFavoriteButton();
   await libraryReady;
   if (loadId !== currentLoadId) return;
@@ -793,12 +797,40 @@ function bindSelectionFeedback() {
     clearSelection();
     resetSelectionFeedback();
   });
-  dom.selectionFeedbackLink.addEventListener("click", (event) => {
+  dom.selectionFeedbackLink.addEventListener("click", async (event) => {
     event.preventDefault();
     const quote = selectedQuote || dom.selectionFeedback.dataset.pendingQuote;
     if (!quote) return;
-    sendQuoteToComment(quote);
+    const context = { ...selectedContext };
+    // 登录框会清掉选区，先收起气泡；flagTranslationIssue 会在登录成功后继续提交
+    clearSelection();
+    resetSelectionFeedback();
+    await flagTranslationIssue({ quote, sid: context.sid, target: context.target });
   });
+}
+
+// 选区所在段落的 sid，以及是在原文还是译文里
+function getSelectionContext(selection) {
+  const range = selection.getRangeAt(0);
+  const node = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentElement;
+  const block = node?.closest?.("[data-sid]");
+  if (!block || !dom.rendered.contains(block)) return { sid: "", target: "" };
+  const target = block.classList.contains("sutra-original") ? "original" : block.classList.contains("sutra-translation") ? "translation" : "";
+  return { sid: block.dataset.sid || "", target };
+}
+
+// 评论区"查看段落"：滚动到对应段落并短暂高亮
+function jumpToParagraph(sid, target) {
+  const escaped = CSS.escape(sid);
+  const selector = target ? `.sutra-${target}[data-sid="${escaped}"]` : `[data-sid="${escaped}"]`;
+  const el = dom.rendered.querySelector(selector) || dom.rendered.querySelector(`[data-sid="${escaped}"]`);
+  if (!el) {
+    showToast("找不到这一段，经文可能已更新");
+    return;
+  }
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.add("is-flash");
+  setTimeout(() => el.classList.remove("is-flash"), 1800);
 }
 
 function scheduleSyncSelectionFeedback() {
@@ -820,6 +852,7 @@ function syncSelectionFeedback() {
 
   const quoteChanged = nextQuote !== selectedQuote;
   selectedQuote = nextQuote;
+  selectedContext = getSelectionContext(selection);
   lastSelectionRect = getSelectionRect(selection);
   dom.selectionCommentTrigger.hidden = false;
   dom.selectionFeedbackQuote.textContent = `"${selectedQuote}"`;
@@ -916,28 +949,10 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function sendQuoteToComment(quote) {
-  const commentSection =
-    document.getElementById("tk-comments") ||
-    document.querySelector(".tk-comments") ||
-    document.getElementById("tcomment");
-  if (!commentSection) return;
-  const textarea = commentSection.querySelector("textarea");
-  if (textarea) {
-    const prefix = `> ${quote.replace(/\n/g, "\n> ")}\n\n`;
-    textarea.value = prefix + textarea.value;
-    textarea.dispatchEvent(new Event("input", { bubbles: true }));
-  }
-  const scrollTarget = document.getElementById("tcomment") || commentSection;
-  scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
-  if (textarea) setTimeout(() => textarea.focus(), 400);
-  clearSelection();
-  resetSelectionFeedback();
-}
-
 function resetSelectionFeedback() {
   if (selectionSyncFrame) { cancelAnimationFrame(selectionSyncFrame); selectionSyncFrame = 0; }
   selectedQuote = "";
+  selectedContext = { sid: "", target: "" };
   lastSelectionRect = null;
   feedbackPanelOpen = false;
   dom.selectionCommentTrigger.hidden = true;
@@ -965,12 +980,3 @@ function hideSelectionFeedbackPanel() {
   delete dom.selectionFeedback.dataset.position;
 }
 
-function initComments(slug) {
-  if (typeof twikoo === "undefined") return;
-  twikoo.init({
-    envId: "https://twikoo-cloudflare.jeffwoo2019.workers.dev",
-    el: "#tcomment",
-    path: slug,
-    lang: "zh-CN",
-  });
-}

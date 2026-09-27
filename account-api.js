@@ -213,7 +213,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=7");
+  const { readReadingProgress } = await import("./reading-progress.js?v=8");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
@@ -246,6 +246,21 @@ export function getCheckins(workId, slug = "") {
 
 export function checkin({ workId, slug = "", title = "", volumeLabel = "" }) {
   return request("POST", "/checkins", { workId, slug, title, volumeLabel });
+}
+
+// ── 评论 ────────────────────────────────────────────────────
+
+export function getComments(slug) {
+  return request("GET", `/comments?${new URLSearchParams({ slug })}`, undefined, isLoggedIn());
+}
+
+// kind: "comment" | "translation_issue"
+export function postComment({ slug, body = "", kind = "comment", quote = "", sid = "", target = "" }) {
+  return request("POST", "/comments", { slug, body, kind, quote, sid: sid || undefined, target });
+}
+
+export function deleteComment(id) {
+  return request("DELETE", `/comments/${encodeURIComponent(id)}`);
 }
 
 // ── 工具 ────────────────────────────────────────────────────

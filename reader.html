@@ -40,7 +40,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=5" />
+    <link rel="stylesheet" href="./styles.css?v=6" />
     <script id="seo-structured-data" type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -155,10 +155,7 @@
             </article>
             <section class="reader-checkin" id="reader-checkin" aria-label="打卡" hidden></section>
             <nav class="reader-volume-nav reader-volume-nav-bottom" id="reader-volume-nav-bottom" aria-label="卷数导航" hidden></nav>
-            <section class="reader-comments" aria-label="评论区">
-              <h2 class="reader-comments-title">欢迎反馈问题、评论或打卡。</h2>
-              <div id="tcomment"></div>
-            </section>
+            <section class="reader-comments" id="reader-comments" aria-label="评论区"></section>
           </div>
         </section>
       </main>
@@ -169,8 +166,8 @@
       id="selection-comment-trigger"
       type="button"
       hidden
-      aria-label="添加评论或反馈问题"
-      title="添加评论或反馈问题"
+      aria-label="标记翻译问题"
+      title="标记翻译问题"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path
@@ -194,7 +191,7 @@
           id="selection-feedback-link"
           type="button"
         >
-          添加评论或反馈问题
+          标记翻译问题
         </button>
         <button class="selection-feedback-dismiss" id="selection-feedback-dismiss" type="button">
           清除选择
@@ -203,9 +200,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/twikoo@1.7.4/dist/twikoo.min.js"></script>
     <script type="module" src="./global-script-toggle.js?v=2"></script>
-    <script type="module" src="./account.js?v=3"></script>
-    <script type="module" src="./reader.js?v=9"></script>
+    <script type="module" src="./account.js?v=4"></script>
+    <script type="module" src="./reader.js?v=10"></script>
   </body>
 </html>

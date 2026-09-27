@@ -12,7 +12,7 @@ import {
   loadWorksIndex,
   renderMarkdown,
 } from "./site-data.js";
-import { mountResumeBanner } from "./reading-progress.js?v=7";
+import { mountResumeBanner } from "./reading-progress.js?v=8";
 
 mountResumeBanner();
 
