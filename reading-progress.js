@@ -1,4 +1,5 @@
 import { escapeHtml, getReaderUrl } from "./site-data.js";
+import { getLibrary, getRemoteProgress, isLoggedIn, queueProgressSync, workIdFromSlug } from "./account-api.js?v=1";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
@@ -43,6 +44,29 @@ export function saveReadingProgress(progress) {
     savedAt: Number(progress.savedAt) || Date.now(),
   };
   storageSet(localStorage, READING_PROGRESS_KEY, JSON.stringify(payload));
+  queueProgressSync(payload);
+}
+
+// 打开某一卷时要恢复的位置：本机与云端（已收藏经文）中较新的那条，且必须是同一卷
+export function pickRestoreProgress(slug) {
+  const candidates = [readReadingProgress(), getRemoteProgress(workIdFromSlug(slug))];
+  return newestProgress(candidates.filter((p) => p?.slug === slug));
+}
+
+// "继续阅读"提示用：本机与所有收藏经文中最近读的一条
+export function latestProgress() {
+  const candidates = [readReadingProgress()];
+  if (isLoggedIn()) getLibrary().forEach((item) => candidates.push(item.progress));
+  return newestProgress(candidates);
+}
+
+function newestProgress(list) {
+  let best = null;
+  for (const p of list) {
+    if (!p?.slug || !Number.isInteger(p.blockIndex)) continue;
+    if (!best || (Number(p.savedAt) || 0) > (Number(best.savedAt) || 0)) best = p;
+  }
+  return best;
 }
 
 export function formatResumeLabel(progress) {
@@ -250,7 +274,7 @@ export function mountResumeBanner(options = {}) {
   const existing = document.querySelector(".reading-resume-banner");
   if (existing) existing.remove();
 
-  const progress = readReadingProgress();
+  const progress = latestProgress();
   if (!progress) return null;
   if (isBannerDismissed()) return null;
   if (currentSlug && currentSlug === progress.slug) return null;

@@ -15,10 +15,21 @@ import {
   assignReadingAnchors,
   mountResumeBanner,
   readHashBlockIndex,
+  pickRestoreProgress,
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=4";
+} from "./reading-progress.js?v=5";
+import {
+  addFavorite,
+  isFavorite,
+  isLoggedIn,
+  onAccountChange,
+  refreshLibraryWithTimeout,
+  removeFavorite,
+  workIdFromSlug,
+} from "./account-api.js?v=1";
+import { openAccountDialog } from "./account.js?v=1";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 
 const dom = {
@@ -50,6 +61,9 @@ let worksIndex = null;
 let stopReadingProgress = null;
 const documentCache = new Map();
 let bootHashIndex = readHashBlockIndex();
+let libraryReady = null;
+let favoriteButton = null;
+let favoriteBusy = false;
 const SELECTION_FEEDBACK_OFFSET = 14;
 const READING_MODE_COOKIE = "sutra_reader_mode";
 const READING_MODE_DEFAULT = "parallel";
@@ -89,6 +103,9 @@ async function init() {
   applyFontSize(fontSize);
   bindSelectionFeedback();
   bindSentenceSync(dom.rendered, () => readingMode === READING_MODE_DEFAULT);
+  bindFavoriteButton();
+  // 登录用户先拉取云端进度（最多等 2 秒），与经文加载并行
+  libraryReady = refreshLibraryWithTimeout();
 
   // Load works index for volume navigation
   worksIndex = await loadWorksIndex();
@@ -138,6 +155,9 @@ async function selectCurrent() {
   applyReadingMode(readingMode);
   applyFontSize(fontSize);
   initComments(selected.slug);
+  renderFavoriteButton();
+  await libraryReady;
+  if (loadId !== currentLoadId) return;
   restoreAndTrackReadingProgress(selected, hashIndex);
   mountResumeBanner({ currentSlug: selected.slug });
 }
@@ -289,11 +309,11 @@ function getCurrentSlug() {
 
 function restoreAndTrackReadingProgress(doc, hashIndex) {
   assignReadingAnchors(dom.rendered);
-  const saved = readReadingProgress();
+  const saved = pickRestoreProgress(doc.slug);
   let restoreIndex = null;
   let restorePreview = "";
   if (hashIndex != null) restoreIndex = hashIndex;
-  else if (saved?.slug === doc.slug) {
+  else if (saved) {
     restoreIndex = saved.blockIndex;
     restorePreview = saved.textPreview || "";
   }
@@ -309,6 +329,69 @@ function restoreAndTrackReadingProgress(doc, hashIndex) {
     }),
     { restoreIndex, restorePreview },
   );
+}
+
+// ── 收藏 ───────────────────────────────────────────────────
+
+function bindFavoriteButton() {
+  const actions = document.querySelector(".reader-actions");
+  if (!actions) return;
+  favoriteButton = document.createElement("button");
+  favoriteButton.type = "button";
+  favoriteButton.className = "reader-favorite-button";
+  favoriteButton.hidden = true;
+  actions.prepend(favoriteButton);
+  favoriteButton.addEventListener("click", () => toggleFavorite());
+  onAccountChange(renderFavoriteButton);
+}
+
+function currentWork() {
+  if (!currentDocument) return null;
+  const workId = workIdFromSlug(currentDocument.slug);
+  const work = worksIndex ? getWorkBySlug(worksIndex, currentDocument.slug) : null;
+  return { workId, title: workTitleForProgress(currentDocument, work) };
+}
+
+function renderFavoriteButton() {
+  if (!favoriteButton) return;
+  const work = currentWork();
+  favoriteButton.hidden = !work;
+  if (!work) return;
+  const active = isLoggedIn() && isFavorite(work.workId);
+  favoriteButton.classList.toggle("is-active", active);
+  favoriteButton.setAttribute("aria-pressed", String(active));
+  favoriteButton.disabled = favoriteBusy;
+  favoriteButton.textContent = active ? "★ 已收藏" : "☆ 收藏本经";
+  favoriteButton.title = active ? "取消收藏" : "收藏后，阅读进度会在多台设备间同步";
+}
+
+async function toggleFavorite() {
+  const work = currentWork();
+  if (!work || favoriteBusy) return;
+  if (!isLoggedIn()) {
+    openAccountDialog({
+      reason: "登录后即可收藏经文，并在多台设备间同步阅读进度。",
+      onSuccess: () => {
+        if (!isFavorite(work.workId)) toggleFavorite();
+      },
+    });
+    return;
+  }
+  favoriteBusy = true;
+  renderFavoriteButton();
+  try {
+    if (isFavorite(work.workId)) {
+      await removeFavorite(work.workId);
+    } else {
+      const local = readReadingProgress();
+      await addFavorite(work.workId, work.title, local?.slug && workIdFromSlug(local.slug) === work.workId ? local : null);
+    }
+  } catch (error) {
+    alert(error.message || "操作失败，请稍后再试");
+  } finally {
+    favoriteBusy = false;
+    renderFavoriteButton();
+  }
 }
 
 function stopReadingProgressTracker() {
