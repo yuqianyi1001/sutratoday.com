@@ -182,7 +182,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=5");
+  const { readReadingProgress } = await import("./reading-progress.js?v=6");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
@@ -197,6 +197,24 @@ function toApiProgress(p) {
     volumeLabel: p.volumeLabel || "",
     savedAt: p.savedAt || Date.now(),
   };
+}
+
+// ── 建议重翻 / 打卡 ─────────────────────────────────────────
+
+// 登录可选；登录时会记下是谁提的建议
+export function suggestRetranslate({ slug, sid, title, volumeLabel, original, translation }) {
+  return request("POST", "/retranslate", { slug, sid, title, volumeLabel, original, translation }, isLoggedIn());
+}
+
+// slug 为空表示整部经
+export function getCheckins(workId, slug = "") {
+  const query = new URLSearchParams({ workId });
+  if (slug) query.set("slug", slug);
+  return request("GET", `/checkins?${query}`, undefined, isLoggedIn());
+}
+
+export function checkin({ workId, slug = "", title = "", volumeLabel = "" }) {
+  return request("POST", "/checkins", { workId, slug, title, volumeLabel });
 }
 
 // ── 工具 ────────────────────────────────────────────────────

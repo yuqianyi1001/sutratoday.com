@@ -1756,3 +1756,147 @@ code {
     width: auto;
   }
 }
+
+/* ── 建议重翻 ─────────────────────────────────────────────── */
+
+.retranslate-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  vertical-align: -0.3em;
+  opacity: 0.45;
+  cursor: pointer;
+  transition: opacity 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+
+.retranslate-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.retranslate-button:hover,
+.retranslate-button:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.retranslate-button[data-state="sending"] {
+  cursor: progress;
+}
+
+.retranslate-button[data-state="sent"] {
+  opacity: 0.8;
+  color: var(--green);
+  cursor: default;
+}
+
+.retranslate-button[data-state="sent"]:hover {
+  background: transparent;
+}
+
+.reader-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: 80;
+  max-width: calc(100vw - 32px);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(36, 29, 24, 0.88);
+  color: #fbf7f1;
+  font-size: 0.92rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.reader-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ── 打卡 ─────────────────────────────────────────────────── */
+
+.reader-checkin {
+  display: grid;
+  gap: 14px;
+  margin: 28px 0 8px;
+}
+
+.reader-checkin[hidden] {
+  display: none;
+}
+
+.reader-checkin-card {
+  padding: 18px 20px;
+  border: 1px solid rgba(143, 83, 49, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(255, 248, 240, 0.82);
+}
+
+.reader-checkin-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.reader-checkin-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.reader-checkin-count,
+.reader-checkin-more,
+.reader-checkin-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.reader-checkin-button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.reader-checkin-button:disabled {
+  box-shadow: none;
+  color: var(--green);
+  cursor: default;
+}
+
+.reader-checkin-list {
+  display: grid;
+  gap: 2px;
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.reader-checkin-list strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.reader-checkin-empty {
+  margin-top: 12px;
+}
+
+.reader-checkin-more {
+  margin-top: 8px;
+}

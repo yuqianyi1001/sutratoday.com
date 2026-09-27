@@ -19,17 +19,21 @@ import {
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=5";
+} from "./reading-progress.js?v=6";
 import {
   addFavorite,
+  checkin,
+  getCheckins,
+  getUser,
   isFavorite,
   isLoggedIn,
   onAccountChange,
   refreshLibraryWithTimeout,
   removeFavorite,
+  suggestRetranslate,
   workIdFromSlug,
-} from "./account-api.js?v=1";
-import { openAccountDialog } from "./account.js?v=1";
+} from "./account-api.js?v=2";
+import { openAccountDialog } from "./account.js?v=2";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 
 const dom = {
@@ -49,6 +53,7 @@ const dom = {
   selectionFeedbackLink: document.getElementById("selection-feedback-link"),
   selectionFeedbackQuote: document.getElementById("selection-feedback-quote"),
   summary: document.getElementById("reader-summary"),
+  checkin: document.getElementById("reader-checkin"),
 };
 
 let currentDocument = null;
@@ -104,6 +109,10 @@ async function init() {
   bindSelectionFeedback();
   bindSentenceSync(dom.rendered, () => readingMode === READING_MODE_DEFAULT);
   bindFavoriteButton();
+  bindRetranslateButtons();
+  onAccountChange(() => {
+    if (currentDocument) renderCheckins(currentDocument);
+  });
   // 登录用户先拉取云端进度（最多等 2 秒），与经文加载并行
   libraryReady = refreshLibraryWithTimeout();
 
@@ -142,7 +151,9 @@ async function selectCurrent() {
   dom.summary.textContent = selected.summary || "";
   dom.rendered.innerHTML = renderMarkdown(selected.body);
   setupSentenceSync(dom.rendered);
+  mountRetranslateButtons(selected);
   renderVolumeNavigation(selected);
+  renderCheckins(selected);
   updateSeo(selected);
   dom.statusbar.innerHTML = `
     <span class="badge ${translationBadge.className}">${translationBadge.label}</span>
@@ -392,6 +403,247 @@ async function toggleFavorite() {
     favoriteBusy = false;
     renderFavoriteButton();
   }
+}
+
+// ── 建议重翻 ───────────────────────────────────────────────
+
+const RETRANSLATE_SENT_KEY = "sutra_retranslate_sent";
+const RETRANSLATE_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4.5 12a7.5 7.5 0 0 1 12.8-5.3M19.5 12a7.5 7.5 0 0 1-12.8 5.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.8 3.5v3.7h-3.7M6.2 20.5v-3.7h3.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const RETRANSLATE_SENT_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// 从 markdown 源文按 sid 取出原文与译文，保证提交的是源文件里的文字（不受繁简切换影响）
+function extractParagraphSources(body) {
+  const sections = new Map();
+  let tone = null;
+  let sid = "";
+  for (const line of String(body || "").replace(/\r\n/g, "\n").split("\n")) {
+    const heading = line.match(/^(#{1,4})\s+(.*)$/);
+    if (heading) {
+      const text = heading[2].trim();
+      tone =
+        heading[1].length >= 3 && text === "原文"
+          ? "original"
+          : heading[1].length >= 3 && (text === "现代语译" || text === "現代語譯")
+            ? "translation"
+            : null;
+      sid = "";
+      continue;
+    }
+    const sidMatch = line.trim().match(/^<!--\s*sid:\s*([\w.-]+)\s*-->$/);
+    if (sidMatch) {
+      sid = sidMatch[1];
+      continue;
+    }
+    if (!tone || !sid) continue;
+    if (!sections.has(sid)) sections.set(sid, { original: [], translation: [] });
+    sections.get(sid)[tone].push(line);
+  }
+  const result = new Map();
+  sections.forEach((value, key) => {
+    const original = value.original.join("\n").trim();
+    const translation = value.translation.join("\n").trim();
+    if (original && translation) result.set(key, { original, translation });
+  });
+  return result;
+}
+
+function readSentRetranslations() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(RETRANSLATE_SENT_KEY) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function rememberSentRetranslation(key) {
+  const sent = readSentRetranslations();
+  sent.add(key);
+  try {
+    localStorage.setItem(RETRANSLATE_SENT_KEY, JSON.stringify([...sent].slice(-500)));
+  } catch {
+    // ignore
+  }
+}
+
+function mountRetranslateButtons(doc) {
+  const sources = extractParagraphSources(doc.body);
+  const sent = readSentRetranslations();
+  const lastBySid = new Map();
+  dom.rendered.querySelectorAll(".sutra-translation[data-sid]").forEach((el) => lastBySid.set(el.dataset.sid, el));
+
+  lastBySid.forEach((el, sid) => {
+    if (!sources.has(sid)) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "retranslate-button";
+    button.dataset.sid = sid;
+    setRetranslateState(button, sent.has(`${doc.slug}#${sid}`) ? "sent" : "idle");
+    // 段落、引文内直接跟在文字后面；列表等其他块放在其后
+    if (el.tagName === "P" || el.tagName === "BLOCKQUOTE") el.append(" ", button);
+    else el.insertAdjacentElement("afterend", button);
+  });
+}
+
+function setRetranslateState(button, state) {
+  button.dataset.state = state;
+  button.disabled = state !== "idle";
+  const label = state === "sent" ? "已提交重翻建议" : state === "sending" ? "正在提交…" : "建议重翻这段译文";
+  button.setAttribute("aria-label", label);
+  button.title = label;
+  button.innerHTML = state === "sent" ? RETRANSLATE_SENT_ICON : RETRANSLATE_ICON;
+}
+
+function bindRetranslateButtons() {
+  dom.rendered.addEventListener("click", async (event) => {
+    const button = event.target.closest(".retranslate-button");
+    if (!button || !currentDocument) return;
+    // 不触发原文/译文对照高亮
+    event.stopPropagation();
+    if (button.dataset.state !== "idle") return;
+
+    const doc = currentDocument;
+    const sid = button.dataset.sid;
+    const source = extractParagraphSources(doc.body).get(sid);
+    if (!source) return;
+    const work = currentWork();
+    setRetranslateState(button, "sending");
+    try {
+      await suggestRetranslate({
+        slug: doc.slug,
+        sid,
+        title: work?.title || doc.title || "",
+        volumeLabel: doc.volume_label || "",
+        original: source.original,
+        translation: source.translation,
+      });
+      rememberSentRetranslation(`${doc.slug}#${sid}`);
+      setRetranslateState(button, "sent");
+      showToast("已提交重翻建议，谢谢！");
+    } catch (error) {
+      setRetranslateState(button, "idle");
+      showToast(error.message || "提交失败，请稍后再试");
+    }
+  });
+}
+
+let toastTimer = 0;
+function showToast(message) {
+  let toast = document.querySelector(".reader-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "reader-toast";
+    toast.setAttribute("role", "status");
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 2400);
+}
+
+// ── 打卡 ───────────────────────────────────────────────────
+
+let checkinRenderId = 0;
+
+// 多卷经：每卷卷末可打卡，最后一卷另有"全经"打卡；单卷经只有"全经"打卡
+function getCheckinTargets(doc) {
+  const work = worksIndex ? getWorkBySlug(worksIndex, doc.slug) : null;
+  const workId = workIdFromSlug(doc.slug);
+  const title = workTitleForProgress(doc, work);
+  const volumes = Array.isArray(work?.volumes) ? work.volumes : [];
+  const volumeLabel = doc.volume_label || "";
+  if (volumes.length <= 1) {
+    return [{ workId, slug: "", title, volumeLabel: "", heading: "读毕本经", action: "读毕打卡" }];
+  }
+  const targets = [
+    {
+      workId,
+      slug: doc.slug,
+      title,
+      volumeLabel,
+      heading: `读毕本卷${volumeLabel ? `（${volumeLabel}）` : ""}`,
+      action: "本卷打卡",
+    },
+  ];
+  const lastVolume = volumes[volumes.length - 1];
+  if ((Array.isArray(lastVolume) ? lastVolume[0] : lastVolume) === doc.slug) {
+    targets.push({ workId, slug: "", title, volumeLabel: "", heading: `读毕全经《${title}》`, action: "全经打卡" });
+  }
+  return targets;
+}
+
+async function renderCheckins(doc) {
+  if (!dom.checkin) return;
+  const renderId = ++checkinRenderId;
+  const targets = getCheckinTargets(doc);
+  dom.checkin.hidden = false;
+  dom.checkin.innerHTML = targets.map((t, i) => checkinCardMarkup(t, i, null)).join("");
+
+  const summaries = await Promise.all(targets.map((t) => getCheckins(t.workId, t.slug).catch(() => null)));
+  if (renderId !== checkinRenderId) return;
+  dom.checkin.innerHTML = targets.map((t, i) => checkinCardMarkup(t, i, summaries[i])).join("");
+  dom.checkin.querySelectorAll("[data-checkin-index]").forEach((button) => {
+    button.addEventListener("click", () => onCheckinClick(doc, targets[Number(button.dataset.checkinIndex)], button));
+  });
+}
+
+function checkinCardMarkup(target, index, summary) {
+  const done = Boolean(summary?.mine?.checkedInToday);
+  const loggedIn = isLoggedIn();
+  const buttonLabel = done ? "今日已打卡" : loggedIn ? target.action : "登录后打卡";
+  const records = summary?.recent?.length
+    ? `<ul class="reader-checkin-list">${summary.recent
+        .map(
+          (r) =>
+            `<li><strong>${escapeHtml(r.username)}</strong> 于 ${escapeHtml(formatCheckinDate(r.createdAt))} 已阅读</li>`,
+        )
+        .join("")}</ul>`
+    : summary
+      ? `<p class="reader-checkin-empty">还没有人打卡，来做第一个吧。</p>`
+      : `<p class="reader-checkin-empty">正在加载打卡记录…</p>`;
+  const more =
+    summary && summary.total > summary.recent.length
+      ? `<p class="reader-checkin-more">共 ${summary.total} 次打卡，显示最近 ${summary.recent.length} 条</p>`
+      : "";
+  return `
+    <div class="reader-checkin-card">
+      <div class="reader-checkin-head">
+        <div>
+          <p class="reader-checkin-title">${escapeHtml(target.heading)}</p>
+          ${summary ? `<p class="reader-checkin-count">已有 ${summary.total} 次打卡</p>` : ""}
+        </div>
+        <button class="primary-link reader-checkin-button" type="button" data-checkin-index="${index}" ${done ? "disabled" : ""}>
+          ${escapeHtml(buttonLabel)}
+        </button>
+      </div>
+      ${records}
+      ${more}
+    </div>
+  `;
+}
+
+async function onCheckinClick(doc, target, button) {
+  if (!isLoggedIn()) {
+    openAccountDialog({
+      reason: "登录后即可打卡，打卡记录会显示在经文末尾。",
+      onSuccess: () => onCheckinClick(doc, target, button),
+    });
+    return;
+  }
+  button.disabled = true;
+  try {
+    await checkin(target);
+    showToast(`${getUser()?.username || ""} 打卡成功，随喜功德！`);
+  } catch (error) {
+    showToast(error.message || "打卡失败，请稍后再试");
+  }
+  if (currentDocument === doc) renderCheckins(doc);
+}
+
+function formatCheckinDate(ms) {
+  const d = new Date(ms);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
 function stopReadingProgressTracker() {
