@@ -23,7 +23,8 @@ let emitTimer = 0;
 if (typeof window !== "undefined") {
   window.addEventListener("pagehide", () => flushProgress(true));
   // 切到别的窗口（浏览器仍可见时不会触发 visibilitychange）
-  window.addEventListener("blur", () => flushProgress(true));
+  // 页面仍在，不需要 keepalive；这样可以先拉取云端进度再发送
+  window.addEventListener("blur", () => flushProgress());
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") flushProgress(true);
     // 回到页面时拉取其他设备的最新进度
@@ -138,9 +139,16 @@ export function refreshLibraryWithTimeout(ms = REFRESH_TIMEOUT_MS) {
   return Promise.race([refreshLibrary(), new Promise((resolve) => setTimeout(() => resolve(library), ms))]);
 }
 
-// 服务器数据可能落后于本机（进度尚未发出，或正在发送），同一部经保留较新的进度
+// 服务器数据可能落后于本机（进度尚未发出，或正在发送），同一部经保留较新的进度。
+// 例外：本机待发送的进度比云端位置靠前、且未经读者确认时，丢弃本机进度，以云端为准，
+// 避免进度慢的设备覆盖其他设备读到的更后面的位置。
 function mergeLibrary(remote) {
   return remote.map((item) => {
+    const pending = pendingProgress.get(item.workId);
+    if (pending && !pending.confirmed && item.progress?.slug && comparePosition(pending.progress, item.progress) < 0) {
+      pendingProgress.delete(item.workId);
+      return item;
+    }
     const local = getFavorite(item.workId)?.progress;
     return isNewer(local, item.progress) ? { ...item, progress: local } : item;
   });
@@ -168,17 +176,30 @@ export async function removeFavorite(workId) {
 
 // ── 阅读进度 ────────────────────────────────────────────────
 
-// 由 reading-progress.js 在每次本地保存后调用；只同步已收藏的经文
-export function queueProgressSync(progress) {
+// 比较同一部经内两个阅读位置的先后：先比卷号（slug 末尾的数字），再比段落序号。
+// 返回负数表示 a 在 b 之前。
+export function comparePosition(a, b) {
+  const volume = (p) => Number(String(p?.slug || "").match(/-(\d+)$/)?.[1] || 0);
+  const diff = volume(a) - volume(b);
+  if (diff) return diff;
+  return (Number(a?.blockIndex) || 0) - (Number(b?.blockIndex) || 0);
+}
+
+// 由 reading-progress.js 在每次本地保存后调用；只同步已收藏的经文。
+// confirmed：读者已确认用较前的位置覆盖较后的进度；未确认时，较前的位置不会覆盖云端进度。
+export function queueProgressSync(progress, { confirmed = false } = {}) {
   if (!isLoggedIn() || !progress?.slug) return;
   const workId = workIdFromSlug(progress.slug);
   const fav = getFavorite(workId);
   if (!fav) return;
+  if (!confirmed && fav.progress?.slug && comparePosition(progress, fav.progress) < 0) return;
 
   const next = toApiProgress(progress);
   fav.progress = { workId, ...next };
   writeJson(LIBRARY_KEY, library);
-  pendingProgress.set(workId, next);
+  pendingProgress.set(workId, { progress: next, confirmed });
+  // 较长时间没拉取云端时，先拉一次，以便发现其他设备读到的更后面的位置
+  if (Date.now() - lastRefreshAt > SYNC_INTERVAL_MS) refreshLibrary();
   // 节流而不是防抖：一直在读也会按时同步，期间的多次更新合并成一次请求
   if (!syncTimer) syncTimer = setTimeout(() => flushProgress(), SYNC_INTERVAL_MS);
   emitSoon();
@@ -193,24 +214,42 @@ export async function flushProgress(keepalive = false) {
   clearTimeout(syncTimer);
   syncTimer = 0;
   if (!isLoggedIn() || !pendingProgress.size) return;
+  // 页面还在时，发送前确认云端没有更后面的位置（mergeLibrary 会丢弃未确认的较前进度）
+  if (!keepalive && Date.now() - lastRefreshAt > SYNC_INTERVAL_MS) {
+    await refreshLibrary();
+    if (!isLoggedIn() || !pendingProgress.size) return;
+  }
   const entries = [...pendingProgress.entries()];
   pendingProgress = new Map();
   await Promise.all(
-    entries.map(([workId, progress]) =>
-      request("PUT", `/progress/${encodeURIComponent(workId)}`, progress, true, keepalive)
+    entries.map(([workId, entry]) =>
+      request(
+        "PUT",
+        `/progress/${encodeURIComponent(workId)}`,
+        entry.confirmed ? { ...entry.progress, confirmed: true } : entry.progress,
+        true,
+        keepalive,
+      )
         .then((data) => {
-          // 服务器返回最终保存的进度；若其他设备有更新的进度，以服务器为准
+          // 服务器返回最终保存的进度。未写入（accepted: false）说明云端有更后面的位置，
+          // 以服务器为准；阅读页会据此提示"其他设备上有新的阅读位置"
           const fav = getFavorite(workId);
-          if (fav && data.progress && isNewer(data.progress, fav.progress)) {
-            fav.progress = data.progress;
-            writeJson(LIBRARY_KEY, library);
-            emitSoon();
+          if (!fav || !data.progress) return;
+          if (data.accepted === false) {
+            const queued = pendingProgress.get(workId);
+            if (queued && !queued.confirmed && comparePosition(queued.progress, data.progress) < 0) pendingProgress.delete(workId);
+            if (pendingProgress.has(workId)) return;
+          } else if (!isNewer(data.progress, fav.progress)) {
+            return;
           }
+          fav.progress = data.progress;
+          writeJson(LIBRARY_KEY, library);
+          emitSoon();
         })
         .catch((error) => {
           // 网络失败时放回队列，下次再试；未收藏（409）等错误直接丢弃
           if (error.status === 0 && !pendingProgress.has(workId)) {
-            pendingProgress.set(workId, progress);
+            pendingProgress.set(workId, entry);
             if (!syncTimer) syncTimer = setTimeout(() => flushProgress(), SYNC_INTERVAL_MS);
           }
         }),
@@ -220,7 +259,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=10");
+  const { readReadingProgress } = await import("./reading-progress.js?v=12");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
