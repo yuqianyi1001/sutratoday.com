@@ -1,7 +1,7 @@
 // 阅读页评论区（取代 Twikoo）。浏览公开；发表、标记翻译问题需登录。
 import { escapeHtml } from "./site-data.js";
-import { deleteComment, getComments, getUser, isLoggedIn, onAccountChange, postComment } from "./account-api.js?v=6";
-import { openAccountDialog } from "./account.js?v=6";
+import { deleteComment, getComments, getUser, isLoggedIn, onAccountChange, postComment } from "./account-api.js?v=7";
+import { openAccountDialog } from "./account.js?v=7";
 
 const STATUS_LABELS = { in_progress: "处理中", resolved: "已解决", closed: "已关闭" };
 

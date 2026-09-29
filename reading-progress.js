@@ -1,7 +1,18 @@
 import { escapeHtml, getReaderUrl } from "./site-data.js";
-import { getLibrary, getRemoteProgress, isLoggedIn, onAccountChange, queueProgressSync, workIdFromSlug } from "./account-api.js?v=6";
+import {
+  comparePosition,
+  getLibrary,
+  getRemoteProgress,
+  isLoggedIn,
+  onAccountChange,
+  queueProgressSync,
+  workIdFromSlug,
+} from "./account-api.js?v=7";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
+// 本机在每部经上读到的位置（按 workId），用来判断新位置是否比已保存的进度靠前
+const WORK_POSITIONS_KEY = "sutra_work_reading_positions";
+const WORK_POSITIONS_LIMIT = 200;
 const BANNER_DISMISS_KEY = "sutra_resume_banner_dismissed";
 const READING_BLOCK_SELECTOR = "h1, h2, h3, h4, p, blockquote, pre";
 const SKIP_HEADING_CLASS = new Set(["sutra-original-heading", "sutra-translation-heading"]);
@@ -30,7 +41,8 @@ export function readReadingProgress() {
   }
 }
 
-export function saveReadingProgress(progress) {
+// confirmed：读者已确认用较前的位置覆盖较后的进度
+export function saveReadingProgress(progress, { confirmed = false } = {}) {
   if (!progress?.slug) return;
   const blockIndex = Number(progress.blockIndex);
   if (!Number.isInteger(blockIndex) || blockIndex < 0) return;
@@ -44,13 +56,61 @@ export function saveReadingProgress(progress) {
     savedAt: Number(progress.savedAt) || Date.now(),
   };
   storageSet(localStorage, READING_PROGRESS_KEY, JSON.stringify(payload));
-  queueProgressSync(payload);
+  saveWorkPosition(payload);
+  queueProgressSync(payload, { confirmed });
 }
 
-// 打开某一卷时要恢复的位置：本机与云端（已收藏经文）中较新的那条，且必须是同一卷
-export function pickRestoreProgress(slug) {
-  const candidates = [readReadingProgress(), getRemoteProgress(workIdFromSlug(slug))];
-  return newestProgress(candidates.filter((p) => p?.slug === slug));
+// 本机在这部经上读到的位置
+export function readWorkPosition(workId) {
+  const map = readWorkPositions();
+  const saved = map[workId];
+  if (saved?.slug && Number.isInteger(saved.blockIndex)) return saved;
+  // 兼容旧数据：只存过"最后一次阅读位置"
+  const last = readReadingProgress();
+  return last && workIdFromSlug(last.slug) === workId ? last : null;
+}
+
+// 这部经已保存的进度：已收藏经文以云端为准（含本机尚未发出的进度），否则用本机位置
+export function savedProgressForWork(workId) {
+  return getRemoteProgress(workId) || readWorkPosition(workId);
+}
+
+// 打开某一卷时的恢复计划：
+// - restore：本卷要恢复到的位置，优先用本机自己的位置，其次用云端进度
+// - incoming：其他设备上的进度与本机不同，需要提示读者是否跳过去
+export function planRestore(slug) {
+  const workId = workIdFromSlug(slug);
+  const own = readWorkPosition(workId);
+  const remote = getRemoteProgress(workId);
+  const restore = [own, remote].find((p) => p?.slug === slug) || null;
+  const incoming = remote?.slug && !samePosition(remote, own) ? remote : null;
+  return { restore, incoming };
+}
+
+function samePosition(a, b) {
+  return Boolean(a?.slug && b?.slug) && a.slug === b.slug && Number(a.blockIndex) === Number(b.blockIndex);
+}
+
+function readWorkPositions() {
+  try {
+    const parsed = JSON.parse(storageGet(localStorage, WORK_POSITIONS_KEY) || "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveWorkPosition(payload) {
+  const map = readWorkPositions();
+  map[workIdFromSlug(payload.slug)] = payload;
+  const keys = Object.keys(map);
+  if (keys.length > WORK_POSITIONS_LIMIT) {
+    keys
+      .sort((a, b) => (Number(map[a]?.savedAt) || 0) - (Number(map[b]?.savedAt) || 0))
+      .slice(0, keys.length - WORK_POSITIONS_LIMIT)
+      .forEach((key) => delete map[key]);
+  }
+  storageSet(localStorage, WORK_POSITIONS_KEY, JSON.stringify(map));
 }
 
 // "继续阅读"提示用：本机与所有收藏经文中最近读的一条
@@ -138,9 +198,68 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
   let baselineY = getScrollY();
   let initialBlockIndex = null;
   let lastSavedKey = "";
+  // 上次检查过的位置：位置没变时不重复检查
+  let lastCheckedKey = "";
+  // 本页保存过的位置，用来区分云端进度是本机发出的还是其他设备的
+  const ownKeys = new Set();
   const restoreTimers = [];
   const restoreIndex = Number.isInteger(options.restoreIndex) ? options.restoreIndex : null;
   const restorePreview = String(options.restorePreview || "");
+  const currentWorkId = () => workIdFromSlug(getMeta?.()?.slug);
+  let seenRemoteKey = progressKey(getRemoteProgress(currentWorkId()));
+
+  const blockProgress = (block) => {
+    const meta = getMeta?.() || {};
+    return {
+      slug: meta.slug,
+      title: meta.title,
+      volumeLabel: meta.volumeLabel,
+      blockIndex: Number(block.dataset.readingBlock),
+      textPreview: normalizePreview(block.textContent),
+    };
+  };
+
+  // 保存某一段为阅读进度。比已保存的进度靠前时不保存（除非读者已确认），改为提示读者
+  const saveBlock = (block, { confirmed = false, promptIfBehind = true } = {}) => {
+    const next = blockProgress(block);
+    if (!next.slug) return;
+    const key = progressKey(next);
+    if (!confirmed) {
+      const saved = savedProgressForWork(workIdFromSlug(next.slug));
+      if (saved?.slug && comparePosition(next, saved) < 0) {
+        if (promptIfBehind) prompt.show("behind", saved);
+        return;
+      }
+      prompt.reached(next);
+      // 位置没变就不重新保存：否则闲置的标签页切到后台时，会用"现在"的时间覆盖别处更新的进度
+      if (key === lastSavedKey) return;
+    }
+    if (confirmed) prompt.hide();
+    lastSavedKey = key;
+    ownKeys.add(key);
+    saveReadingProgress(next, { confirmed });
+  };
+
+  const prompt = createSyncPrompt({
+    onJump: (target) => {
+      const meta = getMeta?.() || {};
+      if (target.slug !== meta.slug) {
+        location.href = getResumeUrl(target.slug, target.blockIndex);
+        return;
+      }
+      cancelRestoreLock();
+      restoreReadingPosition(container, target.blockIndex, target.textPreview);
+      lastCheckedKey = "";
+      baselineY = getScrollY();
+    },
+    onConfirm: () => {
+      const block = getActiveReadingBlock(container);
+      if (!block) return;
+      armed = true;
+      saveBlock(block, { confirmed: true });
+      lastCheckedKey = progressKey(blockProgress(block));
+    },
+  });
 
   const persist = () => {
     if (stopped || restoring) return;
@@ -153,18 +272,10 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
       if (!moved && !blockChanged) return;
       armed = true;
     }
-    const meta = getMeta?.() || {};
-    // 位置没变就不重新保存：否则闲置的标签页切到后台时，会用"现在"的时间覆盖别处更新的进度
-    const key = `${meta.slug}#${blockIndex}`;
-    if (key === lastSavedKey) return;
-    lastSavedKey = key;
-    saveReadingProgress({
-      slug: meta.slug,
-      title: meta.title,
-      volumeLabel: meta.volumeLabel,
-      blockIndex,
-      textPreview: normalizePreview(block.textContent),
-    });
+    const key = `${getMeta?.()?.slug}#${blockIndex}`;
+    if (key === lastCheckedKey) return;
+    lastCheckedKey = key;
+    saveBlock(block);
   };
 
   const onScroll = () => {
@@ -191,20 +302,23 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
     baselineY = getScrollY();
     const target = findRestoreTarget(container, restoreIndex, restorePreview);
     initialBlockIndex = Number(target?.dataset.readingBlock);
-    if (ok && target) {
-      const meta = getMeta?.() || {};
-      const key = `${meta.slug}#${Number(target.dataset.readingBlock)}`;
-      if (meta.slug && key !== lastSavedKey) {
-        lastSavedKey = key;
-        saveReadingProgress({
-          slug: meta.slug,
-          title: meta.title,
-          volumeLabel: meta.volumeLabel,
-          blockIndex: Number(target.dataset.readingBlock),
-          textPreview: normalizePreview(target.textContent),
-        });
-      }
-    }
+    // 恢复的位置若比已保存的进度靠前，不保存；由"其他设备上有新的阅读位置"提示读者
+    if (ok && target) saveBlock(target, { promptIfBehind: false });
+  };
+
+  // 云端进度有变化（其他设备读到了新位置）时提示读者
+  const onRemoteChange = () => {
+    if (stopped) return;
+    const remote = getRemoteProgress(currentWorkId());
+    const key = progressKey(remote);
+    if (key === seenRemoteKey) return;
+    seenRemoteKey = key;
+    lastCheckedKey = "";
+    if (!key || ownKeys.has(key)) return;
+    const block = getActiveReadingBlock(container);
+    const current = block ? blockProgress(block) : null;
+    if (current && progressKey(current) === key) return;
+    prompt.show("incoming", remote, { ahead: !current || comparePosition(remote, current) > 0 });
   };
 
   const onKey = (event) => {
@@ -231,6 +345,7 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
     },
     { signal },
   );
+  const stopAccountWatch = onAccountChange(onRemoteChange);
 
   let observer = null;
   if (typeof IntersectionObserver === "function") {
@@ -266,13 +381,106 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
     });
   }
 
+  // 本机恢复到的位置与其他设备的进度不同：提示是否跳到新位置
+  const incoming = options.incoming;
+  if (incoming?.slug) {
+    const meta = getMeta?.() || {};
+    const here = { slug: meta.slug, blockIndex: restoreIndex ?? 0 };
+    const restoredHere = incoming.slug === meta.slug && incoming.blockIndex === restoreIndex;
+    if (!restoredHere) prompt.show("incoming", incoming, { ahead: comparePosition(incoming, here) > 0 });
+  }
+
   return () => {
     restoring = false;
     restoreTimers.splice(0).forEach((id) => clearTimeout(id));
     persist();
     stopped = true;
+    stopAccountWatch();
+    prompt.destroy();
     observer?.disconnect();
     abort.abort();
+  };
+}
+
+function progressKey(p) {
+  return p?.slug && Number.isInteger(Number(p.blockIndex)) ? `${p.slug}#${Number(p.blockIndex)}` : "";
+}
+
+function describePosition(p) {
+  const volume = String(p?.volumeLabel || "").trim();
+  const showVolume = volume && !["全一卷", "单篇", "單篇"].includes(volume);
+  const preview = String(p?.textPreview || "").trim();
+  const quote = preview ? `「${preview.length > 20 ? `${preview.slice(0, 20)}…` : preview}」` : `第 ${Number(p?.blockIndex) + 1} 段`;
+  return `${showVolume ? `${volume} ` : ""}${quote}`;
+}
+
+// 阅读位置提示条：
+// - incoming：其他设备上有新的阅读位置，是否跳过去
+// - behind：当前位置在已保存的进度之前，进度未更新，需读者确认才覆盖
+function createSyncPrompt({ onJump, onConfirm }) {
+  let el = null;
+  let target = null;
+  let mode = "";
+  let ahead = false;
+  let dismissedKey = "";
+
+  const hide = () => {
+    if (!el) return;
+    el.remove();
+    el = null;
+    target = null;
+    mode = "";
+  };
+
+  // ahead：提示的位置在读者当前位置之后，读者自己读到那里时提示自动收起
+  const show = (nextMode, progress, options = {}) => {
+    const key = progressKey(progress);
+    if (!key || key === dismissedKey) return;
+    // 已在提示同一位置时，保留原来的说法（例如"其他设备上有新位置"不改成"进度未更新"）
+    if (el && progressKey(target) === key && (mode === nextMode || mode === "incoming")) return;
+    target = progress;
+    mode = nextMode;
+    ahead = Boolean(options.ahead);
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "reading-sync-prompt";
+      el.setAttribute("role", "status");
+      el.setAttribute("aria-live", "polite");
+      el.addEventListener("click", (event) => {
+        const action = event.target.closest("[data-sync-action]")?.dataset.syncAction;
+        if (!action || !target) return;
+        const current = target;
+        if (action === "dismiss") dismissedKey = progressKey(current);
+        hide();
+        if (action === "jump") onJump(current);
+        else if (action === "confirm") onConfirm(current);
+      });
+      document.body.appendChild(el);
+    }
+    const position = escapeHtml(describePosition(progress));
+    const copy =
+      mode === "incoming"
+        ? `其他设备上有新的阅读位置：${position}，是否跳过去？`
+        : `当前位置在已保存的进度之前，进度未更新。已读到：${position}`;
+    el.innerHTML = `
+      <p class="reading-sync-copy">${copy}</p>
+      <div class="reading-sync-actions">
+        <button class="primary-link" type="button" data-sync-action="jump">${mode === "incoming" ? "跳到新位置" : "回到已读位置"}</button>
+        <button class="reading-sync-secondary" type="button" data-sync-action="confirm">以当前位置为进度</button>
+        <button class="reading-sync-dismiss" type="button" data-sync-action="dismiss" aria-label="关闭阅读位置提示">关闭</button>
+      </div>
+    `;
+  };
+
+  return {
+    show,
+    hide,
+    destroy: hide,
+    // 读者的位置已不在已保存进度之前：收起"进度未更新"；读到了提示的新位置，也收起
+    reached(position) {
+      if (mode === "behind") hide();
+      else if (mode === "incoming" && ahead && comparePosition(position, target) >= 0) hide();
+    },
   };
 }
 

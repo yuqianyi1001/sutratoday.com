@@ -15,11 +15,11 @@ import {
   assignReadingAnchors,
   mountResumeBanner,
   readHashBlockIndex,
-  pickRestoreProgress,
+  planRestore,
   readReadingProgress,
   startReadingProgressTracker,
   workTitleForProgress,
-} from "./reading-progress.js?v=10";
+} from "./reading-progress.js?v=11";
 import {
   addFavorite,
   checkin,
@@ -32,10 +32,10 @@ import {
   removeFavorite,
   suggestRetranslate,
   workIdFromSlug,
-} from "./account-api.js?v=6";
-import { openAccountDialog } from "./account.js?v=6";
+} from "./account-api.js?v=7";
+import { openAccountDialog } from "./account.js?v=7";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
-import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=3";
+import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=4";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -329,7 +329,8 @@ function getCurrentSlug() {
 
 function restoreAndTrackReadingProgress(doc, hashIndex) {
   assignReadingAnchors(dom.rendered);
-  const saved = pickRestoreProgress(doc.slug);
+  // 优先恢复到本机自己读到的位置；其他设备上的进度不同时，由阅读器提示是否跳过去
+  const { restore: saved, incoming } = planRestore(doc.slug);
   let restoreIndex = null;
   let restorePreview = "";
   if (hashIndex != null) restoreIndex = hashIndex;
@@ -347,7 +348,7 @@ function restoreAndTrackReadingProgress(doc, hashIndex) {
       title,
       volumeLabel: (currentDocument || doc).volume_label || "",
     }),
-    { restoreIndex, restorePreview },
+    { restoreIndex, restorePreview, incoming },
   );
 }
 
