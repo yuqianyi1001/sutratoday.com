@@ -223,15 +223,28 @@ export async function flushProgress(keepalive = false) {
   pendingProgress = new Map();
   await Promise.all(
     entries.map(([workId, entry]) =>
-      request("PUT", `/progress/${encodeURIComponent(workId)}`, entry.progress, true, keepalive)
+      request(
+        "PUT",
+        `/progress/${encodeURIComponent(workId)}`,
+        entry.confirmed ? { ...entry.progress, confirmed: true } : entry.progress,
+        true,
+        keepalive,
+      )
         .then((data) => {
-          // 服务器返回最终保存的进度；若其他设备有更新的进度，以服务器为准
+          // 服务器返回最终保存的进度。未写入（accepted: false）说明云端有更后面的位置，
+          // 以服务器为准；阅读页会据此提示"其他设备上有新的阅读位置"
           const fav = getFavorite(workId);
-          if (fav && data.progress && isNewer(data.progress, fav.progress)) {
-            fav.progress = data.progress;
-            writeJson(LIBRARY_KEY, library);
-            emitSoon();
+          if (!fav || !data.progress) return;
+          if (data.accepted === false) {
+            const queued = pendingProgress.get(workId);
+            if (queued && !queued.confirmed && comparePosition(queued.progress, data.progress) < 0) pendingProgress.delete(workId);
+            if (pendingProgress.has(workId)) return;
+          } else if (!isNewer(data.progress, fav.progress)) {
+            return;
           }
+          fav.progress = data.progress;
+          writeJson(LIBRARY_KEY, library);
+          emitSoon();
         })
         .catch((error) => {
           // 网络失败时放回队列，下次再试；未收藏（409）等错误直接丢弃
@@ -246,7 +259,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=11");
+  const { readReadingProgress } = await import("./reading-progress.js?v=12");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
