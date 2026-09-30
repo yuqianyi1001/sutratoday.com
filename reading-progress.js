@@ -7,7 +7,7 @@ import {
   onAccountChange,
   queueProgressSync,
   workIdFromSlug,
-} from "./account-api.js?v=8";
+} from "./account-api.js?v=9";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 // 本机在每部经上读到的位置（按 workId），用来判断新位置是否比已保存的进度靠前
@@ -19,6 +19,8 @@ const SKIP_HEADING_CLASS = new Set(["sutra-original-heading", "sutra-translation
 const SKIP_HEADING_TEXT = new Set(["原文", "现代语译", "現代語譯"]);
 const SCROLL_ARM_DELTA = 24;
 const RESTORE_RETRY_MS = [0, 50, 200, 500, 1000];
+// 比已保存的进度靠前这么多段（或在更前面的卷）才提示"进度未更新"；退回几段属于正常回看
+const BEHIND_PROMPT_BLOCKS = 5;
 
 export function readReadingProgress() {
   const raw = storageGet(localStorage, READING_PROGRESS_KEY);
@@ -227,7 +229,9 @@ export function startReadingProgressTracker(container, getMeta, options = {}) {
     if (!confirmed) {
       const saved = savedProgressForWork(workIdFromSlug(next.slug));
       if (saved?.slug && comparePosition(next, saved) < 0) {
-        if (promptIfBehind) prompt.show("behind", saved);
+        const farBehind = next.slug !== saved.slug || saved.blockIndex - next.blockIndex >= BEHIND_PROMPT_BLOCKS;
+        if (!farBehind) prompt.reached(next);
+        else if (promptIfBehind) prompt.show("behind", saved);
         return;
       }
       prompt.reached(next);

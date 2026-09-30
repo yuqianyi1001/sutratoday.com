@@ -259,7 +259,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=12");
+  const { readReadingProgress } = await import("./reading-progress.js?v=13");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
