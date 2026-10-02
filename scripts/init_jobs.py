@@ -86,6 +86,8 @@ def scan_file(md_path: Path):
     juan_index = int(fm.get("juan_index", 0))
     priority = CATEGORY_PRIORITY.get(category, 0)
 
+    translation_status = fm.get("translation_status", "")
+
     return dict(
         slug=slug,
         file_path=str(md_path),
@@ -95,6 +97,7 @@ def scan_file(md_path: Path):
         cbeta_id=cbeta_id,
         juan_index=juan_index,
         priority=priority,
+        translation_status=translation_status,
     )
 
 

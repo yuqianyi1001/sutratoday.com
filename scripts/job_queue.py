@@ -71,27 +71,36 @@ def init_db():
 
 def upsert_job(slug: str, file_path: str, seg_total: int, seg_done: int,
                category: str = "", cbeta_id: str = "", juan_index: int = 0,
-               priority: int = 0):
+               priority: int = 0, translation_status: str = ""):
     """
-    插入新任务（已存在则只更新 seg_total/seg_done/category，不覆盖 status）。
-    若 md 文件标记为 translated，直接标记 done。
+    插入新任务（已存在则更新 seg_total/seg_done/category）。
+    若正文已全部翻译（seg_done >= seg_total > 0）或 md 标记为 translated，且非 running 状态，自动同步为 done。
     """
+    is_done = (seg_done >= seg_total and seg_total > 0) or translation_status == "translated"
     with get_conn() as conn:
-        existing = conn.execute("SELECT status FROM jobs WHERE slug=?", (slug,)).fetchone()
+        existing = conn.execute("SELECT status, completed_at FROM jobs WHERE slug=?", (slug,)).fetchone()
         if existing:
-            conn.execute("""
-                UPDATE jobs SET seg_total=?, seg_done=?, category=?, updated_at=?
-                WHERE slug=? AND status NOT IN ('running')
-            """, (seg_total, seg_done, category, _now(), slug))
+            if is_done and existing["status"] != "done" and existing["status"] != "running":
+                conn.execute("""
+                    UPDATE jobs SET seg_total=?, seg_done=?, category=?, status='done',
+                                    completed_at=COALESCE(completed_at, ?), updated_at=?
+                    WHERE slug=?
+                """, (seg_total, seg_done, category, _now(), _now(), slug))
+            else:
+                conn.execute("""
+                    UPDATE jobs SET seg_total=?, seg_done=?, category=?, updated_at=?
+                    WHERE slug=? AND status NOT IN ('running')
+                """, (seg_total, seg_done, category, _now(), slug))
         else:
-            status = "done" if seg_done >= seg_total and seg_total > 0 else "pending"
+            status = "done" if is_done else "pending"
+            completed = _now() if status == "done" else None
             conn.execute("""
                 INSERT INTO jobs
                     (slug, file_path, category, cbeta_id, juan_index,
-                     status, priority, seg_total, seg_done, created_at, updated_at)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?)
+                     status, priority, seg_total, seg_done, created_at, updated_at, completed_at)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             """, (slug, file_path, category, cbeta_id, juan_index,
-                  status, priority, seg_total, seg_done, _now(), _now()))
+                  status, priority, seg_total, seg_done, _now(), _now(), completed))
 
 
 def claim_job(agent_id: str, backend: str, model: str,
