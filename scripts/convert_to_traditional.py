@@ -48,7 +48,10 @@ _GLOBAL_CHAR_FIXES = {
     '鍊': '煉',   # s2tw 誤轉：修煉/熔煉 用「煉」，「鍊」= 鏈條
     '痴': '癡',   # s2tw 誤轉：愚癡/貪瞋癡 用「癡」，s2tw 錯誤簡化為「痴」
     '捲': '卷',   # s2tw 誤轉：卷上/卷下（卷冊）不是「捲」（捲起）
+    '睏': '困',   # 疲困、困乏
 }
+
+# 網頁上的簡→繁轉換用同一套規則：script-fixes.js。改這裡時那邊也要改。
 
 # B. 瞭→了：除「瞭望」外全部回退
 _LIAO_PATTERN = re.compile(r'瞭(?!望)')
@@ -69,6 +72,10 @@ _HUI_DAILY = re.compile(r'迴(?=答|來|去|頭|覆|報|應|話|歸|到|家|國|
 
 # G. 屍→尸：佛名/地名用「尸」
 _SHI_PROPER = re.compile(r'屍(?=棄|羅|利沙|婆|吉|城|叉|迦)')
+_SHI_AFTER = re.compile(r'([婆伐])屍')   # 毗婆尸、僧伽伐尸沙
+
+# I. 鹹→咸：「咸」= 都（咸言、咸皆）
+_XIAN_ALL = re.compile(r'鹹(?=[言皆共歸悉同稱謂知來以作各曰得令使見聞願陽])')
 
 # H. 痴→癡：佛教用「癡」（愚癡、貪瞋癡）
 #    opencc 把繁體「癡」轉成了簡化的「痴」，需要轉回
@@ -100,6 +107,10 @@ def _buddhist_fixup(text: str) -> str:
 
     # G. 屍→尸（佛名/地名）
     text = _SHI_PROPER.sub('尸', text)
+    text = _SHI_AFTER.sub(r'\1尸', text)
+
+    # I. 鹹→咸
+    text = _XIAN_ALL.sub('咸', text)
 
     return text
 

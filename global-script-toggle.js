@@ -1,3 +1,5 @@
+import { fixTraditional } from "./script-fixes.js?v=1";
+
 const SCRIPT_MODE_COOKIE = "sutra_reader_script_mode";
 const SCRIPT_MODE_DEFAULT = "traditional";
 const VALID_SCRIPT_MODES = new Set(["simplified", "traditional"]);
@@ -14,6 +16,9 @@ function init() {
   const toTraditional = openCC?.Converter?.({ from: "cn", to: "tw" }) || null;
   let scriptMode = getSavedScriptMode();
   let isApplyingScriptMode = false;
+  // 每个文本节点原本的文字，和我们最后一次显示的文字。切回繁体时从原文重新算，
+  // 不拿已经转成简体的文字再转回去（简 → 繁会转错字）。
+  const sources = new WeakMap();
 
   ensureHeaderScriptPicker();
   applyScriptMode(scriptMode);
@@ -90,14 +95,13 @@ function init() {
         return;
       }
 
-      const converter = scriptMode === "simplified" ? toSimplified : toTraditional;
-      if (!converter) {
+      if (!toSimplified || !toTraditional) {
         return;
       }
 
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
-          convertNodeTree(node, converter);
+          convertNodeTree(node, scriptMode);
         });
       });
     });
@@ -119,15 +123,14 @@ function init() {
       saveCookie(SCRIPT_MODE_COOKIE, nextMode);
     }
 
-    const converter = nextMode === "simplified" ? toSimplified : toTraditional;
-    if (!converter) {
+    if (!toSimplified || !toTraditional) {
       document.documentElement.lang = nextMode === "simplified" ? "zh-CN" : "zh-TW";
       return;
     }
 
     isApplyingScriptMode = true;
     try {
-      convertNodeTree(document.body, converter);
+      convertNodeTree(document.body, nextMode);
       document.documentElement.lang = nextMode === "simplified" ? "zh-CN" : "zh-TW";
     } finally {
       isApplyingScriptMode = false;
@@ -142,13 +145,27 @@ function init() {
     });
   }
 
-  function convertNodeTree(root, converter) {
+  function convertNodeTree(root, mode) {
     walkTextNodes(root, (textNode) => {
-      const converted = converter(textNode.nodeValue);
-      if (converted !== textNode.nodeValue) {
-        textNode.nodeValue = normalizeVolumeText(converted);
+      const known = sources.get(textNode);
+      // 页面自己改过这个节点的文字时，以新的文字为准
+      const source = known && known.shown === textNode.nodeValue ? known.source : textNode.nodeValue;
+      const shown = mode === "simplified" ? toSimplified(source) : toTraditionalText(source);
+      sources.set(textNode, { source, shown });
+      if (shown !== textNode.nodeValue) {
+        textNode.nodeValue = shown;
       }
     });
+  }
+
+  // 文稿里的原文和译文已经是繁体。已是繁体的文字照原样显示：其中的“云”“尸”“布”
+  // 本来就是该用的字，再转一次会变成“雲”“屍”“佈”。只有不含繁体字的文字才转换，
+  // 转换后用 script-fixes.js 的字典修正。
+  function toTraditionalText(text) {
+    if (toSimplified(text) !== text) {
+      return text;
+    }
+    return fixTraditional(toTraditional(text));
   }
 
   function walkTextNodes(root, visitor) {
@@ -183,19 +200,6 @@ function init() {
       textNode = walker.nextNode();
     }
   }
-}
-
-function normalizeVolumeText(text) {
-  if (!text) {
-    return text;
-  }
-  return text
-    .replace(/捲(?=[上下中])/g, "卷")
-    .replace(/捲(?=第)/g, "卷")
-    .replace(/捲(?=[一二三四五六七八九十百千零〇两兩0-9])/g, "卷")
-    .replace(/([全共][一二三四五六七八九十百千零〇两兩0-9]*)捲/g, "$1卷")
-    // OpenCC 把“念诵”转成“唸誦”；佛典和 CBETA 都写作“念誦”
-    .replace(/唸誦/g, "念誦");
 }
 
 function shouldTranslateTextNode(textNode) {
