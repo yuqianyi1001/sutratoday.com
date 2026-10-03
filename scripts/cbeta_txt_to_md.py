@@ -540,15 +540,15 @@ def build_md(frontmatter, title, preface_paras, body_lines):
     ## 序                          (如有)
     ### 原文
     ...
-    ### 现代语译
+    ### 現代語譯
 
     ## （一）第一分初大本經第一     (章节标题)
     ### 原文
     ...
-    ### 现代语译
+    ### 現代語譯
     ### 原文
     ...
-    ### 现代语译
+    ### 現代語譯
     """
     md = []
 
@@ -573,7 +573,7 @@ def build_md(frontmatter, title, preface_paras, body_lines):
         md.append("")
         md.append(content)
         md.append("")
-        md.append("### 现代语译")
+        md.append("### 現代語譯")  # 文稿标题统一用繁体
         md.append(f"<!-- sid:{sid} -->")
         md.append("")
         md.append("")
