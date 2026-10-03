@@ -193,7 +193,9 @@ function normalizeVolumeText(text) {
     .replace(/捲(?=[上下中])/g, "卷")
     .replace(/捲(?=第)/g, "卷")
     .replace(/捲(?=[一二三四五六七八九十百千零〇两兩0-9])/g, "卷")
-    .replace(/([全共][一二三四五六七八九十百千零〇两兩0-9]*)捲/g, "$1卷");
+    .replace(/([全共][一二三四五六七八九十百千零〇两兩0-9]*)捲/g, "$1卷")
+    // OpenCC 把“念诵”转成“唸誦”；佛典和 CBETA 都写作“念誦”
+    .replace(/唸誦/g, "念誦");
 }
 
 function shouldTranslateTextNode(textNode) {
