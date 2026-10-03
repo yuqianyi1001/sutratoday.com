@@ -5,6 +5,11 @@
 // 本地开发时可在控制台执行 localStorage.setItem("sutra_api_base", "http://localhost:8787") 连接本地后端
 export const API_BASE = readApiOverride() || "https://api.sutratoday.com";
 
+// *.sutratoday.com 的站点共用一次登录（本地页面连本地后端时也是）；其他地址（如 pages.dev）各自登录
+const SHARED =
+  typeof location !== "undefined" &&
+  (/(^|\.)sutratoday\.com$/.test(location.hostname) || new URL(API_BASE).hostname === location.hostname);
+
 const SESSION_KEY = "sutra_account_session";
 const LIBRARY_KEY = "sutra_account_library";
 // 进度最多每 30 秒同步一次；离开页面、切走标签或窗口时立即同步
@@ -19,6 +24,8 @@ let syncTimer = 0;
 let refreshPromise = null;
 let lastRefreshAt = 0;
 let emitTimer = 0;
+let sharing = null;
+let shareTried = "";
 
 if (typeof window !== "undefined") {
   window.addEventListener("pagehide", () => flushProgress(true));
@@ -26,9 +33,11 @@ if (typeof window !== "undefined") {
   // 页面仍在，不需要 keepalive；这样可以先拉取云端进度再发送
   window.addEventListener("blur", () => flushProgress());
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden") flushProgress(true);
-    // 回到页面时拉取其他设备的最新进度
-    else if (Date.now() - lastRefreshAt > REFOCUS_REFRESH_MS) refreshLibrary();
+    if (document.visibilityState === "hidden") return flushProgress(true);
+    // 回到页面时：先看别的站点有没有登录/退出，再拉取其他设备的最新进度
+    shareLogin().then(() => {
+      if (Date.now() - lastRefreshAt > REFOCUS_REFRESH_MS) refreshLibrary();
+    });
   });
   // 其他标签页登录/退出时同步状态
   window.addEventListener("storage", (event) => {
@@ -41,6 +50,7 @@ if (typeof window !== "undefined") {
       emit();
     }
   });
+  shareLogin();
 }
 
 // ── 状态 ────────────────────────────────────────────────────
@@ -98,8 +108,40 @@ export async function logout() {
   clearSession();
 }
 
+// 后端把 token 存在 sutratoday.com 的 cookie 里（JS 读不到），另有一个 JS 读得到的短标记 st_sid。
+// 标记和本站的不一样，说明别的站点登录或退出过，这时调 /auth/sso 对齐：
+// 拿到 cookie 里的 token；cookie 没有就把本站的 token 写进去；都无效则 401（request 会清掉本站登录态）。
+// 两边一致时不发请求。
+function shareLogin() {
+  if (!SHARED) return Promise.resolve();
+  if (sharing) return sharing;
+  const theirs = (document.cookie.match(/(?:^|; )st_sid=([^;]*)/) || [])[1] || "";
+  const mine = session ? session.sid || "unknown" : ""; // unknown：有 cookie 之前登录的
+  const pair = `${theirs}/${mine}`;
+  if (theirs === mine || pair === shareTried) return Promise.resolve();
+  shareTried = pair; // cookie 被禁用时，同一种情况不重复请求
+  sharing = request("POST", "/auth/sso")
+    .then(async (data) => {
+      if (session?.token === data.token && session.sid === data.sid) return;
+      if (session?.token === data.token || session?.user?.id === data.user.id) {
+        session = { token: data.token, sid: data.sid, user: data.user };
+        writeJson(SESSION_KEY, session);
+        return;
+      }
+      if (session) clearSession(); // 换了账号
+      await startSession(data);
+    })
+    .catch(() => {
+      // 断网，或没有登录
+    })
+    .finally(() => {
+      sharing = null;
+    });
+  return sharing;
+}
+
 async function startSession(data) {
-  session = { token: data.token, user: data.user };
+  session = { token: data.token, sid: data.sid, user: data.user };
   writeJson(SESSION_KEY, session);
   emit();
   await refreshLibrary();
@@ -259,7 +301,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=14");
+  const { readReadingProgress } = await import("./reading-progress.js?v=15");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
@@ -323,6 +365,8 @@ async function request(method, path, body, auth = true, keepalive = false) {
       headers,
       body: body !== undefined ? JSON.stringify(body) : undefined,
       keepalive,
+      // 只有登录、退出会读写共用 cookie，其他请求一律带 token
+      credentials: SHARED && path.startsWith("/auth/") ? "include" : "same-origin",
     });
   } catch {
     throw makeError(0, "network_error", "网络连接失败，请稍后再试");
