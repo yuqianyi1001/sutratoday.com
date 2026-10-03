@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今文佛典 | 登录</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+    <link rel="stylesheet" href="./styles.css?v=7" />
+    <style>
+      .sso-box { max-width: 420px; margin: 18vh auto 0; padding: 0 20px; text-align: center; }
+      .sso-box h1 { font-size: 1.4rem; margin: 0 0 12px; }
+      .sso-box p { margin: 0 0 20px; line-height: 1.8; }
+      .sso-box [hidden] { display: none; }
+      .sso-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; }
+    </style>
+  </head>
+  <body>
+    <!-- 跳转登录的中转页：别的站点（博客 yuqianyi.com）带着 ?return= 跳到这里，登录后带着一次性短码跳回去。见 sso.js -->
+    <main class="sso-box">
+      <h1>今文佛典账号</h1>
+      <p id="sso-message">正在登录…</p>
+      <div class="sso-actions">
+        <button id="sso-login" class="primary-link" type="button" hidden>登录 / 注册</button>
+        <a id="sso-back" href="./index.html" hidden>不登录，返回</a>
+      </div>
+    </main>
+    <script type="module" src="./sso.js?v=1"></script>
+  </body>
+</html>

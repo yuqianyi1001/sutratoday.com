@@ -140,6 +140,16 @@ function shareLogin() {
   return sharing;
 }
 
+// 等“共用登录”对齐完（没有要对齐的就立即完成）
+export function whenAccountReady() {
+  return sharing || Promise.resolve();
+}
+
+// 跳转登录用的一次性短码：sso.html 带着它跳回 returnTo，那边的页面用它换到同一个登录
+export async function createSsoCode(returnTo) {
+  return (await request("POST", "/auth/sso/code", { returnTo })).code;
+}
+
 async function startSession(data) {
   session = { token: data.token, sid: data.sid, user: data.user };
   writeJson(SESSION_KEY, session);
@@ -301,7 +311,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=15");
+  const { readReadingProgress } = await import("./reading-progress.js?v=16");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
