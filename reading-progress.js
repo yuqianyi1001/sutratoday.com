@@ -7,7 +7,7 @@ import {
   onAccountChange,
   queueProgressSync,
   workIdFromSlug,
-} from "./account-api.js?v=9";
+} from "./account-api.js?v=10";
 
 export const READING_PROGRESS_KEY = "sutra_last_reading_position";
 // 本机在每部经上读到的位置（按 workId），用来判断新位置是否比已保存的进度靠前

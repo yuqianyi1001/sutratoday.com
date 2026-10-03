@@ -3,7 +3,7 @@
 // 注意：所有文件都必须用同一个 URL（含 ?v=）导入本模块，才能共享同一份状态。
 
 // 本地开发时可在控制台执行 localStorage.setItem("sutra_api_base", "http://localhost:8787") 连接本地后端
-export const API_BASE = readApiOverride() || "https://sutratoday-api.jeffwoo2019.workers.dev";
+export const API_BASE = readApiOverride() || "https://api.sutratoday.com";
 
 const SESSION_KEY = "sutra_account_session";
 const LIBRARY_KEY = "sutra_account_library";
@@ -259,7 +259,7 @@ export async function flushProgress(keepalive = false) {
 
 // 登录后，把本机最后一次阅读位置合并到云端（若该经已收藏，服务器保留较新的一条）
 async function pushLocalProgress() {
-  const { readReadingProgress } = await import("./reading-progress.js?v=13");
+  const { readReadingProgress } = await import("./reading-progress.js?v=14");
   const local = readReadingProgress();
   if (local) queueProgressSync(local);
   await flushProgress();
