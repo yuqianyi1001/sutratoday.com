@@ -25,7 +25,7 @@
 | --- | ---: |
 | gpt-5.4-mini | 2530 |
 | qwen3.5-flash | 2470 |
-| deepseek-v3.2 | 884 |
+| deepseek-v3.2 | 881 |
 | gpt-5.4-mini+claude-opus-5.5 | 879 |
 | qwen3.5-flash+claude-opus-5.5 | 726 |
 | qwen3.5-27b | 478 |
@@ -51,6 +51,7 @@
 | gpt-5.4-mini, claude-opus-5.5 | 8 |
 | qwen3.5-flash, claude-opus-5.5 | 6 |
 | deepseek-v3 | 5 |
+| deepseek-v3.2+gemini-3 | 3 |
 | claude-opus-4.8 | 3 |
 | qwen3-32b | 3 |
 | opencode | 2 |
