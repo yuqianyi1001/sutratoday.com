@@ -1997,6 +1997,137 @@ code {
   margin-top: 8px;
 }
 
+.reader-checkin-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-checkin-share,
+.checkin-share-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid rgba(143, 83, 49, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+.reader-checkin-share:hover,
+.reader-checkin-share:focus-visible,
+.checkin-share-secondary:hover,
+.checkin-share-secondary:focus-visible {
+  background: var(--accent-soft);
+}
+
+/* ── 打卡分享图弹窗 ───────────────────────────────────────── */
+
+.checkin-share {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(36, 29, 24, 0.55);
+}
+
+.checkin-share-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(440px, 100%);
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  padding: 16px 18px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  box-shadow: var(--shadow);
+}
+
+.checkin-share-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.checkin-share-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.checkin-share-close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.checkin-share-close:hover,
+.checkin-share-close:focus-visible {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.checkin-share-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.checkin-share-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(64, 41, 21, 0.12);
+}
+
+.checkin-share-status,
+.checkin-share-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.checkin-share-status {
+  padding: 40px 0;
+}
+
+.checkin-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.checkin-share-actions > * {
+  flex: 1 1 140px;
+  min-height: 44px;
+  font: inherit;
+  cursor: pointer;
+}
+
 .sutra-translation-heading .retranslate-button {
   margin-left: 6px;
   vertical-align: -0.15em;
