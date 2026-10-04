@@ -1,4 +1,6 @@
-# 单部佛经翻译工作流
+# 单部佛经翻译工作流（操作手册）
+
+规则见 `AGENTS.md`，本文只写命令和排查。
 
 输入一部经的名称或 CBETA 编号，最终得到一份完整、可发布的 `content/sutras-raw/<slug>.md`。
 本文档覆盖端到端 4 步流程，给出每一步的命令、产物、常见排查。
@@ -82,7 +84,7 @@ python3 scripts/cbeta_txt_to_md.py T0002 --force-overwrite-translated
 - 读 `content/cbeta-raw/T/<sutra_id>/<sutra_id>_NNN.txt`
 - 自动拆分：散文按句末标点切成 ≤150 字段落；偈颂每 4 句一段；连续短段会被合并到 ~150 字上限
 - 章节标题（`（一）...`、`...品第一`）单独成 `## ` 级标题
-- 给每对 `### 原文 / ### 现代语译` 注入 `<!-- sid:NNN -->` 序号，每卷从 001 开始
+- 给每对 `### 原文 / ### 現代語譯` 注入 `<!-- sid:NNN -->` 序号，每卷从 001 开始
 - 写入 frontmatter：`title / slug / cbeta_id / category / translator / juan_index / translation_status: untranslated / review_status: unreviewed`
 
 **产物**：`content/sutras-raw/<sutra_id>-NNN.md`，结构：
@@ -103,7 +105,7 @@ translation_status: untranslated
 
 如是我聞：
 
-### 现代语译
+### 現代語譯
 <!-- sid:001 -->
 
 
@@ -155,20 +157,6 @@ python3 scripts/job_queue.py locks         # 看各部经被哪个 backend+model
 
 ---
 
-## 4b. AI agent 直接翻译 — `seg_io.py`
-
-没有翻译 API 时，由 AI agent（Claude Code 等）自己翻译：
-
-```bash
-# 导出待译段（只列空段；--all 连已译段一起导出）
-python3 scripts/seg_io.py export T0220-201 > 201.src.txt
-
-# 译文按 @@sid 分段写好后回填
-python3 scripts/seg_io.py apply T0220-201 201.tr.txt --model claude-opus-5.5
-```
-
-译文文件格式：每段以单独一行 `@@001` 开头，下面是译文，段间空一行。`apply` 会检查 sid 一一对应、译文里没有标题或注释标记、译文字数不明显少于原文，全部通过才写回，并把 `translation_status` 改为 `translated`。
-
 ## 4. 翻译 — `agent_worker.py`（默认 dashscope qwen3.5-plus）
 
 ```bash
@@ -192,7 +180,7 @@ python3 scripts/agent_worker.py --backend dashscope --batch-size 10
 **做了什么（每卷循环）**：
 
 1. 从 `translation_jobs.db` 原子抢占一个 `pending` 任务（同一部经在一次会话内只锁给一个 backend+model，保证风格一致）
-2. 用正则按 `<!-- sid:NNN -->` 定位每段空白的 `### 现代语译`
+2. 用正则按 `<!-- sid:NNN -->` 定位每段空白的 `### 現代語譯`
 3. 批量发送给 backend（5 段一批 JSON 包），失败的项目自动逐段回退
 4. 用 sid 精确替换写回 md，每批结束 heartbeat 更新进度
 5. 全卷完成后：
@@ -210,7 +198,7 @@ grep "ai_translator" content/sutras-raw/T0002-001.md          # qwen3.5-plus 或
 sed -n '20,40p' content/sutras-raw/T0002-001.md
 ```
 
-**翻译质量复检**：见 `claude.md` 中"校验评论"小节。基本要求：
+**翻译质量复检**：见 `AGENTS.md` 中"校验评论"小节。基本要求：
 
 - 必须逐句、逐段翻译，不省略名单、套语、流通分；
 - "如是我闻" → "我是这样听佛说的"；
@@ -224,6 +212,20 @@ sed -n '20,40p' content/sutras-raw/T0002-001.md
 - **批量失败大段返回"【翻译失败」**：通常是 backend 限速或模型抽风，等几分钟后 `--slug` 单独重跑该卷。
 
 ---
+
+## 4b. AI agent 直接翻译 — `seg_io.py`
+
+没有翻译 API 时，由 AI agent（Claude Code 等）自己翻译：
+
+```bash
+# 导出待译段（只列空段；--all 连已译段一起导出）
+python3 scripts/seg_io.py export T0220-201 > 201.src.txt
+
+# 译文按 @@sid 分段写好后回填
+python3 scripts/seg_io.py apply T0220-201 201.tr.txt --model claude-opus-5.5
+```
+
+译文文件格式：每段以单独一行 `@@001` 开头，下面是译文，段间空一行。`apply` 会检查 sid 一一对应、译文里没有标题或注释标记、译文字数不明显少于原文，全部通过才写回，并把 `translation_status` 改为 `translated`。
 
 ## 5. 重建前端索引 — `build-index.js`（必做）
 
@@ -240,6 +242,37 @@ node scripts/build-sitemap.js
 ```
 
 但 sitemap 只取索引中得分前 100 的经，权重 = `PRIORITY_WORKS` (1000) + `human_reviewed` (100) + `ai_reviewed` (50) + `translated` (30)。普通 `translated` 状态的小众经一般进不了 top 100，要进 sitemap 通常得人工 review 或加进 `scripts/build-sitemap.js` 的 `PRIORITY_WORKS` 列表。
+
+---
+
+## 5b. 多 AI 认领、队列与提交
+
+多个 AI 并行工作时，以 `AGENTS.md`「多 AI 协作」一节为准：按一部经认领，开分支 `ai/<工具名>/<经号>`，在 `tasks/<经号>.md` 登记，开草稿 PR。
+
+`translation_jobs.db`（已在 `.gitignore`）只在本机有效，用于同一台机器上多个脚本、AI 之间分配卷。同一部经（同一 `cbeta_id`）的所有卷由同一个 backend 和模型翻译，第一卷被抢占时系统自动锁定该经其余卷。
+
+AI agent 自己翻译时，用队列领任务：
+
+```bash
+python3 scripts/job_queue.py claim --backend <工具名> --model <模型名>   # 返回 slug、agent_id；ok:false 表示没有待翻任务
+python3 scripts/job_queue.py heartbeat <slug> --agent-id <id> --seg-done N  # 翻完若干段调用一次，防止超时被回收
+python3 scripts/job_queue.py done <slug> --agent-id <id>                    # 完成，md 的 translation_status 改为 translated
+python3 scripts/job_queue.py fail <slug> --agent-id <id> --error "原因"     # 失败
+```
+
+运维命令：
+
+```bash
+python3 scripts/init_jobs.py                              # 同步 md 状态到队列，每次开始前运行
+python3 scripts/job_queue.py status                       # 整体进度
+python3 scripts/job_queue.py locks                        # 各部经的锁定情况
+python3 scripts/job_queue.py reset <slug> [--clear-lock]  # 重置某卷；加 --clear-lock 允许换模型
+python3 scripts/job_queue.py release-stale                # 释放超时 10 分钟无心跳的任务
+```
+
+优先级按 `priority DESC, cbeta_id ASC, juan_index ASC` 排序：阿含部類 10、本緣部類 9、般若部類 8、法華/華嚴部類 7，其他 0 到 6。
+
+密钥只放仓库根目录的 `.env`（已在 `.gitignore`），脚本用 `os.environ` 读取，不在代码里写任何 key（这是公开仓库）。提交前检查暂存区没有密钥。提交信息用中文，开分支提 PR，不直接推 `main`。
 
 ---
 
