@@ -5,17 +5,19 @@
 
 ## 进行中
 
-| 任务 | 负责 | 分支 / PR |
-| --- | --- | --- |
-| 规范与文件整理、状态汇总与检查脚本、统一 front matter、补译空块（PR #57） | Claude（总管） | `claude/multi-ai-docs-workflow-lp0zko` |
+暂无。
 
 ## 下一批待分配
 
 1. 处理 `docs/review-notes/` 里的待复核项，其中 `2026-10-04-fill-empty-blocks.md` 是 2026-10-04 补译 5381 个空译文块时各批译者标出的疑点（共约 440 条），开头列了需要先看的几类。
 2. AI 校验：10241 卷 `unreviewed`（含 2056 卷刚补完空块的文稿），按经分批，翻译者和校验者用不同的模型。
 
+## 已决定（备忘）
+
+- 14 个没有 `ai_translator` 的文稿（T0221 六卷、T0223 六卷、T1925-001、X0454-001）：继续留空，不填；`check_frontmatter.py` 会把它们列出来，属已知情况。
+- T0007-002、T0007-003、T0020-001 原来 `ai_translator` 是 deepseek-v3.2、`translated_by` 是 gemini3，合并写成 `deepseek-v3.2+gemini-3`；T0007-001 两个值本来相同，保持 `gemini-3`。
+- X0227-001、X0587-001 的 `ai_translator` 保留 `opencode`。
+
 ## 需要 Jeff 决定
 
-- 14 个文稿（T0221 六卷、T0223 六卷、T1925-001、X0454-001）没有 `ai_translator`，不知道是哪个模型翻的，没有擅自填写。
-- 4 个文稿同时有 `translated_by` 和 `ai_translator` 且值不同：T0007-001、T0007-002、T0007-003、T0020-001（`translated_by` 都是 gemini3，`ai_translator` 是 gemini-3 或 deepseek-v3.2），已保留 `ai_translator`，删掉 `translated_by`。
-- X0227-001、X0587-001 的 `ai_translator` 是工具名 `opencode`，不是模型名。
+- 译文里引号写法是否统一（见对话里的统计）。
