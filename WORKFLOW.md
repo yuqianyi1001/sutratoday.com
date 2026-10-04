@@ -328,3 +328,14 @@ grep "T0002" sutras-raw-index.json   # 索引里应该有
 ```
 
 每一步都是幂等的：重跑只会跳过已完成的部分，不会破坏现有翻译。
+
+---
+
+## 规范检查与进度汇总
+
+```bash
+python3 scripts/check_frontmatter.py [经号] [-v]   # 检查 front matter 是否符合 AGENTS.md；有问题退出码为 1
+python3 scripts/status_report.py                   # 生成 docs/STATUS.md
+```
+
+提交任务 PR 前，对自己负责的经运行 `check_frontmatter.py <经号>`。`docs/STATUS.md` 由总管在合并后统一重新生成。
