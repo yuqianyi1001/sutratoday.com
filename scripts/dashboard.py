@@ -82,6 +82,7 @@ def _save_workers_state():
             "started_at":  w["started_at"],
         }
     try:
+        WORKERS_STATE_FILE.parent.mkdir(exist_ok=True)
         WORKERS_STATE_FILE.write_text(json.dumps(state, indent=2))
     except Exception as e:
         print(f"[dashboard] 保存 worker 状态失败: {e}")
