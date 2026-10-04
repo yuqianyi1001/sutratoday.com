@@ -24,4 +24,3 @@ coverage.xml
 translation_jobs.db.bak
 content/cbeta-raw/
 .wrangler/
-data/workers_state.json
