@@ -36,6 +36,7 @@ import {
 import { openAccountDialog } from "./account.js?v=12";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=9";
+import { openCheckinShare } from "./checkin-share.js?v=1";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
@@ -613,6 +614,23 @@ async function renderCheckins(doc) {
   dom.checkin.querySelectorAll("[data-checkin-index]").forEach((button) => {
     button.addEventListener("click", () => onCheckinClick(doc, targets[Number(button.dataset.checkinIndex)], button));
   });
+  dom.checkin.querySelectorAll("[data-checkin-share]").forEach((button) => {
+    button.addEventListener("click", () => shareCheckin(doc, targets[Number(button.dataset.checkinShare)]));
+  });
+}
+
+// 分享图里的二维码：卷打卡指向本卷，全经打卡指向第一卷
+function shareCheckin(doc, target) {
+  const work = worksIndex ? getWorkBySlug(worksIndex, doc.slug) : null;
+  const first = Array.isArray(work?.volumes) ? work.volumes[0] : null;
+  const firstSlug = (Array.isArray(first) ? first[0] : first) || doc.slug;
+  openCheckinShare({
+    title: target.title,
+    slug: target.slug,
+    volumeLabel: target.volumeLabel,
+    qrSlug: target.slug || firstSlug,
+    username: getUser()?.username || "",
+  });
 }
 
 function checkinCardMarkup(target, index, summary) {
@@ -640,9 +658,12 @@ function checkinCardMarkup(target, index, summary) {
           <p class="reader-checkin-title">${escapeHtml(target.heading)}</p>
           ${summary ? `<p class="reader-checkin-count">已有 ${summary.total} 次打卡</p>` : ""}
         </div>
-        <button class="primary-link reader-checkin-button" type="button" data-checkin-index="${index}" ${done ? "disabled" : ""}>
-          ${escapeHtml(buttonLabel)}
-        </button>
+        <div class="reader-checkin-buttons">
+          <button class="primary-link reader-checkin-button" type="button" data-checkin-index="${index}" ${done ? "disabled" : ""}>
+            ${escapeHtml(buttonLabel)}
+          </button>
+          ${done ? `<button class="reader-checkin-share" type="button" data-checkin-share="${index}">分享打卡</button>` : ""}
+        </div>
       </div>
       ${records}
       ${more}
@@ -661,7 +682,7 @@ async function onCheckinClick(doc, target, button) {
   button.disabled = true;
   try {
     await checkin(target);
-    showToast(`${getUser()?.username || ""} 打卡成功，随喜功德！`);
+    showToast(`${getUser()?.username || ""} 打卡成功，随喜功德！可以点"分享打卡"生成分享图`);
   } catch (error) {
     showToast(error.message || "打卡失败，请稍后再试");
   }
