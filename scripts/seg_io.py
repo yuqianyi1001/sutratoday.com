@@ -12,6 +12,7 @@
   #   @@002
   #   第 2 段译文
   python3 scripts/seg_io.py apply T0220-201 译文文件 --model claude-opus-5.5
+  # 文稿已有别的模型的译文、只补空段时，加 --append，ai_translator 写成「原模型+claude-opus-5.5」
 
 apply 会检查：每个待译段都有译文、没有多出的 sid、译文不含 markdown 标题、
 译文长度不明显短于原文。全部通过才写回，并把 translation_status 改成
@@ -117,8 +118,12 @@ def cmd_apply(args):
     fm, rest = text[:fm_end], text[fm_end:]
     fm = re.sub(r"^translation_status:.*$", "translation_status: translated", fm, flags=re.MULTILINE)
     fm = re.sub(r"^updated_at:.*$", f"updated_at: {date.today().isoformat()}", fm, flags=re.MULTILINE)
-    if re.search(r"^ai_translator:", fm, re.MULTILINE):
-        fm = re.sub(r"^ai_translator:.*$", f"ai_translator: {args.model}", fm, flags=re.MULTILINE)
+    m_old = re.search(r"^ai_translator:\s*(.*)$", fm, re.MULTILINE)
+    if m_old:
+        model = args.model
+        if args.append and m_old.group(1).strip() and args.model not in m_old.group(1):
+            model = f"{m_old.group(1).strip()}+{args.model}"
+        fm = re.sub(r"^ai_translator:.*$", lambda _: f"ai_translator: {model}", fm, flags=re.MULTILINE)
     else:
         fm = re.sub(r"^(updated_at:.*)$", rf"\1\nai_translator: {args.model}", fm, flags=re.MULTILINE)
     path.write_text(fm + rest, encoding="utf-8")
@@ -138,6 +143,7 @@ def main():
     a.add_argument("slug")
     a.add_argument("file")
     a.add_argument("--model", required=True, help="写入 ai_translator 的模型名")
+    a.add_argument("--append", action="store_true", help="文稿已有 ai_translator 时，写成「原模型+本模型」，不覆盖（补译空段用）")
     a.add_argument("--overwrite", action="store_true", help="覆盖已有译文")
     a.set_defaults(func=cmd_apply)
     args = p.parse_args()

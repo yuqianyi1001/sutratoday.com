@@ -7,7 +7,7 @@
 ## 佛典工作流
 
 - 状态流转
-  - 开始 -> 找到佛经原文 -> 把佛经原文整理成md file -> 校验分组、分段的合理性  -> 分段已校验(segments_reviewed) -> (接下面)
+  - 开始 -> 找到佛经原文 -> 把佛经原文整理成md file -> 校验分组、分段的合理性 -> (接下面)
   - 翻译成 `现代语译` -> translated -> 翻译校验 -> ai_reviewed -> 人工校验 -> human_reviewed
 
 - 添加和处理一个佛经时，先找到佛经原本，并保存一份在本地。如果有多个版本，找到最通用的版本：
@@ -51,6 +51,7 @@
   - 校验评论，会以 md 里面的注释格式
   - 但 md 注释不一定全部都是校验评论，检查一下这些注释是否是 校验评论，如果是，则根据 评论 修改，如果不是校验评论，则忽略它
   - 根据校验评论的内容，确定评论的对象是 当前行，还是上一段，还是下一段
+  - `<!-- sid:NNN -->` 是段落编号标记，不是校验评论。每段 `### 原文`、`### 現代語譯` 下都有，不得删除、改号、移位。
 
 - 阅读器与文稿分离原则：
   - markdown 负责语义结构，不负责展示花样。
@@ -64,17 +65,25 @@
 
 ### front matter 字段
 
-- `title`: 完整标题
+以下是 `content/sutras-raw/` 现有文稿实际使用的字段。新建、修改文稿一律按此写，不另造字段名。
+
+- `title`: 完整标题（含卷别）
 - `short_title`: 页面短标题
-- `slug`: 文稿唯一标识
-- `volume_label`: 卷别或篇别说明
-- `cbeta_source`: 对应的 CBETA 底本文件路径
+- `slug`: 文稿唯一标识，同文件名，如 `T0001-001`
+- `cbeta_id`: 经号，如 `T0001`
+- `cbeta_web_source`: CBETA 网页地址
+- `category`: CBETA 部类，如 `阿含部類`
+- `translator`: 原经译者（如「後秦 佛陀耶舍共竺佛念譯」）
+- `juan_index`: 本卷序号
+- `juan_total`: 全经卷数
+- `volume_label`: 卷别说明
 - `translation_status`: 翻译状态
 - `review_status`: 校验状态
 - `updated_at`: 最后更新时间
-- `summary`: 一句话摘要
-- `tags`: 标签，逗号分隔
-- `translated_by`: 翻译所使用的 AI 模型名称（如 gpt5, gemini3）
+- `ai_translator`: 翻译所用的 AI 模型名称（如 gpt-5.4-mini、claude-opus-5.5）。一部经的所有卷用同一个。
+- 可选：`summary`（一句话摘要）、`tags`（逗号分隔）
+
+`translated_by` 是旧写法，统一改成 `ai_translator`，不要再用。
 
 ### 正文体例
 
@@ -94,12 +103,14 @@
 - `translation_status`
   - `untranslated`: 未翻译
   - `translating`: 翻译中
-  - `translated`: 已翻译
+  - `translated`: 已翻译。每个 `### 現代語譯` 下都有译文、没有空块，才能标这个值；有空块的卷标 `translating`
 - `review_status`
   - `unreviewed`: 未校验
   - `reviewing`: 校验中
   - `ai_reviewed`: AI已校验
-  - `human_reviewed`: 人工已校验
+  - `human_reviewed`: 人工已校验，只由 Jeff 修改
+  - 只允许以上四个值。`4-4-script-scan-and-reviewed`、`reviewed-4-4` 是旧值，改成 `ai_reviewed`。
+  - 翻译者和 AI 校验者必须是不同的模型。
 
 ### 文稿处理补充流程
 
@@ -121,13 +132,12 @@ title: 示例经名
 short_title: 示例
 slug: sample
 volume_label: 全一卷
-cbeta_source: file://${workspaceFolder}/sources/cbeta/T00n0000_001.xml
+cbeta_id: T0000
 translation_status: translating
 review_status: unreviewed
 updated_at: 2026-03-21
 summary: 这里写一行摘要
-tags: 入门,示例
-translated_by: gpt5
+ai_translator: gpt-5.4-mini
 ---
 
 # 示例经名
@@ -139,18 +149,22 @@ translated_by: gpt5
 ## 译者(卷二以及以后的卷数，跳过这个部分)
 
 ### 原文
+<!-- sid:001 -->
 作者原文
 
 ### 現代語譯
+<!-- sid:001 -->
 白话翻译
 
 ## 一、示例分节
 
 ### 原文
+<!-- sid:001 -->
 
 原文文本
 
 ### 現代語譯
+<!-- sid:001 -->
 
 白话翻译
 
@@ -172,3 +186,16 @@ translated_by: gpt5
 - 结论必须从原文或代码直接落出，不能靠语气词硬撑。
 - 发现自己在写“很、非常、其实、核心、本质、收束、闭环、痛点、稳住、说人话就是”这类词时，先删掉，再改成具体事实。
 
+## 多 AI 协作
+
+Gemini、Cursor、Codex、Claude 等都按本文件工作。规则只在本文件里写；`CLAUDE.md`、`GEMINI.md` 是指向本文件的符号链接，不在别处另写规则。Claude 担任总管。
+
+- 任务单位是一部经（一个 `cbeta_id`）。同一部经由同一个 AI、同一个模型做完。
+- 认领：开分支 `ai/<工具名>/<经号>`，在 `tasks/<经号>.md` 登记（格式见 `tasks/README.md`），并开草稿 PR。分支先被推上去的先得，别人看到就不要碰这部经。
+- 一个任务只改自己经号对应的 `content/sutras-raw/<经号>-*.md`。一个 PR 只含一部经，或同一部经的一批卷。
+- 下列共享文件，任务 PR 里不要改，由总管统一处理：`AGENTS.md`、`WORKFLOW.md`、`TODO.md`、`sutras-raw-index.json`、`sitemap.xml`、`script-fixes.js`、`scripts/convert_to_traditional.py`、`target_sutra_list.tsv`。
+- 简转繁转错的字词，在 PR 描述里列出，由总管并入 `script-fixes.js` 和 `scripts/convert_to_traditional.py`。
+- 合并后由总管运行 `node scripts/build-index.js` 重建 `sutras-raw-index.json`。
+- 进度以文稿 front matter 为准，`TODO.md` 只记进行中、待分配、待 Jeff 决定的事。
+- 提交：不直接推 `main`，开分支提 PR，提交信息用中文，写清做了什么。提交前确认暂存区里没有 API key、token、密码；密钥只放 `.env`（已加入 `.gitignore`）。
+- 合并由 Jeff 决定。

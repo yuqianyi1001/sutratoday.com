@@ -1,3 +1,5 @@
+> 状态：设计草案，未按此实施。网站现在用 `sutras-raw-index.json` 加 `scripts/build-index.js`，没有使用 Pagefind。经文工作的 AI 不需要读本文。
+
 # 今文佛典 (SutraToday) 项目架构设计书
 
 ## 1. 项目愿景

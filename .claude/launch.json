@@ -2,15 +2,13 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dashboard",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["scripts/dashboard.py"],
-      "port": 7788
-    },
-    {
       "name": "web",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8080"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8080"
+      ],
       "port": 8080
     }
   ]
