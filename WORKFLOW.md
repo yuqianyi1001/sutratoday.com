@@ -298,7 +298,7 @@ python3 scripts/job_queue.py release-stale                # 释放超时 10 分�
 | lmstudio | `qwen3.5-9b` | 完全离线、零成本，机器够强可用 | 本地 LM Studio 跑 `:1234` |
 | anyrouter | `claude-3-5-haiku-20241022` | Claude 风格译文 | `ANYROUTER_API_KEY` |
 | gemini | `gemini-2.5-flash` | 子进程调用 Gemini CLI；强制逐段 | 安装 `gemini` CLI |
-| openrouter / nvidia / groq / codex | 同名脚本 | 各家备份/比对实验 | 各自 key |
+| openrouter / nvidia / groq / codex | 见 `agent_worker.py` 的 `BACKENDS` | 各家备份/比对实验 | 各自 key |
 
 > 同一部经一次只允许一个 backend+model 锁定（见 `job_queue.py:claim_job`），保证全经风格一致。要换 backend，先 `reset <slug> --clear-lock`。
 
