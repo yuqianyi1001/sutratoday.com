@@ -17,9 +17,7 @@
 | 状态 | 卷数 |
 | --- | ---: |
 | unreviewed | 10241 |
-| 4-4-script-scan-and-reviewed | 109 |
-| ai_reviewed | 7 |
-| reviewed-4-4 | 1 |
+| ai_reviewed | 117 |
 
 ## ai_translator
 
@@ -36,18 +34,20 @@
 | qwen3.6-plus | 212 |
 | qwen3.5-flash+claude-opus-5.5 | 120 |
 | gpt-5.3 | 88 |
-| （无） | 42 |
 | grok-4.7 | 28 |
+| qwen3.6-plus-free | 26 |
 | gemini-3.8-flash | 24 |
 | deepseek-v3.2+claude-opus-5.5 | 20 |
 | gemini-2.0-flash | 16 |
 | grok-4.6 | 16 |
+| （无） | 14 |
 | gpt-5.4-mini, claude-opus-5.5 | 8 |
 | qwen3.5-flash, claude-opus-5.5 | 6 |
 | deepseek-v3 | 5 |
 | claude-opus-4.8 | 3 |
 | qwen3-32b | 3 |
 | qwen3.5-9b | 2 |
+| opencode | 2 |
 | gemini-2.5-flash | 2 |
 | claude-3.5-haiku | 1 |
 | gemini-3 | 1 |
@@ -154,7 +154,7 @@
 | T0264 | 添品妙法蓮華經 | 7 | 7 | 21 | gpt-5.4-mini、qwen3.5-flash |
 | T0398 | 大哀經 | 8 | 7 | 21 | gpt-5.4-mini、qwen3.5-flash |
 | T1582 | 菩薩善戒經 | 9 | 9 | 21 | kimi-k2.5 |
-| T0223 | 摩訶般若波羅蜜經 | 27 | 9 | 20 | deepseek-v3.2、qwen3.5-flash、（无） |
+| T0223 | 摩訶般若波羅蜜經 | 27 | 9 | 20 | deepseek-v3.2、qwen3.5-flash、qwen3.6-plus-free、（无） |
 | T0227 | 小品般若波羅蜜經 | 10 | 10 | 20 | gpt-5.4-mini、qwen3.5-flash |
 | T0278 | 大方廣佛華嚴經 | 60 | 14 | 20 | gpt-5.4-mini、qwen3.5-flash |
 | T1606 | 大乘阿毘達磨雜集論 | 16 | 16 | 19 | deepseek-v3.2 |
@@ -208,7 +208,7 @@
 | T1605 | 大乘阿毘達磨集論 | 7 | 7 | 13 | qwen3.5-flash、qwen3.5-plus |
 | T1775 | 注維摩詰經 | 10 | 8 | 13 | gpt-5.4-mini |
 | X0384 | 地藏本願經科註 | 6 | 6 | 13 | deepseek-v3.2、qwen3.5-flash |
-| T0222 | 光讚經 | 10 | 7 | 12 | deepseek-v3.2、qwen3.5-flash、（无） |
+| T0222 | 光讚經 | 10 | 7 | 12 | deepseek-v3.2、qwen3.5-flash、qwen3.6-plus-free |
 | T0376 | 佛說大般泥洹經 | 6 | 5 | 12 | gpt-5.4-mini、qwen3.5-flash |
 | T0385 | 中陰經 | 2 | 2 | 12 | qwen3.5-flash |
 | T0414 | 菩薩念佛三昧經 | 5 | 5 | 12 | gpt-5.4-mini、qwen3.5-flash |
