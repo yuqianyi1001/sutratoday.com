@@ -1,5 +1,6 @@
 // 打卡分享图：在浏览器里用 canvas 画一张图文卡片（经名 + 卷别 + 今文佛典标识 + 本经二维码）
 import { escapeHtml, getReaderUrl } from "./site-data.js";
+import { fixTraditional } from "./script-fixes.js?v=1";
 import qrcode from "./assets/vendor/qrcode-generator.js";
 
 const SITE_ORIGIN = "https://sutratoday.com/";
@@ -48,13 +49,32 @@ export function formatVolumeForShare(volumeLabel) {
 
 export function shareHeadline(target) {
   const volume = target.slug ? formatVolumeForShare(target.volumeLabel) : "";
-  return volume ? `今天阅读完《${target.title}》${volume}` : `今天阅读完《${target.title}》`;
+  // 分段转换：经名可能已是繁体，整句一起判断会让"今天阅读完"漏转
+  return `${scriptText("今天阅读完")}${scriptText(`《${target.title}》`)}${volume ? scriptText(volume) : ""}`;
+}
+
+// 图里的文字跟随页面当前的繁简设置（global-script-toggle.js 会把 <html lang> 设为 zh-CN / zh-TW）。
+// 转换规则与页面一致：转简体直接转；转繁体时，已含繁体字的文字（如文稿里的经名）原样保留，
+// 其余转成繁体后用 script-fixes.js 修正。OpenCC 没加载成功时不转换。
+function scriptText(text) {
+  const openCC = window.OpenCC;
+  if (!openCC?.Converter) return text;
+  const toSimplified = openCC.Converter({ from: "tw", to: "cn" });
+  if (document.documentElement.lang === "zh-CN") return toSimplified(text);
+  if (toSimplified(text) !== text) return text;
+  return fixTraditional(openCC.Converter({ from: "cn", to: "tw" })(text));
 }
 
 async function drawShareCard(target) {
-  const title = `《${target.title}》`;
-  const volume = target.slug ? formatVolumeForShare(target.volumeLabel) : "";
-  await loadFonts(`今天阅读完${title}${volume}${SITE_NAME}${SITE_SLOGAN}扫码阅读本经0123456789年月日`);
+  const title = scriptText(`《${target.title}》`);
+  const volume = target.slug ? scriptText(formatVolumeForShare(target.volumeLabel)) : "";
+  const text = {
+    lead: scriptText("今天阅读完"),
+    name: scriptText(SITE_NAME),
+    slogan: scriptText(SITE_SLOGAN),
+    scan: scriptText("扫码阅读本经"),
+  };
+  await loadFonts(`${text.lead}${title}${volume}${text.name}${text.slogan}${text.scan}${target.username || ""}0123456789年月日`);
   const logo = await loadImage(LOGO_SRC).catch(() => null);
 
   const canvas = document.createElement("canvas");
@@ -90,7 +110,7 @@ async function drawShareCard(target) {
   }
   lines = lines.slice(0, 4);
   // 每行：[字体, 颜色, 文字, 本行占用高度]
-  const rows = [[`500 56px ${SERIF}`, COLORS.ink, "今天阅读完", 100]];
+  const rows = [[`500 56px ${SERIF}`, COLORS.ink, text.lead, 100]];
   lines.forEach((line, i) => rows.push([`600 ${titleSize}px ${SERIF}`, COLORS.accent, line, titleSize * (i ? 1.3 : 1.6)]));
   if (volume) rows.push([`500 60px ${SERIF}`, COLORS.ink, volume, 110]);
   if (target.username) rows.push([`400 36px ${SERIF}`, COLORS.muted, `—— ${target.username}`, 110]);
@@ -118,7 +138,7 @@ async function drawShareCard(target) {
   ctx.fillStyle = COLORS.muted;
   ctx.font = `400 26px ${SERIF}`;
   ctx.textAlign = "center";
-  ctx.fillText("扫码阅读本经", qrX + qrSize / 2, qrY + qrSize + 40);
+  ctx.fillText(text.scan, qrX + qrSize / 2, qrY + qrSize + 40);
 
   ctx.textAlign = "left";
   const logoSize = 112;
@@ -136,10 +156,10 @@ async function drawShareCard(target) {
   }
   ctx.fillStyle = COLORS.ink;
   ctx.font = `700 56px ${SERIF}`;
-  ctx.fillText(SITE_NAME, textX, brandY + 72);
+  ctx.fillText(text.name, textX, brandY + 72);
   ctx.fillStyle = COLORS.muted;
   ctx.font = `400 34px ${SERIF}`;
-  ctx.fillText(SITE_SLOGAN, PAD, brandY + logoSize + 76);
+  ctx.fillText(text.slogan, PAD, brandY + logoSize + 76);
   ctx.font = `400 28px ${SERIF}`;
   ctx.fillText("sutratoday.com", PAD, brandY + logoSize + 126);
 
@@ -272,7 +292,7 @@ function showResult(dialog, blob, target) {
   `;
   dialog.querySelector('[data-share-action="share"]')?.addEventListener("click", () => {
     navigator
-      .share({ files: [file], title: SITE_NAME, text: shareHeadline(target) })
+      .share({ files: [file], title: scriptText(SITE_NAME), text: shareHeadline(target) })
       .catch(() => {
         // 读者取消分享时忽略
       });

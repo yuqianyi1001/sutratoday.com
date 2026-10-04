@@ -36,7 +36,7 @@ import {
 import { openAccountDialog } from "./account.js?v=12";
 import { bindSentenceSync, clearSentenceSync, setupSentenceSync } from "./sentence-sync.js?v=1";
 import { flagTranslationIssue, initComments, loadComments } from "./comments.js?v=9";
-import { openCheckinShare } from "./checkin-share.js?v=1";
+import { openCheckinShare } from "./checkin-share.js?v=2";
 
 const dom = {
   statusbar: document.getElementById("reader-statusbar"),
