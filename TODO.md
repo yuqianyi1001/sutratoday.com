@@ -7,12 +7,12 @@
 
 | 任务 | 负责 | 分支 / PR |
 | --- | --- | --- |
-| 规范与文件整理，状态汇总与检查脚本（PR #57） | Claude（总管） | `claude/multi-ai-docs-workflow-lp0zko` |
+| 规范与文件整理、状态汇总与检查脚本、统一 front matter、补译空块（PR #57） | Claude（总管） | `claude/multi-ai-docs-workflow-lp0zko` |
 
 ## 下一批待分配
 
-1. 补译空的 `### 現代語譯` 块：2057 个文稿里共 5382 个（2026-10-04 统计）。先出清单，按经号分给各 AI，一个 AI 一批；补不完的文稿把 `translation_status` 降回 `translating`。
-2. 处理 `docs/review-notes/` 里的待复核项。
+1. 处理 `docs/review-notes/` 里的待复核项，其中 `2026-10-04-fill-empty-blocks.md` 是 2026-10-04 补译 5381 个空译文块时各批译者标出的疑点（共约 440 条），开头列了需要先看的几类。
+2. AI 校验：10241 卷 `unreviewed`（含 2056 卷刚补完空块的文稿），按经分批，翻译者和校验者用不同的模型。
 
 ## 需要 Jeff 决定
 
