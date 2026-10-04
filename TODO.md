@@ -17,7 +17,8 @@
 - 14 个没有 `ai_translator` 的文稿（T0221 六卷、T0223 六卷、T1925-001、X0454-001）：继续留空，不填；`check_frontmatter.py` 会把它们列出来，属已知情况。
 - T0007-002、T0007-003、T0020-001 原来 `ai_translator` 是 deepseek-v3.2、`translated_by` 是 gemini3，合并写成 `deepseek-v3.2+gemini-3`；T0007-001 两个值本来相同，保持 `gemini-3`。
 - X0227-001、X0587-001 的 `ai_translator` 保留 `opencode`。
+- 引号：文稿统一用 CBETA 的「」『』，网页简体显示换成“”‘’（`scripts/normalize_quotes.py`）。
 
 ## 需要 Jeff 决定
 
-- 译文里引号写法是否统一（见对话里的统计）。
+暂无。
