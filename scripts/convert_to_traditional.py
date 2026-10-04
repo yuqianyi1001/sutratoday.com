@@ -115,9 +115,13 @@ def _buddhist_fixup(text: str) -> str:
     return text
 
 
+# 文稿的引號用 CBETA 的「」『』；簡體譯文若寫成“”‘’，一併換過來
+_QUOTE_MAP = str.maketrans({"“": "「", "”": "」", "‘": "『", "’": "』"})
+
+
 def convert_text(text: str) -> str:
-    """簡體→繁體 + 佛教回退。"""
-    return _buddhist_fixup(cc.convert(text))
+    """簡體→繁體 + 佛教回退 + 引號換成「」『』。"""
+    return _buddhist_fixup(cc.convert(text)).translate(_QUOTE_MAP)
 
 
 def convert_file(md_path: Path, write: bool = False) -> dict:

@@ -4,6 +4,8 @@ const SCRIPT_MODE_COOKIE = "sutra_reader_script_mode";
 const SCRIPT_MODE_DEFAULT = "traditional";
 const VALID_SCRIPT_MODES = new Set(["simplified", "traditional"]);
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+// 文稿里的引号是 CBETA 的「」『』；简体显示时换成“”‘’，切回繁体时从原文重新算，不用反向转换
+const TO_SIMPLIFIED_QUOTES = { "「": "“", "」": "”", "『": "‘", "』": "’" };
 const NON_TRANSLATABLE_TAGS = new Set(["SCRIPT", "STYLE", "PRE", "CODE", "TEXTAREA"]);
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
@@ -150,12 +152,16 @@ function init() {
       const known = sources.get(textNode);
       // 页面自己改过这个节点的文字时，以新的文字为准
       const source = known && known.shown === textNode.nodeValue ? known.source : textNode.nodeValue;
-      const shown = mode === "simplified" ? toSimplified(source) : toTraditionalText(source);
+      const shown = mode === "simplified" ? simplifiedText(source) : toTraditionalText(source);
       sources.set(textNode, { source, shown });
       if (shown !== textNode.nodeValue) {
         textNode.nodeValue = shown;
       }
     });
+  }
+
+  function simplifiedText(text) {
+    return toSimplified(text).replace(/[「」『』]/g, (ch) => TO_SIMPLIFIED_QUOTES[ch]);
   }
 
   // 文稿里的原文和译文已经是繁体。已是繁体的文字照原样显示：其中的“云”“尸”“布”
