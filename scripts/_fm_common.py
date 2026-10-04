@@ -10,10 +10,11 @@ SUTRAS_DIR = ROOT / "content" / "sutras-raw"
 TRANSLATION_STATUS = {"untranslated", "translating", "translated"}
 REVIEW_STATUS = {"unreviewed", "reviewing", "ai_reviewed", "human_reviewed"}
 
-# 現代語譯 标题下没有正文（只有 sid 注释或空白）的块
-RE_EMPTY_BLOCK = re.compile(
-    r'### (?:現代語譯|现代语译)\n(?:<!--[^\n]*-->\n)?\s*(?=\n### |\n## |\n# |\Z)'
+# 原文 / 現代語譯 成对的块；译文槽取到下一个 `### 原文`、`## ` 标题或文末
+RE_PAIR = re.compile(
+    r'### 原文\n(.*?)\n### (?:現代語譯|现代语译)\n(.*?)(?=\n### 原文|\n## |\Z)', re.S
 )
+RE_COMMENT = re.compile(r'<!--.*?-->', re.S)
 RE_FM = re.compile(r'\A---\n(.*?)\n---', re.S)
 
 
@@ -39,4 +40,5 @@ def load_all():
 
 
 def empty_blocks(text: str) -> int:
-    return len(RE_EMPTY_BLOCK.findall(text))
+    """現代語譯 下没有正文（只有 sid 注释或空白）的块数。"""
+    return sum(1 for m in RE_PAIR.finditer(text) if not RE_COMMENT.sub("", m.group(2)).strip())

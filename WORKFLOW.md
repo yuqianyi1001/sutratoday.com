@@ -223,6 +223,9 @@ python3 scripts/seg_io.py export T0220-201 > 201.src.txt
 
 # 译文按 @@sid 分段写好后回填
 python3 scripts/seg_io.py apply T0220-201 201.tr.txt --model claude-opus-5.5
+
+# 文稿已有别的模型的译文、只补空段时，加 --append，ai_translator 写成「原模型+claude-opus-5.5」
+python3 scripts/seg_io.py apply T0220-201 201.tr.txt --model claude-opus-5.5 --append
 ```
 
 译文文件格式：每段以单独一行 `@@001` 开头，下面是译文，段间空一行。`apply` 会检查 sid 一一对应、译文里没有标题或注释标记、译文字数不明显少于原文，全部通过才写回，并把 `translation_status` 改为 `translated`。
