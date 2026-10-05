@@ -16,14 +16,14 @@
 
 | 状态 | 卷数 |
 | --- | ---: |
-| unreviewed | 10238 |
-| ai_reviewed | 120 |
+| unreviewed | 10237 |
+| ai_reviewed | 121 |
 
 ## ai_translator
 
 | 模型 | 卷数 |
 | --- | ---: |
-| gpt-5.4-mini | 2529 |
+| gpt-5.4-mini | 2528 |
 | qwen3.5-flash | 2469 |
 | deepseek-v3.2 | 881 |
 | gpt-5.4-mini+claude-opus-5.5 | 879 |
@@ -54,6 +54,7 @@
 | deepseek-v3.2+gemini-3 | 3 |
 | claude-opus-4.8 | 3 |
 | qwen3-32b | 3 |
+| gpt-5.4-mini+claude-sonnet-5.5 | 2 |
 | opencode | 2 |
 | qwen3.5-9b+claude-opus-5.5 | 1 |
 | qwen3.5-9b | 1 |
@@ -61,7 +62,6 @@
 | gemini-3 | 1 |
 | gemini-2.0-flash, claude-opus-5.5 | 1 |
 | qwen3.5-flash+claude-sonnet-5.5 | 1 |
-| gpt-5.4-mini+claude-sonnet-5.5 | 1 |
 | glm-5 | 1 |
 | minimax-m2.1, claude-opus-5.5 | 1 |
 | gemini-2.5-flash+claude-opus-5.5 | 1 |
