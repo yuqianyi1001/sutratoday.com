@@ -2,21 +2,21 @@
 
 由 `scripts/status_report.py` 生成，不要手改。
 
-- 经数：2484
-- 卷文稿数：10358
+- 经数：2487
+- 卷文稿数：10363
 - 有空译文块的卷：0，空译文块共 0 个
 
 ## translation_status
 
 | 状态 | 卷数 |
 | --- | ---: |
-| translated | 10358 |
+| translated | 10363 |
 
 ## review_status
 
 | 状态 | 卷数 |
 | --- | ---: |
-| unreviewed | 10047 |
+| unreviewed | 10052 |
 | ai_reviewed | 311 |
 
 ## ai_translator
@@ -24,13 +24,13 @@
 | 模型 | 卷数 |
 | --- | ---: |
 | gpt-5.4-mini | 2508 |
-| qwen3.5-flash | 2466 |
+| qwen3.5-flash | 2468 |
 | gpt-5.4-mini+claude-opus-5.5 | 879 |
 | deepseek-v3.2 | 878 |
 | qwen3.5-flash+claude-opus-5.5 | 726 |
 | qwen3.5-27b | 478 |
 | claude-opus-5.5 | 475 |
-| qwen3.5-plus | 406 |
+| qwen3.5-plus | 409 |
 | deepseek-v3.2+claude-opus-5.5 | 313 |
 | kimi-k2.5 | 282 |
 | minimax-m2.1 | 209 |
