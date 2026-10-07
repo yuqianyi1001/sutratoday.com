@@ -6,6 +6,7 @@ const SITE_ORIGIN = "https://sutratoday.com/";
 const SITE_NAME = "今文佛典";
 const SITE_SLOGAN = "以白话文读佛教经典";
 const LOGO_SRC = "./assets/logo-mark.png";
+const DEDICATION = "愿以此功德，普及于一切，我等与众生，皆共成佛道";
 
 const WIDTH = 1080;
 const HEIGHT = 1440;
@@ -54,7 +55,7 @@ export function shareHeadline(target) {
 async function drawShareCard(target) {
   const title = `《${target.title}》`;
   const volume = target.slug ? formatVolumeForShare(target.volumeLabel) : "";
-  await loadFonts(`今天阅读完${title}${volume}${SITE_NAME}${SITE_SLOGAN}扫码阅读本经0123456789年月日`);
+  await loadFonts(`今天阅读完${title}${volume}${SITE_NAME}${SITE_SLOGAN}${DEDICATION}扫码阅读本经0123456789年月日`);
   const logo = await loadImage(LOGO_SRC).catch(() => null);
 
   const canvas = document.createElement("canvas");
@@ -71,7 +72,7 @@ async function drawShareCard(target) {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // 上半部分：日期，以及在剩余空间里垂直居中的"今天阅读完 / 经名 / 卷别 / 署名"
+  // 上半部分：日期，在剩余空间里垂直居中的"今天阅读完 / 经名 / 卷别 / 署名"，分隔线上方以小字写回向文
   const qrSize = 260;
   const footerTop = HEIGHT - 48 - PAD - qrSize - 50;
   const maxWidth = WIDTH - PAD * 2 - 40;
@@ -96,13 +97,19 @@ async function drawShareCard(target) {
   if (target.username) rows.push([`400 36px ${SERIF}`, COLORS.muted, `—— ${target.username}`, 110]);
   const blockHeight = rows.reduce((sum, row) => sum + row[3], 0);
   const areaTop = 240;
-  let y = areaTop + Math.max(0, (footerTop - areaTop - blockHeight) / 2) - 20;
+  const dedicationY = footerTop - 48;
+  let y = areaTop + Math.max(0, (dedicationY - 40 - areaTop - blockHeight) / 2) - 20;
   for (const [font, color, text, height] of rows) {
     y += height;
     ctx.font = font;
     ctx.fillStyle = color;
     ctx.fillText(text, left, y);
   }
+  ctx.font = `400 30px ${SERIF}`;
+  ctx.fillStyle = COLORS.muted;
+  ctx.textAlign = "center";
+  ctx.fillText(DEDICATION, WIDTH / 2, dedicationY);
+  ctx.textAlign = "left";
 
   // 下半部分：分隔线、标识与介绍、二维码
   ctx.strokeStyle = COLORS.line;
