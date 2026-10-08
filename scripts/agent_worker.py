@@ -151,7 +151,7 @@ BATCH_SYSTEM_PROMPT = """你是一位精通汉语佛教典籍的学者，擅长�
 只输出 JSON 数组，不加任何前言后语。"""
 
 RE_SECTION = re.compile(
-    r'(### 原文\n(?:<!-- sid:(\d{3}) -->\n)?)(.*?)(\n### (?:现代语译|現代語譯)\n(?:<!-- sid:\d{3} -->\n)?)(.*?)(?=\n### 原文|\Z)',
+    r'(### 原文\n(?:<!-- sid:(\d{3}) -->\n)?)(.*?)(\n### (?:现代语译|現代語譯)\n(?:<!-- sid:\d{3} -->\n)?)(.*?)(?=\n### 原文|\n## |\Z)',
     re.DOTALL
 )
 
@@ -947,7 +947,7 @@ def translate_file(md_path: Path, backend_key: str, model: str,
                     r'(.*?)'
                     r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
                     r'(.*?)'
-                    r'(?=\n### 原文|\Z)',
+                    r'(?=\n### 原文|\n## |\Z)',
                     re.DOTALL
                 )
                 m = pattern.search(current)
@@ -1178,7 +1178,7 @@ def dedup_file(md_path: Path, backend_key: str, model: str):
                 r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
                 r'(?:<!-- review:dup_suspect[^>]*-->\n?)?'
                 r'(.*?)'
-                r'(?=\n### 原文|\Z)',
+                r'(?=\n### 原文|\n## |\Z)',
                 re.DOTALL
             )
             m = pattern.search(text)
@@ -1289,7 +1289,7 @@ def retranslate_file(md_path: Path, backend_key: str, model: str):
             r'(.*?)'
             r'(\n### (?:现代语译|現代語譯)\n<!-- sid:' + re.escape(sid) + r' -->\n)'
             r'(.*?)'
-            r'(?=\n### 原文|\Z)',
+            r'(?=\n### 原文|\n## |\Z)',
             re.DOTALL
         )
         m = pattern.search(text)
