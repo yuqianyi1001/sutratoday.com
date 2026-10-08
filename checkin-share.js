@@ -263,14 +263,28 @@ function mountDialog() {
   return dialog;
 }
 
+// iPhone/iPad 上，下载链接保存的图片进「文件」App；分享面板里的「存储图像」才进「照片」
+const IS_IOS =
+  /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
 function showResult(dialog, blob, target) {
   const url = URL.createObjectURL(blob);
   dialog.dataset.objectUrl = url;
   const fileName = `今文佛典-打卡-${target.qrSlug || "sutra"}.png`;
   const file = typeof File === "function" ? new File([blob], fileName, { type: "image/png" }) : null;
   const canShareFile = Boolean(file && navigator.canShare?.({ files: [file] }));
-  dialog.querySelector(".checkin-share-body").innerHTML = `
-    <img class="checkin-share-image" src="${url}" alt="${escapeHtml(shareHeadline(target))}" />
+  const image = `<img class="checkin-share-image" src="${url}" alt="${escapeHtml(shareHeadline(target))}" />`;
+  dialog.querySelector(".checkin-share-body").innerHTML =
+    IS_IOS && canShareFile
+      ? `
+    ${image}
+    <p class="checkin-share-hint">点「保存或分享」后选「存储图像」，图片会存到「照片」；也可以长按图片保存</p>
+    <div class="checkin-share-actions">
+      <button class="primary-link" type="button" data-share-action="share">保存或分享</button>
+    </div>
+  `
+      : `
+    ${image}
     <p class="checkin-share-hint">手机上可长按图片保存或发送给朋友</p>
     <div class="checkin-share-actions">
       ${canShareFile ? `<button class="primary-link" type="button" data-share-action="share">分享</button>` : ""}
