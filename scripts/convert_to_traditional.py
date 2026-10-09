@@ -90,7 +90,8 @@ _MISC_FIXES = [
     (re.compile(r'準(?=許|予)'), '准'),           # 准許、准予
     (re.compile(r'(?<=規)製'), '制'),             # 規制
     (re.compile(r'(?<=場)閤'), '合'),             # 場合
-    (re.compile(r'託(?=腮)'), '托'),              # 托腮
+    (re.compile(r'託(?=腮|著)'), '托'),           # 托腮、托著
+    (re.compile(r'(?<=長)幹(?=寺|里)'), '干'),    # 長干寺、長干里
 ]
 
 _CHI_BUDDHIST = re.compile(r'(?<=[愚貪瞋三])痴|^痴(?=[迷癡])')
