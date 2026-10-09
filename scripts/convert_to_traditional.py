@@ -23,7 +23,7 @@ from opencc import OpenCC
 SUTRAS_DIR = Path(__file__).parent.parent / "content" / "sutras-raw"
 
 RE_TRANS = re.compile(
-    r'(### (?:現代語譯|现代语译)\n)(.*?)(?=\n### 原文|\Z)',
+    r'(### (?:現代語譯|现代语译)\n)(.*?)(?=\n### 原文|\n## |\Z)',
     re.DOTALL
 )
 
@@ -72,13 +72,23 @@ _HUI_DAILY = re.compile(r'迴(?=答|來|去|頭|覆|報|應|話|歸|到|家|國|
 
 # G. 屍→尸：佛名/地名用「尸」
 _SHI_PROPER = re.compile(r'屍(?=棄|羅|利沙|婆|吉|城|叉|迦)')
-_SHI_AFTER = re.compile(r'([婆伐])屍')   # 毗婆尸、僧伽伐尸沙
+_SHI_AFTER = re.compile(r'([婆伐鉢缽])屍')   # 毗婆尸、僧伽伐尸沙、毘鉢尸
 
 # I. 鹹→咸：「咸」= 都（咸言、咸皆）
 _XIAN_ALL = re.compile(r'鹹(?=[言皆共歸悉同稱謂知來以作各曰得令使見聞願陽])')
 
 # H. 痴→癡：佛教用「癡」（愚癡、貪瞋癡）
 #    opencc 把繁體「癡」轉成了簡化的「痴」，需要轉回
+# J. s2tw 對已是繁體的字詞誤轉
+_MISC_FIXES = [
+    (re.compile(r'(?<![一二三四五六七八九十兩幾每這那此某半])隻(?=能|應)'), '只'),
+    (re.compile(r'幹(?=擾|涉|預)'), '干'),
+    (re.compile(r'([親鄉鄰])裡'), r'\1里'),     # 親里、鄉里、鄰里
+    (re.compile(r'製(?=度)'), '制'),
+    (re.compile(r'矇(?=住)'), '蒙'),
+    (re.compile(r'佔(?=卜)|(?<=筮)佔'), '占'),
+]
+
 _CHI_BUDDHIST = re.compile(r'(?<=[愚貪瞋三])痴|^痴(?=[迷癡])')
 
 
@@ -111,6 +121,10 @@ def _buddhist_fixup(text: str) -> str:
 
     # I. 鹹→咸
     text = _XIAN_ALL.sub('咸', text)
+
+    # J. 其他誤轉
+    for pat, rep in _MISC_FIXES:
+        text = pat.sub(rep, text)
 
     return text
 
