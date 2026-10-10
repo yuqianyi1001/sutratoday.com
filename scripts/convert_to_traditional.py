@@ -72,7 +72,7 @@ _HUI_DAILY = re.compile(r'迴(?=答|來|去|頭|覆|報|應|話|歸|到|家|國|
 
 # G. 屍→尸：佛名/地名用「尸」
 _SHI_PROPER = re.compile(r'屍(?=棄|羅|利沙|婆|吉|城|叉|迦)')
-_SHI_AFTER = re.compile(r'([婆伐鉢缽迦])屍')   # 毗婆尸、僧伽伐尸沙、毘鉢尸、迦尸國
+_SHI_AFTER = re.compile(r'([婆伐鉢缽迦])屍|(起)屍(?=鬼)')   # 毗婆尸、僧伽伐尸沙、毘鉢尸、迦尸國、起尸鬼
 
 # I. 鹹→咸：「咸」= 都（咸言、咸皆）
 _XIAN_ALL = re.compile(r'鹹(?=[言皆共歸悉同稱謂知來以作各曰得令使見聞願陽])')
@@ -95,7 +95,7 @@ _MISC_FIXES = [
     (re.compile(r'佔(?=相)'), '占'),              # 占相
     (re.compile(r'(?<=[小升一二三四五六七八九十百千半數])鬥(?![爭諍毆法志氣])|(?<=大)鬥(?=秤|量|入)'), '斗'),  # 小斗、升斗、三斗；大鬥爭、一鬥不改
     (re.compile(r'(?<=津)樑'), '梁'),             # 津梁
-    (re.compile(r'徵(?=討|伐|戰|服)|(?<=出)徵(?![問兆驗詢詰起求象信稅收])'), '征'),  # 征討、出征；提出徵問等不改
+    (re.compile(r'徵(?=討|伐|戰|服)|(?<=出)徵(?![問兆驗詢詰起求象信稅收])|(?<=遠)徵(?!引)'), '征'),  # 征討、出征；提出徵問等不改
     (re.compile(r'佔(?=波)'), '占'),              # 占波國
     (re.compile(r'矇(?=昧)'), '蒙'),              # 蒙昧
     (re.compile(r'於(?=闐)'), '于'),              # 于闐
@@ -136,7 +136,7 @@ def _buddhist_fixup(text: str) -> str:
 
     # G. 屍→尸（佛名/地名）
     text = _SHI_PROPER.sub('尸', text)
-    text = _SHI_AFTER.sub(r'\1尸', text)
+    text = _SHI_AFTER.sub(lambda m: (m.group(1) or m.group(2)) + '尸', text)
 
     # I. 鹹→咸
     text = _XIAN_ALL.sub('咸', text)
