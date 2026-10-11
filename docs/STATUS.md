@@ -16,8 +16,8 @@
 
 | 状态 | 卷数 |
 | --- | ---: |
-| unreviewed | 10006 |
-| ai_reviewed | 413 |
+| unreviewed | 9996 |
+| ai_reviewed | 423 |
 
 ## ai_translator
 
