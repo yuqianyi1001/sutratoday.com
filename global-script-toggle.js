@@ -1,4 +1,4 @@
-import { fixTraditional } from "./script-fixes.js?v=23";
+import { fixTraditional } from "./script-fixes.js?v=24";
 
 const SCRIPT_MODE_COOKIE = "sutra_reader_script_mode";
 const SCRIPT_MODE_DEFAULT = "traditional";
